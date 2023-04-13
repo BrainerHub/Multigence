@@ -1,0 +1,34 @@
+[
+  {
+    "model": "core.user",
+    "pk": "4b3e2bcb-cf96-4060-9e2a-a665ad7e2dc0",
+    "fields": {
+      "password": "kaancan",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "cain",
+      "first_name_alias": "",
+      "last_name": "test",
+      "last_name_alias": "",
+      "email": "cainbln@hotmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2016-09-10T15:50:27.102Z",
+      "department": "aab87039-730b-4816-88a8-87dbeced0da6",
+      "title": "System Employee",
+      "position": null,
+      "role": "EMPLOYEE",
+      "gender": null,
+      "address": null,
+      "zipcode": null,
+      "state": null,
+      "country": null,
+      "telephone": null,
+      "website": null,
+      "profile_picture": null,
+      "description": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

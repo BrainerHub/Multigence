@@ -1,0 +1,92 @@
+[
+  {
+    "model": "core.question",
+    "pk": "16430e75-dbd4-4d89-be1e-1f97ecf5f35a",
+    "fields": {
+      "text": {
+        "de": "Meine bevorzugten F\u00fchrungsinstrumente sind:",
+        "en": "My preferred management instruments are:"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "1e22d857-e0f4-4ac4-86de-a66fb496f76a",
+    "fields": {
+      "text": {
+        "de": "Meine bevorzugten F\u00fchrungsrollen sind:",
+        "en": "My preferred leadership roles are:"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "32d176cb-67ba-44ea-86e5-8ec5e26f72e9",
+    "fields": {
+      "text": {
+        "de": "Ich beziehe mein Wissen und Einsichten aus:",
+        "en": "I derive knowledge and insight from:"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "3d82cec2-d2ec-4997-a704-e344417ed472",
+    "fields": {
+      "text": {
+        "de": "Meine pers\u00f6nlichen Zukunftskompetenzen:",
+        "en": "My personal future competences:"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "6e42b0c1-eb93-4946-93db-216678de0bb5",
+    "fields": {
+      "text": {
+        "de": "Meine Identit\u00e4t ist begr\u00fcndet in:",
+        "en": "My identity is founded in"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "796e5354-353e-443e-a88d-81195f8387da",
+    "fields": {
+      "text": {
+        "de": "Meine Grundhaltungen zu Arbeit",
+        "en": "My basic attitude to work:"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "9f85db17-b52f-4854-8733-af76038ceff7",
+    "fields": {
+      "text": {
+        "de": "Meine Konfliktstrategien sind:",
+        "en": "My conflict strategies are:"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "a79a9665-1407-4c2b-8276-fd97a5ca7328",
+    "fields": {
+      "text": {
+        "de": "Meine bevorzugten Instrumente zur Zukunftsgestaltung sind:",
+        "en": "My preferred instruments for future design are:"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "dc742e76-2d29-41de-89e5-4e2a18f331ec",
+    "fields": {
+      "text": {
+        "de": "Stress-Strategien und Stressresilienz:",
+        "en": "Stress strategies and resilience:"
+      }
+    }
+  }
+]

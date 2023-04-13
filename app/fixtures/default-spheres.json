@@ -1,0 +1,65 @@
+[
+  {
+    "model": "core.sphere",
+    "pk": "13f5a068-f4b3-4ab2-94ca-288f133612ea",
+    "fields": {
+      "name": "sphere.individual.ware",
+      "type": "INDIVIDUAL",
+      "index": 1
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "16da4e29-ac4f-4355-8412-8b67ae25a704",
+    "fields": {
+      "name": "sphere.individual.wissen",
+      "type": "INDIVIDUAL",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "3444ec2b-1e5a-4539-aea4-c9ff1847f02c",
+    "fields": {
+      "name": "sphere.individual.territorium",
+      "type": "INDIVIDUAL",
+      "index": 2
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "4479f713-4de4-4b57-a9af-3d6eec4e6964",
+    "fields": {
+      "name": "sphere.collective.territorium",
+      "type": "COLLECTIVE",
+      "index": 4
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "86dc0e26-3752-41d4-9a39-0918c3a349e6",
+    "fields": {
+      "name": "sphere.collective.ware",
+      "type": "COLLECTIVE",
+      "index": 5
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "a40636a4-fdfa-42d3-a765-b529d195c954",
+    "fields": {
+      "name": "sphere.none.welt",
+      "type": "NONE",
+      "index": 3
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "d1e9d628-9ae3-48a3-b658-b5147b174513",
+    "fields": {
+      "name": "sphere.collective.wissen",
+      "type": "COLLECTIVE",
+      "index": 6
+    }
+  }
+]

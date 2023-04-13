@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Culture Patten Software</title>
+    <meta name="description" content="CPT">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: 'Oxygen', sans-serif; background: #eee; text-align: center; margin: 0;">
+<div style="display: block; max-width: 90%; margin: auto; padding-bottom: 200px;">
+    <div style="display: inline-block; margin: 10px; background: #fff; box-shadow: 0 0 15px 0 #bbb; border-radius: 5px; vertical-align: top; width: 30%; min-width: 255px; padding: 10px;">
+        <!-- Column one start -->
+        <p>Sehr geehrte/r {{ name }},</p>
+        <p>Multigence lädt Sie ein den folgenden Fragebogen zu Ihrer kulturellen Disposition zu beantworten. Bitte klicken Sie auf den Start-Button, um den Fragebogen zu starten.</p>
+        <a href="{{ link }}" style="color: black; text-decoration: none;" onmouseover="this.children[0].style.color='green'" onmouseout="this.children[0].style.color='inherit'"><p style="margin: 30px auto; padding:  9px 9px; border: 1px solid #444; border-radius: 4px; width: 220px; text-align: center;">Mit dem Fragebogen starten</p></a>
+        <p>Der Link ist für sieben Tage aktiv. Wir empfehlen den Fragebogen ohne Unterbrechung zu beantworten. Wenn der Fragebogen unterbrochen wird, werden Ihre Fortschritte und Antworten aufgezeichnet. Wenn Sie fortfahren wollen starten Sie bei der Frage, die Sie zuletzt bearbeitet hatten.</p>
+        <p>Mit freundlichen Grüßen</p>
+        <p>Ihr Multigence Team</p>
+
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;border-top: 1px solid #444;padding-top:20px;margin-top: 40px;">
+            <tbody>
+            <tr valign="top">
+                <td style="padding-left:20px;width:10px;padding-right:20px;">
+                    <a href="http://multigence.xailabs.com:9000/">
+                        <img src="{{ logo_url }}" alt="multigence" style="max-width:220px; display: block; margin: auto;">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- Column one end -->
+    </div>
+    <div style="display: inline-block; margin: 10px; background: #fff; box-shadow: 0 0 15px 0 #bbb; border-radius: 5px; vertical-align: top; width: 30%; min-width: 255px; padding: 10px;">
+        <!-- Column two start -->
+        <p>Dear {{ name }},</p>
+        <p>You are kindly invited to fill our cultural disposition questionnaire. Please click on the link below to start.</p>
+        <a href="{{ link }}" style="color: black; text-decoration: none;" onmouseover="this.children[0].style.color='green'" onmouseout="this.children[0].style.color='inherit'"><p style="margin: 30px auto; padding: 9px 9px; border: 1px solid #444; border-radius: 4px; width: 220px; text-align: center;">Start the questionnaire</p></a>
+        <p>This link is active for seven days. We recommend you to complete the questionnaire in one session. However, if you interrupt the questionnaire, your answers up to that point will be saved and you will be able to continue later when you return.</p>
+        <p>Thanks. Best Regards,</p>
+        <p>Multigence Team.<p>
+        <table border="0" cellspacing="0" cellpadding="0" width="470" style="width:100%;border-top: 1px solid #444;padding-top:20px;margin-top: 40px;">
+            <tbody>
+            <tr valign="top">
+                <td style="padding-left:20px;width:10px;padding-right:20px;">
+                    <a href="http://www.multigence.com/">
+                        <img src="{{ logo_url }}" alt="multigence" style="max-width:220px; display: block; margin: auto;">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- Column two end -->
+    </div>
+</div>
+<div style="position: fixed; bottom: 0; width: 100%; padding: 20px; border-top: 1px solid #aaa; background-color: #cccccc;">
+    <p style="text-align: center; font-size: 9px; color: white;">Multigence GmbH<br> Neuendorfstrasse 18b, D-16761 Hennigsdorf</p>
+    <p style="text-align: center; font-size: 9px; color: white;">Multigence Berlin Lab<br> Kurfürstenstrasse 3a, D-10785 Berlin</p>
+</div>
+</body>
+</html>

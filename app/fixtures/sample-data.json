@@ -1,0 +1,552 @@
+[
+  {
+    "model": "core.company",
+    "pk": "d4e7b969-d1ca-468f-873c-096ad7840986",
+    "fields": {
+      "name": "google",
+      "trial": false
+    }
+  },
+  {
+    "model": "core.company",
+    "pk": "fe01379e-7f57-43c8-94c3-745a2c7c4c6a",
+    "fields": {
+      "name": "multigence",
+      "trial": false
+    }
+  },
+  {
+    "model": "core.department",
+    "pk": "013197b3-14b1-4145-9c24-c77a7bf8fd35",
+    "fields": {
+      "name": "HR department",
+      "company": "fe01379e-7f57-43c8-94c3-745a2c7c4c6a"
+    }
+  },
+  {
+    "model": "core.department",
+    "pk": "29530487-3caa-445a-b894-8727bf13def1",
+    "fields": {
+      "name": "Frontend development",
+      "company": "d4e7b969-d1ca-468f-873c-096ad7840986"
+    }
+  },
+  {
+    "model": "core.department",
+    "pk": "47627f70-22a3-4b4c-bbb4-3d6a3ea34fec",
+    "fields": {
+      "name": "Backend development",
+      "company": "d4e7b969-d1ca-468f-873c-096ad7840986"
+    }
+  },
+  {
+    "model": "core.department",
+    "pk": "8eb5a14b-fc45-4dcc-b448-51d3cf8fb1ac",
+    "fields": {
+      "name": "IT department",
+      "company": "fe01379e-7f57-43c8-94c3-745a2c7c4c6a"
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "002a5235-9965-4d28-89a5-94b033e1bcce",
+    "fields": {
+      "text": {
+        "de": "Frage 1",
+        "en": "Question 1"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "79ba3d41-f205-424d-aa95-d288765e4d10",
+    "fields": {
+      "text": {
+        "de": "Frage 2",
+        "en": "Question 2"
+      }
+    }
+  },
+  {
+    "model": "core.question",
+    "pk": "a0db1bf5-1ad1-40e8-9b35-0a3f741130d2",
+    "fields": {
+      "text": {
+        "de": "Frage 1",
+        "en": "Question 1"
+      }
+    }
+  },
+  {
+    "model": "core.questionary",
+    "pk": "d077c625-991c-45f7-a171-f82593da332f",
+    "fields": {
+      "id": "",
+      "name": "Default questionary",
+      "max_points": 22,
+      "company": "fe01379e-7f57-43c8-94c3-745a2c7c4c6a"
+    }
+  },
+  {
+    "model": "core.questionaryquestion",
+    "pk": 1,
+    "fields": {
+      "questionary": "d077c625-991c-45f7-a171-f82593da332f",
+      "question": "002a5235-9965-4d28-89a5-94b033e1bcce",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.questionaryquestion",
+    "pk": 2,
+    "fields": {
+      "questionary": "d077c625-991c-45f7-a171-f82593da332f",
+      "question": "79ba3d41-f205-424d-aa95-d288765e4d10",
+      "index": 1
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "021f15fc-ccee-4eca-a8aa-ae15d4ac64c1",
+    "fields": {
+      "name": "sphere6",
+      "type": "INDIVIDUAL",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "26d13a27-39a5-4569-a3b2-a21cc894627a",
+    "fields": {
+      "name": "sphere7",
+      "type": "INDIVIDUAL",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "44cb3332-aa7f-4fa0-9fea-adc621870985",
+    "fields": {
+      "name": "sphere1",
+      "type": "COLLECTIVE",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "8fd0b115-782a-41d9-ad79-b3618b5216d2",
+    "fields": {
+      "name": "sphere5",
+      "type": "INDIVIDUAL",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "ac5b397c-711a-4896-86a7-01b37293f8bc",
+    "fields": {
+      "name": "sphere4",
+      "type": "NONE",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "d4866d2a-9635-4900-a6e7-502b014ce2cb",
+    "fields": {
+      "name": "sphere2",
+      "type": "COLLECTIVE",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.sphere",
+    "pk": "f0af02a5-f85a-40bf-825d-cb61b42da6f3",
+    "fields": {
+      "name": "sphere3",
+      "type": "COLLECTIVE",
+      "index": 0
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "15c78d54-7c64-4c71-99de-bda12ae7b16b",
+    "fields": {
+      "question": "002a5235-9965-4d28-89a5-94b033e1bcce",
+      "text": {
+        "de": "optionDe7",
+        "en": "option7"
+      },
+      "sphere": "26d13a27-39a5-4569-a3b2-a21cc894627a"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "291ca311-4ce2-4ab0-9896-53355f8f005d",
+    "fields": {
+      "question": "a0db1bf5-1ad1-40e8-9b35-0a3f741130d2",
+      "text": {
+        "de": "optionDe4",
+        "en": "option4"
+      },
+      "sphere": "ac5b397c-711a-4896-86a7-01b37293f8bc"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "29d3d7ff-7aec-4d73-bd83-cbb40bf40d6a",
+    "fields": {
+      "question": "a0db1bf5-1ad1-40e8-9b35-0a3f741130d2",
+      "text": {
+        "de": "optionDe3",
+        "en": "option3"
+      },
+      "sphere": "f0af02a5-f85a-40bf-825d-cb61b42da6f3"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "2bac71bb-c126-4524-a3a8-e1afe99cb161",
+    "fields": {
+      "question": "79ba3d41-f205-424d-aa95-d288765e4d10",
+      "text": {
+        "de": "optionDe6",
+        "en": "option6"
+      },
+      "sphere": "021f15fc-ccee-4eca-a8aa-ae15d4ac64c1"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "2f7351ea-6a4d-4b93-9e4d-ba22787ca1f5",
+    "fields": {
+      "question": "79ba3d41-f205-424d-aa95-d288765e4d10",
+      "text": {
+        "de": "optionDe4",
+        "en": "option4"
+      },
+      "sphere": "ac5b397c-711a-4896-86a7-01b37293f8bc"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "3ab0be2c-b68e-4868-93a8-becb0cfe6eff",
+    "fields": {
+      "question": "a0db1bf5-1ad1-40e8-9b35-0a3f741130d2",
+      "text": {
+        "de": "optionDe6",
+        "en": "option6"
+      },
+      "sphere": "021f15fc-ccee-4eca-a8aa-ae15d4ac64c1"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "3bf5ba3c-c95c-42bc-902b-e4373ef4c9a1",
+    "fields": {
+      "question": "a0db1bf5-1ad1-40e8-9b35-0a3f741130d2",
+      "text": {
+        "de": "optionDe7",
+        "en": "option7"
+      },
+      "sphere": "26d13a27-39a5-4569-a3b2-a21cc894627a"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "480b4279-9179-44f3-a7f6-e766ffc6e60d",
+    "fields": {
+      "question": "002a5235-9965-4d28-89a5-94b033e1bcce",
+      "text": {
+        "de": "optionDe1",
+        "en": "option1"
+      },
+      "sphere": "44cb3332-aa7f-4fa0-9fea-adc621870985"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "7010be5b-1318-47ec-b82e-5886b47a6308",
+    "fields": {
+      "question": "002a5235-9965-4d28-89a5-94b033e1bcce",
+      "text": {
+        "de": "optionDe5",
+        "en": "option5"
+      },
+      "sphere": "8fd0b115-782a-41d9-ad79-b3618b5216d2"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "7e76d241-cab1-4f03-806c-221f7330c785",
+    "fields": {
+      "question": "002a5235-9965-4d28-89a5-94b033e1bcce",
+      "text": {
+        "de": "optionDe2",
+        "en": "option2"
+      },
+      "sphere": "d4866d2a-9635-4900-a6e7-502b014ce2cb"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "80725331-c651-476d-b907-65863a747ac4",
+    "fields": {
+      "question": "79ba3d41-f205-424d-aa95-d288765e4d10",
+      "text": {
+        "de": "optionDe2",
+        "en": "option2"
+      },
+      "sphere": "d4866d2a-9635-4900-a6e7-502b014ce2cb"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "8db98867-c51d-4c5e-a15c-9222ebc5b87f",
+    "fields": {
+      "question": "002a5235-9965-4d28-89a5-94b033e1bcce",
+      "text": {
+        "de": "optionDe4",
+        "en": "option4"
+      },
+      "sphere": "ac5b397c-711a-4896-86a7-01b37293f8bc"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "9aaf2ed6-ce63-4986-8ccb-46445ee62f0f",
+    "fields": {
+      "question": "79ba3d41-f205-424d-aa95-d288765e4d10",
+      "text": {
+        "de": "optionDe1",
+        "en": "option1"
+      },
+      "sphere": "44cb3332-aa7f-4fa0-9fea-adc621870985"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "c965a0bc-eda6-4289-8233-8e564f775480",
+    "fields": {
+      "question": "a0db1bf5-1ad1-40e8-9b35-0a3f741130d2",
+      "text": {
+        "de": "optionDe5",
+        "en": "option5"
+      },
+      "sphere": "8fd0b115-782a-41d9-ad79-b3618b5216d2"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "caa505ed-e3e7-4d54-995a-e04ed04d7e8d",
+    "fields": {
+      "question": "002a5235-9965-4d28-89a5-94b033e1bcce",
+      "text": {
+        "de": "optionDe3",
+        "en": "option3"
+      },
+      "sphere": "f0af02a5-f85a-40bf-825d-cb61b42da6f3"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "d65acf13-7937-4e8d-a0df-32501903a8b6",
+    "fields": {
+      "question": "79ba3d41-f205-424d-aa95-d288765e4d10",
+      "text": {
+        "de": "optionDe3",
+        "en": "option3"
+      },
+      "sphere": "f0af02a5-f85a-40bf-825d-cb61b42da6f3"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "dbab1807-3507-4e27-9746-ca0796d889e6",
+    "fields": {
+      "question": "79ba3d41-f205-424d-aa95-d288765e4d10",
+      "text": {
+        "de": "optionDe7",
+        "en": "option7"
+      },
+      "sphere": "26d13a27-39a5-4569-a3b2-a21cc894627a"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "e6b0110c-b539-49a1-95fc-b461da3676ad",
+    "fields": {
+      "question": "a0db1bf5-1ad1-40e8-9b35-0a3f741130d2",
+      "text": {
+        "de": "optionDe2",
+        "en": "option2"
+      },
+      "sphere": "d4866d2a-9635-4900-a6e7-502b014ce2cb"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "ef154b7b-6cc3-4368-adb2-b58cd97e3a80",
+    "fields": {
+      "question": "002a5235-9965-4d28-89a5-94b033e1bcce",
+      "text": {
+        "de": "optionDe6",
+        "en": "option6"
+      },
+      "sphere": "021f15fc-ccee-4eca-a8aa-ae15d4ac64c1"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "f7b31f96-7ccf-4bbd-b37c-f1f775647733",
+    "fields": {
+      "question": "79ba3d41-f205-424d-aa95-d288765e4d10",
+      "text": {
+        "de": "optionDe5",
+        "en": "option5"
+      },
+      "sphere": "8fd0b115-782a-41d9-ad79-b3618b5216d2"
+    }
+  },
+  {
+    "model": "core.questionoption",
+    "pk": "fabcb4fe-ff67-49d1-bfa7-e32f5a380f7d",
+    "fields": {
+      "question": "a0db1bf5-1ad1-40e8-9b35-0a3f741130d2",
+      "text": {
+        "de": "optionDe1",
+        "en": "option1"
+      },
+      "sphere": "44cb3332-aa7f-4fa0-9fea-adc621870985"
+    }
+  },
+  {
+    "model": "core.user",
+    "pk": "13eeff42-f6b3-4eac-9214-556f467a8fea",
+    "fields": {
+      "password": "pbkdf2_sha256$24000$S2VnGrqqELWp$jEA7ZTcbPmE9KlO9ekQ6QVfOLSMQoxT/aD4t5nF67Nc=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "EmployeeFirstName",
+      "last_name": "EmployeeLastName",
+      "email": "employee@multigence.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2016-08-03T12:58:33.854Z",
+      "department": "8eb5a14b-fc45-4dcc-b448-51d3cf8fb1ac",
+      "title": "System Employee",
+      "position": null,
+      "role": "EMPLOYEE",
+      "gender": null,
+      "address": null,
+      "zipcode": null,
+      "state": null,
+      "country": null,
+      "telephone": null,
+      "website": null,
+      "profile_picture": null,
+      "description": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.user",
+    "pk": "552e4e92-f665-4008-91b7-027b9a16d86d",
+    "fields": {
+      "password": "pbkdf2_sha256$24000$imU80I00p3Zx$7yHYtUCTLrXtWHD57wzUmApKxW5vDcuLmgWc4Bv/DW0=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "ProgramManagerFirstName",
+      "last_name": "ProgramManagerLastName",
+      "email": "manager@multigence.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2016-08-03T12:58:33.914Z",
+      "department": "013197b3-14b1-4145-9c24-c77a7bf8fd35",
+      "title": null,
+      "position": null,
+      "role": "MANAGER",
+      "gender": null,
+      "address": null,
+      "zipcode": null,
+      "state": null,
+      "country": null,
+      "telephone": null,
+      "website": null,
+      "profile_picture": null,
+      "description": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.user",
+    "pk": "a2786413-5fc3-47ac-b30f-197a793f27e6",
+    "fields": {
+      "password": "pbkdf2_sha256$24000$v7DrPpeyVBGJ$rb1g6s3FB0AyHUjZQ8Iz4DASSY8i4AglyjTpfhf8RRI=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "AdminFirstName",
+      "last_name": "AdminLastName",
+      "email": "admin@multigence.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2016-08-03T12:58:33.823Z",
+      "department": "8eb5a14b-fc45-4dcc-b448-51d3cf8fb1ac",
+      "title": "System Admin",
+      "position": null,
+      "role": "ADMIN",
+      "gender": null,
+      "address": null,
+      "zipcode": null,
+      "state": null,
+      "country": null,
+      "telephone": null,
+      "website": null,
+      "profile_picture": null,
+      "description": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.user",
+    "pk": "dce36017-ca11-447c-9b6c-7965491699dd",
+    "fields": {
+      "password": "pbkdf2_sha256$24000$CFkBttPdrIPB$iPqCcGW/lLBPZLGLOvyU6PcsEzHjFqagvBH36gsZMK0=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "DummyFirstName",
+      "last_name": "DummyLastName",
+      "email": "dummy@multigence.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2016-08-03T12:58:33.884Z",
+      "department": "013197b3-14b1-4145-9c24-c77a7bf8fd35",
+      "title": null,
+      "position": null,
+      "role": "APPLICANT",
+      "gender": null,
+      "address": null,
+      "zipcode": null,
+      "state": null,
+      "country": null,
+      "telephone": null,
+      "website": null,
+      "profile_picture": null,
+      "description": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.questionaryresult",
+    "pk": "35e023e7-7cf6-401d-a2a4-685d51662636",
+    "fields": {
+      "user": "13eeff42-f6b3-4eac-9214-556f467a8fea",
+      "questionary": "d077c625-991c-45f7-a171-f82593da332f",
+      "status": "CREATED"
+    }
+  }
+]
