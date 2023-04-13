@@ -1,0 +1,174 @@
+
+<div class="layout-content">
+  <header class="header position-fixed top-0 w-100 left-0">
+    <nav class="navbar">
+      <div class="d-flex align-items-center">
+        <a
+          class="navbar-brand"
+          data-toggle="collapse"
+          data-target=".navbar-collapse.in"
+        >
+          <img class="logo" src="assets/images/logo.png" />
+        </a>
+        <ul>
+          <li >
+            <a href="">
+              <svg
+                version="1.1"
+                id="house_1_"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                width="58px"
+                height="33px"
+                viewBox="0 0 59.5 42.8"
+                style="
+                  enable-background: new 0 0 59.5 42.8;
+                  display: block;
+                  margin: auto;
+                "
+                xml:space="preserve"
+                stroke="#fff"
+              >
+                <g>
+                  <polygon
+                    class="st0"
+                    points="0.8,41.8 49.5,41.8 49.5,1.8 0.8,19.2 	"
+                  ></polygon>
+                  <polygon
+                    class="st0"
+                    points="49.5,1.8 49.5,41.8 58.8,38.8 58.8,10.9 	"
+                  ></polygon>
+                </g>
+                <polygon
+                  class="st0"
+                  points="5.3,25.9 45.2,25.9 45.2,37.6 5.3,37.6 "
+                ></polygon>
+                <line class="st0" x1="49.5" y1="19.2" x2="23.8" y2="11"></line>
+                <line
+                  class="st0"
+                  x1="49.5"
+                  y1="19.2"
+                  x2="58.8"
+                  y2="10.9"
+                ></line>
+              </svg>
+              <span>{{"menu.home" | translate}}</span>
+            </a>
+          </li>
+        </ul>
+
+
+        <ul>
+          <li *ngIf="!isAdmin">
+            <a href="/profile">
+              <!-- <svg
+                version="1.1"
+                id="house_1_"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                width="58px"
+                height="33px"
+                viewBox="0 0 59.5 42.8"
+                style="
+                  enable-background: new 0 0 59.5 42.8;
+                  display: block;
+                  margin: auto;
+                "
+                xml:space="preserve"
+                stroke="#fff"
+              >
+                <g>
+                  <polygon
+                    class="st0"
+                    points="0.8,41.8 49.5,41.8 49.5,1.8 0.8,19.2 	"
+                  ></polygon>
+                  <polygon
+                    class="st0"
+                    points="49.5,1.8 49.5,41.8 58.8,38.8 58.8,10.9 	"
+                  ></polygon>
+                </g>
+                <polygon
+                  class="st0"
+                  points="5.3,25.9 45.2,25.9 45.2,37.6 5.3,37.6 "
+                ></polygon>
+                <line class="st0" x1="49.5" y1="19.2" x2="23.8" y2="11"></line>
+                <line
+                  class="st0"
+                  x1="49.5"
+                  y1="19.2"
+                  x2="58.8"
+                  y2="10.9"
+                ></line>
+              </svg> -->
+              <!-- <span>{{"menu.profile" | translate}}</span> -->
+            </a>
+          </li>
+        </ul>
+       
+      </div>
+      <div class="navbar-right lang-selector">
+        <a (click)="changeLanguage('de')" class="active">de</a>
+        <a
+          (click)="changeLanguage('en')"
+          class="{'lang-selected': currentLang == 'en'}"
+          >en</a
+        >
+      </div>
+    </nav>
+    <div class="submenu-gradient">
+      <div class="d-flex align-items-center position-relative">
+        <h5 class="background-label">Background</h5>
+        <div class="themeSelector d-flex align-items-center">
+          <a (click)="myValue('dark')" class="theme-selected">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 14 7"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xml:space="preserve"
+              stroke="#000"
+            >
+              <g transform="matrix(1,0,0,1,-1.76699,-18.167)">
+                <path
+                  d="M4.2,24.2L2.8,23.1L2.2,21.4L2.8,19.6L4.2,18.6L14.8,18.6L14.8,24.2L4.2,24.2Z"
+                  style="fill: none; stroke-width: 0.5px"
+                ></path>
+              </g>
+            </svg>
+            <span  ng-class="{'theme-selected': vm.currentTheme == 'light'}"> Black </span>
+          </a>
+          <a  (click)="myValue('white')" class="theme-selected">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 14 7"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xml:space="preserve"
+              stroke="#000"
+            >
+              <g transform="matrix(1,0,0,1,-14.367,-18.167)">
+                <path
+                  d="M25.4,18.6L26.8,19.6L27.4,21.4L26.8,23.1L25.4,24.2L14.8,24.2L14.8,18.6L25.4,18.6Z"
+                  style="fill: none; stroke-width: 0.5px"
+                />
+              </g>
+            </svg>
+            <span >White</span>
+          </a>
+        </div>
+      </div>
+      <button class="theme-btn position-relative" (click)="logOut()">
+        <span class="text-uppercase" height="100%" translate="logout"></span>
+        <i class="fa-regular fa-paper-plane-top"></i>
+      </button>
+    </div>
+  </header>
+</div>

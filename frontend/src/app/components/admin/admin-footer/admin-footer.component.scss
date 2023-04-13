@@ -1,0 +1,18 @@
+.progress-footer {
+  background-image: url(../../../../assets/images/bg-subheader-2.png);
+  background-repeat: repeat-x;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  a {
+    color: #337ab7;
+    text-decoration: none;
+    text-transform: uppercase;
+    &:hover {
+      color: #00ff85;
+      text-decoration: underline;
+    }
+  }
+}
