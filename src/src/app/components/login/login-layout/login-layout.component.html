@@ -1,0 +1,23 @@
+<div class="login-content">
+  <div class="login-background"></div>
+  <header class="header position-fixed top-0 w-100 left-0">
+    <div class="container-fluid">
+      <nav class="navbar">
+        <a
+          class="navbar-brand"
+          data-toggle="collapse"
+          data-target=".navbar-collapse.in"
+        >
+          <img class="logo" src="assets/images/logo-inverse.png" />
+        </a>
+
+    
+        
+        <div class="navbar-right lang-selector">
+          <a (click)="changeLanguage('de')"  class="active">de</a>
+          <a (click)="changeLanguage('en')" class="{'lang-selected': currentLang == 'en'}">en</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+</div>

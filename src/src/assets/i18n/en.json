@@ -1,0 +1,276 @@
+{
+    "menu": {
+      "home": "Home",
+      "profile": "Profile",
+      "questionary": "Questionnaire",
+      "report": "Report"
+    },
+    "next": "Next",
+    "questionary": {
+      "points": "Points",
+      "instructions": {
+        "text": "This is how it works<br></br>You will be presented with 9 affirmations that are incomplete and a series of options to complete them.<br></br>With some of the options you will agree more, with some less. There is no right or wrong.<br></br>A total of 22 points per affirmation must be distributed among seven answers.<br></br>You can distribute the points as you wish across them. The way you spread your points indicates the importance of an answer over others.<br></br>You must distribute all points to a question in order to proceed to the next question.<br></br>You can take the test only once. If you choose to stop, you will be able to continue from where you left.<br></br>Answering usually takes 30-60 minutes. Time is not being tracked – go at your own pace.",
+        "title": "Welcome to Multigence Test!"
+      },
+      "completed": {
+        "text": "You have completed the questionnaire.",
+        "title": "Congratulations!"
+      }
+    },
+    "sort": {
+      "asc": "Furthest",
+      "desc": "Closest",
+      "sort": "sort"
+    },
+    "acceptform": {
+      "form": {
+        "firstname": {
+          "error": {
+            "required": "First name is required"
+          }
+        },
+        "lastname": {
+          "error": {
+            "required": "Last name is required"
+          }
+        },
+        "pass": {
+          "error": {
+            "required": "Password is required"
+          }
+        },
+        "repeatpass": {
+          "error": {
+            "required": "Repeat password is required"
+          }
+        }
+      }
+    },
+    "admin": {
+      "catalog": "Catalog of users",
+      "companies": {
+        "add": "Create company",
+        "new": {
+          "form": {
+            "managerEmail": "Email",
+            "managerLastName": "Last name",
+            "managerName": "First name",
+            "name": "Company name"
+          }
+        },
+        "title": "Company monitor"
+      },
+      "form": {
+        "invitations": "Invitations"
+      },
+      "organization": {
+        "deleteConfirm": {
+          "text": "Are you sure you want to delete this organization?"
+        }
+      },
+      "users": {
+        "deleteConfirm": {
+          "text": "Are you sure you want to delete this user?"
+        }
+      },
+      "version": {
+        "select": "Software version"
+      }
+    },
+    "changePassword": {
+      "form": {
+        "error": {
+          "passwordIsNotNew": "New password matches the current",
+          "passwordNotMatch": "Passwords do not match"
+        }
+      }
+    },
+    "filter": {
+      "search": "SEARCH"
+    },
+    "footer": {
+      "catalog": "Catalog of employees and candidates"
+    },
+    "forgotpassword": {
+      "emailNotExists": "Email does not exist"
+    },
+    "forgotPassword": {
+      "form": {
+        "send": "Get reset link"
+      }
+    },
+    "form": {
+      "company": "Company",
+      "createDepartment": "create Department",
+      "createJobId": "create Job ID",
+      "email": "Email",
+      "firstname": "First Name",
+      "join": "Join",
+      "lastname": "Last Name",
+      "password": "Password",
+      "passwordNotMatch": "Password does not match",
+      "repeatPassword": "Repeat password",
+      "reset": "reset",
+      "send": "Send",
+      "setPassword": "Enter password"
+    },
+    "graphic": {
+      "collective": "Collective",
+      "individual": "Individual",
+      "points": "Points",
+      "trialMessage": "Not avalaible in the Trial Version"
+    },
+    "invitation": {
+      "expired": "The invitation has expired",
+      "maxReached": "Maximum number of invitations reached",
+      "sentBeforeMessage": "Invitation was sent before",
+      "sentMessage": "Invitation sent",
+      "userHasStartedQuizMessage": "Invitation was sent before. User has started quiz"
+    },
+    "invitations": {
+      "dropdown": {
+        "candidate": "invite candidates",
+        "employee": "invite employees"
+      },
+      "header": "<p>Please visit questionnaire section to help us evaluate your company cultural values.</p>\n<p>Invite those you want to take the test between your employees and interesting candidates.</p>\n<p>Note that employees’ interviews contribute determining company cultural values and help refine our analytics.</p>",
+      "subheader": "Send invitation to employees and candidates:"
+    },
+    "login": {
+      "form": {
+        "email": {
+          "error": {
+            "email": "Email not valid",
+            "required": "Email is required"
+          }
+        },
+        "error": {
+          "badcredentials": "Wrong email or password"
+        },
+        "forgotPassword": "forgotten password?",
+        "join": "Join now",
+        "noAccount": "Don't have an account yet?",
+        "password": {
+          "error": {
+            "required": "Password is required"
+          }
+        },
+        "remember": "remember my password",
+        "submit": "Login"
+      },
+      "header": {
+        "claim": "GRAB YOUR CUP OF TEA OR COFFEE & START YOUR SMART RECRUITMENT"
+      }
+    },
+    "profile": {
+      "address": "Address",
+      "company": "Company",
+      "country": "Country",
+      "department": "Department",
+      "description": "Description",
+      "edit": "Edit",
+      "editProfileHeader": "create / edit profile",
+      "firstname": "First Name",
+      "gender": "Gender",
+      "jobTitle": "Job Title",
+      "lastname": "Last Name",
+      "profileHeader": "profile",
+      "save": "Save",
+      "state": "State",
+      "telephone": "Telephone",
+      "uploadphoto": "upload photo",
+      "website": "Website",
+      "zipcode": "Zip Code"
+    },
+    "progress": {
+      "allDepartments": "All Departments",
+      "candidate": "candidates",
+      "department": "department",
+      "finished": "completed",
+      "header": "Catalog of employees and candidates",
+      "inHouse": "employees",
+      "jobId": "job id",
+      "jobTitle": "job title",
+      "pending": "pending",
+      "progress": "progress",
+      "progressing": "in progress",
+      "viewResults": "view results"
+    },
+    "resetPassword": {
+      "callback": {
+        "password": "Password",
+        "passwordRepeat": "Confirm password",
+        "submit": "Change password"
+      }
+    },
+    "signup": {
+      "form": {
+        "acceptTerms": "I have read and accept Multigence's",
+        "email": {
+          "error": {
+            "required": "Email is required"
+          }
+        },
+        "error": {
+          "company": {
+            "required": "Company is required"
+          },
+          "email": {
+            "invalid": "The provided email is invalid"
+          },
+          "firstname": {
+            "required": "First name is required"
+          },
+          "lastname": {
+            "required": "Last name is required"
+          },
+          "terms": {
+            "required": "You must accept our terms and conditions"
+          }
+        },
+        "submit": "Join",
+        "terms": "Terms and conditions",
+        "why": "Tell us why you want to join"
+      }
+    },
+    "software": {
+      "version": {
+        "full": "Full version",
+        "trial": "Trial version"
+      }
+    },
+    "sphere": {
+      "collective": {
+        "territorium": "Territory",
+        "ware": "Industry",
+        "wissen": "Knowledge"
+      },
+      "individual": {
+        "territorium": "Territory",
+        "ware": "Industry",
+        "wissen": "Knowledge"
+      },
+      "none": {
+        "welt": "Earth"
+      }
+    },
+    "title": {
+      "sphere": {
+        "collective": {
+          "territorium": "Territory sphere",
+          "ware": "Industry sphere",
+          "wissen": "Knowledge sphere"
+        },
+        "individual": {
+          "territorium": "Territory sphere",
+          "ware": "Industry sphere",
+          "wissen": "Knowledge sphere"
+        },
+        "none": {
+          "welt": "Welt sphere"
+        }
+      }
+    },
+    "trial": {
+      "notAvailable": "Not available in the trial version"
+    }
+  }

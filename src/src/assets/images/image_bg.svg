@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="42.3" height="42.3" viewBox="0 0 42.3 42.3">
+  <defs>
+    <style>
+      .cls-1 {
+        isolation: isolate;
+      }
+
+      .cls-2 {
+        opacity: 0.15;
+      }
+
+      .cls-3 {
+        mix-blend-mode: multiply;
+      }
+
+      .cls-4 {
+        opacity: 0.25;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 0.25px;
+      }
+    </style>
+  </defs>
+  <title>Profile_bg</title>
+  <g class="cls-1">
+    <g id="profile_pic_bg" data-name="profile pic bg">
+      <g class="cls-2">
+        <g class="cls-3">
+          <polygon points="37.1 30.3 42.1 21.1 37.1 12 31.6 2.2 10.6 2.2 5.6 11.3 0.1 21.1 5.6 31 10.6 40.1 10.6 40.1 31.6 40.1 37.1 30.3"/>
+        </g>
+      </g>
+      <g class="cls-2">
+        <g class="cls-3">
+          <polygon points="30.3 5.2 21.1 0.1 12 5.2 2.2 10.6 2.2 31.6 11.3 36.7 21.1 42.1 31 36.7 40.1 31.6 40.1 31.6 40.1 10.6 30.3 5.2"/>
+        </g>
+      </g>
+    </g>
+    <g id="Ebene_2" data-name="Ebene 2">
+      <g class="cls-4">
+        <g class="cls-3">
+          <polygon class="cls-5" points="37.1 30.3 42.1 21.1 37.1 12 31.6 2.2 10.6 2.2 5.6 11.3 0.1 21.1 5.6 31 10.6 40.1 10.6 40.1 31.6 40.1 37.1 30.3"/>
+        </g>
+      </g>
+      <g class="cls-4">
+        <g class="cls-3">
+          <polygon class="cls-5" points="30.3 5.2 21.1 0.1 12 5.2 2.2 10.6 2.2 31.6 11.3 36.7 21.1 42.1 31 36.7 40.1 31.6 40.1 31.6 40.1 10.6 30.3 5.2"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

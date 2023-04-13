@@ -1,0 +1,276 @@
+{
+    "menu": {
+      "home": "Home",
+      "profile": "Profil",
+      "questionary": "Fragenkatalog",
+      "report": "Report"
+    },
+    "next": "Weiter",
+    "questionary": {
+      "points": "Punkte",
+      "instructions": {
+        "text": "So funktioniert der Fragebogen:<br></br>Ihnen werden neun Aussagen vorgelegt, die Sie vervollständigen müssen. Dazu gibt es vorgefertigte Optionen.<br></br>Einigen von diesen werden Sie mehr zustimmen als anderen. Es gibt dabei kein richtig oder falsch, sondern das was am meisten ihrer eigenen Einstellung entspricht.<br></br>Insgesamt müssen pro Aussage 22 Punkte auf sieben Antwortgruppen verteilt werden.<br></br>Je mehr sie einer Antwortgruppe zustimmen, desto mehr Punkte sollte sie erhalten. Die Verteilung der Punkte auf die Antwortgruppen zeigt den Grad der Zustimmung im Vergleich zu den andern an.<br></br>Sie müssen alle 22 Punkte verteilen, bevor Sie zur nächsten Frage weiter können.<br></br>Den Test können Sie nur einmal machen. Üblicherweise dauert die Beantwortung zwischen 30-60 Minuten.<br></br>Die Zeit wird nicht getrackt –nehmen Sie sich die Zeit die Sie brauchen.",
+        "title": "Willkommen beim Test von Multigence"
+      },
+      "completed": {
+        "text": "Sie haben den Fragebogen erfolgreich ausgefüllt.",
+        "title": "Herzlichen Glückwunsch!"
+      }
+    },
+    "sort": {
+      "asc": "Am weitesten",
+      "desc": "Am nächsten",
+      "sort": "sortieren"
+    },
+    "acceptform": {
+      "form": {
+        "firstname": {
+          "error": {
+            "required": "Vorname ist erforderlich"
+          }
+        },
+        "lastname": {
+          "error": {
+            "required": "Nachname ist erforderlich"
+          }
+        },
+        "pass": {
+          "error": {
+            "required": "Passwort wird benötigt"
+          }
+        },
+        "repeatpass": {
+          "error": {
+            "required": "Bitte Wiederholen Sie Ihr Passwort"
+          }
+        }
+      }
+    },
+    "admin": {
+      "catalog": "Catalog of users",
+      "companies": {
+        "add": "Erstelle Unternehmen",
+        "new": {
+          "form": {
+            "managerEmail": "Email",
+            "managerLastName": "Nachname",
+            "managerName": "Vorname",
+            "name": "Name des Unternehmen"
+          }
+        },
+        "title": "Company monitor"
+      },
+      "form": {
+        "invitations": "Invitations"
+      },
+      "organization": {
+        "deleteConfirm": {
+          "text": "Are you sure you want to delete this organization?"
+        }
+      },
+      "users": {
+        "deleteConfirm": {
+          "text": "Are you sure you want to delete this user?"
+        }
+      },
+      "version": {
+        "select": "Software version"
+      }
+    },
+    "changePassword": {
+      "form": {
+        "error": {
+          "passwordIsNotNew": "New password matches the current",
+          "passwordNotMatch": "Passworte stimmen nicht überein"
+        }
+      }
+    },
+    "filter": {
+      "search": "SUCHE"
+    },
+    "footer": {
+      "catalog": "Katalog von Angestellten und Kandidaten"
+    },
+    "forgotpassword": {
+      "emailNotExists": "Email existiert nicht"
+    },
+    "forgotPassword": {
+      "form": {
+        "send": "Link zum zurücksetzten"
+      }
+    },
+    "form": {
+      "company": "Company",
+      "createDepartment": "erstelle Abteilung",
+      "createJobId": "erstelle Job ID",
+      "email": "Email",
+      "firstname": "Vorname",
+      "join": "Beitreten",
+      "lastname": "Nachname",
+      "password": "Passwort",
+      "passwordNotMatch": "Passwort stimmt nicht überein",
+      "repeatPassword": "Passwort wiederholen",
+      "reset": "zurücksetzten",
+      "send": "Senden",
+      "setPassword": "Passwort eingeben"
+    },
+    "graphic": {
+      "collective": "Kollektiv",
+      "individual": "Individuell",
+      "points": "Punkte",
+      "trialMessage": "Not avalaible in the Trial Version"
+    },
+    "invitation": {
+      "expired": null,
+      "maxReached": null,
+      "sentBeforeMessage": "Einladung wurde schon verschickt",
+      "sentMessage": "Einladung verschickt",
+      "userHasStartedQuizMessage": "Einladung wurde schon verschickt. Benutzer hat den Fragebogen gestartet"
+    },
+    "invitations": {
+      "dropdown": {
+        "candidate": "Arbeitsuchende einladen",
+        "employee": "Mitarbeiter einladen"
+      },
+      "header": "<p>Please visit questionnaire section to help us evaluate your company cultural values.</p>\n<p>Invite those you want to take the test between your employees and interesting candidates.</p>\n<p>Note that employees’ interviews contribute determining company cultural values and help refine our analytics.</p>",
+      "subheader": "Send invitation to employees and candidates:"
+    },
+    "login": {
+      "form": {
+        "email": {
+          "error": {
+            "email": "Ungültige E-Mail-Adresse",
+            "required": "Eine gültige E-Mail-Adresse ist erforderlich"
+          }
+        },
+        "error": {
+          "badcredentials": "Falsche E-mail oder Passwort"
+        },
+        "forgotPassword": "Passwort vergessen?",
+        "join": "Jetzt Mitglied werden",
+        "noAccount": "Haben Sie noch kein Konto?",
+        "password": {
+          "error": {
+            "required": "Passwort erforderlich"
+          }
+        },
+        "remember": "Kennwort im Schlüsselbund sichern",
+        "submit": "Anmelden"
+      },
+      "header": {
+        "claim": "GRAB YOUR CUP OF TEA OR COFFEE & START YOUR SMART RECRUITMENT"
+      }
+    },
+    "profile": {
+      "address": "Adresse",
+      "company": "Unternehmen",
+      "country": "Land",
+      "department": "Abteilung",
+      "description": "Beschreibung",
+      "edit": "bearbeiten",
+      "editProfileHeader": "erstelle / bearbeite Profil",
+      "firstname": "Vorname",
+      "gender": "Geschlecht",
+      "jobTitle": "Berufsbezeichnung",
+      "lastname": "Nachname",
+      "profileHeader": "Profil",
+      "save": "speichern",
+      "state": "Stadt",
+      "telephone": "Telefon",
+      "uploadphoto": "Foto hochladen",
+      "website": "Website",
+      "zipcode": "Postleitzahl"
+    },
+    "progress": {
+      "allDepartments": "Alle Abteilungen",
+      "candidate": "Arbeitsuchende",
+      "department": "Abteilung",
+      "finished": "beendet",
+      "header": "Katalog von Arbeitnehmern und Arbeitsuchenden",
+      "inHouse": "Mitarbeiter",
+      "jobId": "job id",
+      "jobTitle": "Berufsbezeichnung",
+      "pending": "Ausstehend",
+      "progress": "progress",
+      "progressing": "In Bearbeitung",
+      "viewResults": "view results"
+    },
+    "resetPassword": {
+      "callback": {
+        "password": "Passwort",
+        "passwordRepeat": "Passwort wiederholen",
+        "submit": "Passwort ändern"
+      }
+    },
+    "signup": {
+      "form": {
+        "acceptTerms": "I have read and accept Multigence's",
+        "email": {
+          "error": {
+            "required": "Email is required"
+          }
+        },
+        "error": {
+          "company": {
+            "required": "Company is required"
+          },
+          "email": {
+            "invalid": "The provided email is invalid"
+          },
+          "firstname": {
+            "required": "First name is required"
+          },
+          "lastname": {
+            "required": "Last name is required"
+          },
+          "terms": {
+            "required": "You must accept our terms and conditions"
+          }
+        },
+        "submit": "Join",
+        "terms": "Terms and conditions",
+        "why": "Tell us why you want to join"
+      }
+    },
+    "software": {
+      "version": {
+        "full": "Vollversion",
+        "trial": "Testversion"
+      }
+    },
+    "sphere": {
+      "collective": {
+        "territorium": "Territorium",
+        "ware": "Ware",
+        "wissen": "Wissen"
+      },
+      "individual": {
+        "territorium": "Territorium",
+        "ware": "Ware",
+        "wissen": "Wissen"
+      },
+      "none": {
+        "welt": "Welt"
+      }
+    },
+    "title": {
+      "sphere": {
+        "collective": {
+          "territorium": "Identität basiert auf klaren Grenzen, Regeln; Zugehörigkeit zu Land oder Religion; Achtung im sozialen Raum",
+          "ware": "Identität basiert auf sozialer Kompetenz, Kooperationsfähigkeit, Wille zum Ausgleich und gemeinsamen Wachstum ",
+          "wissen": "Identität basiert auf Einbindung ins planetare Ökosystem, globales Bewusstsein, die Evolution der Menschheit"
+        },
+        "individual": {
+          "territorium": "Identität basiert auf Willens- und Behauptungskraft, Kampf um Selbstbestimmung, Respekt und Ehre; hohes Machtbewusstsein",
+          "ware": "Identität basiert auf Produktion, Austausch, Konsum; orientiert an Arbeit, Leistung, Wettbewerb, Besitz",
+          "wissen": "Identität basiert auf einem offenen Blick fürs Ganze, Vielfalt von Wissen und Weisheit, Streben nach Freiheit"
+        },
+        "none": {
+          "welt": "Identität basiert auf Beziehung zum Kosmos; Abstammung, Allianzen mit anderen Menschen"
+        }
+      }
+    },
+    "trial": {
+      "notAvailable": "Not available in the trial version"
+    }
+  }
