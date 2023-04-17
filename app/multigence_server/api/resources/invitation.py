@@ -16,6 +16,8 @@ from multigence_server.core import services
 class InvitationCreationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invitation
+        fields = '__all__'
+        
     uri = serializers.URLField()
 
     def get_uri(self, obj):
@@ -43,7 +45,6 @@ class InvitationCreationSerializer(serializers.ModelSerializer):
             if QuestionaryResult.objects.filter(user=user).exists():
                 if not QuestionaryResult.objects.get(user=user).status == QuestionaryResult.CREATED:
                     raise CustomValidationError("User has started quiz already", status.HTTP_409_CONFLICT)
-
         return data
 
 class InvitationSerializer(serializers.ModelSerializer):
@@ -72,7 +73,6 @@ class InvitationViewSet(viewsets.ViewSet):
 
     def create(self, request):
         data = request.data
-
         serializer = InvitationCreationSerializer(data=data)
         email = data.get('email').lower()
         first_invitation = True
@@ -83,7 +83,7 @@ class InvitationViewSet(viewsets.ViewSet):
             if Invitation.objects.filter(email=email).exists():
                 first_invitation = False
                 Invitation.objects.get(email=email).delete()
-
+                
         serializer = InvitationCreationSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             first_name = data.get('first_name')

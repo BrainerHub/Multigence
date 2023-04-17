@@ -78,7 +78,6 @@ filters: any = {
   }
 
   ngOnInit(): void {
-    
     this.getUser();
 
  }

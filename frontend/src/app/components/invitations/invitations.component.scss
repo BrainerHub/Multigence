@@ -1,0 +1,46 @@
+.MainBodyPart {
+  height: calc(100vh - 150px);
+  overflow: auto;
+  top: 106px;
+  position: relative;
+  background-color: #212121;
+}
+.invitations {
+  padding-top: 30px;
+  p {
+    color: #eeeeee;
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  .invitation-text {
+    margin: 25px 0px 45px;
+  }
+  .companyform {
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    background: transparent;
+    padding: 10px;
+    border-bottom: 1px solid #eeeeee;
+    color: #eeeeee;
+    img {
+      max-width: 15px;
+    }
+    &:hover {
+      color: #eeeeee;
+      text-decoration: none;
+    }
+  }
+}
+.CreateFormBtnPart {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+  button {
+    width: auto;
+  }
+}

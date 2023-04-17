@@ -81,6 +81,18 @@ export class UserService {
         })
       );
     }
+
+
+   // get organization with id
+    getOrganization(id:any) {
+      return this.http.get<any>(`${this.apiUrl}` + '/organization/'+id+'/').pipe(
+        map((user) => {
+          return user;
+        })
+      );
+    }
+
+  
   //get all departments list
     getDepartments(organizationId:any) {
       return this.http.get<any>(`${this.apiUrl}` + '/organization/' + organizationId + '/department/',).pipe(
@@ -161,5 +173,104 @@ getMe() {
     );
   }
 
+  //question upload
+
+  // uploadQuestions(file: any) {
+  //   console.log("fileee",file);
+  //   const headers = new HttpHeaders();
+  //   headers.append('skip', 'true');
+  //   return this.http.post<{ OUTPUT: { file: any } }>(
+  //     `${this.apiUrl}` +  '/questionUpload/', {headers: headers}
+  //   );
+  
+  // }
+
+  uploadQuestions(file: any) {
+    var fd = new FormData();
+    fd.append('file', file);
+    return this.http.post<any>(`${this.apiUrl}` + '/questionUpload/', file).pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
+
+
+  //get position
+  getPositions(organizationId:any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/position/').pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
+
+
  
+  
+  getQuestionaryStatus(organizationId:any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/questionary/status/').pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
+
+  getOrganizationUsers(organizationId:any, departmentId:any) {
+    var params = {};
+    if (departmentId !== undefined) {
+      params = departmentId;
+    }
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/user/',params).pipe(
+      map((user) => {
+        return user;
+      })
+    );
+   
+  }
+
+
+
+
+  getInviteOrganization(uuid: any) {
+    return this.http.get<any>(`${this.apiUrl}` +  '/organization/' + uuid + '/').pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
+
+
+  //sphere
+
+  getSpheres () {
+    return this.http.get<any>(`${this.apiUrl}` + '/sphere/').pipe(
+      map((sphere) => {
+        return sphere;
+      })
+    );
+  
+  }
+
+  getCorridorReport(organizationId:any) {
+   
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=All+users&source=employees').pipe(
+      map((report) => {
+        return report;
+      })
+    );
+  
+  }
+
+  getOrganizationData(organizationId:any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/'+organizationId+'/').pipe(
+      map((user) => {
+        return user;
+      })
+    );
+    
+  }
 }
+ 
+
+

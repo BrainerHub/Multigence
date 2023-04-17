@@ -45,3 +45,4 @@ Thumbs.db
 # app (backend)
 app/fixtures/default-questionoptions.json
 app/venv
+app/**/*.pyc

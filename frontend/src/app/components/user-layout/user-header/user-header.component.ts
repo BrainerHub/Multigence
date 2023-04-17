@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-header',
@@ -7,13 +8,14 @@ import { Component } from '@angular/core';
 })
 export class UserHeaderComponent {
   username = '';
-isActive = 'account';
+  isActive = 'account';
 
-constructor(){
+constructor(public router:Router){
 
 }
 
-logout(){
-
+onLogout(){
+  localStorage.clear();
+  this.router.navigate(['login']);
 }
 }

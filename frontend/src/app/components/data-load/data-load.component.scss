@@ -1,7 +1,25 @@
 .MainBodyPart {
-    height: calc(100vh - 150px);
-    overflow: auto;
-    top: 106px;
-    position: relative;
-    background-color: #212121;
+  height: calc(100vh - 106px);
+  overflow: auto;
+  top: 106px;
+  position: relative;
+  background-color: #fff;
+}
+.UploadQuestion {
+  padding-top: 20px;
+  form {
+    max-width: 370px;
+    width: 100%;
+    input {
+      height: 46px;
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.3333333;
+      border-radius: 6px;
+    }
+    .theme-btn {
+      font-size: 18px;
+      line-height: 1.3333333;
+    }
   }
+}

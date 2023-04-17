@@ -50,6 +50,7 @@ export class AdminComponent {
       invitations: [null, Validators.required],
     });
     this.getAll();
+    //this.getOrganization();
   }
 
   getAll() {
@@ -57,9 +58,14 @@ export class AdminComponent {
       this.getAllOrgination = res;
     });
     this.organizations().push(this.newOrganization());
+    
   }
  
- 
+  getOrganization() {
+    this.userService.getOrganization(this.organization).subscribe((res) => {
+    });
+    
+  }
 
   organizations(): FormArray {
     return this.createOrginationForm.get('organizations') as FormArray;

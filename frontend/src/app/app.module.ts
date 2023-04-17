@@ -33,6 +33,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
 
+import { InvitationsComponent } from './components/invitations/invitations.component';
+import { AcceptComponent } from './components/invitations/accept/accept.component';
+
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { UserFooterComponent } from './components/user-layout/user-footer/user-footer.component';
 import { UserHeaderComponent } from './components/user-layout/user-header/user-header.component';
@@ -41,9 +44,13 @@ import { QuestionaryComponent } from './components/questionary/questionary.compo
 import { ReportComponent } from './components/report/report.component';
 import { ContentComponent } from './components/content/content.component';
 import { DataLoadComponent } from './components/data-load/data-load.component';
+import { TestComponent } from './components/test/test.component';
+import { ProgressFooterComponent } from './components/layout/progress-footer/progress-footer.component';
 @NgModule({
   declarations: [
     AppComponent,
+    AcceptComponent,
+    InvitationsComponent,
     LoginComponent,
     LoginLayoutComponent,
     ChangePasswordComponent,
@@ -63,6 +70,8 @@ import { DataLoadComponent } from './components/data-load/data-load.component';
     ReportComponent,
     ContentComponent,
     DataLoadComponent,
+    TestComponent,
+    ProgressFooterComponent,
   ],
   imports: [
     NgbModule,

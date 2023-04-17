@@ -1,0 +1,99 @@
+.progress-footer {
+    //background-image: url(../../../../assets/images/bg-subheader-2.png);
+    background-repeat: repeat-x;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 12px;
+    a {
+      color: #337ab7;
+      text-decoration: none;
+      text-transform: uppercase;
+      &:hover {
+        color: #00ff85;
+        text-decoration: underline;
+      }
+    }
+  }
+  .FooterTop {
+    position: relative;
+    top: 106px !important;
+    .progress-chart {
+      position: absolute;
+      top: 50%;
+      width: 267px;
+      right: 30px;
+      transform: translate(0, -50%);
+    }
+  }
+  .pending {
+    background-color: #777777;
+  }
+  .progressing {
+    background-color: #1a5a56;
+  }
+  .finished {
+    background-color: #00ff85;
+  }
+  
+  .MainBodyPart {
+    height: calc(100vh - 150px);
+    overflow: auto;
+    top: 106px;
+    position: relative;
+    background-color: #212121;
+  }
+  .AdminUser {
+  padding: 15px 0 15px 90px;
+  .right-inner-addon {
+    position: relative;
+    padding-bottom: 50px !important;
+    img {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+  }
+  .FilterBox {
+    margin-bottom: 20px;
+    .FilterBoxInner {
+      border-top: 1px solid #555555;
+      background-color: rgba(12, 12, 12, 0.8);
+      padding: 15px 5px 5px 0px;
+      p {
+        color: #eee;
+        margin: 0;
+      }
+    }
+  }
+  .AdminSubTitle {
+    color: #eee;
+  }
+  .UserTable {
+    border: 1px solid #555555;
+    background-color: #0c0c0c;
+    table {
+      margin-bottom: 0;
+      tr {
+        th {
+          font-size: 12px;
+          font-weight: 700;
+          text-transform: uppercase;
+          padding: 15px 7px;
+          color: #eee;
+          i {
+            cursor: pointer;
+          }
+        }
+        td {
+          font-size: 12px;
+          color: #eee;
+          &:first-child {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}
