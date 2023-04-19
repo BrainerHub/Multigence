@@ -1,7 +1,6 @@
 <app-layout-header></app-layout-header>
 <div class="progress-footer FooterTop text-center">
   <a href="invitations">{{ "footer.catalog" | translate }}</a>
-
   <div class="progress-chart">
     <div class="progress">
       <div
@@ -10,7 +9,7 @@
         style="width: 33%"
         data-toggle="tooltip"
         data-placement="top"
-        title="{{'progress.pending' | translate}}"
+        title="{{ 'progress.pending' | translate }}"
       ></div>
       <div
         class="progressing"
@@ -18,7 +17,7 @@
         style="width: 33%"
         data-toggle="tooltip"
         data-placement="top"
-        title="{{'progress.progressing' | translate}}"
+        title="{{ 'progress.progressing' | translate }}"
       ></div>
       <div
         class="finished"
@@ -26,12 +25,11 @@
         style="width: 34%"
         data-toggle="tooltip"
         data-placement="top"
-        title="{{'progress.finished' | translate}}"
+        title="{{ 'progress.finished' | translate }}"
       ></div>
     </div>
   </div>
 </div>
-
 <div class="MainBodyPart">
   <div class="container-fluid">
     <div class="AdminUser">
@@ -48,39 +46,25 @@
                 [(ngModel)]="searchText"
                 autocomplete="off"
               />
-              <div class="pad-bottom-20">
-                <div class="dropdown">
-
-                  <div class="form-group w-50">
-                    <select
-                      class="form-select"
-                      name="progress"
-                      id="progress"
+              <div class="FilterBox mt-4">
+                <div class="form-group mb-4">
+                  <!-- <select class="form-select" name="progress" id="progress">
+                    <option
+                      *ngFor="let progress of progressList; let i = index"
                     >
-                      <option *ngFor="let progress of progressList; let i = index">
-                        {{ progress }}
-                      </option>
-                    </select>
-                  </div>
-             
-                  <div class="form-group w-50">
-                    <select
-                    class="form-select"
-                      name="role"
-                      id="role"
-                    >
-                      <option *ngFor="let rol of userRolList; let i = index">
-                        {{ rol }}
-                      </option>
-                    </select>
-                  </div>
+                      {{ progress }}
+                    </option>
+                  </select> -->
                 </div>
-                <div class="form-group w-50">
-                  <select
-                    class="form-select"
-                    name="department"
-                    id="department"
-                  >
+                <div class="form-group mb-4">
+                  <select class="form-select" name="role" id="role">
+                    <option *ngFor="let rol of userRolList; let i = index">
+                      {{ rol }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group mb-4">
+                  <select class="form-select" name="department" id="department">
                     <option
                       *ngFor="let department of departments"
                       value="{department.uuid}"
@@ -89,91 +73,134 @@
                     </option>
                   </select>
                 </div>
-
-
-                <div class="form-group w-50">
-                  <select
-                    class="form-select"
-                    name="title"
-                    id="title"
-
-                  >
-                    <option
-                      *ngFor="let title of titles"
-                      value="{title.uuid}"
-                    >
-                      {{ title}}
+                <div class="form-group mb-4">
+                  <select class="form-select" name="title" id="title">
+                    <option *ngFor="let title of titles" value="{title.uuid}">
+                      {{ title }}
                     </option>
                   </select>
                 </div>
-                
-                <div class="form-group w-50">
-                  <select
-                    class="form-select"
-                    name="title"
-                    id="title"
-                  >
+                <div class="form-group mb-4">
+                  <select class="form-select" name="title" id="title">
                     <option
                       *ngFor="let position of positions"
                       value="{position.uuid}"
                     >
-                      {{ position.name}}
+                      {{ position.name }}
                     </option>
                   </select>
                 </div>
-
-                
               </div>
+              <!-- <div class="pad-bottom-20">
+                <div class="dropdown">
+                  <div class="form-group w-50">
+                    <select class="form-select" name="progress" id="progress">
+                      <option
+                        *ngFor="let progress of progressList; let i = index"
+                      >
+                        {{ progress }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group w-50">
+                    <select class="form-select" name="role" id="role">
+                      <option *ngFor="let rol of userRolList; let i = index">
+                        {{ rol }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group w-50">
+                  <select class="form-select" name="department" id="department">
+                    <option
+                      *ngFor="let department of departments"
+                      value="{department.uuid}"
+                    >
+                      {{ department.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group w-50">
+                  <select class="form-select" name="title" id="title">
+                    <option *ngFor="let title of titles" value="{title.uuid}">
+                      {{ title }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group w-50">
+                  <select class="form-select" name="title" id="title">
+                    <option
+                      *ngFor="let position of positions"
+                      value="{position.uuid}"
+                    >
+                      {{ position.name }}
+                    </option>
+                  </select>
+                </div>
+              </div> -->
             </div>
-            <button (click)="viewResult()" type="button" class="theme-btn w-auto text-uppercase bold">View Result</button>
-            </div>
-
-
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item"> <a class="page-link" aria-label="Previous">
+            <button
+              (click)="viewResult()"
+              type="button"
+              class="theme-btn w-100 text-uppercase bold"
+            >
+              View Result
+            </button>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="Custompagination">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
-                </a></li>
-                <li class="page-item"><a class="page-link">001</a></li>
-                <li class="page-item"> <a class="page-link" aria-label="Next">
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link active">001</a></li>
+              <li class="page-item">
+                <a class="page-link" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
-                </a></li>
-                <li class="page-item">
-                  <a class="page-link" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
-            <!-- <div class="person-list"> -->
-              <div>
-
-                <!-- <div class="col-xs-1">
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- <div class="person-list"> -->
+          <div>
+            <!-- <div class="col-xs-1">
                   <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
                     class="icon-triangle triangle"></i>
                   <i *ngIf="user.role === 'APPLICANT'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
                     class="icon-hexagon hexagon"></i>
                 </div> -->
-                <ul class="">
-                  <li class="" *ngFor="let user of userStatusListPage">
-                    <div class="">
-                      <div class="">{{user['first_name']}}</div>
-                      <div class="">{{user['last_name']}}</div>
-                      <div class="">{{user['role'] == 'EMPLOYEE' ? user['title'] : user['position_name']}}</div>
-                      <div class="">{{user['department_name']}}</div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-             
-            </div>
-            </div>
-            </div>
-                 
+            <ul class="">
+              <li class="" *ngFor="let user of userStatusListPage">
+                <div class="">
+                  <div class="">{{ user["first_name"] }}</div>
+                  <div class="">{{ user["last_name"] }}</div>
+                  <div class="">
+                    {{
+                      user["role"] == "EMPLOYEE"
+                        ? user["title"]
+                        : user["position_name"]
+                    }}
+                  </div>
+                  <div class="">{{ user["department_name"] }}</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

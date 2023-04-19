@@ -13,9 +13,13 @@
 
     
         
+        
         <div class="navbar-right lang-selector">
-          <a (click)="changeLanguage('de')"  class="active">de</a>
-          <a (click)="changeLanguage('en')" class="{'lang-selected': currentLang == 'en'}">en</a>
+          <a (click)="changeLanguage('de')" [ngClass]="{'active' : selectedLanguage ==='de'}">de</a>
+          <a
+            (click)="changeLanguage('en')"
+            [ngClass]="{'active' : selectedLanguage ==='en'}" >en</a
+          >
         </div>
       </nav>
     </div>

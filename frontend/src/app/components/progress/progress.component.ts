@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'app/services/user.service';
+// import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-progress',
@@ -56,12 +57,6 @@ export class ProgressComponent {
     this._router.navigate(['/report']);
   }
 
-  // findUsers(){
-  //   this.userService.findUsers(this.user).subscribe((res) => {
-  //    console.log(res, "@@@@@@@@@");
-
-  //   })
-  // }
 
   getDepartment() {
     this.userService.getDepartments(this.organization).subscribe((res) => {
@@ -71,8 +66,6 @@ export class ProgressComponent {
   }
   getPositions() {
     this.userService.getPositions(this.organization).subscribe((res) => {
-      console.log("position data", res);
-      
      this.positions = res[0]
     });
   }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'app/services/user.service';
+// import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -43,7 +44,6 @@ export class SignupComponent {
   signUp(){
     this.submitted = true;
     if (this.signupForm.invalid) {
-      console.log(this.signupForm)
     }
     let data = {
       first_name: this.signupForm.controls['first_name'].value,

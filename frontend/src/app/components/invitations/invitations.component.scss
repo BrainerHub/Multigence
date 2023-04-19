@@ -44,3 +44,33 @@
     width: auto;
   }
 }
+.CustomAddBtn {
+  position: relative;
+  .plusIconBtn {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    padding: 0;
+  }
+}
+.CreateCompanyForm {
+  // background-color: #0c0c0c;
+  // padding: 20px 20px 20px 20px;
+}
+.profile {
+  .profile-container {
+    background-color: rgba(12, 12, 12, 0.5);
+    padding: 10px;
+    border: 1px solid #555555;
+    margin-bottom: 50px;
+    .profile-container2 {
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      padding: 25px;
+    }
+  }
+}

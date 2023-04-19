@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { UserService } from 'src/app/services/user.service';
+import { BootstrapService } from 'app/services/bootstrap.service';
+import { UserService } from 'app/services/user.service';
+// import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,8 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
     public _router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private bootstrapService:BootstrapService
   ) {}
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -44,7 +48,7 @@ export class LoginComponent {
     };
     this.userService.login(data).subscribe((response) => {      
       localStorage.setItem("authToken",response.token)
-      this._router.navigate(['/admin']);
+      return this.bootstrapService.bootstrap();
     });
   }
 

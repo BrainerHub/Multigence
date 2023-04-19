@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'app/services/user.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
  
 @Component({

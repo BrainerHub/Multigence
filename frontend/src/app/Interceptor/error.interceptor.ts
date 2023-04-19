@@ -20,12 +20,12 @@ export class ErrorInterceptor implements HttpInterceptor {
         // auto logout
         
 
-        // this.userService.logout();
+       // this.userService.logout();
 
       }
-      alert(err.statusText);
+      //alert(err.statusText);
 
-      //const error = err.error.message || err.statusText;
+      const error = err.error.message || err.statusText;
       return throwError(err.error.message);
     }))
   }

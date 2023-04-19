@@ -5,7 +5,7 @@
       <h2>Upload questions</h2>
       <form>
         <input class="input-lg" type="file" (change)="onChange($event)"/>
-        <button class="theme-btn w-auto" (click)="uploadFile()">
+        <button class="theme-btn w-auto" (click)="uploadFile($event)">
           Upload
         </button>
       </form>
@@ -15,6 +15,9 @@
         </div>
         <div class="alert alert-danger" role="alert" *ngIf="hidden">
           {{ errorMessage }}
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="hidden">
+          {{ resp }}
         </div>
       </div>
     </div>

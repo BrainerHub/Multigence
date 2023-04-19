@@ -1,9 +1,10 @@
 import { Component, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
+// import { UserService } from 'src/app/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { UserService } from 'app/services/user.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class ReportComponent {
   visible: boolean = false;
   departments: any;
   organization:any =[];
+  corridorPersons: any =[]
   user: any;
   postions:any;
   submitted!: boolean;
@@ -43,16 +45,22 @@ export class ReportComponent {
     this.organization = res.company;
     this.getDepartment();
     this.getPostions();
-   // this.getOrganizationUsers();
+    this.getOrganizationUsers();
     this.getInviteOrganization();
    this.getSpheres();
    this.getCorridorReport();
 });
 }
+getOrganizationUsers(){
+  this.userService.getOrganizationUsers(this.organization,this.departments).subscribe((res) => {
+    var usertitleData = Array.from(Object.values(res));
+   // this.titles = usertitleData[0];
+  });
+}
+
 
 getDepartment() {
   this.userService.getDepartments(this.organization).subscribe(res => {
-    console.log(res)
    var userDepartmentData = Array.from(Object.values(res));
    this.departments = userDepartmentData[0]
   })

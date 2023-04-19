@@ -1,0 +1,5 @@
+<form #form='ngForm' (ngSubmit)='submitForm(form.value)'>
+    <input type='email'
+    class='form-control' placeholder='E-mail' name='userEmail' ngModel required >
+    <button type='submit'>Submit</button>
+  </form>

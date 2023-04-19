@@ -64,15 +64,16 @@
                         <input
                           type="checkbox"
                           [checked]="filters.status[status] || false"
-                          (click)="onChecked($event, status, 'status')"
+                          (change)="onChecked($event, status, 'status')"
                           id="status{{i}}"
                           name="status{{i}}"
                         />
+                        <!---->
                         <label for="progress-pending">{{status}}</label>
                       </div>
                     </div>
                     <div class="col-sm-3 text-end">
-                      <p>({{ counters.progress[status] || 0 }})</p>
+                      <p>({{ counters?.progress[status] || 0 }})</p>
                     </div>
                   </div>
                   <!-- <div class="row align-items-center mb-3">
@@ -124,7 +125,7 @@
                           [checked]="filters.company[company.uuid] || false"
                           name="company{{i}}"
                           id="company{{i}}"
-                          (click)="onChecked($event, company.uuid, 'company')"
+                          (change)="onChecked($event, company.uuid, 'company')"
                         />
                         <label class="text-capitalize">{{
                           company.name
@@ -180,7 +181,7 @@
                           [checked]="filters.department[department.uuid] || false"
                           name="department{{i}}"
                           id="department{{i}}"
-                          (click)="onChecked($event, department.uuid, 'department')"
+                          (change)="onChecked($event, department.uuid, 'department')"
                         />
                         <label class="text-capitalize">{{
                           department.name
@@ -214,7 +215,7 @@
                         <input
                           type="checkbox"
                           [checked]="filters.role[role] || false"
-                          (click)="onChecked($event, role, 'role')"
+                          (change)="onChecked($event, role, 'role')"
                           id="role{{i}}"
                           name="role{{i}}"
                         />
@@ -222,7 +223,7 @@
                       </div>
                     </div>
                     <div class="col-sm-3 text-end">
-                      <p>({{ counters.role.MANAGER || 0 }})</p>
+                      <p>({{ counters?.role.MANAGER || 0 }})</p>
                     </div>
                   </div>
                   <!-- <div class="row align-items-center mb-3">

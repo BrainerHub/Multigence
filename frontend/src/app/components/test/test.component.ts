@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'app/services/user.service';
+
 
 @Component({
   selector: 'app-test',

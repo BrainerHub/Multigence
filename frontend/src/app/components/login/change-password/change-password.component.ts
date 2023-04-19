@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { UserService } from 'src/app/services/user.service';
-import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
+import { UserService } from 'app/services/user.service';
+import { ConfirmPasswordValidator } from 'app/validators/confirm-password.validator';
+// import { UserService } from 'src/app/services/user.service';
+// import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 
 @Component({
   selector: 'app-change-password',
@@ -41,7 +43,7 @@ export class ChangePasswordComponent implements OnInit {
     this.submitted = true;
     let data = {
       new_password: this.changePasswordForm.controls['new_password'].value,
-      token: true,
+      token: "true",
     };
     if (this.password === this.new_password) {
       this.userService.changePassword(data).subscribe(
@@ -59,14 +61,6 @@ export class ChangePasswordComponent implements OnInit {
         }
       );
     }
-    //   this.submitted = true;
-    //   let data = {
-    //     new_password: this.changePasswordForm .controls['new_password'].value,
-    //     token:true
-    //   };
-    //   this.userService. changePassword(data).subscribe((response) => {
-    //     console.log(response);
-
-    //   });
+ 
   }
 }

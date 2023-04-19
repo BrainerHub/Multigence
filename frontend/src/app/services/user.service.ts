@@ -7,8 +7,12 @@ import { Observable, Subject, map } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
- 
-
+  ROLE_MANAGER = 'MANAGER';
+  ROLE_EMPLOYEE = 'EMPLOYEE';
+  ROLE_APPLICANT = 'APPLICANT';
+  ROLE_ADMIN = 'ADMIN';
+  me: any;
+  storage = sessionStorage;
   apiUrl = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient, public router:Router) {}
@@ -130,13 +134,14 @@ export class UserService {
 }
 
  // get User
-  getUser() {
-    return this.http.get<any>(`${this.apiUrl}` + '/user/').pipe(
+  getUser(): Observable<any> {
+    return this.http.get(`${this.apiUrl}` + '/user/').pipe(
       map((user) => {
         return user;
       })
     );
   }
+
 
    //delete User
    deleteUser(userId:any) {
@@ -175,20 +180,10 @@ getMe() {
 
   //question upload
 
-  // uploadQuestions(file: any) {
-  //   console.log("fileee",file);
-  //   const headers = new HttpHeaders();
-  //   headers.append('skip', 'true');
-  //   return this.http.post<{ OUTPUT: { file: any } }>(
-  //     `${this.apiUrl}` +  '/questionUpload/', {headers: headers}
-  //   );
-  
-  // }
-
   uploadQuestions(file: any) {
-    var fd = new FormData();
+   var fd = new FormData();
     fd.append('file', file);
-    return this.http.post<any>(`${this.apiUrl}` + '/questionUpload/', file).pipe(
+    return this.http.post<any>(`${this.apiUrl}` + '/questionUpload/', fd).pipe(
       map((user) => {
         return user;
       })
@@ -206,7 +201,57 @@ getMe() {
   }
 
 
- 
+
+
+  getDescription(user:any) {
+    if(user.role === this.ROLE_EMPLOYEE) {
+      return user.title;
+    }
+    else if(user.role === this.ROLE_APPLICANT) {
+      return user['position_name'];
+    }
+    else {
+      return null;
+    }
+  }
+
+
+  isLoggedSync() {
+    if(localStorage['token']) {
+      this.storage = localStorage;
+    }
+    return this.storage['token'] !== undefined && this.storage['token'] !== null;
+  }
+
+
+  isAdminSync() {
+    if(!this.isLoggedSync()){
+      return false;
+    }
+    return this.me && this.me.role === this.ROLE_ADMIN;
+  }
+
+
+  isAdmin() {
+    return this.getMe().subscribe((user) => {
+      return user.role === this.ROLE_ADMIN;
+    });
+  }
+
+
+
+  isManager() {
+      return this.getMe().subscribe((user) => {
+        return user.role === this.ROLE_MANAGER;
+      });
+  }
+
+  isManagerSync() {
+      if(!this.isLoggedSync()){
+        return false;
+      }
+      return this.me && this.me.role === this.ROLE_MANAGER;
+  }
   
   getQuestionaryStatus(organizationId:any) {
     return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/questionary/status/').pipe(
@@ -215,6 +260,11 @@ getMe() {
       })
     );
   }
+
+
+
+
+
 
   getOrganizationUsers(organizationId:any, departmentId:any) {
     var params = {};
@@ -270,6 +320,20 @@ getMe() {
     );
     
   }
+ //get UserQuestionaries
+ getUserQuestionaries(userId: any, ) {
+    return this.http.get<any>(`${this.apiUrl}` + '/user/' + userId + '/questionary/').pipe(
+      map((sphere) => {
+        return sphere;
+      })
+    );
+  
+  }
+
+  // getUserQuestionaries: function (userId, params) {
+  //   var req = _getRequest('/user/' + userId + '/questionary/', params, true);
+  //   return $http(req);
+  // },
 }
  
 

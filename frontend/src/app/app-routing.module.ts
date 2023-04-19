@@ -18,9 +18,10 @@ import { ProgressComponent } from './components/progress/progress.component';
 import { InvitationsComponent } from './components/invitations/invitations.component';
 import { AcceptComponent } from './components/invitations/accept/accept.component';
 import { ReportComponent } from './components/report/report.component';
+import { QuestionaryComponent } from './components/questionary/questionary.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'admin', pathMatch: 'full',},
+ // {path: '', redirectTo: 'admin', pathMatch: 'full',},
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent,canActivate: [AuthGuard]},
   {path: 'reset-password', component: ForgetPasswordComponent},
@@ -37,7 +38,9 @@ const routes: Routes = [
   {path: 'progress', component: ProgressComponent},
   {path: 'invitations', component: InvitationsComponent},
   {path: 'accept', component: AcceptComponent},
+  {path: 'questionary', component: QuestionaryComponent},
   {path: 'report', component: ReportComponent},
+  {path: 'layout', component: LayoutComponent},
   {path: '**', redirectTo: '/admin', pathMatch: 'full' },
 ];
 

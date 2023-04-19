@@ -47,6 +47,13 @@
       }
     },
     "admin": {
+      "forms": {
+       "name": "Dieses Feld ist erforderlich!",
+       "firstName": "Vorname ist erforderlich!",
+       "LastName": "Nachname ist erforderlich!",
+       "email": "E-Mail muss erforderlich sein!",
+       "valid": "Email ist ungültig"
+      },
       "catalog": "Catalog of users",
       "companies": {
         "add": "Erstelle Unternehmen",

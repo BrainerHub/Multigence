@@ -1,1 +1,123 @@
-<p>questionary works!</p>
+<app-layout-header></app-layout-header>
+<div class="MainBodyPart">
+    <div class="question-header text-center pad-top-10 pad-bottom-10" *ngIf="!completed">
+        <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+          <!-- <span class="question-text">{{questionary.questions[this.current].text}} ...</span> -->
+          <div *ngIf="questionary === null">
+            <span class="question-text">You have no pending questionaries to complete! :)</span>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-12 points">
+          <!-- <span><span ng-class="{'max-value': vm.availablePoints() === 0}" class="points-title" translate="questionary.points"></span>&nbsp;&nbsp;<span ng-class="{'max-value': vm.availablePoints() === 0}" class="points-box">{{totalPoints()}} | {{questionary['max_points']}}</span>&nbsp;&nbsp;</span> -->
+        </div>
+      </div>
+
+      <div *ngIf="completed" class="bg-gradient text-center pad-bottom-10 completed-text">
+        <div class="multigence-logo"></div>
+        <h1>{{"questionary.completed.title" | translate}}</h1>
+        <h3>{{"questionary.completed.text" | translate}}</h3>
+    </div>
+    
+
+    <div class="bg-gradient pad-top-50 pad-bottom-50" ng-if="vm.questionary && !vm.completed">
+        <div class="container-fluid">
+      
+              <div class="row pad-top-50 pad-right-15 pad-left-15" >
+                <form [formGroup]="optionsForm"  class="form-horizontal">
+                  <div ng-if="$index % 2 == 0" class="row">
+      
+                      <div class="col-md-6 col-sm-12 mar-top-20">
+                        <div>
+                            <div class="panel panel-default question-box" ng-class="{'has-error': vm.paramsForm.amount.$invalid && vm.paramsForm.amount.$dirty}">
+                              <div class="panel-body question-box-body">
+                                <!-- <label for="{{'option' + $index}}" class="text-justify">{{'... ' + vm.questionary.questions[vm.current].options[$index].text}}</label> -->
+                              </div>
+                              <div class="question-box-counter no-gutter">
+                                <div class="plus-container background-plus-custom">
+                                  <i class="icon icon-icon-plus icon-questionary-color icon-controler no_selection icon-plus" (click)="increment()"></i>
+                                </div>
+                                <div class="box-counter">
+                                  <!-- <input type="number" name="{{'option' + $index}}" class="input-counter" id="{{'option' + $index}}" min="0" ng-model="vm.answers[$index]" ng-required="!vm.amountParamsVisible" placeholder="0" -->
+                                         <!-- onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"> -->
+                                </div>
+                                <div class="minus-container background-minus-custom">
+                                  <i class="icon icon-icon-minus icon-questionary-color icon-controler no_selection icon-minus" (click)="decrement()"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6 col-sm-12 mar-top-20" ng-if="!$last">
+                        <div>
+                            <div class="panel panel-default question-box" ng-class="{'has-error': vm.paramsForm.amount.$invalid && vm.paramsForm.amount.$dirty}">
+                              <div class="panel-body question-box-body">
+                                <!-- <label for="{{'option' + ($index + 1)}}" class="text-justify">{{'... ' + vm.questionary.questions[vm.current].options[$index + 1].text}}</label> -->
+                              </div>
+                              <div class="question-box-counter no-gutter">
+                                <div class="plus-container background-plus-custom">
+                                  <i class="icon icon-icon-plus icon-questionary-color icon-controler no_selection icon-plus" (click)="increment()"></i>
+                                </div>
+                                <div class="box-counter">
+                                  <!-- <input type="number" name="{{'option' + ($index + 1)}}" class="input-counter" id="{{'option' + ($index + 1)}}" min="0" ng-model="vm.answers[$index + 1]" ng-required="!vm.amountParamsVisible" placeholder="0"onfocus="this.placeholder = ''" onblur="this.placeholder = '0'"> -->
+                                </div>
+                                <div class="minus-container background-minus-custom">
+                                  <i class="icon icon-icon-minus icon-questionary-color icon-controler no_selection icon-minus" (click)="decrement()"></i>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  
+                  <ng-template #template>
+                    <div class="ConfirmationModel">
+                      <div class="modal-body">
+                        <p>
+                        {{"questionary.instructions.text" | translate}}
+                        </p>
+                        <div class="ModelBtnPart">
+                          <button
+                            type="button"
+                            class="theme-btn w-auto"
+                            (click)="confirmStartDialog() "
+                          >{{"start" | translate}}
+                          </button>
+                          <button
+                            type="button"
+                            class="theme-btn w-auto"
+                            (click)="declineModal()"
+                          >
+                           {{"later" | translate}}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    </ng-template>
+                </form>
+              </div>
+      
+          <div ng-show="vm.questionary && !vm.completed">
+          <div class="row pad-top-50 pad-left-15 pad-right-15">
+            <button id="next-button"  ng-cloak class="btn btn-default btn-lg" (click)="next()" ng-disabled="vm.availablePoints() > 0 && !vm.completed">
+              <span class="text-uppercase" translate="next"></span> <i class="icon icon-next"></i>
+            </button>
+          </div>
+          <div class="row pad-top-20 pad-left-15 pad-right-15">
+            <!-- <uib-progressbar max="vm.totalQuestions()" value="vm.current + 1">
+              <span>{{vm.current + 1}} / {{vm.totalQuestions()}}</span>
+            <next/uib-progressbar> -->
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+</div>

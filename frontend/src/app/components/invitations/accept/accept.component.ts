@@ -1,10 +1,10 @@
 import { Component, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { template } from 'lodash';
+import { UserService } from 'app/services/user.service';
 @Component({
   selector: 'app-accept',
   templateUrl: './accept.component.html',
@@ -43,16 +43,8 @@ createAccept(){
   }
 
   confirmOkDialog(){
-    debugger
     this._router.navigate(['/login']);
     this.modalRef.hide();
 }
-  //  get f() {
-  //   return this.Createacceptform.controls;
-  // }
-
-  // onShowInvitationForm(){
-  //   this.createInvitation = !this.createInvitation; //not equal to condition
-  //   this.visible = !this.visible;
-  // }
+ 
 }

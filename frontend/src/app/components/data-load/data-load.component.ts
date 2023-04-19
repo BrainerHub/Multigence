@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'app/services/user.service';
+// import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-data-load',
@@ -16,6 +17,7 @@ export class DataLoadComponent {
   questionsFile: any;
   departments: any;
   organization:any =[];
+  resp: any;
   constructor(private userService: UserService, public route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -28,11 +30,9 @@ export class DataLoadComponent {
     this.file = event.target.files[0];
   }
 
-  uploadFile() {
-    let file = new FormData();
-    file.append('file', this.file);
-
-    this.userService.uploadQuestions(file).subscribe(
+  uploadFile(data:any) {
+   
+    this.userService.uploadQuestions(this.file).subscribe(
       (resp: any) => {
         this.message = 'Data uploaded successfully!';
       },
@@ -45,34 +45,7 @@ export class DataLoadComponent {
       }
     );
 
-    // this.userService.uploadQuestions(this.file).subscribe((resp:any ) => {
-    //       this.message = 'Data uploaded successfully!';
-    //     },
-    //     (resp:any) => {
-    //       if(resp && resp.data && resp.data.detail) {
-    //         this.errorMessage = resp.data.detail;
-    //       }
-    //       else {
-    //         this.errorMessage = 'Unexpected error';
-    //       }
-    //     }
-    //   );
-
-    //)
-
-    // console.log("this.file",this.file);
-    // this.userService.uploadQuestions(this.file).subscribe((resp:any ) => {
-    //       this.message = 'Data uploaded successfully!';
-    //     },
-    //     (resp:any) => {
-    //       if(resp && resp.data && resp.data.detail) {
-    //         this.errorMessage = resp.data.detail;
-    //       }
-    //       else {
-    //         this.errorMessage = 'Unexpected error';
-    //       }
-    //     }
-    //   );
+   
     this.hidden = true;
   }
 

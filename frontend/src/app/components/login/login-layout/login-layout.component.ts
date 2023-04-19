@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./login-layout.component.scss']
 })
 export class LoginLayoutComponent {
+  selectedLanguage = "en"
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
     translate.use('en');
@@ -14,6 +15,8 @@ export class LoginLayoutComponent {
 
   changeLanguage(event: any) {
     const lang = event;
-    this.translate.use(lang);
+    this.selectedLanguage = event;
+    this.translate.use(this.selectedLanguage );
+   
   }
 }

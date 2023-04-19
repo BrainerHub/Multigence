@@ -47,6 +47,13 @@
       }
     },
     "admin": {
+      "forms": {
+        "name": "This field is required!",
+        "firstName": "First name is required!",
+        "LastName": "Last name is required!",
+        "email": "Email must be required!",
+        "valid": "Email is not valid"
+       },
       "catalog": "Catalog of users",
       "companies": {
         "add": "Create company",

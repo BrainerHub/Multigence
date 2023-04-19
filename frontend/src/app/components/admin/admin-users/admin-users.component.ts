@@ -1,10 +1,11 @@
 import { Component, Directive, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user.service';
+// import { User } from 'src/app/models/user';
+// import { UserService } from 'src/app/services/user.service';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import * as _ from 'lodash';
 import { pluck } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-admin-users',
@@ -79,12 +80,12 @@ filters: any = {
 
   ngOnInit(): void {
     this.getUser();
-
  }
 
   getUser(){
     this.userService.getUser().subscribe((res) => {
-      this.usersPage = res;
+      this.usersPage = res.map((x: any) => ({...x,  isChecked: false}));
+      
       this.usersFiltered = this.usersPage;
       this._updateCounters();
       let companyMap = new Map();
@@ -96,7 +97,10 @@ filters: any = {
       this.companyList = [...companyMap.values()];
       this.departments = [...departmentMap.values()];
     })
+   
   }
+
+ 
 
  _updateCounters() {
     var progressCounters = _.chain(this.usersPage).groupBy('status').mapValues(_.size).value();
@@ -114,16 +118,52 @@ filters: any = {
   }
 
   onFilterSelect(property: any, filter: any){
+    // console.log('property',property);
+    // console.log('filter',filter);
+    // Object.keys(property).map((key: any) => {
+    //   let arr: Array<any> = Object.entries(property[key])
+    //   arr.forEach((element) => {
+    //     if (element[1]) {
+    //         console.log(element,'elemnt');
+    //         if(key == 'company' || key == 'department') {
+             
+              
+              
+    //         } else {
+    //           console.log(key,'key');
+    //           this.usersPage.filter((user: any) => console.log(user.uuid,'user')
+    //           )
+    //           console.log(element[0],'140');
+    //         }
+    //       }
+    //   })
+    // })
     Object.keys(this.filters).map((key:any) =>  {
-      
       let arr: Array<any> = Object.entries(this.filters[key])
       arr.forEach(element => {
         if (element[1]){
-          console.log("--------element----------", element)
+         // console.log("--------element----------", element)
           if (key == 'company' || key == 'department'){
             this.usersPage = this.usersPage.filter((user:any) => {return user[key].uuid == element[0]})
+
           }else{
-            this.usersPage = this.usersPage.filter((user:any) => {return user[key] == element[0]})
+            // this.usersPage = this.usersPage.filter((user:any) => {return user[key] == element[0]})
+        
+           console.log(this.usersPage,'page');
+           console.log(element[0]);
+           
+            if(element[0] == 'CREATED' || element[0] == 'DONE' ) {
+                console.log(this.usersPage,'page');
+              this.usersPage = this.usersPage.filter((user:any) => {return user[key] == element[0]})
+            }
+            // if(element[0] == 'IN_PROGRESS ') {
+            //   //this.usersPage = this.usersPage.filter((user:any) => {return user[key] == 'IN_PROGRESS'})
+            // }
+            // if(element[0] == 'DONE')
+            // this.usersPage = this.usersPage.filter((user:any) => {return console.log(user[key])})
+            //this.usersPage = this.usersPage.filter((user:any) => {return user[key] == 'DONE'})
+            //console.log(element[0],'el');
+            
           }
         }
         this._updateCounters();
@@ -131,16 +171,21 @@ filters: any = {
       });
   })
 }
-
+ 
 onChecked(event: any, value: any, filterBy: any){
-   console.log("-------value------", value, filterBy)
-   this.usersPage = this.usersFiltered
+  //  console.log("-------value------", value, filterBy)
+  //  console.log(this.filters,'filter');
+   
+   
+    this.usersPage = this.usersFiltered
     if (event.target.checked) {
+      
       this.filters[filterBy][value] = true
     } else {
       this.filters[filterBy][value] = false
     }
-    const statusFilterd = this.onFilterSelect(this.filters.status, 'status')
+    //const statusFilterd = this.onFilterSelect(this.filters.status, 'status')
+   this.onFilterSelect(this.filters, 'status')
     
   }
 
@@ -241,7 +286,6 @@ onChecked(event: any, value: any, filterBy: any){
 
   confirmDeleteDialog(id:any){
     this.userService.deleteUser(id).subscribe((res)=>{
-      console.log("deletetetete",res);
       
       this.modalRef.hide();
       })

@@ -1,9 +1,10 @@
 import { Component, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
+// import { UserService } from 'src/app/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { UserService } from 'app/services/user.service';
 @Component({
   selector: 'app-invitations',
   templateUrl: './invitations.component.html',

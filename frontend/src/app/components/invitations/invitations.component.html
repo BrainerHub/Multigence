@@ -1,213 +1,315 @@
 <app-layout-header></app-layout-header>
 <div class="MainBodyPart">
-    <div class="bg-gradient pad-top-30 pad-bottom-500">
-        <div class="container">
-            <div class="invitations">
-                <p>Please visit questionnaire section to help us evaluate your company cultural values.</p>
-                <p>Invite those you want to take the test between your employees and interesting candidates. </p>
-                <p>Note that employees’ interviews contribute determining company cultural values and help refine our
-                    analytics. </p>
-                <p class="invitation-text">Send invitation to employees and candidates: </p>
-                <div class="row">
-                    <div class="col-6">
-                        <form [formGroup]="createInvitationForm" class="" (ngSubmit)="inviteEmployee()">
-                            <button (click)="onShowInvitationForm()" type="button"
-                                class="companyform text-uppercase bold">
-                                {{createInvitation ? "invite Employees" : "invite Employees"}}
-                                <img src="../../../../assets/images/plusIcon.svg" alt="" *ngIf="!visible" />
-                            </button>
-                            <div class="createInvitationForm CreateCompanyForm" *ngIf="visible">
-                                <div class="row">
-                                    <div class="col-6">
-
-                                        <div class="form-group">
-                                            <input type="text" name="firstName"
-                                                class="form-control form-control-outline" placeholder="First Name"
-                                                formControlName="firstName" />
-                                            <ng-container *ngIf="
-                                                          createInvitationForm.get('firstName')?.invalid &&
-                                                          createInvitationForm.get('firstName')?.touched
-                                                          ">
-                                                <p class="caption status-danger"
-                                                    *ngIf="createInvitationForm.get('firstName')?.errors?.['required']">
-                                                    <span style="color: red">First name is required!</span>
-                                                </p>
-
-                                            </ng-container>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="col-6">
-
-                                        <div class="form-group">
-                                            <input type="text" name="lastName" placeholder="Last Name"
-                                                class="form-control form-control-outline" formControlName="lastName" />
-                                            <ng-container *ngIf="
-                                                          createInvitationForm.get('lastName')?.invalid &&
-                                                          createInvitationForm.get('lastName')?.touched
-                                                          ">
-                                                <p class="caption status-danger"
-                                                    *ngIf="createInvitationForm.get('lastName')?.errors?.['required']">
-                                                    <span style="color: red">Last name is required!</span>
-                                                </p>
-                                            </ng-container>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-6">
-                                        <div class="dropdown">
-                                            <select class="form-select" name="department" id="department"
-                                                formControlName="department">
-                                                <option *ngFor="let department of departments"
-                                                    value="{department.uuid}">
-                                                    {{ department.name }}
-                                                </option>
-                                            </select>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <input type="text" name="createDepartament"
-                                                placeholder="{{'form.createDepartment' | translate }}"
-                                                class="form-control form-control-outline"
-                                                formControlName="createDepartament" />
-                                            <button type="button" ng-click="vm.addDepartment(vm.newDepartament)"
-                                                class="absolute-on-right">+</button>
-                                            <ng-container *ngIf="
-                                                          createInvitationForm.get('createDepartament')?.invalid &&
-                                                          createInvitationForm.get('createDepartament')?.touched
-                                                          ">
-                                                <p class="caption status-danger"
-                                                    *ngIf="createInvitationForm.get('createDepartament')?.errors?.['required']">
-                                                    <span style="color: red">Create Departament is
-                                                        required!</span>
-                                                </p>
-                                            </ng-container>
-                                        </div>
-
-                                    </div>
-                                    <div class="clearfix"></div>
-
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <input type="email" name="employeeEmail"
-                                                class="form-control form-control-outline" placeholder="Email"
-                                                formControlName="employeeEmail" />
-                                            <ng-container *ngIf="
-                                                          createInvitationForm.get('employeeEmail')?.invalid &&
-                                                          createInvitationForm.get('employeeEmail')?.touched
-                                                          ">
-                                                <p class="caption status-danger"
-                                                    *ngIf="createInvitationForm.get('employeeEmail')?.errors?.['required']">
-                                                    <span style="color: red">Email must be required?</span>
-                                                </p>
-                                                <p class="caption status-danger"
-                                                    *ngIf="createInvitationForm.get('employeeEmail')?.errors?.['pattern']">
-                                                    <span style="color: red">Email is not valid</span>
-                                                </p>
-                                            </ng-container>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6"></div>
-
-                                    <div class="clearfix"></div>
-
-                                    <div class="col-6"></div>
-                                    <div class="CreateFormBtnPart">
-                                        <button type="submit" [disabled]="!createInvitationForm.valid"
-                                            class="theme-btn w-auto"  (click)="openConfirmationModal(template)">{{'form.send'|
-                                            translate}}</button>
-                                            <ng-template #template>
-                                                <div class="ConfirmationModel">
-                                                  <div class="modal-body">
-                                                    <p>
-                                                      Are you sure you want to delete this
-                                                      organization?
-                                                    </p>
-                                                    <div class="ModelBtnPart">
-                                                      <button
-                                                        type="button"
-                                                        class="theme-btn w-auto"
-                                                        (click)="
-                                                          confirmOkDialog()
-                                                        "
-                                                      >
-                                                        Ok
-                                                      </button>
-                                                      <!-- <button
-                                                        type="button"
-                                                        class="theme-btn w-auto"
-                                                        (click)="declineDeleteModal()"
-                                                      >
-                                                        Cancel
-                                                      </button> -->
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </ng-template>    
-                                    </div>
-
-                                    <div class="clearfix"></div>
+  <div class="bg-gradient pad-top-30 pad-bottom-500">
+    <div class="container">
+      <div class="invitations">
+        <p>
+          Please visit questionnaire section to help us evaluate your company
+          cultural values.
+        </p>
+        <p>
+          Invite those you want to take the test between your employees and
+          interesting candidates.
+        </p>
+        <p>
+          Note that employees’ interviews contribute determining company
+          cultural values and help refine our analytics.
+        </p>
+        <p class="invitation-text">
+          Send invitation to employees and candidates:
+        </p>
+        <div class="row">
+          <div class="col-6">
+            <form
+              [formGroup]="createInvitationForm"
+              class="profile"
+              (ngSubmit)="inviteEmployee()"
+            >
+              <button
+                (click)="onShowInvitationForm()"
+                type="button"
+                class="companyform text-uppercase bold"
+              >
+                {{ createInvitation ? "invite Employees" : "invite Employees" }}
+                <img
+                  src="../../../../assets/images/plusIcon.svg"
+                  alt=""
+                  *ngIf="!visible"
+                />
+              </button>
+              <div
+                class="createInvitationForm CreateCompanyForm"
+                *ngIf="visible"
+              >
+                <div class="profile-container">
+                  <div class="profile-container2">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            name="firstName"
+                            class="form-control form-control-outline"
+                            placeholder="First Name"
+                            formControlName="firstName"
+                          />
+                          <ng-container
+                            *ngIf="
+                              createInvitationForm.get('firstName')?.invalid &&
+                              createInvitationForm.get('firstName')?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="createInvitationForm.get('firstName')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >First name is required!</span
+                              >
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            name="lastName"
+                            placeholder="Last Name"
+                            class="form-control form-control-outline"
+                            formControlName="lastName"
+                          />
+                          <ng-container
+                            *ngIf="
+                              createInvitationForm.get('lastName')?.invalid &&
+                              createInvitationForm.get('lastName')?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="createInvitationForm.get('lastName')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >Last name is required!</span
+                              >
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group dropdown">
+                          <select
+                            class="form-select"
+                            name="department"
+                            id="department"
+                            formControlName="department"
+                          >
+                            <option
+                              *ngFor="let department of departments"
+                              value="{department.uuid}"
+                            >
+                              {{ department.name }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group CustomAddBtn">
+                          <input
+                            type="text"
+                            name="createDepartament"
+                            placeholder="{{
+                              'form.createDepartment' | translate
+                            }}"
+                            class="form-control form-control-outline"
+                            formControlName="createDepartament"
+                          />
+                          <button
+                            type="button"
+                            ng-click="vm.addDepartment(vm.newDepartament)"
+                            class="plusIconBtn"
+                          >
+                            +
+                          </button>
+                          <ng-container
+                            *ngIf="
+                              createInvitationForm.get('createDepartament')
+                                ?.invalid &&
+                              createInvitationForm.get('createDepartament')
+                                ?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="createInvitationForm.get('createDepartament')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >Create Departament is required!</span
+                              >
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input
+                            type="email"
+                            name="employeeEmail"
+                            class="form-control form-control-outline"
+                            placeholder="Email"
+                            formControlName="employeeEmail"
+                          />
+                          <ng-container
+                            *ngIf="
+                              createInvitationForm.get('employeeEmail')
+                                ?.invalid &&
+                              createInvitationForm.get('employeeEmail')?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="createInvitationForm.get('employeeEmail')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >Email must be required?</span
+                              >
+                            </p>
+                            <p
+                              class="caption status-danger"
+                              *ngIf="createInvitationForm.get('employeeEmail')?.errors?.['pattern']"
+                            >
+                              <span style="color: red">Email is not valid</span>
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-end">
+                          <button
+                            type="submit"
+                            [disabled]="!createInvitationForm.valid"
+                            class="theme-btn w-auto"
+                            (click)="openConfirmationModal(template)"
+                          >
+                            {{ "form.send" | translate }}
+                          </button>
+                          <ng-template #template>
+                            <div class="ConfirmationModel">
+                              <div class="modal-body">
+                                <p>
+                                  Are you sure you want to delete this
+                                  organization?
+                                </p>
+                                <div class="ModelBtnPart">
+                                  <button
+                                    type="button"
+                                    class="theme-btn w-auto"
+                                    (click)="confirmOkDialog()"
+                                  >
+                                    Ok
+                                  </button>
+                                  <!-- <button
+                                                          type="button"
+                                                          class="theme-btn w-auto"
+                                                          (click)="declineDeleteModal()"
+                                                        >
+                                                          Cancel
+                                                        </button> -->
                                 </div>
-
+                              </div>
                             </div>
-                        </form>
+                          </ng-template>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-6">
-                        <form [formGroup]="CreateCandidateform" class="" (ngSubmit)="saveAndOpencandidateData()">
-                            <button (click)="onShowcandidateform()" type="button"
-                                class="companyform text-uppercase bold">
-                                {{candidateform ? "INVITES CANDIDATES" : "INVITES CANDIDATES"}}
-                                <img src="../../../../assets/images/plusIcon.svg" alt="" *ngIf="!IsVisible" />
-                            </button>
-                            <div class="candidateform CreateCompanyForm" *ngIf="IsVisible">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="relative">
-                                            <input type="text" name="candidateFirstName"
-                                                class="form-control form-control-outline" placeholder="First Name"
-                                                formControlName="candidateFirstName" />
-                                            <ng-container *ngIf="
-                                                CreateCandidateform.get('candidateFirstName')?.invalid &&
-                                                CreateCandidateform.get('candidateFirstName')?.touched
-                                                  ">
-                                                <p class="caption status-danger"
-                                                    *ngIf="CreateCandidateform.get('candidateFirstName')?.errors?.['required']">
-                                                    <span style="color: red">First name is required!</span>
-                                                </p>
-
-                                            </ng-container>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="relative">
-
-                                            <input type="text" name="candidateLastName"
-                                                class="form-control form-control-outline" placeholder="Last Name"
-                                                formControlName="candidateLastName" />
-                                            <ng-container *ngIf="
-                                                CreateCandidateform.get('candidateLastName')?.invalid &&
-                                                CreateCandidateform.get('candidateLastName')?.touched
-                                                  ">
-                                                <p class="caption status-danger"
-                                                    *ngIf="CreateCandidateform.get('candidateLastName')?.errors?.['required']">
-                                                    <span style="color: red">Last name is required!</span>
-                                                </p>
-
-                                            </ng-container>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <div class="dropdown">
-                                            <!-- <div role="button" data-toggle="dropdown"
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-6">
+            <form
+              [formGroup]="CreateCandidateform"
+              class="profile"
+              (ngSubmit)="saveAndOpencandidateData()"
+            >
+              <button
+                (click)="onShowcandidateform()"
+                type="button"
+                class="companyform text-uppercase bold"
+              >
+                {{
+                  candidateform ? "INVITES CANDIDATES" : "INVITES CANDIDATES"
+                }}
+                <img
+                  src="../../../../assets/images/plusIcon.svg"
+                  alt=""
+                  *ngIf="!IsVisible"
+                />
+              </button>
+              <div class="candidateform CreateCompanyForm" *ngIf="IsVisible">
+                <div class="profile-container">
+                  <div class="profile-container2">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group relative">
+                          <input
+                            type="text"
+                            name="candidateFirstName"
+                            class="form-control form-control-outline"
+                            placeholder="First Name"
+                            formControlName="candidateFirstName"
+                          />
+                          <ng-container
+                            *ngIf="
+                              CreateCandidateform.get('candidateFirstName')
+                                ?.invalid &&
+                              CreateCandidateform.get('candidateFirstName')
+                                ?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="CreateCandidateform.get('candidateFirstName')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >First name is required!</span
+                              >
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            name="candidateLastName"
+                            class="form-control form-control-outline"
+                            placeholder="Last Name"
+                            formControlName="candidateLastName"
+                          />
+                          <ng-container
+                            *ngIf="
+                              CreateCandidateform.get('candidateLastName')
+                                ?.invalid &&
+                              CreateCandidateform.get('candidateLastName')
+                                ?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="CreateCandidateform.get('candidateLastName')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >Last name is required!</span
+                              >
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group dropdown">
+                          <!-- <div role="button" data-toggle="dropdown"
                                                         class="form-control form-control-outline" data-target="#">
                                                         <div class="relative">
                                                             <div class="hidden-overflow input-with-icon-ellipsis">
@@ -217,154 +319,187 @@
                                                                 class="icon icon-arrow-down icon-dropdown absolute-on-right">
                                                             </div>
                                                         </div>
-
                                                     </div> -->
-
-                                            <select class="form-select" name="department" id="department"
-                                                formControlName="department">
-                                                <option *ngFor="let department of departments"
-                                                    value="{department.uuid}">
-                                                    {{ department.name }}
-                                                </option>
-                                            </select>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <input type="text" name="createDepartament"
-                                                placeholder="{{'form.createDepartment' | translate }}"
-                                                class="form-control form-control-outline"
-                                                formControlName="createDepartament" />
-                                            <button type="button" ng-click="vm.addDepartment(vm.newDepartament)"
-                                                class="absolute-on-right">+</button>
-                                            <ng-container *ngIf="
-                                                      createInvitationForm.get('createDepartament')?.invalid &&
-                                                      createInvitationForm.get('createDepartament')?.touched
-                                                      ">
-                                                <p class="caption status-danger"
-                                                    *ngIf="createInvitationForm.get('createDepartament')?.errors?.['required']">
-                                                    <span style="color: red">Departament is
-                                                        required!</span>
-                                                </p>
-                                            </ng-container>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="col-6">
-                                        <div class="dropdown">
-                                            <div role="button" data-toggle="dropdown"
-                                                class="form-control form-control-outline" data-target="#">
-                                                <div class="relative">
-                                                    <div class="input-with-icon-ellipsis" ng-class="{selected: vm.job}">
-                                                        VACANCY / JOB ID
-                                                    </div>
-                                                    <div class="icon icon-arrow-down icon-dropdown absolute-on-right">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <select class="form-select" name="job" id="job" formControlName="job">
-                                                <option *ngFor="let job of jobs" value="{department.uuid}">
-                                                    {{ job.name }}
-                                                </option>
-                                            </select>
-                                            <!-- <ul class="dropdown-menu scroll-option multi-level" role="menu"
+                          <select
+                            class="form-select"
+                            name="department"
+                            id="department"
+                            formControlName="department"
+                          >
+                            <option
+                              *ngFor="let department of departments"
+                              value="{department.uuid}"
+                            >
+                              {{ department.name }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group CustomAddBtn">
+                          <input
+                            type="text"
+                            name="createDepartament"
+                            placeholder="{{
+                              'form.createDepartment' | translate
+                            }}"
+                            class="form-control form-control-outline"
+                            formControlName="createDepartament"
+                          />
+                          <button
+                            type="button"
+                            ng-click="vm.addDepartment(vm.newDepartament)"
+                            class="plusIconBtn"
+                          >
+                            +
+                          </button>
+                          <ng-container
+                            *ngIf="
+                              createInvitationForm.get('createDepartament')
+                                ?.invalid &&
+                              createInvitationForm.get('createDepartament')
+                                ?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="createInvitationForm.get('createDepartament')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >Departament is required!</span
+                              >
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <select
+                            class="form-select"
+                            name="job"
+                            id="job"
+                            formControlName="job"
+                          >
+                            <option
+                              *ngFor="let job of jobs"
+                              value="{department.uuid}"
+                            >
+                              {{ job.name }}
+                            </option>
+                          </select>
+                          <!-- <ul class="dropdown-menu scroll-option multi-level" role="menu"
                                                         aria-labelledby="dropdownMenu">
                                                         <li ng-repeat="job in vm.jobs"><a
                                                                 ng-click="vm.setJob(job.name)">job.name</a></li>
                                                     </ul> -->
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="relative">
-                                            <input type="text" name="createJobID"
-                                                class="form-control form-control-outline"
-                                                placeholder="{{'form.createJobId' | translate }}"
-                                                formControlName="createJobId" />
-                                            <button type="button" ng-click="vm.addPosition(vm.newPosition)"
-                                                class="absolute-on-right">+</button>
-                                            <ng-container
-                                                *ngIf="CreateCandidateform.get('createJobId')?.invalid && CreateCandidateform.get('createJobId')?.touched">
-                                                <p class="caption status-danger"
-                                                    *ngIf="CreateCandidateform.get('createJobId')?.errors?.['required']">
-                                                    <span style="color: red">JobId must be required?</span>
-                                                </p>
-
-                                            </ng-container>
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-
-                                    <div class="col-6">
-
-
-                                        <input type="email" name="candidateEmail"
-                                            class="form-control form-control-outline" placeholder="Email"
-                                            formControlName="candidateEmail" />
-                                        <ng-container
-                                            *ngIf="CreateCandidateform.get('candidateEmail')?.invalid && CreateCandidateform.get('candidateEmail')?.touched">
-                                            <p class="caption status-danger"
-                                                *ngIf="CreateCandidateform.get('candidateEmail')?.errors?.['required']">
-                                                <span style="color: red">Email must be required!</span>
-                                            </p>
-                                            <p class="caption status-danger"
-                                                *ngIf="CreateCandidateform.get('candidateEmail')?.errors?.['pattern']">
-                                                <span style="color: red">Email is not valid</span>
-                                            </p>
-                                        </ng-container>
-                                    </div>
-                                    <div class="col-6"></div>
-
-                                    <div class="clearfix"></div>
-
-                                    <div class="col-6"></div>
-                                    <div class="CreateFormBtnPart">
-                                        <button type="submit" [disabled]="!CreateCandidateform.valid"
-                                            class="theme-btn w-auto"  (click)="openConfirmationModal(template)">{{'form.send' |translate}}</button>
-                                            <ng-template #template>
-                                                <div class="ConfirmationModel">
-                                                  <div class="modal-body">
-                                                    <p>
-                                                      Are you sure you want to delete this
-                                                      organization?
-                                                    </p>
-                                                    <div class="ModelBtnPart">
-                                                      <button
-                                                        type="button"
-                                                        class="theme-btn w-auto"
-                                                        (click)="
-                                                          confirmOkDialog()
-                                                        "
-                                                      >
-                                                        Ok
-                                                      </button>
-                                                      <!-- <button
-                                                        type="button"
-                                                        class="theme-btn w-auto"
-                                                        (click)="declineDeleteModal()"
-                                                      >
-                                                        Cancel
-                                                      </button> -->
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </ng-template>   
-                                    </div>
-                                    <div class="clearfix"></div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group CustomAddBtn">
+                          <input
+                            type="text"
+                            name="createJobID"
+                            class="form-control form-control-outline"
+                            placeholder="{{ 'form.createJobId' | translate }}"
+                            formControlName="createJobId"
+                          />
+                          <button
+                            type="button"
+                            ng-click="vm.addPosition(vm.newPosition)"
+                            class="plusIconBtn"
+                          >
+                            +
+                          </button>
+                          <ng-container
+                            *ngIf="
+                              CreateCandidateform.get('createJobId')?.invalid &&
+                              CreateCandidateform.get('createJobId')?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="CreateCandidateform.get('createJobId')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >JobId must be required?</span
+                              >
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <input
+                            type="email"
+                            name="candidateEmail"
+                            class="form-control form-control-outline"
+                            placeholder="Email"
+                            formControlName="candidateEmail"
+                          />
+                          <ng-container
+                            *ngIf="
+                              CreateCandidateform.get('candidateEmail')
+                                ?.invalid &&
+                              CreateCandidateform.get('candidateEmail')?.touched
+                            "
+                          >
+                            <p
+                              class="caption status-danger"
+                              *ngIf="CreateCandidateform.get('candidateEmail')?.errors?.['required']"
+                            >
+                              <span style="color: red"
+                                >Email must be required!</span
+                              >
+                            </p>
+                            <p
+                              class="caption status-danger"
+                              *ngIf="CreateCandidateform.get('candidateEmail')?.errors?.['pattern']"
+                            >
+                              <span style="color: red">Email is not valid</span>
+                            </p>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group text-end">
+                          <button
+                            type="submit"
+                            [disabled]="!CreateCandidateform.valid"
+                            class="theme-btn w-auto"
+                            (click)="openConfirmationModal(template)"
+                          >
+                            {{ "form.send" | translate }}
+                          </button>
+                          <ng-template #template>
+                            <div class="ConfirmationModel">
+                              <div class="modal-body">
+                                <p>
+                                  Are you sure you want to delete this
+                                  organization?
+                                </p>
+                                <div class="ModelBtnPart">
+                                  <button
+                                    type="button"
+                                    class="theme-btn w-auto"
+                                    (click)="confirmOkDialog()"
+                                  >
+                                    Ok
+                                  </button>
                                 </div>
+                              </div>
                             </div>
-                        </form>
-                      
+                          </ng-template>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-           
+              </div>
+            </form>
+          </div>
         </div>
-       
+      </div>
     </div>
-   <app-progress-footer></app-progress-footer>
+  </div>
+  <app-progress-footer></app-progress-footer>
+</div>

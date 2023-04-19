@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route } from '@angular/router';
+import { UserService } from 'app/services/user.service';
 import { lowerFirst } from 'lodash';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',

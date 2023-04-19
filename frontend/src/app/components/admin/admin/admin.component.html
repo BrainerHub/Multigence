@@ -11,13 +11,12 @@
                 [formGroup]="createCompanyForm"
                 class=""
                 (ngSubmit)="saveAndOpenCompanyData()"
-              >
-                <button
+              > <button
                   (click)="onShowCreateCompany()"
                   type="button"
                   class="companyform text-uppercase bold"
                 >
-                  {{ createCompany ? "Create Company" : "Create Company" }}
+                  {{ (createCompany ? "admin.companies.add" : "admin.companies.add") | translate }}
                   <img
                     src="../../../../assets/images/plusIcon.svg"
                     alt=""
@@ -36,9 +35,7 @@
                           formControlName="name"
                           placeholder="{{
                             'admin.companies.new.form.name' | translate
-                          }}"
-                          required
-                        />
+                          }}" required/>
                         <ng-container
                           *ngIf="
                             createCompanyForm.get('name')?.invalid &&
@@ -50,7 +47,7 @@
                             *ngIf="createCompanyForm.get('name')?.errors?.['required']"
                           >
                             <span style="color: red"
-                              >This field is required!</span
+                              >{{"admin.forms.name" | translate}}</span
                             >
                           </p>
                         </ng-container>
@@ -119,7 +116,7 @@
                           ? 'theme-btn disabled'
                           : 'theme-btn'
                       "
-                      [disabled]="!createCompanyForm.valid"
+                     
                     >
                       Save
                     </button>
@@ -197,7 +194,7 @@
                                   *ngIf="createOrginationForm.get('managerName')?.errors?.['required']"
                                 >
                                   <span style="color: red"
-                                    >First name is required!</span
+                                    >{{"admin.forms.firstName" | translate}}</span
                                   >
                                 </p>
                               </ng-container>
@@ -233,7 +230,7 @@
                                   *ngIf="createOrginationForm.get('managerLastName')?.errors?.['required']"
                                 >
                                   <span style="color: red"
-                                    >Last name is required!</span
+                                    >{{"admin.forms.lastName" | translate}}</span
                                   >
                                 </p>
                               </ng-container>
@@ -279,7 +276,7 @@
                                   *ngIf="createOrginationForm.get('managerEmail')?.errors?.['required']"
                                 >
                                   <span style="color: red"
-                                    >Email must be required!</span
+                                    >{{"admin.forms.email" | translate}}</span
                                   >
                                 </p>
                                 <p
@@ -287,7 +284,7 @@
                                   *ngIf="createOrginationForm.get('managerEmail')?.errors?.['pattern']"
                                 >
                                   <span style="color: red"
-                                    >Invalid Format!</span
+                                    >{{"admin.forms.valid" | translate}}</span
                                   >
                                 </p>
                               </ng-container>

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'app/services/user.service';
+// import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -53,12 +54,9 @@ export class ForgetPasswordComponent {
         this._router.navigate(['']);
       },
       (err) => {
-        if (err.status == 404) {
-          debugger;
-          this.errormsg = this._translate.instant(
-            'forgotpassword.emailNotExists'
-          );
-        }
+        this.errormsg = this._translate.instant(
+          'forgotpassword.emailNotExists'
+        );
       }
     );
   }

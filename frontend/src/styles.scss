@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css";
-@import "~font-awesome/css/font-awesome.css";
-
+// @import "~bootstrap/dist/css/bootstrap.css";
+// @import "~font-awesome/css/font-awesome.css";
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -56,6 +55,23 @@ textarea.form-control {
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: #eeeeee;
   height: auto;
+}
+.form-select {
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  color: #eeeeee;
+  &:focus {
+    box-shadow: unset;
+  }
+  option {
+    background-color: #0c0c0c;
+    color: #fff;
+    &:hover {
+      color: #00ff85;
+    }
+  }
 }
 .theme-btn {
   padding: 6px 12px;
@@ -132,10 +148,38 @@ label {
   background-color: rgba(12, 12, 12, 0.8);
   padding: 50px 15px 50px;
 }
+.Custompagination {
+  width: 100%;
+  border: 1px solid #555555;
+  padding: 20px;
+  .pagination {
+    margin: 0;
+    justify-content: center;
+    .page-link {
+      background-color: transparent;
+      border: none;
+      color: #555555;
+      padding: 5px 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      &:hover {
+        color: #00ff85;
+      }
+    }
+    .page-link.active {
+      border-right: 1px solid #555555;
+      border-left: 1px solid #555555;
+      color: #eeeeee;
+      background-color: #0c0c0c;
+    }
+  }
+}
+.status-danger {
+  font-size: 14px !important;
+}
 .dark-theme {
   background: #252525;
 }
-
 .dark-theme-selector {
   background-color: black !important;
 }
@@ -223,6 +267,36 @@ label {
     }
     .btn-close-edit-profile {
       color: #000 !important;
+    }
+  }
+  .form-select {
+    color: #0e0e0e;
+    border-bottom: 1px solid #0e0e0e;
+  }
+  .form-control {
+    color: #0e0e0e;
+    border-bottom: 1px solid #0e0e0e;
+    &::placeholder {
+      color: #0e0e0e;
+    }
+  }
+  .invitations {
+    p {
+      color: #0c0c0c !important;
+    }
+    .companyform {
+      color: #0c0c0c !important;
+    }
+  }
+  .AdminUser {
+    .UserTable {
+      .table {
+        th,
+        td {
+          background-color: #C6C6C6;
+          color: #555555 !important;
+        }
+      }
     }
   }
 }
