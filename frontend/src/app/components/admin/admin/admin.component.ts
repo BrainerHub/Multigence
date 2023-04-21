@@ -117,7 +117,7 @@ getMe() {
     this.visible = false;
   }
 
-  saveNewCompanyName(uuid: any, newData: any) {
+  saveNewCompanyName(newData: any) {
     let data = {
       uuid : newData.uuid,
       name : this.createOrginationForm.value.organizations[0].name,
