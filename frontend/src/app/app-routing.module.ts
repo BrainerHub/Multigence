@@ -43,6 +43,7 @@ const routes: Routes = [
   {path: 'report', component: CorridorReportComponent},
   {path: 'layo', component: CorridorLegendItemComponent},
   {path: 'questionary/report', component: QuestionaryReportComponent},
+  {path: 'invitations/accept', component: AcceptComponent},
   {path: '**', redirectTo: '/admin', pathMatch: 'full' },
 ];
 @NgModule({

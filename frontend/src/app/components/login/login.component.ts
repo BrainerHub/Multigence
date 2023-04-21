@@ -15,6 +15,8 @@ import { UserService } from 'app/services/user.service';
 export class LoginComponent {
   loginForm!: FormGroup;
   submitted!: boolean;
+  user: any;
+  userRole:any;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -23,6 +25,7 @@ export class LoginComponent {
     private bootstrapService:BootstrapService
   ) {}
   ngOnInit() {
+    this.getMe();
     this.loginForm = this.formBuilder.group({
       email: [
         null,
@@ -46,12 +49,18 @@ export class LoginComponent {
       email: this.loginForm.controls['email'].value,
       password: this.loginForm.controls['password'].value,
     };
-    this.userService.login(data).subscribe((response) => {      
+    this.userService.login(data).subscribe((response) => {  
       localStorage.setItem("authToken",response.token)
       return this.bootstrapService.bootstrap();
     });
   }
 
 
+  getMe() {
+    this.userService.getMe().subscribe((res: any) => {
+      this.user = res;
+      this.userRole = res.role;
+  });
+  }
   
 }

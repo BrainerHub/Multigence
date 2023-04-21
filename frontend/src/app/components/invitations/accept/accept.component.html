@@ -4,7 +4,7 @@
 		<div class="">
 			<div class="">
 
-				<form [formGroup]="Createacceptform">
+				<form [formGroup]="Createacceptform" *ngIf="!invitationIsExpired">
 					<div>
 						<input type="text" name="email" class=" form-control-outline" formControlName="email"
 							placeholder="Email">
@@ -72,30 +72,22 @@
 					</div>
 
 					<div>
-						<button type="submit" class="theme-btntext-uppercase">{{"form.join" | translate}}</button>
+						<button type="submit" (click)="join()" class="theme-btntext-uppercase">{{"form.join" |
+							translate}}</button>
 					</div>
 				</form>
-				<ng-template #template>
-					<div class="ConfirmationModel">
-					  <div class="modal-body">
-						<p>
-							The invitation has expired
-						</p>
-						<div class="ModelBtnPart">
-						  <button
-							type="button"
-							class="theme-btn w-auto"
-							(click)="
-							  confirmOkDialog()
-							"
-						  >
-							Ok
-						  </button>
-						</div>
-					  </div>
-					</div>
-				</ng-template> 
+
 			</div>
 		</div>
 	</div>
+	<ng-template #content let-modal>
+
+		<div class="modal-body">
+			<p>The invitation has expired</p>
+			<button type="button" class="btn btn-light" (click)="modalclose()">Close</button>
+		</div>
+
+	</ng-template>
+
+	<!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openSm(content)"></button> -->
 </div>

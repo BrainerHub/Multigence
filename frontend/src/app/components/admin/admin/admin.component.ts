@@ -30,6 +30,9 @@ export class AdminComponent {
   departments: any;
   modalRef: BsModalRef<unknown>;
 
+  updateAdminData:any;
+  managers : any;
+  user:any;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -47,13 +50,24 @@ export class AdminComponent {
       trial: [null, Validators.required],
       invitations: [null, Validators.required],
     });
+  
+
     this.getAll();
-    //this.getOrganization();
+    this.getOrganization();
+    this.getMe();
   }
 
+getMe() {
+  this.userService.getMe().subscribe((res: any) => {
+    this.user = res;
+    this.managers = res.role;
+    this.organization = res.company;
+  });
+}
   getAll() {
     this.userService.getOrganizations().subscribe((res) => {
       this.getAllOrgination = res;
+      console.log(this.getAllOrgination);
     });
     this.organizations().push(this.newOrganization());
   }
@@ -69,6 +83,7 @@ export class AdminComponent {
   newOrganization(): FormGroup {
     this.visible = false;
     return this.formBuilder.group({
+      name : '',
       managerName: '',
       managerLastName: '',
       managerEmail: '',
@@ -94,6 +109,7 @@ export class AdminComponent {
 
     this.userService.createOrganization(data).subscribe((res) => {
       this.userService.getOrganizations().subscribe((res) => {
+        console.log("orgaData----", res);
         this.getAll();
       });
     });
@@ -103,16 +119,32 @@ export class AdminComponent {
 
   saveNewCompanyName(uuid: any, newData: any) {
     let data = {
-      name: this.createCompanyForm.controls['name'].value,
-      trial:
-        this.createCompanyForm.controls['trial'].value === 'Trial version'
-          ? true
-          : false,
-      invitations: this.createCompanyForm.controls['invitations'].value,
-      managers: [{}],
+      uuid : newData.uuid,
+      name : this.createOrginationForm.value.organizations[0].name,
+      departments : this.departments,
+      managers: [],
+  // //     departments:this.departments,
+  // //     invitations: 0,
+  // //    invitations_sent: 0,
+  // //   managers:[],
+  // //   name:"",
+  // //  trial: false,
+  // //   uuid:"31b82797-d7bf-414e-853d-670e285a191e"
+  //     departments:this.departments,
+  //     name: this.createOrginationForm.controls['name'].value,
+  //     trial:this.createOrginationForm.controls['trial'].value === 'Trial version'
+  //         ? true
+  //         : false,
+  //     invitations:this.createOrginationForm.controls['invitations'].value,
+     
+  //     managers: [{}],
     };
+      
+    this.userService.updateOrganization(newData.uuid,data).subscribe((res) => {
+      this.getAll();
 
-    this.userService.updateOrganization(uuid, data).subscribe((res) => {});
+    })
+    this.onCancelVisibleCompany('index')
   }
 
   onCancelCreateCompany() {
@@ -137,8 +169,12 @@ export class AdminComponent {
       this.activeIndex = index;
     }
     this.userService.getDepartments(data.uuid).subscribe((res) => {
-      this.departments = res.departments;
-    });
+     this.departments = res.departments;
+    })
+   
+      this.userService.getOrganizations().subscribe((res) => {
+        this.updateAdminData = res ;
+      });
   }
 
   confirmDeleteDialog(id: any, index: any) {

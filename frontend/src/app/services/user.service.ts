@@ -87,7 +87,7 @@ export class UserService {
 
     // get organization list
     getOrganizations() {
-      return this.http.get<any>(`${this.apiUrl}` + '/organization/').pipe(
+      return this.http.get<any>(`${this.apiUrl}` + '/organization/',true).pipe(
         map((user) => {
           return user;
         })
@@ -97,7 +97,7 @@ export class UserService {
 
    // get organization with id
     getOrganization(id:any) {
-      return this.http.get<any>(`${this.apiUrl}` + '/organization/'+id+'/').pipe(
+      return this.http.get<any>(`${this.apiUrl}` + '/organization/'+id+'/',true).pipe(
         map((user) => {
           return user;
         })
@@ -107,13 +107,31 @@ export class UserService {
   
   //get all departments list
     getDepartments(organizationId:any) {
-      return this.http.get<any>(`${this.apiUrl}` + '/organization/' + organizationId + '/department/',).pipe(
+      return this.http.get<any>(`${this.apiUrl}` + '/organization/' + organizationId + '/department/',true).pipe(
         map((user) => {
           return user;
         })
       );
     }
-
+    //add department
+    addDepartament(organizationId:any, department:any) {
+     
+      return this.http.post<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/department/', department).pipe(
+        map((name) => {
+          return name;
+        })
+      );
+    
+    }
+ 
+//addposition
+addPosition(organizationId:any , position:any) {
+  return this.http.post<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/position/', position).pipe(
+    map((job) => {
+      return job;
+    })
+  );
+}
    //delete Organisation
    deleteOrganization(id:any) {
     return this.http.delete<any>(`${this.apiUrl}` + '/organization/'+id+'/',).pipe(
@@ -124,8 +142,8 @@ export class UserService {
   }
 
    //update Organisation
-  updateOrganization(uuid:any, data:any ) {
-    return this.http.patch<any>(`${this.apiUrl}` + '/organization/'+uuid+'/', data).pipe(
+  updateOrganization(uuid:any, datas:any ) {
+    return this.http.patch<any>(`${this.apiUrl}` + '/organization/'+uuid+'/', datas).pipe(
       map((user) => {
         return user;
       })
@@ -140,10 +158,29 @@ export class UserService {
     })
   );
 }
+getInvitation(uuid:any) {
+  return this.http.get<any>(`${this.apiUrl}` + '/invite/' + uuid + '/',false).pipe(
+    map((user) => {
+      return user;
+    })
+  );
+  // var req = _getRequest('/invite/' + uuid + '/', {}, false);
+  // return $http(req);
+}
 
+acceptInvitation(uuid:any, data:any) {
+  return this.http.patch<any>(`${this.apiUrl}` +'/invite/' + uuid + '/', true ,data).pipe(
+    map((user) => {
+      return user;
+    })
+  );
+  // var req = _patchRequest('/invite/' + uuid + '/', {}, true);
+  // req.data = data;
+  // return $http(req);
+}
  // get User
-  getUser(): Observable<any> {
-    return this.http.get(`${this.apiUrl}` + '/user/').pipe(
+  getUser() {
+    return this.http.get<any>(`${this.apiUrl}` + '/user/',true).pipe(
       map((user) => {
         return user;
       })
@@ -170,13 +207,14 @@ export class UserService {
 
 //get user list data
 getMe() {
-    return this.http.get<any>(`${this.apiUrl}` + '/user/me/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` + '/user/me/',true).pipe(
       map((user) => {
         return user;
       })
     );
   }
 
+ 
 //update user  list data
   updateMe(data: any) {
     return this.http.patch<any>(`${this.apiUrl}` + '/user/me/', data).pipe(
@@ -201,7 +239,7 @@ getMe() {
 
   //get position
   getPositions(organizationId:any) {
-    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/position/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/position/',true).pipe(
       map((user) => {
         return user;
       })
@@ -262,7 +300,7 @@ getMe() {
   }
   
   getQuestionaryStatus(organizationId:any) {
-    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/questionary/status/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/questionary/status/',true).pipe(
       map((user) => {
         return user;
       })
@@ -270,7 +308,7 @@ getMe() {
   }
 
   getUserQuestionaryAnswers(userId:any, questionaryId:any){
-    return this.http.get<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', true).pipe(
       map((user) => {
         return user;
       })
@@ -300,11 +338,8 @@ getMe() {
    
   }
 
-
-
-
   getInviteOrganization(uuid: any) {
-    return this.http.get<any>(`${this.apiUrl}` +  '/organization/' + uuid + '/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` +  '/organization/' + uuid + '/',true).pipe(
       map((user) => {
         return user;
       })
@@ -315,7 +350,7 @@ getMe() {
   //sphere
 
   getSpheres () {
-    return this.http.get<any>(`${this.apiUrl}` + '/sphere/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` + '/sphere/',true).pipe(
       map((sphere) => {
         return sphere;
       })
@@ -324,7 +359,8 @@ getMe() {
   }
 
   getCorridorReport(organizationId:any) {
-    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=All+users&source=employees').pipe(
+   
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=All+users&source=employees',true).pipe(
       map((report) => {
         return report;
       })
@@ -333,7 +369,7 @@ getMe() {
   }
 
   getOrganizationData(organizationId:any) {
-    return this.http.get<any>(`${this.apiUrl}` +'/organization/'+organizationId+'/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/'+organizationId+'/',true).pipe(
       map((user) => {
         return user;
       })
@@ -342,7 +378,7 @@ getMe() {
   }
  //get UserQuestionaries
  getUserQuestionaries(userId: any, ) {
-    return this.http.get<any>(`${this.apiUrl}` + '/user/' + userId + '/questionary/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` + '/user/' + userId + '/questionary/', true).pipe(
       map((sphere) => {
         return sphere;
       })

@@ -34,18 +34,11 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="name" hidden>Company Name</label>
-                        <input
-                          type="name"
-                          name="name"
-                          class="form-control form-control-outline"
-                          formControlName="name"
+                        <input type="name" name="name" class="form-control form-control-outline" formControlName="name"
                           placeholder="{{
                             'admin.companies.new.form.name' | translate
-                          }}"
-                          required
-                        />
-                        <ng-container
-                          *ngIf="
+                          }}" required />
+                        <ng-container *ngIf="
                             createCompanyForm.get('name')?.invalid &&
                             createCompanyForm.get('name')?.touched
                           "
@@ -65,7 +58,7 @@
                       <div class="form-group">
                         <label for="trial" hidden>{{
                           "admin.version.select" | translate
-                        }}</label>
+                          }}</label>
                         <select formControlName="trial">
                           <option>
                             {{ "software.version.trial" | translate }}
@@ -86,40 +79,25 @@
                       </div>
                     </div>
                     <div class="col-md-3">
-                      <div
-                        class="cform-inline"
-                        *ngIf="
+                      <div class="cform-inline" *ngIf="
                           createCompanyForm.controls['trial'].value ==
                           'Trial version'
-                        "
-                      >
+                        ">
                         <div class="form-group d-flex align-items-center gap-2">
                           <label for="invitations">{{
                             "admin.form.invitations" | translate
-                          }}</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-box"
-                            id="invitations"
-                            placeholder="10"
-                            formControlName="invitations"
-                            style="width: 50px"
-                          />
+                            }}</label>
+                          <input type="number" class="form-control form-control-box" id="invitations" placeholder="10"
+                            formControlName="invitations" style="width: 50px" />
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="CreateFormBtnPart">
-                    <button
-                      type="reset"
-                      class="theme-btn"
-                      (click)="onCancelCreateCompany()"
-                    >
+                    <button type="reset" class="theme-btn" (click)="onCancelCreateCompany()">
                       Cancel
                     </button>
-                    <button
-                      type="submit"
-                      [ngClass]="
+                    <button type="submit" [ngClass]="
                         !createCompanyForm.valid
                           ? 'theme-btn disabled'
                           : 'theme-btn'
@@ -138,31 +116,15 @@
                 {{ data.name }}
               </a>
 
-              <form
-                [formGroup]="createOrginationForm"
-                class=""
-                (ngSubmit)="saveAndOpenCompanyData()"
-              >
-                <div
-                  formArrayName="organizations"
-                  *ngIf="visibleCompanyList.includes(index)"
-                >
-                  <div
-                    *ngFor="
+              <form [formGroup]="createOrginationForm" class="" (ngSubmit)="saveNewCompanyName(data)">
+                <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(index)">
+                  <div *ngFor="
                       let organization of organizations().controls;
                       let orgIndex = index
-                    "
-                  >
+                    ">
                     <div [formGroupName]="orgIndex">
-                      <input
-                        class="form-control form-control-outline"
-                        placeholder="{{
-                          'admin.companies.new.form.name' | translate
-                        }}"
-                        name="companyName"
-                        formControlName="name"
-                        value="{{ data.name }}"
-                      />
+                      <input class="form-control form-control-outline" name="name" formControlName="name"
+                        [(ngModel)]="data.name" />
 
                       <div class="CreateCompanyForm">
                         <div class="row">
@@ -175,24 +137,18 @@
                             <div class="form-group">
                               <label for="managerName" hidden>{{
                                 "admin.companies.new.form.managerName"
-                                  | translate
-                              }}</label>
-                              <input
-                                type="text"
-                                name="managerName"
-                                class="form-control form-control-outline"
-                                formControlName="managerName"
-                                placeholder="{{
+                                | translate
+                                }}</label>
+                              <input type="text" name="managerName" class="form-control form-control-outline"
+                                formControlName="managerName" placeholder="{{
                                   'admin.companies.new.form.managerName'
                                     | translate
-                                }}"
-                                required
-                              />
-                              <ng-container
-                                *ngIf="
+                                }}" required />
+                              <ng-container *ngIf="
                                   createOrginationForm.get('managerName')
                                     ?.invalid &&
                                   createOrginationForm.get('managerName')
+                                  
                                     ?.touched
                                 "
                               >
@@ -211,21 +167,14 @@
                             <div class="form-group">
                               <label for="managerLastName" hidden>{{
                                 "admin.companies.new.form.managerLastName"
-                                  | translate
-                              }}</label>
-                              <input
-                                type="text"
-                                name="last_name"
-                                class="form-control form-control-outline"
-                                formControlName="managerLastName"
-                                placeholder="{{
+                                | translate
+                                }}</label>
+                              <input type="text" name="managerLastName" class="form-control form-control-outline"
+                                formControlName="managerLastName" placeholder="{{
                                   'admin.companies.new.form.managerLastName'
                                     | translate
-                                }}"
-                                required
-                              />
-                              <ng-container
-                                *ngIf="
+                                }}" required />
+                              <ng-container *ngIf="
                                   createOrginationForm.get('managerLastName')
                                     ?.invalid &&
                                   createOrginationForm.get('managerLastName')
@@ -245,10 +194,7 @@
                           </div>
                           <div class="col-5">
                             <select name="department" id="department">
-                              <option
-                                *ngFor="let department of departments"
-                                value="{department.uuid}"
-                              >
+                              <option *ngFor="let department of departments" value="{department.uuid}">
                                 {{ department.name }}
                               </option>
                             </select>
@@ -257,21 +203,14 @@
                             <div class="form-group">
                               <label for="managerEmail" hidden>{{
                                 "admin.companies.new.form.managerEmail"
-                                  | translate
-                              }}</label>
-                              <input
-                                type="email"
-                                name="email"
-                                class="form-control form-control-outline"
-                                formControlName="managerEmail"
-                                placeholder="{{
+                                | translate
+                                }}</label>
+                              <input type="email" name="managerEmail" class="form-control form-control-outline"
+                                formControlName="managerEmail" placeholder="{{
                                   'admin.companies.new.form.managerEmail'
                                     | translate
-                                }}"
-                                required
-                              />
-                              <ng-container
-                                *ngIf="
+                                }}" required />
+                              <ng-container *ngIf="
                                   createOrginationForm.get('managerEmail')
                                     ?.invalid &&
                                   createOrginationForm.get('managerEmail')
@@ -299,26 +238,26 @@
                           </div>
                           <div class="col-2">
                             <div class="text-end">
-                              <button
-                                [ngClass]="
+                              <button [ngClass]="
                                   !createOrginationForm.valid
                                     ? 'theme-btn disabled w-auto'
                                     : 'theme-btn w-auto'
-                                "
-                                (click)="onInviteManager(data)"
-                                [disabled]="!createOrginationForm.valid"
-                              >
+                                " (click)="onInviteManager(data)" [disabled]="!createOrginationForm.valid">
                                 <span>Invite</span>
                               </button>
                             </div>
                           </div>
+                          <div class="row manager-field" *ngFor="let manager of managers">
+                            <div class="col-xs-5">
+                              <p>{{manager['first_name']}}</p>
+                            </div>
+                            <div class="col-xs-7">
+                              <p>{{manager['last_name']}}</p>
+                            </div>
+                          </div>
                         </div>
                         <div class="CreateFormBtnPart justify-content-between">
-                          <button
-                            type="reset"
-                            class="theme-btn"
-                            (click)="openConfirmationModal(template)"
-                          >
+                          <button type="reset" class="theme-btn" (click)="openConfirmationModal(template)">
                             Delete
                           </button>
                           <ng-template #template>
@@ -329,20 +268,12 @@
                                   organization?
                                 </p>
                                 <div class="ModelBtnPart">
-                                  <button
-                                    type="button"
-                                    class="theme-btn w-auto"
-                                    (click)="
+                                  <button type="button" class="theme-btn w-auto" (click)="
                                       confirmDeleteDialog(data.uuid, index)
-                                    "
-                                  >
+                                    ">
                                     Ok
                                   </button>
-                                  <button
-                                    type="button"
-                                    class="theme-btn w-auto"
-                                    (click)="declineDeleteModal()"
-                                  >
+                                  <button type="button" class="theme-btn w-auto" (click)="declineDeleteModal()">
                                     Cancel
                                   </button>
                                 </div>
@@ -350,18 +281,10 @@
                             </div>
                           </ng-template>
                           <div class="">
-                            <button
-                              type="reset"
-                              class="theme-btn me-2"
-                              (click)="onCancelVisibleCompany(index)"
-                            >
+                            <button type="reset" class="theme-btn me-2" (click)="onCancelVisibleCompany(index)">
                               Cancel
                             </button>
-                            <button
-                              class="theme-btn"
-                              type="submit"
-                              (click)="saveNewCompanyName(data.uuid, data.name)"
-                            >
+                            <button class="theme-btn" type="submit">
                               Save
                             </button>
                           </div>

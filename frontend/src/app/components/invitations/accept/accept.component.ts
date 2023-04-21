@@ -1,10 +1,11 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { template } from 'lodash';
 import { UserService } from 'app/services/user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-accept',
   templateUrl: './accept.component.html',
@@ -15,14 +16,27 @@ export class AcceptComponent {
   visible: boolean = false;
   IsVisible: boolean = false;
   modalRef: BsModalRef<unknown>;
+  ERROR_PASSWORD_NOT_MATCH = 'form.passwordNotMatch';
+  uid:any;
+  user: any;
+  password:any;
+  invitationIsExpired:boolean = true;
+  closeResult: string;
+  @ViewChild("content",{static:true}) content:ElementRef;
   constructor(private userService: UserService,private formBuilder: FormBuilder,private translate: TranslateService,
     private modalService: BsModalService,
+    private _modalService: NgbModal,
     public _router: Router,){
    
   }
   ngOnInit(): void {
    this.createAccept();
-   this.confirmOkDialog();
+    this.getMe();
+    this.openSm(this.content)
+  }
+  openSm(content:any) {
+    this. _modalService.open(content, { size: 'sm' });
+    this._router.navigate(['/login']);
   }
 
 createAccept(){
@@ -38,8 +52,8 @@ createAccept(){
     });
    }
   
-   openConfirmationModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+   get f() {
+    return this.Createacceptform.controls;
   }
 
   confirmOkDialog(){
@@ -47,4 +61,47 @@ createAccept(){
     this.modalRef.hide();
 }
  
+  modalclose(){
+    localStorage.clear();
+    this._router.navigate(['/login']);
+  }
+  getMe() {
+    this.userService.getMe().subscribe((res: any) => {
+      this.user = res;
+      this.user.role = res.role ;
+      this.uid = res.company;
+  });
+  }
+  
+  getInvitation(template: TemplateRef<any>) {
+    this.userService.getInvitation(this.uid).subscribe(res =>{
+      this.invitationIsExpired = false;
+      this.user = res;
+      this.openSm(template);
+    },(error)=>{
+      this.invitationIsExpired = true;
+    })
+   
+  }
+ 
+  join() {
+    if(this.Createacceptform.controls['password'].value == this.Createacceptform.controls['repeatpass'].value){
+      this.password = this.Createacceptform.controls['password'].value;
+      this.userService.acceptInvitation(this.uid, this.password).subscribe(res =>{
+        let data = {
+          email: this.Createacceptform.controls['email'].value,
+          password:this.Createacceptform.controls['password'].value,
+        };
+         return this.userService.login(data);
+      })
+    if(this.user.role == 'MANAGER'){
+      this._router.navigate(['/invitations']);
+    }
+    else{
+      this._router.navigate(['/questionary']);
+    }
+    }else{
+       this.ERROR_PASSWORD_NOT_MATCH;
+    }
+  }
 }
