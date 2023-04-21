@@ -30,6 +30,7 @@ export class CorridorReportComponent {
   QuestionaryStatus: any;
   users: any;
   trial: boolean;
+  send :boolean = true;
   sortOrder = 'Closest';
   sortOrders = 'Furthest';
   isAscendingSort: boolean = false;
@@ -38,7 +39,7 @@ export class CorridorReportComponent {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private translate: TranslateService,
+    private _translate: TranslateService,
     public _router: Router,
     private bootstrapService: BootstrapService
   ) {}

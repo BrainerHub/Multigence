@@ -22,7 +22,9 @@ export class AcceptComponent {
   password:any;
   invitationIsExpired:boolean = true;
   closeResult: string;
-  @ViewChild("content",{static:true}) content:ElementRef;
+  @ViewChild('template') template: TemplateRef<HTMLDivElement>;
+ 
+  
   constructor(private userService: UserService,private formBuilder: FormBuilder,private translate: TranslateService,
     private modalService: BsModalService,
     private _modalService: NgbModal,
@@ -31,14 +33,19 @@ export class AcceptComponent {
   }
   ngOnInit(): void {
    this.createAccept();
-    this.getMe();
-    this.openSm(this.content)
-  }
-  openSm(content:any) {
-    this. _modalService.open(content, { size: 'sm' });
-    this._router.navigate(['/login']);
+    this.getMe( );
+  
   }
 
+  openModal() {
+    this.modalRef = this.modalService.show(this.template, {
+      animated: true,
+      backdrop: 'static',
+    });
+  }
+ 
+
+ 
 createAccept(){
     this.Createacceptform = this.formBuilder.group({
       email: [ null, [ Validators.required, Validators.pattern('^[aA-zZ0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
@@ -57,19 +64,17 @@ createAccept(){
   }
 
   confirmOkDialog(){
+    localStorage.clear();
     this._router.navigate(['/login']);
     this.modalRef.hide();
 }
  
-  modalclose(){
-    localStorage.clear();
-    this._router.navigate(['/login']);
-  }
   getMe() {
     this.userService.getMe().subscribe((res: any) => {
       this.user = res;
       this.user.role = res.role ;
       this.uid = res.company;
+      this.openModal();
   });
   }
   
@@ -77,7 +82,7 @@ createAccept(){
     this.userService.getInvitation(this.uid).subscribe(res =>{
       this.invitationIsExpired = false;
       this.user = res;
-      this.openSm(template);
+    this.openModal();
     },(error)=>{
       this.invitationIsExpired = true;
     })

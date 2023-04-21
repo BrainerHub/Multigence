@@ -92,6 +92,12 @@
           &:first-child {
             font-weight: 700;
           }
+          span.bi {
+            font-size: 16px;
+          }
+          span.bi-hexagon-fill::before {
+            transform: rotate(30deg);
+          }
         }
       }
     }
@@ -109,11 +115,11 @@
   .modal-body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     border: 1px solid #fff;
-    border-radius: 6px;
+    // border-radius: 6px;
     background-color: #171717;
     padding: 50px 50px 50px 50px;
     p {
-      color: #333;
+      color: #fff;
     }
     .ModelBtnPart {
       display: flex;

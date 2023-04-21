@@ -3,30 +3,12 @@
   <a href="invitations">{{ "footer.catalog" | translate }}</a>
   <div class="progress-chart">
     <div class="progress">
-      <div
-        class="pending"
-        role="progressbar"
-        style="width: 33%"
-        data-toggle="tooltip"
-        data-placement="top"
-        title="{{ 'progress.pending' | translate }}"
-      ></div>
-      <div
-        class="progressing"
-        role="progressbar"
-        style="width: 33%"
-        data-toggle="tooltip"
-        data-placement="top"
-        title="{{ 'progress.progressing' | translate }}"
-      ></div>
-      <div
-        class="finished"
-        role="progressbar"
-        style="width: 34%"
-        data-toggle="tooltip"
-        data-placement="top"
-        title="{{ 'progress.finished' | translate }}"
-      ></div>
+      <div class="pending" role="progressbar" style="width: 33%" data-toggle="tooltip" data-placement="top"
+        title="{{ 'progress.pending' | translate }}"></div>
+      <div class="progressing" role="progressbar" style="width: 33%" data-toggle="tooltip" data-placement="top"
+        title="{{ 'progress.progressing' | translate }}"></div>
+      <div class="finished" role="progressbar" style="width: 34%" data-toggle="tooltip" data-placement="top"
+        title="{{ 'progress.finished' | translate }}"></div>
     </div>
   </div>
 </div>
@@ -38,20 +20,13 @@
           <div>
             <div class="right-inner-addon">
               <img src="../../../../assets/images/search.svg" alt="" />
-              <input
-                class="form-control form-control-outline custom-search"
-                placeholder="{{ 'filter.search' | translate }}"
-                type="text"
-                name="search"
-                [(ngModel)]="searchText"
-                autocomplete="off"
-              />
+              <input class="form-control form-control-outline custom-search"
+                placeholder="{{ 'filter.search' | translate }}" type="text" name="search" [(ngModel)]="searchText"
+                autocomplete="off" />
               <div class="FilterBox mt-4">
                 <div class="form-group mb-4">
                   <select class="form-select" name="progress" id="progress">
-                    <option
-                      *ngFor="let progress of progressList; let i = index"
-                    >
+                    <option *ngFor="let progress of progressList; let i = index">
                       {{ progress }}
                     </option>
                   </select>
@@ -65,10 +40,7 @@
                 </div>
                 <div class="form-group mb-4">
                   <select class="form-select" name="department" id="department">
-                    <option
-                      *ngFor="let department of departments"
-                      value="{department.uuid}"
-                    >
+                    <option *ngFor="let department of departments" value="{department.uuid}">
                       {{ department.name }}
                     </option>
                   </select>
@@ -82,69 +54,15 @@
                 </div>
                 <div class="form-group mb-4">
                   <select class="form-select" name="title" id="title">
-                    <option
-                      *ngFor="let position of positions"
-                      value="{position.uuid}"
-                    >
+                    <option *ngFor="let position of positions" value="{position.uuid}">
                       {{ position.name }}
                     </option>
                   </select>
                 </div>
               </div>
-              <!-- <div class="pad-bottom-20">
-                <div class="dropdown">
-                  <div class="form-group w-50">
-                    <select class="form-select" name="progress" id="progress">
-                      <option
-                        *ngFor="let progress of progressList; let i = index"
-                      >
-                        {{ progress }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group w-50">
-                    <select class="form-select" name="role" id="role">
-                      <option *ngFor="let rol of userRolList; let i = index">
-                        {{ rol }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group w-50">
-                  <select class="form-select" name="department" id="department">
-                    <option
-                      *ngFor="let department of departments"
-                      value="{department.uuid}"
-                    >
-                      {{ department.name }}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group w-50">
-                  <select class="form-select" name="title" id="title">
-                    <option *ngFor="let title of titles" value="{title.uuid}">
-                      {{ title }}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group w-50">
-                  <select class="form-select" name="title" id="title">
-                    <option
-                      *ngFor="let position of positions"
-                      value="{position.uuid}"
-                    >
-                      {{ position.name }}
-                    </option>
-                  </select>
-                </div>
-              </div> -->
             </div>
-            <button
-              (click)="viewResult()"
-              type="button"
-              class="theme-btn w-100 text-uppercase bold"
-            >
-              View Result
+            <button (click)="viewResult()" type="button" class="theme-btn w-100 text-uppercase bold">
+              View Results
             </button>
           </div>
         </div>
@@ -174,30 +92,29 @@
               </li>
             </ul>
           </div>
-          <!-- <div class="person-list"> -->
-          <div>
+          <div class="UserTable table-hover">
             <div class="col-xs-1">
-                  <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
-                    class="icon-triangle triangle"></i>
-                  <i *ngIf="user.role === 'APPLICANT'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
-                    class="icon-hexagon hexagon"></i>
-                </div>
-            <ul class="">
-              <li class="" *ngFor="let user of userStatusListPage | filter : searchText">
-                <div class="">
-                  <div class="">{{ user["first_name"] }}</div>
-                  <div class="">{{ user["last_name"] }}</div>
-                  <div class="">
-                    {{
-                      user["role"] == "EMPLOYEE"
-                        ? user["title"]
-                        : user["position_name"]
-                    }}
-                  </div>
-                  <div class="">{{ user["department_name"] }}</div>
-                </div>
-              </li>
-            </ul>
+            </div>
+            <table class="table table-dark">
+              <tbody>
+                <tr *ngFor="let user of usersPage | filter : searchText">
+                  <td scope="row">
+                    <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'" class="bi bi-triangle-fill"></i>
+                    <i *ngIf="user.role == 'APPLICANT'" class="bi bi-hexagon-fill"></i>
+                  </td>
+                  <td>{{ user["first_name"] }}</td>
+                  <td>{{ user["last_name"] }}</td>
+                  <td>{{
+                    user["role"] == "EMPLOYEE"
+                    ? user["title"]
+                    : user["position_name"]
+                    }}</td>
+                  <td>{{ user["department_name"] }}</td>
+                </tr>
+
+              </tbody>
+            </table>
+
           </div>
         </div>
       </div>

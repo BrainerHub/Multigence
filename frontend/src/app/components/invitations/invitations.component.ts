@@ -29,11 +29,11 @@ export class InvitationsComponent {
   ROLE_APPLICANT = 'APPLICANT';
   ROLE_MANGER = 'MANAGER';
   MAX_INVITATIONS_REACHED_ERROR_DESCRIPTION = 'Maximum number of invitations reached';
-
-  INVITATION_SENT_MSG:any = 'invitation.sentMess';
+  send :boolean = false;
+  INVITATION_SENT_MSG:any = 'invitation.sentMessage';
   INVITATION_SENT_BEFORE_MSG:any = 'invitation.sentBeforeMessage';
-   USER_HAS_STARTED_QUIZ = 'invitation.userHasStartedQuizMessage';
-   INVITATION_MAX_REACHED = 'invitation.maxReached';
+  USER_HAS_STARTED_QUIZ = 'invitation.userHasStartedQuizMessage';
+  INVITATION_MAX_REACHED = 'invitation.maxReached';
 
   modalRef: BsModalRef<unknown>;
   constructor(private userService: UserService,private formBuilder: FormBuilder,
@@ -117,7 +117,6 @@ getPostions(){
   this.userService.getPositions(this.organization).subscribe(res => {
    var userDepartmentData = Array.from(Object.values(res));
    this.postions = userDepartmentData[0];
-  // console.log("POSTIONS",this.postions)
   })
 }
 
@@ -125,7 +124,6 @@ getInviteOrganization(){
   this.userService.getInviteOrganization(this.organization).subscribe(res =>{
      var userDepartmentData = Array.from(Object.values(res));
     this.jobs = userDepartmentData;
-    //console.log("job",this.inviteOrganaiztion);
   })
 }
 
@@ -157,9 +155,11 @@ getInviteOrganization(){
   //  data.newdepartment =this.createInvitationForm.controls['name'].value;
     data.uri = this._uri()
     this.userService.invite(data).subscribe((res) => {
-      this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+     
+      //this.modalRef = this.modalService.show(template, {class: 'modal-md'});
       if(res.data['first_invitation']){
-        this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+         this.send = true;
+      //  this.modalRef = this.modalService.show(template, {class: 'modal-md'});
         this.openConfirmationModal(this.INVITATION_SENT_MSG);
       }
       else {
@@ -168,7 +168,7 @@ getInviteOrganization(){
       this.resetForms();
     },
     (err) => {
-      console.log("error....");
+      return err("Invitation unsent");
     }
     ) }
 
@@ -182,9 +182,10 @@ getInviteOrganization(){
       data.position =this.CreateCandidateform.controls['job'].value;
       data.uri = this._uri()
       this.userService.invite(data).subscribe((res) => {
-        this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+       // this.modalRef = this.modalService.show(template, {class: 'modal-md'});
         if(res.data['first_invitation']){
-          this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+          this.send = true;
+          //this.modalRef = this.modalService.show(template, {class: 'modal-md'});
           this.openConfirmationModal(this.INVITATION_SENT_MSG);
         }
         else {
@@ -193,7 +194,7 @@ getInviteOrganization(){
         this.resetForms();
       },
       (err) => {
-        console.log("error....");
+        return err("Invitation unsent")
       }
       ) }
 
@@ -212,9 +213,9 @@ getInviteOrganization(){
       this.modalRef.hide();
     }
     confirmOkDialog(){
-     this._router.navigate(['/invitations/accept']);
+     //this._router.navigate(['/invitations/accept']);
      this.modalRef.hide();
-  }
+    }
 
   addDepartment(department:any){
     var data:any = {};
@@ -234,9 +235,7 @@ getInviteOrganization(){
     var data:any = {};
     data.name = this.CreateCandidateform.controls['name'].value;
     this.userService.addDepartament(this.organization,data).subscribe((res) => {
-       
           this.getDepartment();
-      
      },(error) => { 
         if(error.status === 409){
           this.CreateCandidateform.controls['name'].value == '';

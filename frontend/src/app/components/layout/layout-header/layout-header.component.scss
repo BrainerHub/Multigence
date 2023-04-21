@@ -108,6 +108,12 @@
     &:hover {
       color: #00ff85 !important;
     }
+    span.bi-send {
+      margin-left: 7px;
+      &::before {
+        transform: rotate(45deg);
+      }
+    }
   }
   .themeSelector {
     .theme-selected {

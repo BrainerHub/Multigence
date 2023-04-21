@@ -74,3 +74,23 @@
     }
   }
 }
+
+.ConfirmationModel {
+  .modal-body {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid #fff;
+    // border-radius: 6px;
+    background: #777777 url("../../../assets/images/modal-background.png")
+      repeat center center;
+    padding: 50px 50px 50px 50px;
+    p {
+      color: #fff;
+      text-align: center;
+    }
+    .ModelBtnPart {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
+}

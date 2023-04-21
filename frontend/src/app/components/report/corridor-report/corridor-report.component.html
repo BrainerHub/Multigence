@@ -8,53 +8,50 @@
             <div class="col-md-7">
               <div class="corridor-filters legend-content-size corridor-legend">
                 <ul class="list-group">
-                        <li *ngFor="let user of corridorPersons">
+                  <li *ngFor="let user of corridorPersons">
                     <app-corridor-legend-item user="user" [ngClass]="{trial:trial}"></app-corridor-legend-item>
-                        
-                </li>
-                 
+
+                  </li>
+
                 </ul>
               </div>
             </div>
-            
+
             <div class="col-md-4">
               <div class="corridor-filters legend-content-size px-4">
                 <div class="form-group w-75">
-                <ng-container *ngIf="trial">
-                  <select class="form-select">
-                    <option>All departments</option>
-                    <option>{{"trial.notAvailable" | translate}}</option>
-                  </select>
+                  <ng-container *ngIf="trial">
+                    <select class="form-select">
+                      <option>All departments</option>
+                      <option>{{"trial.notAvailable" | translate}}</option>
+                    </select>
                   </ng-container>
                   <ng-container *ngIf="!trial" class="form-group">
                     <select class="form-select" name="department" id="department">
-                        <option>All departments</option>
+                      <option>All departments</option>
                       <option *ngFor="let department of departments" value="{department.uuid}">
                         {{ department.name }}
                       </option>
                     </select>
-                </ng-container>
+                  </ng-container>
                 </div>
                 <div class="form-group w-75">
-                    <ng-container *ngIf="trial">
-                       
-                        <select class="form-select">
-                            <option>{{"employees" | uppercase}}</option>
-                          <option>{{"trial.notAvailable" | translate}}</option>
-                        </select>
-                        </ng-container>
-                        <ng-container *ngIf="!trial" class="form-group">
-                            <select class="form-select" name="employee" id="employee">
-                                <option>{{"employees" | uppercase}}</option>
-                                <option
-                                  *ngFor="let employee of employees"
-                                  value="{employee.uuid}"
-                                >
-                                  {{ employee.name }}
-                                </option>
-                              </select>
-                        </ng-container>
-                    <!-- <div>
+                  <ng-container *ngIf="trial">
+
+                    <select class="form-select">
+                      <option>{{"employees" | uppercase}}</option>
+                      <option>{{"trial.notAvailable" | translate}}</option>
+                    </select>
+                  </ng-container>
+                  <ng-container *ngIf="!trial" class="form-group">
+                    <select class="form-select" name="employee" id="employee">
+                      <option>{{"employees" | uppercase}}</option>
+                      <option *ngFor="let employee of employees" value="{employee.uuid}">
+                        {{ employee.name }}
+                      </option>
+                    </select>
+                  </ng-container>
+                  <!-- <div>
                           <input type="text" (keyup)="onSeachDropdownValue($event)"/>
                           <div class="dropdown-selector">
                             <div class="dropdown-selector-option"  *ngFor="let employee of employees" (click)="onSelectDropdownValue(employee)">{{employee.name}}</div>
@@ -66,44 +63,37 @@
             <div class="col-md-12">
               <div class="corridor-filters legend-content-size corridor-graph">
 
-            </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="corridor-filters px-4">
             <div class="form-group person-list-form w-75">
-                <ng-container *ngIf="trial">
-                       
-                    <select class="form-select">
-                        <option>All Users</option>
-                      <option>{{"trial.notAvailable" | translate}}</option>
-                    </select>
-                    </ng-container>
-                    <ng-container *ngIf="!trial" class="form-group">
-                        <select class="form-select" name="employee" id="employee">
-                            <option>All Users</option>
-                            <option>Employees </option>
-                            <option
-                              *ngFor="let title of titles"
-                              value="{title.uuid}"
-                            >
-                              {{ title }}
-                            </option>
-                          </select>
-                          <select class="form-select" name="employee" id="employee">
-                            <option>All Users</option>
-                            <option>>Candidates</option>
-                            <option
-                              *ngFor="let position of positions"
-                              value="{position.uuid}"
-                            >
-                              {{ position }}
-                            </option>
-                          </select>
+              <ng-container *ngIf="trial">
 
-                    </ng-container>
-             
+                <select class="form-select">
+                  <option>All Users</option>
+                  <option>{{"trial.notAvailable" | translate}}</option>
+                </select>
+              </ng-container>
+              <ng-container *ngIf="!trial" class="form-group">
+                <select class="form-select" name="employee" id="employee">
+                  <option>All Users</option>
+                  <option>Employees </option>
+                  <option *ngFor="let title of titles" value="{title.uuid}">
+                    {{ title.name }}
+                  </option>
+                </select>
+                <select class="form-select" name="employee" id="employee">
+                  <option>All Users</option>
+                  <option>Candidates</option>
+                  <option *ngFor="let position of positions" value="{position.uuid}">
+                    {{ position }}
+                  </option>
+                </select>
+              </ng-container>
+
             </div>
           </div>
           <div class="corridor-filters px-4 py-3">
@@ -111,27 +101,17 @@
               <div class="col-md-6">
                 <div class="form-group SearchForm">
                   <img src="../../../../assets/images/search.svg" alt="" />
-                  <input
-                    class="form-control form-control-outline custom-search"
-                    placeholder="{{ 'filter.search' | translate }}"
-                    type="text"
-                    name="search"
-                    [(ngModel)]="searchText"
-                    autocomplete="off"
-                  />
+                  <input class="form-control form-control-outline custom-search"
+                    placeholder="{{ 'filter.search' | translate }}" type="text" name="search" [(ngModel)]="searchText"
+                    autocomplete="off" />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <select class="form-select" (click)="getpersonListPage()">
-                    <option>{{ sortOrder }}</option>
-                    <option>{{ sortOrders }}</option>
-                    </select>
-                    <!-- <select class="form-select" (click)="getpersonListPage()">
-                      <option>{{"sort.asc" | translate}}</option>
-                      <option>{{"sort.desc" | translate}}</option>
-                    </select> -->
-                 
+                    <option>{{ "sort.asc" | translate }}</option>
+                    <option>{{ "sort.desc" | translate}}</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -160,41 +140,29 @@
                 </a>
               </li>
             </ul>
+
           </div>
-                <div class="" *ngFor="let user of personListPage | filter : searchText">
-                  <div class="">{{user['first_name']}}</div>
-                  <div class="">{{user['last_name']}}</div>
-                  <div class="">{{userDescription(user)}}</div>
-               
-            </div>
+
+          <table class="table table-dark">
+            <tbody>
+
+              <tr *ngFor="let user of personListPage | filter : searchText">
+                <td scope="row">
+                  <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-triangle-fill"></i>
+                  <i *ngIf="user.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
+                </td>
+                <td>{{user['first_name']}}</td>
+                <td>{{user['last_name']}}</td>
+                <td>{{userDescription(user)}}</td>
+              </tr>
+            </tbody>
+          </table>
+
         </div>
       </div>
     </div>
-    
 
 
-   
+
+
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
