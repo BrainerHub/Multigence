@@ -30,6 +30,7 @@ export class QuestionaryComponent {
   rootScope: any;
   last: boolean;
   amountParamsVisible: boolean
+  count = 0;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -39,10 +40,11 @@ export class QuestionaryComponent {
     public route: ActivatedRoute,
     private questionaryService: QuestionaryService
   ) {}
+
   ngOnInit() {
     this.getMe();
     this.loadQuestionary();
-    this.handleLanguageChange();
+    //this.handleLanguageChange();
   }
 
   openModal() {
@@ -120,12 +122,22 @@ export class QuestionaryComponent {
   }
  
   increment(index: number): void {
+    //debugger
+    if (this.count < 22) {
+      this.count++;
+    }
+  
+    
     if (this.availablePoints('id') > 0) {
       this.answers[index] = (this.answers[index] || 0) + 1;
     }
   }
 
   decrement(index: number): void {
+    if (this.count > 0) {
+      this.count--;
+    }
+   
     if (this.availablePoints('id') < this.questionary.max_points) {
       this.answers[index] = (this.answers[index] || 0) - 1;
     }
@@ -168,14 +180,14 @@ export class QuestionaryComponent {
   addGuards(){
 
   }
-  handleLanguageChange(): void {
-    const langListener = this.rootScope.$on('lang:change', () => {
-      this.loadQuestionary();
-    });
-    this.scope.on((destroyed:any, ) => {
-      langListener(); // stop listening
-    });
-  }
+  // handleLanguageChange(): void {
+  //   const langListener = this.rootScope.on('lang:change', () => {
+  //     this.loadQuestionary();
+  //   });
+  //   this.scope.on((destroyed:any, ) => {
+  //     langListener(); // stop listening
+  //   });
+  // }
    isNotAnswered(question:any): boolean {
     return !question.answered;
   }
@@ -193,7 +205,7 @@ export class QuestionaryComponent {
       this.organization = res.company;
       this.getOrganization();
       this.getUserQuestionaries();
-      this.openModal();
+    //  this.openModal();
     });
   }
   getOrganization() {
@@ -203,7 +215,10 @@ export class QuestionaryComponent {
   getUserQuestionaries() {
     this.userService
       .getUserQuestionaries(this.organization)
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        this.questionary = res[0].questions[0];
+        console.log(this.questionary,"ques.....")
+      });
   }
  
 

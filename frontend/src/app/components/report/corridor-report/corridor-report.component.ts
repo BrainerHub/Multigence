@@ -5,6 +5,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import { BootstrapService } from 'app/services/bootstrap.service';
+
 @Component({
   selector: 'app-corridor-report',
   templateUrl: './corridor-report.component.html',
@@ -42,6 +43,8 @@ export class CorridorReportComponent {
     public _router: Router,
     private bootstrapService: BootstrapService
   ) {}
+
+  
 
   ngOnInit(): void {
     this.getMe();
@@ -132,6 +135,7 @@ export class CorridorReportComponent {
     this.userService
       .getCorridorReport(this.organization)
       .subscribe((res) => {
+        console.log(' this.personListPage', res.users);
         this.personListPage = res.users;
       });
   }

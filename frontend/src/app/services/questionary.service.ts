@@ -63,7 +63,7 @@ export class QuestionaryService {
       return of(user);
     }
     return this.userService.getMe().pipe(
-      map((response) => response.data.uuid)
+      map((response) => response.data)
     );
   }
 

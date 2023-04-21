@@ -23,3 +23,104 @@
     }
   }
 }
+.question-box {
+  position: relative;
+  padding: 7px;
+  height: 100%;
+  margin-bottom: 0 !important;
+  height: 194px;
+  background-color: rgba(12, 12, 12, 0.5);
+  border: none;
+  margin: 20px 0px !important;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  //border-radius(0);
+  .question-box-body {
+    font-size: 17px;
+    width: calc(100% - 56px);
+    height: 100%;
+    float: left;
+    overflow: auto;
+    background-color: #0c0c0c;
+   // @include border-radius(0);
+    label {
+      font-weight: normal;
+    }
+  }
+  .question-box-counter {
+    width:44px;
+    margin-left: 10px;
+    .background-plus-custom{
+      padding-bottom: 0px !important;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+    .id-input{
+      input{
+        width:auto;
+        max-width: -webkit-fill-available;
+        text-align: center;
+        border: 1px solid #525252;
+        background: none;
+        color: #525252;
+      }
+    }
+    .plus-container {
+      button{
+        width:100%;
+        border:none;
+        background: url(../../../assets/images/plus-white-btn.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        filter: opacity(0.7);
+      }
+      .icon-plus {
+        &.icon-icon-plus:hover {
+          color: green-color;
+        }
+        font-size: 44px;
+      }
+    }
+    .minus-container {
+      button{
+        width:100%;
+        border:none;
+        background: url(../../../assets/images/minus-white-btn.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        filter: opacity(0.7);
+      }
+      .icon-minus {
+        &.icon-icon-minus:hover {
+          color: green-color;
+        }
+        font-size: 44px;
+      }
+    }
+    .input-counter {
+      height: 25px;
+      width: 100%;
+      padding: 0;
+      -webkit-appearance: textfield;
+      -moz-appearance:    textfield;
+      appearance:         textfield;
+      background: none;
+      border: none;
+      text-align: center;
+      position: relative;
+      z-index: 999;
+    }
+
+    .input-counter:focus {
+      outline: none;
+    }
+
+    .input-counter.ng-invalid:not(.ng-pristine) {
+      color:pink-color;
+    }
+  }
+}

@@ -35,7 +35,7 @@ import { AccountComponent } from './components/account/account.component';
 
 import { InvitationsComponent } from './components/invitations/invitations.component';
 import { AcceptComponent } from './components/invitations/accept/accept.component';
-
+import { NgChartsModule } from 'ng2-charts';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { UserFooterComponent } from './components/user-layout/user-footer/user-footer.component';
 import { UserHeaderComponent } from './components/user-layout/user-header/user-header.component';
@@ -49,6 +49,7 @@ import { CorridorReportComponent } from './components/report/corridor-report/cor
 import { QuestionaryReportComponent } from './components/report/questionary-report/questionary-report.component';
 import { CorridorLegendItemComponent } from './components/report/corridor-legend-item/corridor-legend-item.component';
 import { CorridorGraphComponent } from './components/report/corridor-graph/corridor-graph.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +83,7 @@ import { CorridorGraphComponent } from './components/report/corridor-graph/corri
   imports: [
     NgbModule,
     BrowserModule,
+    NgChartsModule,
     CommonModule,
     FormsModule,
     HttpClientModule,
