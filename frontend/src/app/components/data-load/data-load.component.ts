@@ -9,14 +9,15 @@ import { UserService } from 'app/services/user.service';
   styleUrls: ['./data-load.component.scss'],
 })
 export class DataLoadComponent {
-  hidden: boolean = false;
+  messageHidden: boolean = false;
+  errorMessageHidden: boolean = false;
   user: any;
-  file: any;
+  file: undefined;
   message: any;
   errorMessage: any;
   questionsFile: any;
   departments: any;
-  organization:any =[];
+  organization: any = [];
   resp: any;
   constructor(private userService: UserService, public route: ActivatedRoute) {}
 
@@ -24,29 +25,29 @@ export class DataLoadComponent {
     this.getMe();
   }
 
-
-
   onChange(event: any) {
     this.file = event.target.files[0];
   }
 
-  uploadFile(data:any) {
-   
+  uploadFile() {
     this.userService.uploadQuestions(this.file).subscribe(
-      (resp: any) => {
-        this.message = 'Data uploaded successfully!';
-      },
-      (resp: any) => {
-        if (resp && resp.data && resp.data.detail) {
-          this.errorMessage = resp.data.detail;
-        } else {
-          this.errorMessage = 'Unexpected error';
+      (res: any) => {
+        console.log(res,'res');
+        
+        if (res) {
+          this.message = 'Data uploaded successfully!';
+          this.messageHidden = true;
         }
+        if (res && res.data && res.data.detail) {
+        }
+      },
+      (err) => {
+        err = 'Authentication credentials were not provided';
+        this.errorMessage = err;
       }
     );
 
-   
-    this.hidden = true;
+    this.errorMessageHidden = true;
   }
 
   getMe() {
@@ -57,10 +58,9 @@ export class DataLoadComponent {
     });
   }
   getDepartment() {
-    this.userService.getDepartments(this.organization).subscribe(res => {
+    this.userService.getDepartments(this.organization).subscribe((res) => {
       var userDepartmentData = Array.from(Object.values(res));
-      this.departments = userDepartmentData[0]
-    })
-   
+      this.departments = userDepartmentData[0];
+    });
   }
 }

@@ -59,7 +59,9 @@
                   class="caption status-danger"
                   *ngIf="loginForm.get('password')?.errors?.['required']"
                 >
-                  <span style="color: red"> {{"login.form.password.error.required" | translate}}</span>
+                  <span style="color: red">
+                    {{ "login.form.password.error.required" | translate }}</span
+                  >
                 </p>
               </ng-container>
             </div>
@@ -69,7 +71,9 @@
                 <input type="checkbox" />
                 <div class="slider round"></div>
               </label>
-              <p class="switch-label">{{"login.form.remember" | translate}}</p>
+              <p class="switch-label">
+                {{ "login.form.remember" | translate }}
+              </p>
             </div>
 
             <button type="submit" class="theme-btn">LOGIN</button>

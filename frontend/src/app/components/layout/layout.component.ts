@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-layout',
@@ -7,7 +7,9 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
-  submitForm(data:any){
-    console.log(data);
-  }
+ 
+
+ 
 }
+
+

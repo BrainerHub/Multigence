@@ -10,7 +10,7 @@
         style="width: 33%"
         data-toggle="tooltip"
         data-placement="top"
-        title="{{'progress.pending' | translate}}"
+        title="{{ 'progress.pending' | translate }}"
       ></div>
       <div
         class="progressing"
@@ -18,7 +18,7 @@
         style="width: 33%"
         data-toggle="tooltip"
         data-placement="top"
-        title="{{'progress.progressing' | translate}}"
+        title="{{ 'progress.progressing' | translate }}"
       ></div>
       <div
         class="finished"
@@ -26,7 +26,7 @@
         style="width: 34%"
         data-toggle="tooltip"
         data-placement="top"
-        title="{{'progress.finished' | translate}}"
+        title="{{ 'progress.finished' | translate }}"
       ></div>
     </div>
   </div>
@@ -52,7 +52,10 @@
               <div class="AdminSubTitle">PROGRESS</div>
               <div class="FilterBoxInner">
                 <div class="container-fluid">
-                  <div class="row align-items-center mb-3" *ngFor="let status of statusList; let i=index">
+                  <div
+                    class="row align-items-center mb-3"
+                    *ngFor="let status of statusList; let i = index"
+                  >
                     <div class="col-sm-9">
                       <div class="checkbox m-0">
                         <!-- <input
@@ -65,11 +68,11 @@
                           type="checkbox"
                           [checked]="filters.status[status] || false"
                           (change)="onChecked($event, status, 'status')"
-                          id="status{{i}}"
-                          name="status{{i}}"
+                          id="status{{ i }}"
+                          name="status{{ i }}"
                         />
                         <!---->
-                        <label for="progress-pending">{{status}}</label>
+                        <label for="progress-pending">{{ status }}</label>
                       </div>
                     </div>
                     <div class="col-sm-3 text-end">
@@ -117,14 +120,15 @@
                 <div class="container-fluid">
                   <div
                     class="row align-items-center mb-3"
-                    *ngFor="let company of companyList; let i=index">
+                    *ngFor="let company of companyList; let i = index"
+                  >
                     <div class="col-sm-9">
                       <div class="checkbox m-0">
                         <input
                           type="checkbox"
                           [checked]="filters.company[company.uuid] || false"
-                          name="company{{i}}"
-                          id="company{{i}}"
+                          name="company{{ i }}"
+                          id="company{{ i }}"
                           (change)="onChecked($event, company.uuid, 'company')"
                         />
                         <label class="text-capitalize">{{
@@ -167,10 +171,10 @@
               <div class="FilterBoxInner">
                 <div class="container-fluid">
                   <div
-                  class="row align-items-center mb-3"
-                  *ngFor="let department of departments; let i=index"
-                >
-                  <!-- <div
+                    class="row align-items-center mb-3"
+                    *ngFor="let department of departments; let i = index"
+                  >
+                    <!-- <div
                     class="row align-items-center mb-3"
                     *ngFor="let department of filteredUsersPage; let i=index"
                   > -->
@@ -178,10 +182,14 @@
                       <div class="checkbox m-0">
                         <input
                           type="checkbox"
-                          [checked]="filters.department[department.uuid] || false"
-                          name="department{{i}}"
-                          id="department{{i}}"
-                          (change)="onChecked($event, department.uuid, 'department')"
+                          [checked]="
+                            filters.department[department.uuid] || false
+                          "
+                          name="department{{ i }}"
+                          id="department{{ i }}"
+                          (change)="
+                            onChecked($event, department.uuid, 'department')
+                          "
                         />
                         <label class="text-capitalize">{{
                           department.name
@@ -189,11 +197,7 @@
                       </div>
                     </div>
                     <div class="col-sm-3 text-end">
-                      <p>
-                        ({{
-                          counters.department[department.uuid] || 0
-                        }})
-                      </p>
+                      <p>({{ counters.department[department.uuid] || 0 }})</p>
                     </div>
                   </div>
                 </div>
@@ -203,7 +207,10 @@
               <div class="AdminSubTitle">ROLE</div>
               <div class="FilterBoxInner">
                 <div class="container-fluid">
-                  <div class="row align-items-center mb-3"  *ngFor="let role of roleList; let i=index">
+                  <div
+                    class="row align-items-center mb-3"
+                    *ngFor="let role of roleList; let i = index"
+                  >
                     <div class="col-sm-9">
                       <div class="checkbox m-0">
                         <!-- <input
@@ -216,10 +223,10 @@
                           type="checkbox"
                           [checked]="filters.role[role] || false"
                           (change)="onChecked($event, role, 'role')"
-                          id="role{{i}}"
-                          name="role{{i}}"
+                          id="role{{ i }}"
+                          name="role{{ i }}"
                         />
-                        <label for="role-manager">{{role}}</label>
+                        <label for="role-manager">{{ role }}</label>
                       </div>
                     </div>
                     <div class="col-sm-3 text-end">
@@ -267,7 +274,35 @@
           <div class="container">
             <div class="UserTable table-hover">
               <div class="row">
-                <div class="row"></div>
+                <div class="row">
+                  <div class="Custompagination">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <a class="page-link" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link active">001</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
               <table class="table table-dark">
                 <thead>
@@ -394,11 +429,12 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let user of usersPage | filter : searchText">
-                  <!-- <tr *ngFor="let user of filteredUsersPage | filter : searchText"> -->
-                    <td scope="row"> 
+                    <!-- <tr *ngFor="let user of filteredUsersPage | filter : searchText"> -->
+                    <td scope="row">
                       <!-- <i class="fa fas fa-caret-up"></i> 
                       <i class="fa fad fa-volume-up"></i> -->
-                      <i class="material-icons">edit</i><i class="material-icons">delete</i>
+                      <i class="material-icons">edit</i
+                      ><i class="material-icons">delete</i>
                     </td>
                     <td>{{ user.first_name }}</td>
                     <td>{{ user.last_name }}</td>
@@ -410,7 +446,13 @@
                       <div
                         class="d-flex align-items-center gap-3 justify-content-between"
                       >
-                        <a *ngIf="user.status === 'DONE' || user.status === 'IN_PROGRESS'" href="">
+                        <a
+                          *ngIf="
+                            user.status === 'DONE' ||
+                            user.status === 'IN_PROGRESS'
+                          "
+                          href=""
+                        >
                           <img
                             height="13"
                             width="13"
@@ -455,8 +497,6 @@
                     </td>
                   </tr>
                 </tbody>
-
-
               </table>
             </div>
           </div>

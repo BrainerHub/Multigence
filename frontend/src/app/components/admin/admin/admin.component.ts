@@ -9,7 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
- 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -17,7 +17,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class AdminComponent {
   activeIndex: any;
-  text:any;
+  text: any;
   createCompanyForm: FormGroup;
   createOrginationForm: FormGroup;
   submitted = false;
@@ -25,11 +25,11 @@ export class AdminComponent {
   submitCompany: boolean = true;
   visible: boolean = false;
   organization: any = [];
-  visibleCompanyList: any = []
+  visibleCompanyList: any = [];
   getAllOrgination: any;
-  departments:any;
+  departments: any;
   modalRef: BsModalRef<unknown>;
-  
+
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -37,10 +37,8 @@ export class AdminComponent {
     modalRef: BsModalRef,
     private modalService: BsModalService
   ) {
-    
     this.createOrginationForm = this.formBuilder.group({
       organizations: this.formBuilder.array([]),
-      
     });
   }
   ngOnInit() {
@@ -58,13 +56,10 @@ export class AdminComponent {
       this.getAllOrgination = res;
     });
     this.organizations().push(this.newOrganization());
-    
   }
- 
+
   getOrganization() {
-    this.userService.getOrganization(this.organization).subscribe((res) => {
-    });
-    
+    this.userService.getOrganization(this.organization).subscribe((res) => {});
   }
 
   organizations(): FormArray {
@@ -74,7 +69,6 @@ export class AdminComponent {
   newOrganization(): FormGroup {
     this.visible = false;
     return this.formBuilder.group({
-    
       managerName: '',
       managerLastName: '',
       managerEmail: '',
@@ -107,7 +101,7 @@ export class AdminComponent {
     this.visible = false;
   }
 
-  saveNewCompanyName(uuid:any,newData:any) {
+  saveNewCompanyName(uuid: any, newData: any) {
     let data = {
       name: this.createCompanyForm.controls['name'].value,
       trial:
@@ -117,58 +111,56 @@ export class AdminComponent {
       invitations: this.createCompanyForm.controls['invitations'].value,
       managers: [{}],
     };
-      
-    this.userService.updateOrganization(uuid, data).subscribe((res) => {
-    })
+
+    this.userService.updateOrganization(uuid, data).subscribe((res) => {});
   }
 
-  onCancelCreateCompany(){
+  onCancelCreateCompany() {
     this.submitted = false;
     this.createCompanyForm.reset();
-    this.visible = false
+    this.visible = false;
   }
 
   onCancelVisibleCompany(index: any) {
     this.submitted = false;
     this.createCompanyForm.reset();
-    this.visibleCompanyList = this.visibleCompanyList.filter((visibleCompany: any) => visibleCompany != index)
+    this.visibleCompanyList = this.visibleCompanyList.filter(
+      (visibleCompany: any) => visibleCompany != index
+    );
   }
 
-  onShowCompanyList(index: any, data:any) {
-    this.visibleCompanyList.push(index)
+  onShowCompanyList(index: any, data: any) {
+    this.visibleCompanyList.push(index);
     if (this.activeIndex === index) {
       this.activeIndex = null;
     } else {
       this.activeIndex = index;
     }
     this.userService.getDepartments(data.uuid).subscribe((res) => {
-     this.departments = res.departments;
-    })
+      this.departments = res.departments;
+    });
   }
 
-  confirmDeleteDialog(id:any, index:any){
-      this.userService.deleteOrganization(id).subscribe((res)=>{
-        this.getAll();
-        this.createCompanyForm.reset();
-        this.visibleCompanyList = this.visibleCompanyList.filter((visibleCompany: any) => visibleCompany != index)
-        this.modalRef.hide();
-        })
+  confirmDeleteDialog(id: any, index: any) {
+    this.userService.deleteOrganization(id).subscribe((res) => {
+      this.getAll();
+      this.createCompanyForm.reset();
+      this.visibleCompanyList = this.visibleCompanyList.filter(
+        (visibleCompany: any) => visibleCompany != index
+      );
+      this.modalRef.hide();
+    });
   }
 
   openConfirmationModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
- 
- 
+
   declineDeleteModal(): void {
     this.modalRef.hide();
   }
 
-
-  onInviteManager(data:any){
-    this.userService.invite(data).subscribe((res) => {
-      console.log(res);
-      
-    })
+  onInviteManager(data: any) {
+    this.userService.invite(data).subscribe((res) => {});
   }
 }

@@ -41,11 +41,14 @@ import { UserFooterComponent } from './components/user-layout/user-footer/user-f
 import { UserHeaderComponent } from './components/user-layout/user-header/user-header.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { QuestionaryComponent } from './components/questionary/questionary.component';
-import { ReportComponent } from './components/report/report.component';
 import { ContentComponent } from './components/content/content.component';
 import { DataLoadComponent } from './components/data-load/data-load.component';
 import { TestComponent } from './components/test/test.component';
 import { ProgressFooterComponent } from './components/layout/progress-footer/progress-footer.component';
+import { CorridorReportComponent } from './components/report/corridor-report/corridor-report.component';
+import { QuestionaryReportComponent } from './components/report/questionary-report/questionary-report.component';
+import { CorridorLegendItemComponent } from './components/report/corridor-legend-item/corridor-legend-item.component';
+import { CorridorGraphComponent } from './components/report/corridor-graph/corridor-graph.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,11 +70,14 @@ import { ProgressFooterComponent } from './components/layout/progress-footer/pro
     UserHeaderComponent,
     ProgressComponent,
     QuestionaryComponent,
-    ReportComponent,
     ContentComponent,
     DataLoadComponent,
     TestComponent,
     ProgressFooterComponent,
+    CorridorReportComponent,
+    QuestionaryReportComponent,
+    CorridorLegendItemComponent,
+    CorridorGraphComponent,
   ],
   imports: [
     NgbModule,

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-// import { UserService } from 'src/app/services/user.service';
 import {  Renderer2, ElementRef } from '@angular/core';
 import { UserService } from 'app/services/user.service';
 

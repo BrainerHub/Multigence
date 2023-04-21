@@ -3,19 +3,17 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent {
-  disableSwitching: true
+  disableSwitching: true;
   activeTab = 'home';
 
-
-  home(activeTab: any){
+  home(activeTab: any) {
     this.activeTab = activeTab;
   }
 
-
-  profile(activeTab: any){
+  profile(activeTab: any) {
     this.activeTab = activeTab;
   }
 }

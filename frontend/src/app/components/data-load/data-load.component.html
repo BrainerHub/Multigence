@@ -4,20 +4,15 @@
     <div class="UploadQuestion">
       <h2>Upload questions</h2>
       <form>
-        <input class="input-lg" type="file" (change)="onChange($event)"/>
-        <button class="theme-btn w-auto" (click)="uploadFile($event)">
-          Upload
-        </button>
+        <input class="input-lg" type="file" (change)="onChange($event)" />
+        <button class="theme-btn w-auto" (click)="uploadFile()">Upload</button>
       </form>
       <div class="mt-3">
-        <div class="alert alert-success" role="alert" *ngIf="hidden">
+        <div class="alert alert-success" role="alert" *ngIf="messageHidden">
           {{ message }}
         </div>
-        <div class="alert alert-danger" role="alert" *ngIf="hidden">
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessageHidden">
           {{ errorMessage }}
-        </div>
-        <div class="alert alert-danger" role="alert" *ngIf="hidden">
-          {{ resp }}
         </div>
       </div>
     </div>

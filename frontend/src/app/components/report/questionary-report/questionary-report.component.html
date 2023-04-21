@@ -1,0 +1,22 @@
+<app-layout-header></app-layout-header>
+<div class="MainBodyPart">
+<div class="container">
+    <h2>Questionary Report</h2>
+    <h5>ID: {{summary}}</h5>
+    <hr>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th *ngFor="let sphere of spheres">{{getSphereName(sphere)}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of report.results"> 
+          <td>{{result.username}}</td>
+          <td *ngFor="let points of userPointsForSpheres(result) track by $index">{{points}}</td>
+         </tr> 
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -101,7 +101,6 @@ getMe() {
 
 getDepartment() {
   this.userService.getDepartments(this.organization).subscribe(res => {
-    console.log(res)
    var userDepartmentData = Array.from(Object.values(res));
    this.departments = userDepartmentData[0]
   })
@@ -157,10 +156,8 @@ getInviteOrganization(){
     this.userService.invite(data).subscribe((res) => {
      
       if(res.data['first_invitation']){
-       // this.openConfirmationModal(this.INVITATION_SENT_MSG);
       }
       else {
-       // _openInvitationSentModal(INVITATION_SENT_BEFORE_MSG);
       }
       this.resetForms();
     },
@@ -181,10 +178,8 @@ getInviteOrganization(){
       this.userService.invite(data).subscribe((res) => {
        
         if(res.data['first_invitation']){
-         // this.openConfirmationModal(this.INVITATION_SENT_MSG);
         }
         else {
-         // _openInvitationSentModal(INVITATION_SENT_BEFORE_MSG);
         }
         this.resetForms();
       },

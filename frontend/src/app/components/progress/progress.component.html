@@ -48,13 +48,13 @@
               />
               <div class="FilterBox mt-4">
                 <div class="form-group mb-4">
-                  <!-- <select class="form-select" name="progress" id="progress">
+                  <select class="form-select" name="progress" id="progress">
                     <option
                       *ngFor="let progress of progressList; let i = index"
                     >
                       {{ progress }}
                     </option>
-                  </select> -->
+                  </select>
                 </div>
                 <div class="form-group mb-4">
                   <select class="form-select" name="role" id="role">
@@ -176,14 +176,14 @@
           </div>
           <!-- <div class="person-list"> -->
           <div>
-            <!-- <div class="col-xs-1">
+            <div class="col-xs-1">
                   <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
                     class="icon-triangle triangle"></i>
                   <i *ngIf="user.role === 'APPLICANT'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
                     class="icon-hexagon hexagon"></i>
-                </div> -->
+                </div>
             <ul class="">
-              <li class="" *ngFor="let user of userStatusListPage">
+              <li class="" *ngFor="let user of userStatusListPage | filter : searchText">
                 <div class="">
                   <div class="">{{ user["first_name"] }}</div>
                   <div class="">{{ user["last_name"] }}</div>

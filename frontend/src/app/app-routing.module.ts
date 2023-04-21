@@ -17,8 +17,10 @@ import { TestComponent } from './components/test/test.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { InvitationsComponent } from './components/invitations/invitations.component';
 import { AcceptComponent } from './components/invitations/accept/accept.component';
-import { ReportComponent } from './components/report/report.component';
 import { QuestionaryComponent } from './components/questionary/questionary.component';
+import { CorridorReportComponent } from './components/report/corridor-report/corridor-report.component';
+import { QuestionaryReportComponent } from './components/report/questionary-report/questionary-report.component';
+import { CorridorLegendItemComponent } from './components/report/corridor-legend-item/corridor-legend-item.component';
 
 const routes: Routes = [
  // {path: '', redirectTo: 'admin', pathMatch: 'full',},
@@ -27,7 +29,6 @@ const routes: Routes = [
   {path: 'reset-password', component: ForgetPasswordComponent},
   {path: 'change-password', component: ChangePasswordComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'layout', component: LayoutComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   {path: 'users', component: AdminUsersComponent},
   {path: 'account', component: AccountComponent},
@@ -39,11 +40,11 @@ const routes: Routes = [
   {path: 'invitations', component: InvitationsComponent},
   {path: 'accept', component: AcceptComponent},
   {path: 'questionary', component: QuestionaryComponent},
-  {path: 'report', component: ReportComponent},
-  {path: 'layout', component: LayoutComponent},
+  {path: 'report', component: CorridorReportComponent},
+  {path: 'layo', component: CorridorLegendItemComponent},
+  {path: 'questionary/report', component: QuestionaryReportComponent},
   {path: '**', redirectTo: '/admin', pathMatch: 'full' },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

@@ -11,12 +11,18 @@
                 [formGroup]="createCompanyForm"
                 class=""
                 (ngSubmit)="saveAndOpenCompanyData()"
-              > <button
+              >
+                <button
                   (click)="onShowCreateCompany()"
                   type="button"
                   class="companyform text-uppercase bold"
                 >
-                  {{ (createCompany ? "admin.companies.add" : "admin.companies.add") | translate }}
+                  {{
+                    (createCompany
+                      ? "admin.companies.add"
+                      : "admin.companies.add"
+                    ) | translate
+                  }}
                   <img
                     src="../../../../assets/images/plusIcon.svg"
                     alt=""
@@ -35,7 +41,9 @@
                           formControlName="name"
                           placeholder="{{
                             'admin.companies.new.form.name' | translate
-                          }}" required/>
+                          }}"
+                          required
+                        />
                         <ng-container
                           *ngIf="
                             createCompanyForm.get('name')?.invalid &&
@@ -46,9 +54,9 @@
                             class="caption status-danger"
                             *ngIf="createCompanyForm.get('name')?.errors?.['required']"
                           >
-                            <span style="color: red"
-                              >{{"admin.forms.name" | translate}}</span
-                            >
+                            <span style="color: red">{{
+                              "admin.forms.name" | translate
+                            }}</span>
                           </p>
                         </ng-container>
                       </div>
@@ -116,7 +124,6 @@
                           ? 'theme-btn disabled'
                           : 'theme-btn'
                       "
-                     
                     >
                       Save
                     </button>
@@ -193,9 +200,9 @@
                                   class="caption status-danger"
                                   *ngIf="createOrginationForm.get('managerName')?.errors?.['required']"
                                 >
-                                  <span style="color: red"
-                                    >{{"admin.forms.firstName" | translate}}</span
-                                  >
+                                  <span style="color: red">{{
+                                    "admin.forms.firstName" | translate
+                                  }}</span>
                                 </p>
                               </ng-container>
                             </div>
@@ -229,9 +236,9 @@
                                   class="caption status-danger"
                                   *ngIf="createOrginationForm.get('managerLastName')?.errors?.['required']"
                                 >
-                                  <span style="color: red"
-                                    >{{"admin.forms.lastName" | translate}}</span
-                                  >
+                                  <span style="color: red">{{
+                                    "admin.forms.lastName" | translate
+                                  }}</span>
                                 </p>
                               </ng-container>
                             </div>
@@ -275,17 +282,17 @@
                                   class="caption status-danger"
                                   *ngIf="createOrginationForm.get('managerEmail')?.errors?.['required']"
                                 >
-                                  <span style="color: red"
-                                    >{{"admin.forms.email" | translate}}</span
-                                  >
+                                  <span style="color: red">{{
+                                    "admin.forms.email" | translate
+                                  }}</span>
                                 </p>
                                 <p
                                   class="caption status-danger"
                                   *ngIf="createOrginationForm.get('managerEmail')?.errors?.['pattern']"
                                 >
-                                  <span style="color: red"
-                                    >{{"admin.forms.valid" | translate}}</span
-                                  >
+                                  <span style="color: red">{{
+                                    "admin.forms.valid" | translate
+                                  }}</span>
                                 </p>
                               </ng-container>
                             </div>
@@ -341,7 +348,7 @@
                                 </div>
                               </div>
                             </div>
-                            </ng-template>
+                          </ng-template>
                           <div class="">
                             <button
                               type="reset"

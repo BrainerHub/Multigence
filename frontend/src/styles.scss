@@ -293,8 +293,23 @@ label {
       .table {
         th,
         td {
-          background-color: #C6C6C6;
+          background-color: #c6c6c6;
           color: #555555 !important;
+        }
+      }
+    }
+  }
+  .corridor {
+    .corridor-filters {
+      background-color: transparent !important;
+    }
+    .corridor-legend {
+      background-color: #c6c6c6 !important;
+    }
+    .form-group {
+      .form-select {
+        &:hover {
+          background-color: #d4d4d4;
         }
       }
     }

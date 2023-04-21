@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'enviroment/enviroment';
 import { Observable, Subject, map } from 'rxjs';
 
 @Injectable({
@@ -13,8 +14,16 @@ export class UserService {
   ROLE_ADMIN = 'ADMIN';
   me: any;
   storage = sessionStorage;
-  apiUrl = 'http://localhost:8000/api';
-
+  apiUrl = environment.api;
+  utils: any;
+  private headers = {
+    headers: new HttpHeaders({
+      'Content-Type': ' ', 
+      "Authorization":`Token`
+     
+      
+    }),
+  };
   constructor(private http: HttpClient, public router:Router) {}
 
 
@@ -51,8 +60,7 @@ export class UserService {
   changePassword(data: any){
     return this.http.post<any>(`${this.apiUrl}` + '/changePassword/', data).pipe(
       map((user) => {
-        console.log(user);
-        
+        return user;
       })
     );
   }
@@ -180,15 +188,15 @@ getMe() {
 
   //question upload
 
-  uploadQuestions(file: any) {
-   var fd = new FormData();
+  uploadQuestions(file:any) {
+    var fd = new FormData();
     fd.append('file', file);
     return this.http.post<any>(`${this.apiUrl}` + '/questionUpload/', fd).pipe(
-      map((user) => {
-        return user;
-      })
-    );
-  }
+          map((user) => {
+            return user;
+          })
+        );
+    }
 
 
   //get position
@@ -261,8 +269,21 @@ getMe() {
     );
   }
 
+  getUserQuestionaryAnswers(userId:any, questionaryId:any){
+    return this.http.get<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/').pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
 
-
+  postUserQuestionaryAnswer(userId:any, questionaryId:any, answer:any){
+    return this.http.post<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', answer).pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
 
 
 
@@ -303,7 +324,6 @@ getMe() {
   }
 
   getCorridorReport(organizationId:any) {
-   
     return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=All+users&source=employees').pipe(
       map((report) => {
         return report;
@@ -330,10 +350,7 @@ getMe() {
   
   }
 
-  // getUserQuestionaries: function (userId, params) {
-  //   var req = _getRequest('/user/' + userId + '/questionary/', params, true);
-  //   return $http(req);
-  // },
+ 
 }
  
 
