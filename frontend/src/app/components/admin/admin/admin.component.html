@@ -7,30 +7,19 @@
         <div class="companies-list">
           <ul>
             <li class="border-bottom">
-              <form
-                [formGroup]="createCompanyForm"
-                class=""
-                (ngSubmit)="saveAndOpenCompanyData()"
-              >
-                <button
-                  (click)="onShowCreateCompany()"
-                  type="button"
-                  class="companyform text-uppercase bold"
-                >
+              <form [formGroup]="createCompanyForm" class="" (ngSubmit)="saveAndOpenCompanyData()">
+                <button (click)="onShowCreateCompany()" type="button" class="companyform text-uppercase bold">
                   {{
-                    (createCompany
-                      ? "admin.companies.add"
-                      : "admin.companies.add"
-                    ) | translate
+                  (createCompany
+                  ? "admin.companies.add"
+                  : "admin.companies.add"
+                  ) | translate
                   }}
-                  <img
-                    src="../../../../assets/images/plusIcon.svg"
-                    alt=""
-                    *ngIf="!visible"
-                  />
+                  <img src="../../../../assets/images/plusIcon.svg" alt="" *ngIf="!visible" />
+
                 </button>
                 <div class="CreateCompanyForm" *ngIf="visible">
-                  <div class="row">
+                  <div class="row align-items-baseline">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="name" hidden>Company Name</label>
@@ -41,15 +30,11 @@
                         <ng-container *ngIf="
                             createCompanyForm.get('name')?.invalid &&
                             createCompanyForm.get('name')?.touched
-                          "
-                        >
-                          <p
-                            class="caption status-danger"
-                            *ngIf="createCompanyForm.get('name')?.errors?.['required']"
-                          >
+                          ">
+                          <p class="caption status-danger" *ngIf="createCompanyForm.get('name')?.errors?.['required']">
                             <span style="color: red">{{
                               "admin.forms.name" | translate
-                            }}</span>
+                              }}</span>
                           </p>
                         </ng-container>
                       </div>
@@ -59,7 +44,7 @@
                         <label for="trial" hidden>{{
                           "admin.version.select" | translate
                           }}</label>
-                        <select formControlName="trial">
+                        <select formControlName="trial" style="padding-bottom: 8px;">
                           <option>
                             {{ "software.version.trial" | translate }}
                           </option>
@@ -67,15 +52,7 @@
                             {{ "software.version.full" | translate }}
                           </option>
                         </select>
-                        <!-- <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown button
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item"> {{ "software.version.trial" | translate }}</a>
-                            <a class="dropdown-item">{{ "software.version.full" | translate }}</a>
-                          </div>
-                        </div> -->
+
                       </div>
                     </div>
                     <div class="col-md-3">
@@ -101,8 +78,7 @@
                         !createCompanyForm.valid
                           ? 'theme-btn disabled'
                           : 'theme-btn'
-                      "
-                    >
+                      ">
                       Save
                     </button>
                   </div>
@@ -114,6 +90,7 @@
             <li *ngFor="let data of getAllOrgination; let index = index">
               <a (click)="onShowCompanyList(index, data)" class="companyform">
                 {{ data.name }}
+                <span class="bi bi-send"></span>
               </a>
 
               <form [formGroup]="createOrginationForm" class="" (ngSubmit)="saveNewCompanyName(data)">
@@ -127,7 +104,7 @@
                         [(ngModel)]="data.name" />
 
                       <div class="CreateCompanyForm">
-                        <div class="row">
+                        <div class="row align-items-baseline">
                           <div class="col-12">
                             <div class="form-group">
                               <label for="name">MANAGERS</label>
@@ -150,15 +127,12 @@
                                   createOrginationForm.get('managerName')
                                   
                                     ?.touched
-                                "
-                              >
-                                <p
-                                  class="caption status-danger"
-                                  *ngIf="createOrginationForm.get('managerName')?.errors?.['required']"
-                                >
+                                ">
+                                <p class="caption status-danger"
+                                  *ngIf="createOrginationForm.get('managerName')?.errors?.['required']">
                                   <span style="color: red">{{
                                     "admin.forms.firstName" | translate
-                                  }}</span>
+                                    }}</span>
                                 </p>
                               </ng-container>
                             </div>
@@ -179,21 +153,18 @@
                                     ?.invalid &&
                                   createOrginationForm.get('managerLastName')
                                     ?.touched
-                                "
-                              >
-                                <p
-                                  class="caption status-danger"
-                                  *ngIf="createOrginationForm.get('managerLastName')?.errors?.['required']"
-                                >
+                                ">
+                                <p class="caption status-danger"
+                                  *ngIf="createOrginationForm.get('managerLastName')?.errors?.['required']">
                                   <span style="color: red">{{
                                     "admin.forms.lastName" | translate
-                                  }}</span>
+                                    }}</span>
                                 </p>
                               </ng-container>
                             </div>
                           </div>
                           <div class="col-5">
-                            <select name="department" id="department">
+                            <select name="department" id="department" style="padding-bottom: 8px;">
                               <option *ngFor="let department of departments" value="{department.uuid}">
                                 {{ department.name }}
                               </option>
@@ -215,23 +186,18 @@
                                     ?.invalid &&
                                   createOrginationForm.get('managerEmail')
                                     ?.touched
-                                "
-                              >
-                                <p
-                                  class="caption status-danger"
-                                  *ngIf="createOrginationForm.get('managerEmail')?.errors?.['required']"
-                                >
+                                ">
+                                <p class="caption status-danger"
+                                  *ngIf="createOrginationForm.get('managerEmail')?.errors?.['required']">
                                   <span style="color: red">{{
                                     "admin.forms.email" | translate
-                                  }}</span>
+                                    }}</span>
                                 </p>
-                                <p
-                                  class="caption status-danger"
-                                  *ngIf="createOrginationForm.get('managerEmail')?.errors?.['pattern']"
-                                >
+                                <p class="caption status-danger"
+                                  *ngIf="createOrginationForm.get('managerEmail')?.errors?.['pattern']">
                                   <span style="color: red">{{
                                     "admin.forms.valid" | translate
-                                  }}</span>
+                                    }}</span>
                                 </p>
                               </ng-container>
                             </div>
@@ -284,7 +250,7 @@
                             <button type="reset" class="theme-btn me-2" (click)="onCancelVisibleCompany(index)">
                               Cancel
                             </button>
-                            <button class="theme-btn" type="submit">
+                            <button type="submit" class="theme-btn ">
                               Save
                             </button>
                           </div>

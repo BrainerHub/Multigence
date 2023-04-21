@@ -6,26 +6,12 @@
         <div class="col-md-5">
           <div class="picture-container mar-bottom-10">
             <div class="picture">
-              <img
-                class="image-background"
-                src="../../../assets/images/image_bg.svg"
-              />
-              <img
-                class="profile-pic"
-                *ngIf="user.profile_picture"
-                src="{{ user.profile_picture }}"
-              />
-              <img
-                class="profile-pic"
-                *ngIf="!user.profile_picture"
-                src="../../../assets/images/user.png"
-              />
+              <img class="image-background" src="../../../assets/images/image_bg.svg" />
+              <img class="profile-pic" *ngIf="user.profile_picture" src="{{ user.profile_picture }}" />
+              <img class="profile-pic" *ngIf="!user.profile_picture" src="../../../assets/images/user.png" />
             </div>
             <div class="UploadBtn">
-              <button
-                type="button"
-                class="text-uppercase theme-btn w-auto BtnUploadPhoto"
-              >
+              <button type="button" class="text-uppercase theme-btn w-auto BtnUploadPhoto">
                 {{ "profile.uploadphoto" | translate }}
               </button>
             </div>
@@ -40,68 +26,67 @@
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.first_name
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.last_name
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.gender
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.title
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.company_name
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.department_name
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.address
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.zipcode
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.state
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.country
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.telephone
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-50">
                 <span class="form-control text-gray profile-text">{{
                   user.website
-                }}</span>
+                  }}</span>
               </div>
               <div class="form-group w-100">
                 <span
-                  class="form-control form-control-outline form-control-without-border-bottom text-gray profile-text"
-                  >{{ user.description }}</span
-                >
+                  class="form-control form-control-outline form-control-without-border-bottom text-gray profile-text">{{
+                  user.description }}</span>
               </div>
             </div>
           </div>
@@ -118,140 +103,72 @@
           <form [formGroup]="userProfileForm" class="col-sm-12">
             <div class="profile-container">
               <div class="profile-container2">
-                <button
-                  type="button"
-                  class="btn btn-default btn-close-edit-profile"
-                  (click)="closeEdit()"
-                >
+                <button type="button" class="btn btn-default btn-close-edit-profile" (click)="closeEdit()">
                   X
                 </button>
                 <div class="form-group w-50">
-                  <input
-                    type="firstName"
-                    name="firstName"
-                    class="form-control form-control-outline"
-                    formControlName="first_name"
-                    placeholder="First Name"
-                  />
+                  <input type="firstName" name="firstName" class="form-control form-control-outline"
+                    formControlName="first_name" placeholder="{{'profile.firstname' | translate}}" />
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="lastName"
-                    name="lastName"
-                    class="form-control form-control-outline"
-                    formControlName="last_name"
-                    placeholder=" Last Name"
-                  />
+                  <input type="lastName" name="lastName" class="form-control form-control-outline"
+                    formControlName="last_name" placeholder="{{'profile.lastname' | translate}}" />
                 </div>
                 <div class="form-group w-50">
-                  <select
-                    class="form-select"
-                    name="gender"
-                    id="gender"
-                    formControlName="gender"
-                  >
+                  <select class="form-select" name="gender" id="gender" formControlName="gender">
                     <option *ngFor="let gender of genderList; let i = index">
                       {{ gender }}
                     </option>
                   </select>
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="test"
-                    name="firstName"
-                    class="form-control form-control-outline"
-                    formControlName="title"
-                  />
+                  <input type="test" name="firstName" class="form-control form-control-outline"
+                    placeholder="{{'profile.jobTitle' | translate}}" formControlName="title" />
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="company"
-                    name="company"
-                    class="form-control form-control-outline"
-                    formControlName="company"
-                    [disabled]="true"
-                  />
+                  <input type="company" name="company" class="form-control form-control-outline disabled"
+                    formControlName="company" placeholder="{{'profile.company' | translate}}" />
                 </div>
                 <div class="form-group w-50">
-                  <select
-                    class="form-select"
-                    name="department"
-                    id="department"
-                    formControlName="department"
-                  >
-                    <option
-                      *ngFor="let department of departments"
-                      value="{department.uuid}"
-                    >
+                  <select class="form-select" name="department" id="department" formControlName="department">
+                    <option *ngFor="let department of departments" value="{department.uuid}">
                       {{ department.name }}
                     </option>
                   </select>
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="address"
-                    name="address"
-                    class="form-control form-control-outline"
-                    formControlName="address"
-                  />
+                  <input type="address" name="address" class="form-control form-control-outline"
+                    placeholder="{{'profile.address' | translate}}" formControlName="address" />
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="text"
-                    name="zipcode"
-                    class="form-control form-control-outline"
-                    formControlName="zipcode"
-                  />
+                  <input type="text" name="zipcode" class="form-control form-control-outline"
+                    placeholder="{{'profile.zipcode' | translate}}" formControlName="zipcode" />
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="state"
-                    name="state"
-                    class="form-control form-control-outline"
-                    formControlName="state"
-                  />
+                  <input type="state" name="state" class="form-control form-control-outline" formControlName="state"
+                    placeholder="{{'profile.state' | translate}}" />
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="text"
-                    name="country"
-                    class="form-control form-control-outline"
-                    formControlName="country"
-                  />
+                  <input type="text" name="country" class="form-control form-control-outline"
+                    placeholder="{{'profile.country' | translate}}" formControlName="country" />
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="number"
-                    name="telephone"
-                    class="form-control form-control-outline"
-                    formControlName="telephone"
-                  />
+                  <input type="number" name="telephone" class="form-control form-control-outline"
+                    placeholder="{{'profile.telephone' | translate}}" formControlName="telephone" />
                 </div>
                 <div class="form-group w-50">
-                  <input
-                    type="text"
-                    name="website"
-                    class="form-control form-control-outline"
-                    formControlName="website"
-                  />
+                  <input type="text" name="website" class="form-control form-control-outline"
+                    placeholder="{{'profile.website' | translate}}" formControlName="website" />
                 </div>
                 <div class="form-group w-100">
-                  <label class="form-label" for="">Description</label>
-                  <textarea
-                    type="text"
-                    name="description"
-                    class="form-control form-control-outline"
-                    formControlName="description"
-                  ></textarea>
+                  <label class="form-label" for="">{{"profile.description" | translate}}</label>
+                  <textarea type="text" name="description" class="form-control form-control-outline"
+                    placeholder="{{'profile.description' | translate}}" formControlName="description"></textarea>
                 </div>
               </div>
             </div>
             <div class="text-end">
-              <button
-                type="submit"
-                class="theme-btn w-auto"
-                (click)="saveProfile()"
-              >
+              <button type="submit" class="theme-btn w-auto" (click)="saveProfile()">
                 {{ "profile.save" | translate }}
               </button>
             </div>

@@ -1,8 +1,10 @@
 .MainBodyPart {
-    height: calc(100vh - 150px);
-    overflow: auto;
-    top: 106px;
-    position: relative;
-    background-color: #212121;
-  }
-  
+  height: calc(100vh - 150px);
+  overflow: auto;
+  top: 106px;
+  position: relative;
+  background-color: #212121;
+}
+.headers {
+  color: #fff;
+}

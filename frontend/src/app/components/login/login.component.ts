@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BootstrapService } from 'app/services/bootstrap.service';
 import { UserService } from 'app/services/user.service';
-// import { UserService } from 'src/app/services/user.service';
 
 
 @Component({

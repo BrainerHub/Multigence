@@ -1,5 +1,6 @@
 .AccountTabbing {
   display: flex;
+
   gap: 15px;
   .nav-pills {
     width: 28%;
@@ -34,4 +35,12 @@
       }
     }
   }
+}
+.account-section {
+  background-color: #0c0c0c;
+  color: #eeeeee;
+  padding: 100px 0px;
+}
+.account-section .AccountTabbing form label {
+  color: #eeeeee;
 }

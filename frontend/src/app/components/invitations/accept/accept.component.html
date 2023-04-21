@@ -1,93 +1,100 @@
 <app-layout-header></app-layout-header>
 <div class="MainBodyPart">
-	<div class="">
+	<article class="container">
 		<div class="">
 			<div class="">
+				<div class="">
 
-				<form [formGroup]="Createacceptform" *ngIf="!invitationIsExpired">
-					<div>
-						<input type="text" name="email" class=" form-control-outline" formControlName="email"
-							placeholder="Email">
-						<ng-container *ngIf="Createacceptform.get('email')?.invalid && Createacceptform.get('email')?.touched
+					<form [formGroup]="Createacceptform" *ngIf="!invitationIsExpired">
+						<div>
+							<input type="text" name="email" class=" form-control-outline" formControlName="email"
+								placeholder="Email">
+							<ng-container *ngIf="Createacceptform.get('email')?.invalid && Createacceptform.get('email')?.touched
 							">
-							<p class="caption status-danger"
-								*ngIf="Createacceptform.get('email')?.errors?.['required']">
-								<span style="color: red">Email is required</span>
-							</p>
+								<p class="caption status-danger"
+									*ngIf="Createacceptform.get('email')?.errors?.['required']">
+									<span style="color: red">Email is required</span>
+								</p>
 
-						</ng-container>
-					</div>
-					<div>
-						<input type="text" name="firstname" class=" form-control-outline" formControlName="firstName"
-							placeholder="firstName">
-						<ng-container *ngIf="Createacceptform.get('firstName')?.invalid && Createacceptform.get('firstName')?.touched
+							</ng-container>
+						</div>
+						<div>
+							<input type="text" name="firstname" class=" form-control-outline"
+								formControlName="firstName" placeholder="firstName">
+							<ng-container *ngIf="Createacceptform.get('firstName')?.invalid && Createacceptform.get('firstName')?.touched
 							">
-							<p class="caption status-danger">
-								<span style="color: red">
-									{{"acceptform.form.firstname.error.required" | translate}}</span>
-							</p>
+								<p class="caption status-danger">
+									<span style="color: red">
+										{{"acceptform.form.firstname.error.required" | translate}}</span>
+								</p>
 
-						</ng-container>
-					</div>
-					<div>
-						<input type="text" name="lastname" class=" form-control-outline" formControlName="lastName"
-							placeholder="lastName">
-						<ng-container *ngIf="Createacceptform.get('lastName')?.invalid && Createacceptform.get('lastName')?.touched
+							</ng-container>
+						</div>
+						<div>
+							<input type="text" name="lastname" class=" form-control-outline" formControlName="lastName"
+								placeholder="lastName">
+							<ng-container *ngIf="Createacceptform.get('lastName')?.invalid && Createacceptform.get('lastName')?.touched
 							">
-							<p class="caption status-danger"
-								*ngIf="Createacceptform.get('lastName')?.errors?.['required']">
-								<span style="color: red">{{"acceptform.form.lastname.error.required" |
-									translate}}</span>
-							</p>
+								<p class="caption status-danger"
+									*ngIf="Createacceptform.get('lastName')?.errors?.['required']">
+									<span style="color: red">{{"acceptform.form.lastname.error.required" |
+										translate}}</span>
+								</p>
 
-						</ng-container>
-					</div>
-					<div>
-						<input type="password" name="pass" class=" form-control-outline" formControlName="password"
-							placeholder="set password">
-						<ng-container *ngIf="Createacceptform.get('password')?.invalid && Createacceptform.get('password')?.touched
+							</ng-container>
+						</div>
+						<div>
+							<input type="password" name="pass" class=" form-control-outline" formControlName="password"
+								placeholder="set password">
+							<ng-container *ngIf="Createacceptform.get('password')?.invalid && Createacceptform.get('password')?.touched
 							">
-							<p class="caption status-danger"
-								*ngIf="Createacceptform.get('password')?.errors?.['required']">
-								<span style="color: red">{{"acceptform.form.pass.error.required" | translate}}</span>
-							</p>
+								<p class="caption status-danger"
+									*ngIf="Createacceptform.get('password')?.errors?.['required']">
+									<span style="color: red">{{"acceptform.form.pass.error.required" |
+										translate}}</span>
+								</p>
 
-						</ng-container>
-					</div>
-					<div>
-						<input type="password" name="repeatpass" class=" form-control-outline"
-							formControlName="repeatpass" placeholder="repeatPassword">
-						<ng-container *ngIf="Createacceptform.get('repeatpass')?.invalid && Createacceptform.get('repeatpass')?.touched
+							</ng-container>
+						</div>
+						<div>
+							<input type="password" name="repeatpass" class=" form-control-outline"
+								formControlName="repeatpass" placeholder="repeatPassword">
+							<ng-container *ngIf="Createacceptform.get('repeatpass')?.invalid && Createacceptform.get('repeatpass')?.touched
 							">
-							<p class="caption status-danger"
-								*ngIf="Createacceptform.get('repeatpass')?.errors?.['required']">
-								<span style="color: red">{{"acceptform.form.repeatpass.error.required" |
-									translate}}</span>
-							</p>
+								<p class="caption status-danger"
+									*ngIf="Createacceptform.get('repeatpass')?.errors?.['required']">
+									<span style="color: red">{{"acceptform.form.repeatpass.error.required" |
+										translate}}</span>
+								</p>
 
-						</ng-container>
-					</div>
-					<div class="input-50">
-						<input type="checkbox" name="checked">
-					</div>
+							</ng-container>
+						</div>
+						<div class="input-50">
+							<input type="checkbox" name="checked">
+						</div>
 
-					<div>
-						<button type="submit" (click)="join()" class="theme-btntext-uppercase">{{"form.join" |
-							translate}}</button>
-					</div>
-				</form>
+						<div>
+							<button type="submit" (click)="join()" class="theme-btntext-uppercase">{{"form.join" |
+								translate}}</button>
+						</div>
+					</form>
+					<ng-template #template>
+						<div class="ConfirmationModel">
+							<div class="modal-body">
+								<p>{{"invitation.expired" | translate}}</p>
+								<button type="button" class="theme-btn w-auto" aria-label="close"
+									(click)="confirmOkDialog()">
+									<strong translate="ok"></strong>
+								</button>
 
+							</div>
+						</div>
+					</ng-template>
+				</div>
 			</div>
+
 		</div>
-	</div>
-	<ng-template #content let-modal>
+	</article>
 
-		<div class="modal-body">
-			<p>The invitation has expired</p>
-			<button type="button" class="btn btn-light" (click)="modalclose()">Close</button>
-		</div>
 
-	</ng-template>
-
-	<!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openSm(content)"></button> -->
 </div>

@@ -29,7 +29,6 @@ export class AdminComponent {
   getAllOrgination: any;
   departments: any;
   modalRef: BsModalRef<unknown>;
-
   updateAdminData:any;
   managers : any;
   user:any;
@@ -67,9 +66,8 @@ getMe() {
   getAll() {
     this.userService.getOrganizations().subscribe((res) => {
       this.getAllOrgination = res;
-      console.log(this.getAllOrgination);
     });
-    this.organizations().push(this.newOrganization());
+   this.organizations().push(this.newOrganization());
   }
 
   getOrganization() {
@@ -97,6 +95,7 @@ getMe() {
   }
 
   saveAndOpenCompanyData() {
+    debugger
     let data = {
       name: this.createCompanyForm.controls['name'].value,
       trial:
@@ -109,12 +108,12 @@ getMe() {
 
     this.userService.createOrganization(data).subscribe((res) => {
       this.userService.getOrganizations().subscribe((res) => {
-        console.log("orgaData----", res);
         this.getAll();
       });
     });
 
     this.visible = false;
+    window.location.reload();
   }
 
   saveNewCompanyName(newData: any) {
@@ -123,21 +122,6 @@ getMe() {
       name : this.createOrginationForm.value.organizations[0].name,
       departments : this.departments,
       managers: [],
-  // //     departments:this.departments,
-  // //     invitations: 0,
-  // //    invitations_sent: 0,
-  // //   managers:[],
-  // //   name:"",
-  // //  trial: false,
-  // //   uuid:"31b82797-d7bf-414e-853d-670e285a191e"
-  //     departments:this.departments,
-  //     name: this.createOrginationForm.controls['name'].value,
-  //     trial:this.createOrginationForm.controls['trial'].value === 'Trial version'
-  //         ? true
-  //         : false,
-  //     invitations:this.createOrginationForm.controls['invitations'].value,
-     
-  //     managers: [{}],
     };
       
     this.userService.updateOrganization(newData.uuid,data).subscribe((res) => {
@@ -145,6 +129,7 @@ getMe() {
 
     })
     this.onCancelVisibleCompany('index')
+    window.location.reload();
   }
 
   onCancelCreateCompany() {

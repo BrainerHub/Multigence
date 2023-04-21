@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 // @import "~bootstrap/dist/css/bootstrap.css";
 // @import "~font-awesome/css/font-awesome.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -314,4 +315,10 @@ label {
       }
     }
   }
+}
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 auto;
 }
