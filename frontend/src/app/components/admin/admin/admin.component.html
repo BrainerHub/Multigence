@@ -7,7 +7,7 @@
         <div class="companies-list">
           <ul>
             <li class="border-bottom">
-              <form [formGroup]="createCompanyForm" class="" (ngSubmit)="saveAndOpenCompanyData()">
+              <form [formGroup]="createCompanyForm" class="">
                 <button (click)="onShowCreateCompany()" type="button" class="companyform text-uppercase bold">
                   {{
                   (createCompany
@@ -74,11 +74,10 @@
                     <button type="reset" class="theme-btn" (click)="onCancelCreateCompany()">
                       Cancel
                     </button>
-                    <button type="submit" [ngClass]="
+                    <button type="submit" (click)="saveAndOpenCompanyData()" [ngClass]="
                         !createCompanyForm.valid
                           ? 'theme-btn disabled'
-                          : 'theme-btn'
-                      ">
+                          : 'theme-btn'">
                       Save
                     </button>
                   </div>
@@ -87,14 +86,14 @@
             </li>
           </ul>
           <ul>
-            <li *ngFor="let data of getAllOrgination; let index = index">
-              <a (click)="onShowCompanyList(index, data)" class="companyform">
+            <li *ngFor="let data of getAllOrgination; trackBy: trackByFn">
+              <a (click)="onShowCompanyList(data)" class="companyform" *ngIf="data != activeIndex">
                 {{ data.name }}
                 <span class="bi bi-send"></span>
               </a>
 
-              <form [formGroup]="createOrginationForm" class="" (ngSubmit)="saveNewCompanyName(data)">
-                <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(index)">
+              <form [formGroup]="createOrginationForm" class="">
+                <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(data)">
                   <div *ngFor="
                       let organization of organizations().controls;
                       let orgIndex = index
@@ -235,7 +234,7 @@
                                 </p>
                                 <div class="ModelBtnPart">
                                   <button type="button" class="theme-btn w-auto" (click)="
-                                      confirmDeleteDialog(data.uuid, index)
+                                      confirmDeleteDialog(data.uuid, data)
                                     ">
                                     Ok
                                   </button>
@@ -247,10 +246,10 @@
                             </div>
                           </ng-template>
                           <div class="">
-                            <button type="reset" class="theme-btn me-2" (click)="onCancelVisibleCompany(index)">
+                            <button type="reset" class="theme-btn me-2" (click)="onCancelVisibleCompany(data)">
                               Cancel
                             </button>
-                            <button type="submit" class="theme-btn ">
+                            <button type="submit" class="theme-btn" (click)="saveNewCompanyName(data)">
                               Save
                             </button>
                           </div>

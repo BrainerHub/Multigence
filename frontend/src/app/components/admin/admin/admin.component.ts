@@ -1,6 +1,5 @@
-import { Component, TemplateRef } from '@angular/core';
-import {
-  AbstractControl,
+import { ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
+import { AbstractControl,
   FormArray,
   FormBuilder,
   FormGroup,
@@ -37,7 +36,8 @@ export class AdminComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
     modalRef: BsModalRef,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private cd: ChangeDetectorRef
   ) {
     this.createOrginationForm = this.formBuilder.group({
       organizations: this.formBuilder.array([]),
@@ -86,6 +86,7 @@ getMe() {
       managerLastName: '',
       managerEmail: '',
     });
+    
   }
 
   //onclick toggling
@@ -95,7 +96,6 @@ getMe() {
   }
 
   saveAndOpenCompanyData() {
-    debugger
     let data = {
       name: this.createCompanyForm.controls['name'].value,
       trial:
@@ -111,9 +111,8 @@ getMe() {
         this.getAll();
       });
     });
-
     this.visible = false;
-    window.location.reload();
+    //window.location.reload();
   }
 
   saveNewCompanyName(newData: any) {
@@ -128,8 +127,9 @@ getMe() {
       this.getAll();
 
     })
+    
     this.onCancelVisibleCompany('index')
-    window.location.reload();
+  //  window.location.reload();
   }
 
   onCancelCreateCompany() {
@@ -146,22 +146,35 @@ getMe() {
     );
   }
 
-  onShowCompanyList(index: any, data: any) {
-    this.visibleCompanyList.push(index);
-    if (this.activeIndex === index) {
+  onShowCompanyList(data: any) {
+     this.visibleCompanyList.push(data);
+    
+    if (this.activeIndex === data) {
       this.activeIndex = null;
     } else {
-      this.activeIndex = index;
+      this.activeIndex = data;
     }
+   
     this.userService.getDepartments(data.uuid).subscribe((res) => {
      this.departments = res.departments;
     })
    
       this.userService.getOrganizations().subscribe((res) => {
         this.updateAdminData = res ;
+        
       });
   }
 
+
+  trackByFn(index: number, data: any): any {
+    return data.id; 
+  }
+  
+  
+  
+  
+  
+  
   confirmDeleteDialog(id: any, index: any) {
     this.userService.deleteOrganization(id).subscribe((res) => {
       this.getAll();
