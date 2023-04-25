@@ -38,6 +38,8 @@ export class ProgressComponent {
 
   getMe() {
     this.userService.getMe().subscribe((res: any) => {
+      console.log("userrrr",  this.organization);
+      
       this.user = res;
       this.organization = res.company;
       this.getDepartment();
@@ -80,13 +82,16 @@ export class ProgressComponent {
     this.userService.getQuestionaryStatus(this.organization).subscribe((res) => {
       var userData = Array.from(Object.values(res));
       this.userStatusListPage = userData[0];
+      console.log("this.userStatusListPage",this.userStatusListPage);
+      
     });
   }
 
   getOrganizationUsers(){
     this.userService.getOrganizationUsers(this.organization,this.departments).subscribe((res) => {
-      var usertitleData = Array.from(Object.values(res));
-     // this.titles = usertitleData[0];
+     this.usersPage = res.employees;
+     console.log(" this.usersPage ", this.usersPage );
+     
     });
   }
 }

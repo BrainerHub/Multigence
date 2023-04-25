@@ -14,6 +14,7 @@ export class ProfileComponent {
   submitted!: boolean;
   userProfileForm!: FormGroup;
   user: any;
+  userUpdateData: any
   data: any;
   departments: any;
   organization:any =[];
@@ -25,9 +26,6 @@ export class ProfileComponent {
   ) {}
   ngOnInit() {
     this.genderList = ['Male', 'Female', 'Prefer not to say'];
-    // let sub = this.route.params.subscribe((params) => {
-    //   this.edit = params['id'];
-    // });
     this.getMe();
     this.createForm();
   }
@@ -57,7 +55,6 @@ export class ProfileComponent {
       this.getDepartment();
     });
 
-  //  this.userProfileForm.controls['address'].setValue(this.user.title);
 
   }
 
@@ -77,9 +74,12 @@ export class ProfileComponent {
       description: this.userProfileForm.controls['description'].value,
     };
     this.userService.updateMe(data).subscribe((res: any) => {
+      this.userUpdateData = res
+      console.log(" this.userUpdateData",  this.userUpdateData);
+      
       this.getMe()
     });
-    this.editProfile = false;
+    this.editProfile = true;
   }
 
   getDepartment() {
@@ -101,7 +101,7 @@ export class ProfileComponent {
     this.userProfileForm.controls['telephone'].setValue(this.user.telephone);
     this.userProfileForm.controls['website'].setValue(this.user.website);
     this.userProfileForm.controls['description'].setValue(this.user.description);
-    this.editProfile = true
+    this.editProfile = false
   }
   closeEdit() {
     this.editProfile = false

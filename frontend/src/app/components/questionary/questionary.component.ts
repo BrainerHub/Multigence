@@ -122,7 +122,6 @@ export class QuestionaryComponent {
   }
  
   increment(index: number): void {
-    //debugger
     if (this.count < 22) {
       this.count++;
     }
@@ -205,7 +204,7 @@ export class QuestionaryComponent {
       this.organization = res.company;
       this.getOrganization();
       this.getUserQuestionaries();
-    //  this.openModal();
+      this.openModal();
     });
   }
   getOrganization() {

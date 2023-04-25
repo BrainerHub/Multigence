@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group mb-4">
                   <select class="form-select" name="department" id="department">
-                    <option *ngFor="let department of departments" value="{department.uuid}">
+                    <option *ngFor="let department of departments" [value]="department.uuid">
                       {{ department.name }}
                     </option>
                   </select>
@@ -97,19 +97,19 @@
             </div>
             <table class="table table-dark">
               <tbody>
-                <tr *ngFor="let user of usersPage | filter : searchText">
+                <tr *ngFor="let user of userStatusListPage | filter : searchText">
                   <td scope="row">
                     <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'" class="bi bi-triangle-fill"></i>
                     <i *ngIf="user.role == 'APPLICANT'" class="bi bi-hexagon-fill"></i>
                   </td>
-                  <td>{{ user["first_name"] }}</td>
-                  <td>{{ user["last_name"] }}</td>
+                  <td>{{ user.first_name}}</td>
+                  <td>{{ user.last_name }}</td>
                   <td>{{
-                    user["role"] == "EMPLOYEE"
-                    ? user["title"]
-                    : user["position_name"]
+                    user.role == "EMPLOYEE"
+                    ? user.title
+                    : user.position_name
                     }}</td>
-                  <td>{{ user["department_name"] }}</td>
+                  <td>{{ user.department_name }}</td>
                 </tr>
 
               </tbody>

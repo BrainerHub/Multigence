@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="!editProfile" class="col-md-6">
+        <div *ngIf="editProfile" class="col-md-6">
           <div class="pad-bottom-10 profile-text text-uppercase">
             {{ "profile.profileHeader" | translate }}
           </div>
@@ -96,7 +96,7 @@
             </button>
           </div>
         </div>
-        <div *ngIf="editProfile" class="col-md-6 hidden-overflow">
+        <div *ngIf="!editProfile" class="col-md-6 hidden-overflow">
           <div class="pad-bottom-10 profile-text text-uppercase">
             {{ "profile.editProfileHeader" | translate }}
           </div>
@@ -106,13 +106,13 @@
                 <button type="button" class="btn btn-default btn-close-edit-profile" (click)="closeEdit()">
                   X
                 </button>
-                <div class="form-group w-50">
-                  <input type="firstName" name="firstName" class="form-control form-control-outline"
-                    formControlName="first_name" placeholder="{{'profile.firstname' | translate}}" />
+                <div class="form-group w-50">               
+                     <input type="firstName" name="firstName" class="form-control form-control-outline"
+                    formControlName="first_name" placeholder="{{user.first_name ? user.first_name : 'profile.firstname' | translate}}" />
                 </div>
                 <div class="form-group w-50">
                   <input type="lastName" name="lastName" class="form-control form-control-outline"
-                    formControlName="last_name" placeholder="{{'profile.lastname' | translate}}" />
+                    formControlName="last_name" placeholder="{{user.last_name ? user.last_name :'profile.lastname' | translate}}" />
                 </div>
                 <div class="form-group w-50">
                   <select class="form-select" name="gender" id="gender" formControlName="gender">
@@ -123,47 +123,47 @@
                 </div>
                 <div class="form-group w-50">
                   <input type="test" name="firstName" class="form-control form-control-outline"
-                    placeholder="{{'profile.jobTitle' | translate}}" formControlName="title" />
+                    placeholder="{{user.title ? user.title : 'profile.jobTitle' | translate}}" formControlName="title" />
                 </div>
                 <div class="form-group w-50">
                   <input type="company" name="company" class="form-control form-control-outline disabled"
-                    formControlName="company" placeholder="{{'profile.company' | translate}}" />
+                    formControlName="company" placeholder="{{user.company_name ? user.company_name :'multigence' | translate}}" [disabled]="true"/>
                 </div>
                 <div class="form-group w-50">
                   <select class="form-select" name="department" id="department" formControlName="department">
-                    <option *ngFor="let department of departments" value="{department.uuid}">
+                    <option *ngFor="let department of departments" [value]="department.uuid">
                       {{ department.name }}
                     </option>
                   </select>
                 </div>
                 <div class="form-group w-50">
                   <input type="address" name="address" class="form-control form-control-outline"
-                    placeholder="{{'profile.address' | translate}}" formControlName="address" />
+                    placeholder="{{user.address ? user.address :'profile.address' | translate}}" formControlName="address" />
                 </div>
                 <div class="form-group w-50">
                   <input type="text" name="zipcode" class="form-control form-control-outline"
-                    placeholder="{{'profile.zipcode' | translate}}" formControlName="zipcode" />
+                    placeholder="{{user.zipcode ? user.zipcode :'profile.zipcode' | translate}}" formControlName="zipcode" />
                 </div>
                 <div class="form-group w-50">
                   <input type="state" name="state" class="form-control form-control-outline" formControlName="state"
-                    placeholder="{{'profile.state' | translate}}" />
+                    placeholder="{{user.state ? user.state : 'profile.state' | translate}}" />
                 </div>
                 <div class="form-group w-50">
                   <input type="text" name="country" class="form-control form-control-outline"
-                    placeholder="{{'profile.country' | translate}}" formControlName="country" />
+                    placeholder="{{user.country ? user.country :'profile.country' | translate}}" formControlName="country" />
                 </div>
                 <div class="form-group w-50">
                   <input type="number" name="telephone" class="form-control form-control-outline"
-                    placeholder="{{'profile.telephone' | translate}}" formControlName="telephone" />
+                    placeholder="{{user.telephone? user.telephone : 'profile.telephone' | translate}}" formControlName="telephone" />
                 </div>
                 <div class="form-group w-50">
                   <input type="text" name="website" class="form-control form-control-outline"
-                    placeholder="{{'profile.website' | translate}}" formControlName="website" />
+                    placeholder="{{user.website ? user.website :'profile.website' | translate}}" formControlName="website" />
                 </div>
                 <div class="form-group w-100">
                   <label class="form-label" for="">{{"profile.description" | translate}}</label>
                   <textarea type="text" name="description" class="form-control form-control-outline"
-                    placeholder="{{'profile.description' | translate}}" formControlName="description"></textarea>
+                    placeholder="{{user.description ? user.description :'profile.description' | translate}}" formControlName="description"></textarea>
                 </div>
               </div>
             </div>
@@ -178,4 +178,3 @@
     </div>
   </div>
 </div>
-<!-- </div> -->

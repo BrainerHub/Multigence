@@ -1,18 +1,17 @@
 <app-layout-header></app-layout-header>
 <div class="MainBodyPart">
-
-    <!-- <div class="question-header text-center pad-top-10 pad-bottom-10" >
+    <div class="question-header text-center pad-top-10 pad-bottom-10" >
         <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-          <div>
-            <span class="question-text">You have no pending questionaries to complete! :</span>
-          </div>
+          <!-- <div> -->
+            <!-- <span class="question-text">You have no pending questionaries to complete! :</span> -->
+          <!-- </div>
         </div>
-        <div class="col-sm-3 col-xs-12 points">
-          <span><span [ngClass]="{'max-value': availablePoints(event) === 0}" class="points-title" translate="questionary.points"></span>&nbsp;&nbsp;<span [ngClass]="{'max-value': availablePoints(event) === 0}" class="points-box">{{totalPoints()}} | {{questionary['max_points']}}</span>&nbsp;&nbsp;</span>
-        </div>
+        <div class="col-sm-3 col-xs-12 points"> -->
+          <!-- <span><span [ngClass]="{'max-value': availablePoints(event) === 0}" class="points-title" translate="questionary.points"></span>&nbsp;&nbsp;<span [ngClass]="{'max-value': availablePoints(event) === 0}" class="points-box">{{totalPoints()}} | {{questionary['max_points']}}</span>&nbsp;&nbsp;</span> -->
+        <!-- </div>
       </div> -->
 
-      <!-- <div class="bg-gradient text-center pad-bottom-10 completed-text">
+      <!-- <div  class="bg-gradient text-center pad-bottom-10 completed-text">
         <div>
           <a class="navbar-brand" data-toggle="collapse" data-target=".navbar-collapse.in">
           <img class="logo" src="assets/images/logo-inverse.png" />
@@ -22,12 +21,10 @@
     </div> -->
     
 
-    <div class="bg-gradient pad-top-50 pad-bottom-50">
+    <!-- <div class="bg-gradient pad-top-50 pad-bottom-50">
         <div class="container-fluid">
-      
                <div class="row pad-top-50 pad-right-15 pad-left-15" >
-                <form   class="form-horizontal">
-                
+                <form  class="form-horizontal">
                     <div *ngFor = "let option of questionary.options; let index = index">
                       <div class="col-md-6  mar-top-20">
                         <div>
@@ -38,27 +35,27 @@
                             </ng-contianer>
                             </div>
                             <div class="question-box-counter no-gutter">
-                              <div class="plus-container background-plus-custom">
+                              <div class="plus-container background-plus-custom"> -->
                                 <!-- <i class="icon icon-icon-plus icon-questionary-color icon-controler no_selection icon-plus" (click)="increment(index)">add</i> -->
-                                <button (click)="increment(index)">+</button>
+                                <!-- <button (click)="increment(index)">+</button>
                                 
                               </div>
-                              <div class="id-input">
+                              <div class="id-input"> -->
                                 <!-- <span>{{count}}</span> -->
-                                <input type="text" value={{count}} readonly/>
-                              </div>
+                                <!-- <input type="text" value={{count}} readonly/> -->
+                              <!-- </div> -->
                               <!-- <div class="box-counter"> -->
                                 <!-- <input type="number" name="{{'option' + i}}" class="input-counter" id="{{'option' + i}}" min="0" [(ngModel)]="answers[i]" [required]="!amountParamsVisible" placeholder="0"> -->
                                 
                               <!-- </div> -->
-                              <div class="minus-container background-minus-custom">
-                                <button (click)="decrement(index)">-</button>
+                              <!-- <div class="minus-container background-minus-custom">
+                                <button (click)="decrement(index)">-</button> -->
                                 <!-- <i class="icon icon-icon-minus icon-questionary-color icon-controler no_selection icon-minus" (click)="decrement(i)"></i> -->
-                              </div>
+                              <!-- </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                       <!-- <div class="col-md-6 col-sm-12 mar-top-20" *ngIf="!last">
                         <div>
                           <div class="panel panel-default question-box">
@@ -79,9 +76,9 @@
                           </div>
                         </div>
                       </div> -->
-                    </div>
-                  </form>
-              </div> 
+                    <!-- </div> -->
+                  <!-- </form> -->
+              <!-- </div>  -->
       
 
               <ng-template #template>
@@ -108,13 +105,6 @@
               </div> -->
         </div>
       </div>
-
-      
-
-     
-
-
-
 
 
 </div>

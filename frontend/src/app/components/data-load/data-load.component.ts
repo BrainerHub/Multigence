@@ -32,8 +32,6 @@ export class DataLoadComponent {
   uploadFile() {
     this.userService.uploadQuestions(this.file).subscribe(
       (res: any) => {
-        console.log(res,'res');
-        
         if (res) {
           this.message = 'Data uploaded successfully!';
           this.messageHidden = true;
@@ -42,8 +40,7 @@ export class DataLoadComponent {
         }
       },
       (err) => {
-        err = 'Authentication credentials were not provided';
-        this.errorMessage = err;
+        this.errorMessage = err.error.detail;
       }
     );
 

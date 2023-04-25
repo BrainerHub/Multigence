@@ -39,9 +39,7 @@ export class AdminComponent {
     private modalService: BsModalService,
     private cd: ChangeDetectorRef
   ) {
-    this.createOrginationForm = this.formBuilder.group({
-      organizations: this.formBuilder.array([]),
-    });
+   
   }
   ngOnInit() {
     this.createCompanyForm = this.formBuilder.group({
@@ -49,10 +47,10 @@ export class AdminComponent {
       trial: [null, Validators.required],
       invitations: [null, Validators.required],
     });
-  
 
-    this.getAll();
-    this.getOrganization();
+    this.createOrginationForm = this.formBuilder.group({
+      organizations: this.formBuilder.array([]),
+    });
     this.getMe();
   }
 
@@ -61,11 +59,15 @@ getMe() {
     this.user = res;
     this.managers = res.role;
     this.organization = res.company;
+    this.getOrganization();
+    this.getAll();
+    
   });
 }
   getAll() {
     this.userService.getOrganizations().subscribe((res) => {
       this.getAllOrgination = res;
+      
     });
    this.organizations().push(this.newOrganization());
   }
@@ -148,7 +150,6 @@ getMe() {
 
   onShowCompanyList(data: any) {
      this.visibleCompanyList.push(data);
-    
     if (this.activeIndex === data) {
       this.activeIndex = null;
     } else {
@@ -159,21 +160,16 @@ getMe() {
      this.departments = res.departments;
     })
    
-      this.userService.getOrganizations().subscribe((res) => {
-        this.updateAdminData = res ;
+      // this.userService.getOrganizations().subscribe((res) => {
+      //   this.updateAdminData = res ;
+      //   console.log("this.updateAdminData ",this.updateAdminData );
         
-      });
+      // });
   }
-
 
   trackByFn(index: number, data: any): any {
     return data.id; 
   }
-  
-  
-  
-  
-  
   
   confirmDeleteDialog(id: any, index: any) {
     this.userService.deleteOrganization(id).subscribe((res) => {
