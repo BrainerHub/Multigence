@@ -62,7 +62,7 @@
                       <div class="col-md-6">
                         <div class="form-group dropdown">
                           <select class="form-select" name="department" id="department" formControlName="department">
-                            <option *ngFor="let department of departments" value="{department.uuid}">
+                            <option *ngFor="let department of departments" [value]='department.uuid'>
                               {{ department.name }}
                             </option>
                           </select>
@@ -197,7 +197,7 @@
                                                         </div>
                                                     </div> -->
                           <select class="form-select" name="department" id="department" formControlName="department">
-                            <option *ngFor="let department of departments" value="{department.uuid}">
+                            <option *ngFor="let department of departments" [value]='department.uuid'>
                               {{ department.name }}
                             </option>
                           </select>
@@ -227,15 +227,10 @@
                       <div class="col-6">
                         <div class="form-group">
                           <select class="form-select" name="job" id="job" formControlName="job">
-                            <option *ngFor="let job of jobs" value="{department.uuid}">
+                            <option *ngFor="let job of postions" [value]='job.uuid'>
                               {{ job.name }}
                             </option>
                           </select>
-                          <!-- <ul class="dropdown-menu scroll-option multi-level" role="menu"
-                                                        aria-labelledby="dropdownMenu">
-                                                        <li ng-repeat="job in vm.jobs"><a
-                                                                ng-click="vm.setJob(job.name)">job.name</a></li>
-                                                    </ul> -->
                         </div>
                       </div>
                       <div class="col-6">

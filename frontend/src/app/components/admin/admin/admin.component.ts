@@ -31,6 +31,8 @@ export class AdminComponent {
   updateAdminData:any;
   managers : any;
   user:any;
+  ROLE_MANGER = 'MANAGER';
+  send :boolean = false;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -47,11 +49,14 @@ export class AdminComponent {
       trial: [null, Validators.required],
       invitations: [null, Validators.required],
     });
-
+  
     this.createOrginationForm = this.formBuilder.group({
       organizations: this.formBuilder.array([]),
     });
+    this.getAll();
+ 
     this.getMe();
+   
   }
 
 getMe() {
@@ -59,9 +64,10 @@ getMe() {
     this.user = res;
     this.managers = res.role;
     this.organization = res.company;
-    this.getOrganization();
-    this.getAll();
-    
+  //  let managerID = '2551b27f-ec02-4071-8eed-b73dabbf8532'
+   
+   this.getOrganization();
+   //this.getManagers(managerID);
   });
 }
   getAll() {
@@ -71,6 +77,56 @@ getMe() {
     });
    this.organizations().push(this.newOrganization());
   }
+
+  
+
+  getManagers(organization:any) {
+    this.userService.getAllUsers({role:'MANAGER',organization:'2551b27f-ec02-4071-8eed-b73dabbf8532'}).subscribe((managers) => {
+      managers = managers;
+      console.log("managers data ", managers)
+    });
+  }
+
+  // onInviteManager(data: any) {
+  //   this.userService.invite(data).subscribe((res) => {});
+  // }
+
+  
+  // inviteManager(department, firstName, lastName, email) {
+  //   invitationsService.inviteManager(email, firstName, lastName, department);
+  // }
+
+  onInviteManager() {
+    var data:any = {};
+    const myArray = this.createOrginationForm.get('organizations') as FormArray;
+    const firstItemValue = myArray.at(0).value; 
+   
+    console.log(firstItemValue);
+   // debugger 
+    data.email= firstItemValue.managerEmail;
+    data.role = this.ROLE_MANGER;
+    data.first_name =firstItemValue.managerName;
+    data.last_name =firstItemValue.managerLastName;
+    data.department =firstItemValue.department;
+    data.uri = this._uri()
+    this.userService.invite(data).subscribe((res) => {
+   
+      if(res.data['first_invitation']){
+        this.send = false;
+      }
+    },
+    (err) => {
+      return err("Invitation of manager unsend... ")
+    }
+    ) }
+
+  _uri(){
+    var currentPath = window.location.href;
+    var uri = window.location.href.concat('/accept');
+    window.location.href.concat(currentPath);
+    return uri;
+  }
+
 
   getOrganization() {
     this.userService.getOrganization(this.organization).subscribe((res) => {});
@@ -87,6 +143,7 @@ getMe() {
       managerName: '',
       managerLastName: '',
       managerEmail: '',
+      department:''
     });
     
   }
@@ -98,6 +155,7 @@ getMe() {
   }
 
   saveAndOpenCompanyData() {
+  
     let data = {
       name: this.createCompanyForm.controls['name'].value,
       trial:
@@ -113,8 +171,10 @@ getMe() {
         this.getAll();
       });
     });
+
+
     this.visible = false;
-    //window.location.reload();
+   // window.location.reload();
   }
 
   saveNewCompanyName(newData: any) {
@@ -127,13 +187,31 @@ getMe() {
       
     this.userService.updateOrganization(newData.uuid,data).subscribe((res) => {
       this.getAll();
-
+       
     })
     
     this.onCancelVisibleCompany('index')
-  //  window.location.reload();
+   // window.location.reload();
+   
   }
 
+  onShowCompanyList(index: any, data: any) {
+  
+    if (this.activeIndex === index) {
+      this.activeIndex = null;
+    } else {
+      this.activeIndex = index;
+      this.visibleCompanyList.push(index);
+    }
+    this.userService.getDepartments(data.uuid).subscribe((res) => {
+     this.departments = res.departments;
+    })
+   
+    this.userService.getOrganizations().subscribe((res) => {
+        this.updateAdminData = res ;
+    });
+    this.getManagers(data)
+  }
   onCancelCreateCompany() {
     this.submitted = false;
     this.createCompanyForm.reset();
@@ -148,24 +226,24 @@ getMe() {
     );
   }
 
-  onShowCompanyList(data: any) {
-     this.visibleCompanyList.push(data);
-    if (this.activeIndex === data) {
-      this.activeIndex = null;
-    } else {
-      this.activeIndex = data;
-    }
+  // onShowCompanyList(data: any) {
+  //    this.visibleCompanyList.push(data);
+  //   if (this.activeIndex === data) {
+  //     this.activeIndex = null;
+  //   } else {
+  //     this.activeIndex = data;
+  //   }
    
-    this.userService.getDepartments(data.uuid).subscribe((res) => {
-     this.departments = res.departments;
-    })
+  //   this.userService.getDepartments(data.uuid).subscribe((res) => {
+  //    this.departments = res.departments;
+  //   })
    
-      // this.userService.getOrganizations().subscribe((res) => {
-      //   this.updateAdminData = res ;
-      //   console.log("this.updateAdminData ",this.updateAdminData );
+  //     // this.userService.getOrganizations().subscribe((res) => {
+  //     //   this.updateAdminData = res ;
+  //     //   console.log("this.updateAdminData ",this.updateAdminData );
         
-      // });
-  }
+  //     // });
+  // }
 
   trackByFn(index: number, data: any): any {
     return data.id; 
@@ -190,7 +268,5 @@ getMe() {
     this.modalRef.hide();
   }
 
-  onInviteManager(data: any) {
-    this.userService.invite(data).subscribe((res) => {});
-  }
+ 
 }

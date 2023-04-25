@@ -87,7 +87,7 @@
           </ul>
           <ul>
             <li *ngFor="let data of getAllOrgination; trackBy: trackByFn">
-              <a (click)="onShowCompanyList(data)" class="companyform" *ngIf="data != activeIndex">
+              <a (click)="onShowCompanyList($event,data)" class="companyform" *ngIf="data != activeIndex">
                 {{ data.name }}
                 <span class="bi bi-send"></span>
               </a>
@@ -163,8 +163,9 @@
                             </div>
                           </div>
                           <div class="col-5">
-                            <select name="department" id="department" style="padding-bottom: 8px;">
-                              <option *ngFor="let department of departments" value="{department.uuid}">
+                            <select name="department" id="department" style="padding-bottom: 8px;"
+                              formControlName="department">
+                              <option *ngFor="let department of departments" [value]='department.uuid'>
                                 {{ department.name }}
                               </option>
                             </select>
@@ -207,7 +208,7 @@
                                   !createOrginationForm.valid
                                     ? 'theme-btn disabled w-auto'
                                     : 'theme-btn w-auto'
-                                " (click)="onInviteManager(data)" [disabled]="!createOrginationForm.valid">
+                                " (click)="onInviteManager()" [disabled]="!createOrginationForm.valid">
                                 <span>Invite</span>
                               </button>
                             </div>

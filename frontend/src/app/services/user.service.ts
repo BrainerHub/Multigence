@@ -141,6 +141,8 @@ addPosition(organizationId:any , position:any) {
     );
   }
 
+ 
+
    //update Organisation
   updateOrganization(uuid:any, datas:any ) {
     return this.http.patch<any>(`${this.apiUrl}` + '/organization/'+uuid+'/', datas).pipe(
@@ -212,6 +214,14 @@ getMe() {
     );
   }
 
+  //getAll user
+  getAllUsers(filters:any) {
+    return this.http.get<any>(`${this.apiUrl}` + '/user/' + '?organization=' + filters.organization + '&role=' + filters.role).pipe(
+      map((alluser) => {
+        return alluser;
+      })
+    );
+  }
  
 //update user  list data
   updateMe(data: any) {

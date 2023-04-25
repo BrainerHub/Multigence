@@ -35,6 +35,7 @@ export class AdminUsersComponent {
   user: any;
   modalRef: BsModalRef<unknown>;
   organizations: any;
+  finalArray: any[] = [];
 
   statusList = ['CREATED', 'IN_PROGRESS', 'DONE'];
   roleList = ['MANAGER', 'EMPLOYEE', 'APPLICANT'];
@@ -138,12 +139,24 @@ export class AdminUsersComponent {
             console.log(this.usersPage, 'page');
             console.log(element[0]);
 
-            if (element[0] == 'CREATED' || element[0] == 'DONE') {
-              console.log(this.usersPage, 'page');
+            if (element[0] == 'CREATED' || element[0] == 'DONE' || element[0] == 'IN_PROGRESS') {
+              //console.log(this.usersPage, 'page');
               this.usersPage = this.usersPage.filter((user: any) => {
                 return user[key] == element[0];
               });
             }
+
+            if (element[0] == 'MANAGER' || element[0] == 'EMPLOYEE' || element[0] == 'APPLICANT') {
+              //console.log(this.usersPage, 'page');
+            
+              this.usersPage = this.usersPage.filter((user: any) => {
+                //this.finalArray.push( this.usersPage);
+               
+                return user[key] == element[0];
+                
+              });
+            }
+         
             // if(element[0] == 'IN_PROGRESS ') {
             //   //this.usersPage = this.usersPage.filter((user:any) => {return user[key] == 'IN_PROGRESS'})
             // }
@@ -166,6 +179,8 @@ export class AdminUsersComponent {
     }
     //const statusFilterd = this.onFilterSelect(this.filters.status, 'status')
     this.onFilterSelect(this.filters, 'status');
+    var roleFilters = this.onFilterSelect(this.filters, 'role');
+    
   }
 
   progressFilter(event: any, progress: string) {
