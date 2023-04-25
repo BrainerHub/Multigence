@@ -62,7 +62,7 @@ export class AdminComponent {
 getMe() {
   this.userService.getMe().subscribe((res: any) => {
     this.user = res;
-    this.managers = res.role;
+   // this.managers = res.role;
     this.organization = res.company;
   //  let managerID = '2551b27f-ec02-4071-8eed-b73dabbf8532'
    
@@ -81,28 +81,15 @@ getMe() {
   
 
   getManagers(organization:any) {
-    this.userService.getAllUsers({role:'MANAGER',organization:'2551b27f-ec02-4071-8eed-b73dabbf8532'}).subscribe((managers) => {
-      managers = managers;
-      console.log("managers data ", managers)
+    this.userService.getAllUsers({role:'MANAGER',organization:organization.uuid}).subscribe((managers) => {
+      this.managers = managers;
     });
   }
-
-  // onInviteManager(data: any) {
-  //   this.userService.invite(data).subscribe((res) => {});
-  // }
-
-  
-  // inviteManager(department, firstName, lastName, email) {
-  //   invitationsService.inviteManager(email, firstName, lastName, department);
-  // }
 
   onInviteManager() {
     var data:any = {};
     const myArray = this.createOrginationForm.get('organizations') as FormArray;
     const firstItemValue = myArray.at(0).value; 
-   
-    console.log(firstItemValue);
-   // debugger 
     data.email= firstItemValue.managerEmail;
     data.role = this.ROLE_MANGER;
     data.first_name =firstItemValue.managerName;
