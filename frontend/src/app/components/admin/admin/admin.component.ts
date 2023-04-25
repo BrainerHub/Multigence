@@ -197,11 +197,18 @@ getMe() {
 
   onShowCompanyList(index: any, data: any) {
   
-    if (this.activeIndex === index) {
+    // if (this.activeIndex === index) {
+    //   this.activeIndex = null;
+    // } else {
+    //   this.activeIndex = index;
+    //   this.visibleCompanyList.push(index);
+    // }
+
+    this.visibleCompanyList.push(data);
+    if (this.activeIndex === data) {
       this.activeIndex = null;
     } else {
-      this.activeIndex = index;
-      this.visibleCompanyList.push(index);
+      this.activeIndex = data;
     }
     this.userService.getDepartments(data.uuid).subscribe((res) => {
      this.departments = res.departments;
