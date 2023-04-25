@@ -123,7 +123,7 @@ getPostions(){
 getInviteOrganization(){
   this.userService.getInviteOrganization(this.organization).subscribe(res =>{
      var userDepartmentData = Array.from(Object.values(res));
-    this.jobs = userDepartmentData;
+     this.jobs = userDepartmentData;
   })
 }
 
@@ -152,14 +152,10 @@ getInviteOrganization(){
     data.first_name =this.createInvitationForm.controls['firstName'].value;
     data.last_name =this.createInvitationForm.controls['lastName'].value;
     data.department = this.createInvitationForm.controls['department'].value;
-  //  data.newdepartment =this.createInvitationForm.controls['name'].value;
     data.uri = this._uri()
     this.userService.invite(data).subscribe((res) => {
-     
-      //this.modalRef = this.modalService.show(template, {class: 'modal-md'});
       if(res.data['first_invitation']){
-         this.send = true;
-      //  this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+        this.send = true;
         this.openConfirmationModal(this.INVITATION_SENT_MSG);
       }
       else {
