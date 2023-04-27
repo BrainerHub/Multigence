@@ -38,8 +38,6 @@ export class ProgressComponent {
 
   getMe() {
     this.userService.getMe().subscribe((res: any) => {
-      console.log("userrrr",  this.organization);
-      
       this.user = res;
       this.organization = res.company;
       this.getDepartment();
@@ -66,6 +64,7 @@ export class ProgressComponent {
       this.departments = userDepartmentData[0];
     });
   }
+
   getPositions() {
     this.userService.getPositions(this.organization).subscribe((res) => {
      this.positions = res[0]
@@ -82,7 +81,6 @@ export class ProgressComponent {
     this.userService.getQuestionaryStatus(this.organization).subscribe((res) => {
       var userData = Array.from(Object.values(res));
       this.userStatusListPage = userData[0];
-      console.log("this.userStatusListPage",this.userStatusListPage);
       
     });
   }

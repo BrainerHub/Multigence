@@ -23,6 +23,7 @@
     border-bottom: 1px solid gray;
   }
 }
+
 .border-bottom {
   border-bottom: 1px solid gray;
 }
@@ -44,6 +45,7 @@
     }
   }
 }
+
 .sort-asc {
   position: absolute;
   top: 0;
@@ -76,6 +78,7 @@
   top: 106px;
   position: relative;
 }
+
 .admin-home {
   .companies {
     max-width: 1150px;
@@ -113,6 +116,7 @@
           background: transparent;
           padding: 10px;
           border-bottom: 1px solid gray;
+          position: relative;
           img {
             max-width: 15px;
           }
@@ -135,6 +139,7 @@
           .form-control {
             color: #333333;
             font-weight: bold;
+            position: relative;
             &::placeholder {
               color: #333333;
             }
@@ -149,6 +154,8 @@
             padding: 9px 12px;
             font-size: 14px;
             line-height: 1.42857143;
+            position: relative;
+            appearance: none;
             option {
               color: #000;
               padding: 5px;
@@ -156,6 +163,13 @@
             &:focus-visible {
               outline: none;
             }
+          }
+          select + .bi.bi-send {
+            position: absolute;
+            color: #fff;
+            right: 5px;
+            top: 5px;
+            transform: rotate(132deg);
           }
           .form-control.form-control-box {
             border-radius: 0;
@@ -177,10 +191,21 @@
             }
           }
         }
+        li {
+          position: relative;
+          span.bi.bi-send {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            transform: rotate(132deg);
+            color: #337ab7;
+          }
+        }
       }
     }
   }
 }
+
 .dropdown {
   .btn,
   .btn:active {

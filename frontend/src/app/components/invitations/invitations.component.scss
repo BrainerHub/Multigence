@@ -34,6 +34,37 @@
       text-decoration: none;
     }
   }
+  .form-control {
+    color: #333333;
+    font-weight: bold;
+    position: relative;
+    &::placeholder {
+      color: #333333;
+    }
+  }
+  select {
+    background: transparent;
+    background-color: transparent;
+    color: #333333;
+    border: 0;
+    border-bottom: 1px solid #eeeeee;
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    position: relative;
+    appearance: none;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  select + .bi.bi-send {
+    position: absolute;
+    color: #fff;
+    right: 5px;
+    top: 5px;
+    transform: rotate(132deg);
+  }
 }
 .CreateFormBtnPart {
   display: flex;

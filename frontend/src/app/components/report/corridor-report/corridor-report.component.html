@@ -1,3 +1,7 @@
+report
+
+
+
 <app-layout-header></app-layout-header>
 <div class="MainBodyPart">
   <div class="corridor">
@@ -8,9 +12,8 @@
             <div class="col-md-7">
               <div class="corridor-filters legend-content-size corridor-legend">
                 <ul class="list-group">
-                  <li *ngFor="let user of corridorPersons">
-                    <app-corridor-legend-item user="user" [ngClass]="{trial:trial}"></app-corridor-legend-item>
-
+                  <li>
+                    <app-corridor-legend-item *ngIf="onUserSelected"></app-corridor-legend-item>
                   </li>
 
                 </ul>
@@ -29,7 +32,7 @@
                   <ng-container *ngIf="!trial" class="form-group">
                     <select class="form-select" name="department" id="department">
                       <option>All departments</option>
-                      <option *ngFor="let department of departments" value="{department.uuid}">
+                      <option *ngFor="let department of departments" [value]="department.uuid">
                         {{ department.name }}
                       </option>
                     </select>
@@ -46,7 +49,7 @@
                   <ng-container *ngIf="!trial" class="form-group">
                     <select class="form-select" name="employee" id="employee">
                       <option>{{"employees" | uppercase}}</option>
-                      <option *ngFor="let employee of employees" value="{employee.uuid}">
+                      <option *ngFor="let employee of employees" [value]="employee.uuid">
                         {{ employee.name }}
                       </option>
                     </select>
@@ -90,14 +93,11 @@
                 <select class="form-select" name="employee" id="employee">
                   <option>All Users</option>
                   <option>Employees </option>
-                  <option *ngFor="let title of titles" value="{title.uuid}">
+                  <option>Candidates</option>
+                  <option *ngFor="let title of titles" [value]="title.uuid">
                     {{ title.name }}
                   </option>
-                </select>
-                <select class="form-select" name="employee" id="employee">
-                  <option>All Users</option>
-                  <option>Candidates</option>
-                  <option *ngFor="let position of positions" value="{position.uuid}">
+                  <option *ngFor="let position of positions"[ value]="position.uuid">
                     {{ position }}
                   </option>
                 </select>
@@ -153,16 +153,15 @@
           </div>
 
           <table class="table table-dark">
-            <tbody>
-
-              <tr *ngFor="let user of personListPage | filter : searchText">
+            <tbody (click)="toggleUser(user)">
+              <tr>
                 <td scope="row">
                   <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-triangle-fill"></i>
                   <i *ngIf="user.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
                 </td>
-                <td>{{user['first_name']}}</td>
-                <td>{{user['last_name']}}</td>
-                <td>{{userDescription(user)}}</td>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{getDescription(user)}}</td>
               </tr>
             </tbody>
           </table>

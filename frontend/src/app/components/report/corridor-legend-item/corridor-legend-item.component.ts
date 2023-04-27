@@ -21,7 +21,7 @@ export class CorridorLegendItemComponent {
   spheres: any;
   getSphereName: any;
   report: any;
-  expanded: boolean;
+  expanded: boolean = false;
   userPointsForSpheres: any;
   showCloseIcon = false;
   styleColor: any;
@@ -29,7 +29,8 @@ export class CorridorLegendItemComponent {
   collective = [];
   userDataIndividual = '';
   userDataColective = '';
-
+  page = 1
+  expand: boolean =true;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -42,7 +43,7 @@ export class CorridorLegendItemComponent {
     this.getMe();
 
   }
-
+ 
   toggle() {
     this.expanded = !this.expanded;
   }
@@ -69,19 +70,19 @@ export class CorridorLegendItemComponent {
   getSpheres() {
     this.userService.getSpheres().subscribe((res) => {
 
-      // this.userService.getAll().then(function(spheres){
+      // this.userService.getAll().then(function(spheres:any){
       //   var groups = _.groupBy(spheres, 'type');
       //   return (groups['INDIVIDUAL'].concat(groups['NONE'])).concat(groups['COLLECTIVE']);
       // })
-      // .then(function(spheres) {
-      //   spheres.forEach(function(sphere) {
-      //     var data = _.find(vm.user.data, _byId(sphere.uuid));
-      //     var name = $translate.instant(sphere.name);
+      // .then((spheres:any) => {
+      //   spheres.forEach((sphere:any) => {
+      //     var data = _.find(this.user.data, _byId(sphere.uuid));
+       
       //     if(sphere.type === 'COLLECTIVE') {
-      //       vm.collective.push(data.totalPoints);  
+      //      this.collective.push(totalPoints);  
       //     }
       //     else {
-      //       vm.individual.push(data.totalPoints); 
+      //     this.individual.push(data.totalPoints); 
       //     }
       //   });
       // });
@@ -111,3 +112,7 @@ export class CorridorLegendItemComponent {
       });
   }
 }
+function _byId(uuid: any): _.ListIteratorTypeGuard<unknown, unknown> {
+  throw new Error('Function not implemented.');
+}
+

@@ -32,7 +32,7 @@ import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { InvitationsComponent } from './components/invitations/invitations.component';
 import { AcceptComponent } from './components/invitations/accept/accept.component';
 import { NgChartsModule } from 'ng2-charts';
@@ -49,7 +49,7 @@ import { CorridorReportComponent } from './components/report/corridor-report/cor
 import { QuestionaryReportComponent } from './components/report/questionary-report/questionary-report.component';
 import { CorridorLegendItemComponent } from './components/report/corridor-legend-item/corridor-legend-item.component';
 import { CorridorGraphComponent } from './components/report/corridor-graph/corridor-graph.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +82,8 @@ import { CorridorGraphComponent } from './components/report/corridor-graph/corri
   ],
   imports: [
     NgbModule,
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
     BrowserModule,
     NgChartsModule,
     CommonModule,

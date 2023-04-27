@@ -1,19 +1,24 @@
 
     <div (click)="toggle()">
-      <div class="col-xs-1">
-        <div class="close-icon"  (mouseenter) ="changeColor(true) "  (mouseleave) ="changeColor(false)" (click)="deleteUser()">
-          <i *ngIf="user.role != 'EMPLOYEE'" class="icon-triangle triangle" [ngStyle]="styleColor"></i>
-          <i *ngIf="user.role == 'EMPLOYEE'" class="icon-hexagon hexagon" [ngStyle]="styleColor"></i>
-          <i *ngIf="showCloseIcon" class="icon icon-close"></i>
-        </div>
-      </div>
-      <div class="col-xs-3">{{user['first_name']}}</div>
-      <div class="col-xs-7">{{user['last_name']}}</div>
-      <div class="col-xs-1 expander">
-        <span class="icon" [ngClass]="{'icon-arrow-down': !expanded, 'icon-arrow-down rotate-180 multigence-green-color': expanded}"></span>
-      </div>
+      <div class="close-icon" (mouseenter) = "changeColor(true)" (mouseleave) = "changeColor(false)" (click)="deleteUser()">
     </div>
-    <div class="row details">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td >
+              <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-triangle-fill"></i>
+              <i *ngIf="user.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
+              
+            </td>
+            <td>{{ user.first_name}}</td>
+            <td>{{ user.last_name }}</td>
+            <td><i class ="bi bi-send" ></i></td>
+          </tr>
+        </tbody>
+      </table>
+   
+  
+    <div class="row details" *ngIf="expanded">
       <div class="col-xs-9 col-xs-offset-1">
           <div class="row" style="margin-bottom: 10px;">
               <div class="col-xs-12">
@@ -31,16 +36,18 @@
   
       </div>
       <div class="col-xs-2">
-        Page: {{user.page}}
+        Page: {{page}}
+      </div>
+      <div class="row trial-message">
+        <div class="col-xs-9 col-xs-offset-1">
+            {{"trial.notAvailable" | translate}}
+        </div>
+        <div class="col-xs-2">
+          Page: {{page}}
+        </div>
       </div>
     </div>
-    <div class="row trial-message">
-      <div class="col-xs-9 col-xs-offset-1">
-          {{"trial.notAvailable" | translate}}
-      </div>
-      <div class="col-xs-2">
-        Page: {{user.page}}
-      </div>
-    </div>
+    
 
   
+  </div>

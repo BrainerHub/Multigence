@@ -63,9 +63,17 @@
           border-radius: 0;
           border: none;
           border-bottom: 1px solid #000;
+          background-image: unset;;
           &:focus {
             box-shadow: unset;
-          }
+          } 
+        }
+        select + .bi.bi-send {
+          position: absolute;
+          color: #fff;
+          right: 15px;
+          top: 5px;
+          transform: rotate(132deg);
         }
       }
     }

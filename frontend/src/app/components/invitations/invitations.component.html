@@ -61,11 +61,13 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group dropdown">
-                          <select class="form-select" name="department" id="department" formControlName="department">
+                          <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
+                          <select class="form-select" name="department" id="department" formControlName="department" (change)="onSelectDepartment($event)">
                             <option *ngFor="let department of departments" [value]='department.uuid'>
                               {{ department.name }}
                             </option>
                           </select>
+                          <span class="bi bi-send"></span>
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -185,22 +187,13 @@
                       </div>
                       <div class="col-6">
                         <div class="form-group dropdown">
-                          <!-- <div role="button" data-toggle="dropdown"
-                                                        class="form-control form-control-outline" data-target="#">
-                                                        <div class="relative">
-                                                            <div class="hidden-overflow input-with-icon-ellipsis">
-                                                                DEPARTMENT
-                                                            </div>
-                                                            <div
-                                                                class="icon icon-arrow-down icon-dropdown absolute-on-right">
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
-                          <select class="form-select" name="department" id="department" formControlName="department">
+                          <label class="form-label text-white" *ngIf="!selectDepartment">DEPARTMENT</label>
+                          <select class="form-select" name="department" id="department" formControlName="department" (change)="onSelectDepartments($event)">
                             <option *ngFor="let department of departments" [value]='department.uuid'>
                               {{ department.name }}
                             </option>
                           </select>
+                          <span class="bi bi-send"></span>
                         </div>
                       </div>
                       <div class="col-6">

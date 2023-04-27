@@ -22,6 +22,8 @@ export class InvitationsComponent {
   organization:any =[];
   user: any;
   postions:any = [];
+  selectedDepartment: false;
+  selectDepartment: false;
   submitted!: boolean;
   jobs: any = [];
   inviteOrganaiztion:any = [];
@@ -205,6 +207,13 @@ getInviteOrganization(){
       this.modalRef = this.modalService.show(template, {class: 'modal-md'});
     }
    
+    
+    onSelectDepartment(value: any) {
+      this.selectedDepartment = value;
+    }
+    onSelectDepartments(value: any) {
+      this.selectDepartment = value;
+    }
     inviteconfirmOkDialog(){
       this.modalRef.hide();
     }

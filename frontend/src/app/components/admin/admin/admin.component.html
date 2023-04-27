@@ -22,11 +22,9 @@
                   <div class="row align-items-baseline">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="name" hidden>Company Name</label>
+                        <label class="form-label" for="name" *ngIf="!createCompanyForm.get('name')?.value">{{'admin.companies.new.form.name' | translate}}<span>*</span></label>
                         <input type="name" name="name" class="form-control form-control-outline" formControlName="name"
-                          placeholder="{{
-                            'admin.companies.new.form.name' | translate
-                          }}" required />
+                          required />
                         <ng-container *ngIf="
                             createCompanyForm.get('name')?.invalid &&
                             createCompanyForm.get('name')?.touched
@@ -41,10 +39,10 @@
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="trial" hidden>{{
+                        <label class="form-label text-white" for="trial" *ngIf="!selectedOption">{{
                           "admin.version.select" | translate
                           }}</label>
-                        <select formControlName="trial" style="padding-bottom: 8px;">
+                        <select formControlName="trial" style="padding-bottom: 8px;" (change)="onSelect($event)">
                           <option>
                             {{ "software.version.trial" | translate }}
                           </option>
@@ -52,14 +50,12 @@
                             {{ "software.version.full" | translate }}
                           </option>
                         </select>
+                        <span _ngcontent-sis-c26="" class="bi bi-send"></span>
 
                       </div>
                     </div>
                     <div class="col-md-3">
-                      <div class="cform-inline" *ngIf="
-                          createCompanyForm.controls['trial'].value ==
-                          'Trial version'
-                        ">
+                      <div class="cform-inline" *ngIf="createCompanyForm.controls['trial'].value =='Trial version'">
                         <div class="form-group d-flex align-items-center gap-2">
                           <label for="invitations">{{
                             "admin.form.invitations" | translate
@@ -87,14 +83,14 @@
           </ul>
           <ul>
             <li *ngFor="let data of getAllOrgination; trackBy: trackByFn">
+              <span class="bi bi-send"></span>
               <a (click)="onShowCompanyList($event,data)" class="companyform" *ngIf="data != activeIndex">
                 {{ data.name }}
-                <span class="bi bi-send"></span>
               </a>
-
+              
               <form [formGroup]="createOrginationForm" class="">
                 <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(data)">
-                  <div *ngFor="
+                  <div *ngFor="s
                       let organization of organizations().controls;
                       let orgIndex = index
                     ">
@@ -163,12 +159,16 @@
                             </div>
                           </div>
                           <div class="col-5">
+                            <div class="form-group d-flex align-items-center gap-2">
+                            <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
                             <select name="department" id="department" style="padding-bottom: 8px;"
-                              formControlName="department">
+                              formControlName="department" (change)="onSelectDepartment($event)">
                               <option *ngFor="let department of departments" [value]='department.uuid'>
                                 {{ department.name }}
                               </option>
                             </select>
+                            <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                            </div>
                           </div>
                           <div class="col-5">
                             <div class="form-group">
@@ -213,15 +213,24 @@
                               </button>
                             </div>
                           </div>
-                          <div class="row manager-field" *ngFor="let manager of managers">
-                            <div class="col-xs-5">
+
+
+                         
+                        <div class="row align-items-baseline" *ngFor="let manager of managers">
+                          <div class="col-6">
+                            <div class="form-control form-control-outline" >
                               <p>{{manager.first_name}}</p>
                             </div>
-                            <div class="col-xs-7">
+                          </div>
+                          <div class="col-6">
+                            <div class="form-control form-control-outline" >
                               <p>{{manager.last_name}}</p>
                             </div>
+                           
                           </div>
                         </div>
+                        </div>
+
                         <div class="CreateFormBtnPart justify-content-between">
                           <button type="reset" class="theme-btn" (click)="openConfirmationModal(template)">
                             Delete
@@ -229,10 +238,7 @@
                           <ng-template #template>
                             <div class="ConfirmationModel">
                               <div class="modal-body">
-                                <p>
-                                  Are you sure you want to delete this
-                                  organization?
-                                </p>
+                                <p>{{"admin.organization.deleteConfirm.text" | translate}}</p>
                                 <div class="ModelBtnPart">
                                   <button type="button" class="theme-btn w-auto" (click)="
                                       confirmDeleteDialog(data.uuid, data)
@@ -269,3 +275,5 @@
     <app-admin-footer></app-admin-footer>
   </div>
 </div>
+
+

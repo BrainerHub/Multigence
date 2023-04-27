@@ -33,6 +33,8 @@ export class AdminComponent {
   user:any;
   ROLE_MANGER = 'MANAGER';
   send :boolean = false;
+  selectedDepartment: false;
+  selectedOption = false;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -54,7 +56,6 @@ export class AdminComponent {
       organizations: this.formBuilder.array([]),
     });
     this.getAll();
- 
     this.getMe();
    
   }
@@ -62,12 +63,10 @@ export class AdminComponent {
 getMe() {
   this.userService.getMe().subscribe((res: any) => {
     this.user = res;
-   // this.managers = res.role;
     this.organization = res.company;
-  //  let managerID = '2551b27f-ec02-4071-8eed-b73dabbf8532'
-   
    this.getOrganization();
-   //this.getManagers(managerID);
+   this.organizations().push(this.newOrganization());
+  
   });
 }
   getAll() {
@@ -75,10 +74,18 @@ getMe() {
       this.getAllOrgination = res;
       
     });
-   this.organizations().push(this.newOrganization());
+   
   }
 
   
+  
+  onSelect(event: any) {
+    this.selectedOption = true;
+  }
+ 
+  onSelectDepartment(value: any) {
+    this.selectedDepartment = value;
+  }
 
   getManagers(organization:any) {
     this.userService.getAllUsers({role:'MANAGER',organization:organization.uuid}).subscribe((managers) => {
@@ -158,10 +165,8 @@ getMe() {
         this.getAll();
       });
     });
-
-
+    this.createCompanyForm.reset();
     this.visible = false;
-   // window.location.reload();
   }
 
   saveNewCompanyName(newData: any) {
@@ -178,19 +183,10 @@ getMe() {
     })
     
     this.onCancelVisibleCompany('index')
-   // window.location.reload();
-   
   }
-
+ 
   onShowCompanyList(index: any, data: any) {
-  
-    // if (this.activeIndex === index) {
-    //   this.activeIndex = null;
-    // } else {
-    //   this.activeIndex = index;
-    //   this.visibleCompanyList.push(index);
-    // }
-
+    this.visibleCompanyList = [];
     this.visibleCompanyList.push(data);
     if (this.activeIndex === data) {
       this.activeIndex = null;
@@ -204,7 +200,8 @@ getMe() {
     this.userService.getOrganizations().subscribe((res) => {
         this.updateAdminData = res ;
     });
-    this.getManagers(data)
+    this.getManagers(data);
+   
   }
   onCancelCreateCompany() {
     this.submitted = false;
@@ -218,26 +215,10 @@ getMe() {
     this.visibleCompanyList = this.visibleCompanyList.filter(
       (visibleCompany: any) => visibleCompany != index
     );
+    this.getAll();
   }
 
-  // onShowCompanyList(data: any) {
-  //    this.visibleCompanyList.push(data);
-  //   if (this.activeIndex === data) {
-  //     this.activeIndex = null;
-  //   } else {
-  //     this.activeIndex = data;
-  //   }
-   
-  //   this.userService.getDepartments(data.uuid).subscribe((res) => {
-  //    this.departments = res.departments;
-  //   })
-   
-  //     // this.userService.getOrganizations().subscribe((res) => {
-  //     //   this.updateAdminData = res ;
-  //     //   console.log("this.updateAdminData ",this.updateAdminData );
-        
-  //     // });
-  // }
+
 
   trackByFn(index: number, data: any): any {
     return data.id; 

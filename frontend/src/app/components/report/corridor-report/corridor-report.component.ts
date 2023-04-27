@@ -13,9 +13,12 @@ import { BootstrapService } from 'app/services/bootstrap.service';
 })
 export class CorridorReportComponent {
   searchText: any;
+  ROLE_EMPLOYEE = 'EMPLOYEE';
+  ROLE_APPLICANT = 'APPLICANT';
   personListPage: any;
   IsVisible: boolean = false;
   titles: any;
+  page = 1;
   userRolList: any = [];
   positions: any;
   visible: boolean = false;
@@ -31,12 +34,15 @@ export class CorridorReportComponent {
   QuestionaryStatus: any;
   users: any;
   trial: boolean;
+  personListPages: any
   send :boolean = true;
   sortOrder = 'Closest';
   sortOrders = 'Furthest';
   isAscendingSort: boolean = false;
-  userDescription = this.bootstrapService.getDescription;
-
+  expand: boolean
+   pagesSelected: any;
+   MAX_PERSONS_IN_CORRIDOR = 5;
+   onUserSelected: boolean =false;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -54,25 +60,32 @@ export class CorridorReportComponent {
   getMe() {
     this.userService.getMe().subscribe((res: any) => {
       this.user = res;
+     
       this.organization = res.company;
       this.getDepartment();
-      this.getPostions();
+     // this.getPostions();
       this.getOrganizationUsers();
       this.getInviteOrganization();
       this.getSpheres();
       this.getCorridorReport();
+      this.getpersonListPage();
+      this.getPositions();
     });
   }
-  getOrganizationUsers() {
-    this.userService
-      .getOrganizationUsers(this.organization, 'a')
-      .subscribe((res) => {
-        var usertitleData = res;
-        this.employees = usertitleData.employees;
-        this.users = usertitleData;
-      });
-  }
 
+
+  
+  getDescription(user:any) {
+    if(user.role === this.ROLE_EMPLOYEE) {
+      return user.title;
+    }
+    else if(user.role === this.ROLE_APPLICANT) {
+      return user['position_name'];
+    }
+    else {
+      return null;
+    }
+  }
   onSeachDropdownValue($event: any) {
     const value = $event.target.value;
     this.employees = this.employee.filter((employee: string | any[]) =>
@@ -90,17 +103,31 @@ export class CorridorReportComponent {
     });
   }
 
-  getPostions() {
-    this.userService.getPositions(this.organization).subscribe((res) => {
-      var userPositionData = Array.from(Object.values(res));
-      this.titles = userPositionData[0];
-      this.postions = userPositionData[0];
-    });
-  }
+  // getPostions() {
+  //   this.userService.getPositions(this.organization).subscribe((res) => {
+  //     var userPositionData = Array.from(Object.values(res));
+  //     this.titles = userPositionData[0];
+  //     this.postions = userPositionData[0];
+  //   });
+  // }
 
   getStatus() {}
+  toggleUser(user: any){
+    if (!user.selected) {
+      user.page = this.page;
+      this.onUserSelected = true;
+      if (this.corridorPersons.length < this.MAX_PERSONS_IN_CORRIDOR) {
+       this.corridorPersons = this.corridorPersons.concat([user]);
+        user.selected = true;
+        this.pagesSelected.push(this.page);
+      }
+    }
+    else {
+      user.selected = false;
+      this.onUserSelected = false;
+    }
 
-
+  }
 
   getInviteOrganization() {
     this.userService
@@ -127,17 +154,50 @@ export class CorridorReportComponent {
       }
     });
   }
+
   getpersonListPage(){
     this.sortOrder = this.sortOrder === 'Closest' ? 'Furthest' : 'Closest';
     this.sortOrders = this.sortOrders === 'Closest' ? 'Furthest' : 'Closest';
-  
+    let uuid = this.user.uuid;
+    this.userService.getReportUser(uuid).subscribe((res) => {
+       this.personListPage = res;
+       this.titles = res[0]
+       console.log("   this.personListPage   this.personListPage",    this.personListPage);
+
+      });
   }
+
   getCorridorReport() {
     this.userService
       .getCorridorReport(this.organization)
       .subscribe((res) => {
-        console.log(' this.personListPage', res.users);
-        this.personListPage = res.users;
       });
   }
+
+  getPositions() {
+    this.userService.getPositions(this.organization).subscribe((res) => {
+     this.positions = res[0]
+     
+    });
+  }
+
+  getOrganizationUsers() {
+    debugger
+    this.userService
+      .getOrganizationUsers(this.organization, this.departments)
+      .subscribe((res) => {
+        var usertitleData = res;
+        this.employees = usertitleData.employees;
+        this.users = usertitleData.employees[0];
+   
+      });
+  }
+  
+
+  // getUsers(organizationId:any, departmentId:any) {
+  //  this.userService.getDepartmentInfo(organizationId, departmentId).subscribe((res =>{
+
+  //  }))
+  // }
+
 }

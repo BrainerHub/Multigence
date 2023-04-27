@@ -33,15 +33,5 @@ export class BootstrapService {
   }
 
 
-  getDescription(user: any) {
-    if(this.user.role === this.ROLE_EMPLOYEE) {
-      return this.user.title;
-    }
-    else if(this.user.role === this.ROLE_APPLICANT) {
-      return user['position_name'];
-    }
-    else {
-      return null;
-    }
-  }
+
 }

@@ -14,10 +14,11 @@ export class ProfileComponent {
   submitted!: boolean;
   userProfileForm!: FormGroup;
   user: any;
-  userUpdateData: any
+  userUpdateData: any;
+  selectedDepartment: false;
   data: any;
   departments: any;
-  organization:any =[];
+  organization: any = [];
   genderList: ['Male', 'Female', 'Prefer not to say'];
   constructor(
     private userService: UserService,
@@ -54,12 +55,12 @@ export class ProfileComponent {
       this.organization = res.company;
       this.getDepartment();
     });
-
-
   }
 
+  onSelectDepartment(value: any) {
+    this.selectedDepartment = value;
+  }
   saveProfile() {
-    
     this.submitted = true;
     let data = {
       first_name: this.userProfileForm.controls['first_name'].value,
@@ -74,23 +75,20 @@ export class ProfileComponent {
       description: this.userProfileForm.controls['description'].value,
     };
     this.userService.updateMe(data).subscribe((res: any) => {
-      this.userUpdateData = res
-      console.log(" this.userUpdateData",  this.userUpdateData);
-      
-      this.getMe()
+      this.userUpdateData = res;
+      console.log(' this.userUpdateData', this.userUpdateData);
+
+      this.getMe();
     });
     this.editProfile = true;
   }
 
   getDepartment() {
-    this.userService.getDepartments(this.organization).subscribe(res => {
+    this.userService.getDepartments(this.organization).subscribe((res) => {
       var userDepartmentData = Array.from(Object.values(res));
-      this.departments = userDepartmentData[0]
-    })
-   
+      this.departments = userDepartmentData[0];
+    });
   }
-
-  
 
   openEdit() {
     this.userProfileForm.controls['title'].setValue(this.user.title);
@@ -100,10 +98,12 @@ export class ProfileComponent {
     this.userProfileForm.controls['country'].setValue(this.user.country);
     this.userProfileForm.controls['telephone'].setValue(this.user.telephone);
     this.userProfileForm.controls['website'].setValue(this.user.website);
-    this.userProfileForm.controls['description'].setValue(this.user.description);
-    this.editProfile = false
+    this.userProfileForm.controls['description'].setValue(
+      this.user.description
+    );
+    this.editProfile = false;
   }
   closeEdit() {
-    this.editProfile = false
+    this.editProfile = false;
   }
 }

@@ -15,6 +15,16 @@ body {
 }
 .form-group {
   margin-bottom: 15px;
+  position: relative;
+  .form-label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    // z-index: -1;
+    span {
+      color: green;
+    }
+  }
 }
 .form-control {
   display: block;
@@ -233,6 +243,7 @@ label {
       .companies-list {
         li {
           border-bottom: 1px solid #555 !important;
+          position: relative;
         }
       }
     }

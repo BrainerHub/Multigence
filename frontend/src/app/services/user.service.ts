@@ -132,7 +132,8 @@ addPosition(organizationId:any , position:any) {
     })
   );
 }
-   //delete Organisation
+
+//delete Organisation
    deleteOrganization(id:any) {
     return this.http.delete<any>(`${this.apiUrl}` + '/organization/'+id+'/',).pipe(
       map((user) => {
@@ -187,6 +188,14 @@ acceptInvitation(uuid:any, data:any) {
     );
   }
 
+  //get report user 
+  getReportUser(userId:any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/user/' + userId + '/').pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
 
    //delete User
    deleteUser(userId:any) {
@@ -257,17 +266,6 @@ getMe() {
 
 
 
-  getDescription(user:any) {
-    if(user.role === this.ROLE_EMPLOYEE) {
-      return user.title;
-    }
-    else if(user.role === this.ROLE_APPLICANT) {
-      return user['position_name'];
-    }
-    else {
-      return null;
-    }
-  }
 
 
   isLoggedSync() {
@@ -346,6 +344,31 @@ getMe() {
    
   }
 
+  
+
+  // getDepartmentInfo(organizationId:any, departmentId:any) {
+  //   debugger
+  //    var info = {
+  //      users: [],
+  //      titles: [],
+  //      positions: []
+  //    };
+  //    var organizationPositions;
+  //    return  this.getPositions(organizationId).subscribe((res) => {
+  //      // this.positions = res[0]
+  //      organizationPositions = res;
+  //        return  this.getOrganizationUsers(organizationId,departmentId)
+  //        .subscribe((res) => {
+  //          var usertitleData = res;
+  //         // this.employees = usertitleData.employees;
+  //         // this.users = usertitleData.employees[0];
+      
+  //        });
+  //     });
+    
+ 
+  //  }
+
   getInviteOrganization(uuid: any) {
     return this.http.get<any>(`${this.apiUrl}` +  '/organization/' + uuid + '/').pipe(
       map((user) => {
@@ -354,16 +377,13 @@ getMe() {
     );
   }
 
-
   //sphere
-
-  getSpheres () {
+ getSpheres () {
     return this.http.get<any>(`${this.apiUrl}` + '/sphere/').pipe(
       map((sphere) => {
         return sphere;
       })
     );
-  
   }
 
   getCorridorReport(organizationId:any) {
@@ -386,13 +406,14 @@ getMe() {
   }
  //get UserQuestionaries
  getUserQuestionaries(userId: any, ) {
-    return this.http.get<any>(`${this.apiUrl}` + '/user/' + userId + '/questionary/').pipe(
+    return this.http.get<any>(`${this.apiUrl}` + '/user/' + '13eeff42-f6b3-4eac-9214-556f467a8fea' + '/questionary/').pipe(
       map((sphere) => {
         return sphere;
       })
     );
   
   }
+
 
  
 }
