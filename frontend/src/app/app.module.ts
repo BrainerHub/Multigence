@@ -50,6 +50,7 @@ import { QuestionaryReportComponent } from './components/report/questionary-repo
 import { CorridorLegendItemComponent } from './components/report/corridor-legend-item/corridor-legend-item.component';
 import { CorridorGraphComponent } from './components/report/corridor-graph/corridor-graph.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ProgressBarModule} from "angular-progress-bar";
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,6 +95,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxPaginationModule,
     HttpClientModule,
     Ng2SearchPipeModule,
+    ProgressBarModule,
     TabsModule.forRoot(),
     PaginationModule.forRoot(),
    // PaginationConfig ,

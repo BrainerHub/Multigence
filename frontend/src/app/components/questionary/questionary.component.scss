@@ -33,7 +33,7 @@
   border: none;
   margin: 20px 0px !important;
   border-radius: 4px;
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,23 +45,23 @@
     float: left;
     overflow: auto;
     background-color: #0c0c0c;
-   // @include border-radius(0);
+    // @include border-radius(0);
     label {
       font-weight: normal;
     }
   }
   .question-box-counter {
-    width:44px;
+    width: 44px;
     margin-left: 10px;
-    .background-plus-custom{
+    .background-plus-custom {
       padding-bottom: 0px !important;
       display: flex;
       flex-direction: column;
       text-align: center;
     }
-    .id-input{
-      input{
-        width:auto;
+    .id-input {
+      input {
+        width: auto;
         max-width: -webkit-fill-available;
         text-align: center;
         border: 1px solid #525252;
@@ -70,9 +70,9 @@
       }
     }
     .plus-container {
-      button{
-        width:100%;
-        border:none;
+      button {
+        width: 100%;
+        border: none;
         background: url(../../../assets/images/plus-white-btn.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
@@ -86,9 +86,9 @@
       }
     }
     .minus-container {
-      button{
-        width:100%;
-        border:none;
+      button {
+        width: 100%;
+        border: none;
         background: url(../../../assets/images/minus-white-btn.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
@@ -106,8 +106,8 @@
       width: 100%;
       padding: 0;
       -webkit-appearance: textfield;
-      -moz-appearance:    textfield;
-      appearance:         textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
       background: none;
       border: none;
       text-align: center;
@@ -120,7 +120,75 @@
     }
 
     .input-counter.ng-invalid:not(.ng-pristine) {
-      color:pink-color;
+      color: pink-color;
     }
   }
+}
+.progress .progress-bar {
+  background-color: #cceacd;
+  color: #006134;
+  border: 1px solid #006134;
+  line-height: 30px;
+}
+
+.max-value {
+  color: #00ff85 !important;
+  border-color: #00ff85 !important;
+}
+#next-button {
+  float: right;
+  padding: 2px 25px;
+  color: #0c0c0c;
+  border: 1px solid #0c0c0c;
+  width: auto;
+  border-radius: 0px;
+  i::before {
+    transform: rotate(45deg);
+  }
+  .question-header {
+    position: fixed;
+    width: 100% !important;
+    top: 100px;
+    z-index: 1000;
+    border-bottom: 2px solid #c6c6c6;
+    background-color: #ffffff;
+  }
+}
+#next-button:hover {
+  color: #00ff85;
+  background: none;
+  border: 1px solid #00ff85;
+}
+
+.form-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+}
+.form-horizontal .cs-width {
+  width: calc(50% - 30px);
+  margin: 0px 15px;
+}
+.question-header {
+  position: fixed;
+  width: 100%;
+  // top: 100px;
+  z-index: 1000;
+  background-color: #0c0c0c;
+  padding: 10px 0px;
+}
+.points {
+  text-align: right;
+}
+.points-title {
+  font-size: 18px;
+  margin-right: 5px;
+}
+.points-box {
+  font-size: 18px;
+  display: inline-block;
+  line-height: 24px;
+  letter-spacing: normal;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
 }

@@ -263,9 +263,17 @@ getMe() {
     );
   }
 
-
-
-
+  getDescription(user:any) {
+    if(user.role === this.ROLE_EMPLOYEE) {
+      return user.title;
+    }
+    else if(user.role === this.ROLE_APPLICANT) {
+      return user['position_name'];
+    }
+    else {
+      return null;
+    }
+  }
 
 
   isLoggedSync() {
@@ -405,8 +413,8 @@ getMe() {
     
   }
  //get UserQuestionaries
- getUserQuestionaries(userId: any, ) {
-    return this.http.get<any>(`${this.apiUrl}` + '/user/' + '13eeff42-f6b3-4eac-9214-556f467a8fea' + '/questionary/').pipe(
+ getUserQuestionaries(userId: any) {
+    return this.http.get<any>(`${this.apiUrl}` + '/user/' + userId + '/questionary/').pipe(
       map((sphere) => {
         return sphere;
       })

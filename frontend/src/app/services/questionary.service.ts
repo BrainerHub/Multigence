@@ -14,21 +14,21 @@ export class QuestionaryService {
 
   getAll(user:any, params:any): Observable<any> {
     return this.getUserId(user).pipe(
-      switchMap((userId) => {
-        params = params || {};
-        return this.getDefaultLang().pipe(
-          switchMap((lang) => {
-            if (lang) {
-              // take only the language part and not the country
+     switchMap((userId) => {
+       params = params || {};
+        // return this.getDefaultLang().pipe(
+        //   switchMap((lang) => {
+        //     if (lang) {
+        //       // take only the language part and not the country
            
-            }
+        //     }
             return this.userService.getUserQuestionaries(userId).pipe(
               map((response) => response.data)
             );
           })
-        );
-      })
-    );
+       );
+     // })
+   // );
   }
 
 
@@ -67,9 +67,9 @@ export class QuestionaryService {
     );
   }
 
-  private getDefaultLang(): Observable<any> {
-    return this.http.get('api/i18n/defaultLang').pipe(
-      map((response) => response)
-    );
-  }
+  // private getDefaultLang(): Observable<any> {
+  //   return this.http.get('api/i18n/defaultLang').pipe(
+  //     map((response) => response)
+  //   );
+  // }
 }
