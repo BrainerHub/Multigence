@@ -14,6 +14,7 @@ export class ProgressComponent {
   usersPage: any = [];
   progressList: any;
   userRolList: any = [];
+  rol: any
   user: any;
   data: any;
   departments: any;
@@ -23,6 +24,11 @@ export class ProgressComponent {
   userStatus: any = [];
   userStatusListPage: any;
   questionStatus:any;
+  selectedDepartment: false;
+  selectedOption = false;
+  selectedJob = false;
+  selectedJobId = false;
+  selectedUsers = false
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -32,6 +38,7 @@ export class ProgressComponent {
   ngOnInit() {
     this.progressList = ['Pending', 'Progressing', 'Finished'];
     this.userRolList = ['All users', 'Employee', 'Candidate'];
+    this.rol = 'All users';
     this.getMe();
     this.getInfo();
   }
@@ -51,8 +58,22 @@ export class ProgressComponent {
   }
   getInfo() {}
 
-
-
+  onSelect(event: any) {
+    this.selectedOption = true;
+  }
+  
+  onSelectDepartment(value: any) {
+    this.selectedDepartment = value;
+  }
+  onSelectJob(value: any) {
+    this.selectedJob = value;
+  }
+  onSelectJobId(value: any) {
+    this.selectedJobId = value;
+  }
+  onSelectUsers(value: any) {
+    this.selectedUsers = value;
+  }
    viewResult(){
     this._router.navigate(['/report']);
   }

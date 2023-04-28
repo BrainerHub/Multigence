@@ -89,12 +89,12 @@ export class QuestionaryComponent {
     this.coursesPercentage = (trues / arrLength) * 100;
   }
  
-  openModal() {
-    this.modalRef = this.modalService.show(this.template, {
-      animated: true,
-      backdrop: 'static',
-    });
-  }
+  // openModal() {
+  //   this.modalRef = this.modalService.show(this.template, {
+  //     animated: true,
+  //     backdrop: 'static',
+  //   });
+  // }
 
   availablePoints() {
     if (!this.questionary) {
@@ -266,7 +266,7 @@ export class QuestionaryComponent {
       this.organization = res.company;
       this.getOrganization();
       this.getUserQuestionaries();
-      this.openModal();
+     // this.openModal();
     });
   }
 

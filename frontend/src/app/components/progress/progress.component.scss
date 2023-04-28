@@ -27,6 +27,13 @@
       transform: translate(0, -50%);
     }
   }
+  select + .bi.bi-send {
+    position: absolute;
+    color: #fff;
+    right: 5px;
+    top: 5px;
+    transform: rotate(132deg);
+  }
   .pending {
     background-color: #777777;
   }

@@ -30,7 +30,7 @@ report
                     </select>
                   </ng-container>
                   <ng-container *ngIf="!trial" class="form-group">
-                    <select class="form-select" name="department" id="department">
+                    <select class="form-select" name="department" id="department" (click)="setDepartment(department)">
                       <option>All departments</option>
                       <option *ngFor="let department of departments" [value]="department.uuid">
                         {{ department.name }}
@@ -47,10 +47,11 @@ report
                     </select>
                   </ng-container>
                   <ng-container *ngIf="!trial" class="form-group">
-                    <select class="form-select" name="employee" id="employee">
+                    <select class="form-select" name="employee" id="employee" (click)="setSource(employee)">
                       <option>{{"employees" | uppercase}}</option>
-                      <option *ngFor="let employee of employees" [value]="employee.uuid">
-                        {{ employee.name }}
+                      <option *ngFor="let employee of employeesData" [value]="employee.uuid">
+                        {{employee.first_name }}
+                        {{employee.last_name }}
                       </option>
                     </select>
                   </ng-container>
@@ -97,10 +98,11 @@ report
                   <option *ngFor="let title of titles" [value]="title.uuid">
                     {{ title.name }}
                   </option>
-                  <option *ngFor="let position of positions"[ value]="position.uuid">
+                  <option *ngFor="let position of positions"[value]="position.uuid">
                     {{ position }}
                   </option>
                 </select>
+                <span class="bi bi-send"></span>
               </ng-container>
 
             </div>
@@ -121,6 +123,7 @@ report
                     <option>{{ "sort.asc" | translate }}</option>
                     <option>{{ "sort.desc" | translate}}</option>
                   </select>
+                  <span class="bi bi-send"></span>
                 </div>
               </div>
             </div>
@@ -156,7 +159,7 @@ report
             <tbody (click)="toggleUser(user)">
               <tr>
                 <td scope="row">
-                  <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-triangle-fill"></i>
+                  <!-- <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-triangle-fill"></i> -->
                   <i *ngIf="user.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
                 </td>
                 <td>{{user.first_name}}</td>
