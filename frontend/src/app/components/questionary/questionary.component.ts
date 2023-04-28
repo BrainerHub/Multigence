@@ -100,6 +100,7 @@ export class QuestionaryComponent {
     if (!this.questionary) {
       return 0;
     }
+    console.log(this.totalPoints);
     return this.maxPoint - this.totalPoints();
   }
 
@@ -161,6 +162,7 @@ export class QuestionaryComponent {
   }
 
   postAnswers(userId:any, questionaryId:any) {
+   
     var question = this.currentQuestion();
     var options = question.options.map((option: any, index: any) => {
       var points = this.answers[index] || 0;
@@ -226,7 +228,7 @@ export class QuestionaryComponent {
         //     this.questionary = question;
             //vm.questionary = questionary;
            //console.log("ques....",question);
-       // this.postAnswers(questionaryId,userId);
+       this.postAnswers(questionaryId,userId);
 
         return question;
        
@@ -277,6 +279,7 @@ export class QuestionaryComponent {
     this.userService
       .getUserQuestionaries(this.user.uuid)
       .subscribe((res) => {
+       
         this.QuestionData = res[0];
         this.questionary = res[0].questions[this.current];
         this.nextQue = res[0].questions[1];

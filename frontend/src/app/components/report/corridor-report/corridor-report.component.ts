@@ -100,6 +100,7 @@ export class CorridorReportComponent {
     this.userService.getDepartments(this.organization).subscribe((res) => {
       var userDepartmentData = Array.from(Object.values(res));
       this.departments = userDepartmentData[0];
+
     });
   }
 
@@ -162,7 +163,7 @@ export class CorridorReportComponent {
     this.userService.getReportUser(uuid).subscribe((res) => {
        this.personListPage = res;
        this.titles = res[0]
-       console.log("   this.personListPage   this.personListPage",    this.personListPage);
+       console.log("   this.personListPage   this.personListPage",this.personListPage);
 
       });
   }
@@ -174,6 +175,7 @@ export class CorridorReportComponent {
       });
   }
 
+ 
   getPositions() {
     this.userService.getPositions(this.organization).subscribe((res) => {
      this.positions = res[0]
