@@ -8,6 +8,9 @@ import { Observable, Subject, map } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
+  postAnswer(userId: any, questionaryId: any, answer: { questionId: any; options: any; }) {
+    throw new Error('Method not implemented.');
+  }
   ROLE_MANAGER = 'MANAGER';
   ROLE_EMPLOYEE = 'EMPLOYEE';
   ROLE_APPLICANT = 'APPLICANT';
@@ -322,7 +325,9 @@ getMe() {
   }
 
   getUserQuestionaryAnswers(userId:any, questionaryId:any){
-    return this.http.get<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/').pipe(
+    var answered = {};
+    answered = true ;
+    return this.http.get<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', answered).pipe(
       map((user) => {
         return user;
       })

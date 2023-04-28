@@ -12,11 +12,12 @@
 
     <div class="col-sm-3 col-xs-12 points">
       <!-- *ngIf="questionary && completed"maxPoint -->
-      <span *ngIf="questionary && completed" maxPoint><span class="points-title max-value"
+      <span *ngIf="questionary && !completed" maxPoint><span class="points-title max-value"
           translate="questionary.points"></span>&nbsp;&nbsp;<span class="points-box max-value">{{totalPoints()}} |
           {{maxPoint}}</span>&nbsp;&nbsp;</span>
     </div>
-    <div *ngIf="!completed" class="bg-gradient text-center pad-bottom-10 completed-text">
+
+    <!-- <div>
       <div>
         <a class="navbar-brand" data-toggle="collapse" data-target=".navbar-collapse.in">
           <img class="logo" src="assets/images/logo-inverse.png" />
@@ -25,15 +26,40 @@
       <h1>{{"questionary.completed.title" | translate}}</h1>
       <h3>{{"questionary.completed.text" | translate}}</h3>
     </div>
-  </div>
+  </div> -->
 
-  <div class="bg-gradient pt-5 pb-5">
-    <!-- *ngIf="!questionary && completed" -->
-    <div class="container-fluid">
-      <div class="row pt-5 ps-2 pe-2">
-        <form class="form-horizontal ">
-          <div class="cs-width col-md-6" *ngFor="let option of questionary?.options; let i = index">
-            <div class="mar-top-20">
+    <div class="bg-gradient pt-5 pb-5" *ngIf="!completed">
+      <!-- *ngIf="!questionary && completed" -->
+      <div class="container-fluid">
+        <div class="row pt-5 ps-2 pe-2">
+          <form class="form-horizontal ">
+            <div class="cs-width col-md-6" *ngFor="let option of questionary?.options; let i = index">
+              <div>
+                <div>
+                  <div class="panel panel-default question-box">
+                    <div class="panel-body question-box-body">
+                      <ng-contianer>
+                        <div class="text-justify">{{option.text}}</div>
+                      </ng-contianer>
+                    </div>
+                    <div class="question-box-counter no-gutter">
+                      <div class="plus-container background-plus-custom">
+                        <button (click)="increment(i)">+</button>
+                      </div>
+                      <div class="id-input">
+                        <input type="text" min="0" name="{{'option' + i}}" [(ngModel)]="answers[i]" readonly />
+                      </div>
+                      <div class="minus-container background-minus-custom">
+                        <button (click)="decrement(i)">-</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- <div class="cs-width col-md-6" *ngFor="let option of nextQue?.options; let i = index">
+            <div class="mar-top-20" *ngIf="!last">
               <div>
                 <div class="panel panel-default question-box">
                   <div class="panel-body question-box-body">
@@ -55,66 +81,50 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-sm-12 mar-top-20" *ngIf="!last">
-              <div>
-                <div class="panel panel-default question-box">
-                  <div class="panel-body question-box-body">
-                    <label class="text-justify">{{'... ' +
-                      questionary?.questions[0].options[i + 1].text}}</label>
-                  </div>
-                  <div class="question-box-counter no-gutter">
-                    <div class="plus-container background-plus-custom">
-                      <i class="icon icon-icon-plus icon-questionary-color icon-controler no_selection icon-plus"
-                        (click)="increment(i + 1)"></i>
-                    </div>
-                    <div class="box-counter">
-                      <input type="number" name="{{'option' + (i + 1)}}" class="input-counter"
-                        id="{{'option' + (i + 1)}}" min="0" [(ngModel)]="answers[i + 1]" placeholder="0">
-                    </div>
-                    <div class="minus-container background-minus-custom">
-                      <i class="icon icon-icon-minus icon-questionary-color icon-controler no_selection icon-minus"
-                        (click)="decrement(i + 1)"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
 
-      <!-- <div class="row pad-top-20 pad-left-15 pad-right-15">
+          </div> -->
+          </form>
+        </div>
+
+        <!-- <div class="row pad-top-20 pad-left-15 pad-right-15">
         <ngb-progressbar type="danger" [value]="40" [max]="1" [showValue]="true"></ngb-progressbar>
       </div> -->
-      <!-- <ng-template #template>
-                <div class="ConfirmationModel">
-                <div class="modal-body">
-                  <p>{{"questionary.instructions.text" | translate}}</p>
-                  <button type="button" class="theme-btn w-auto" aria-label="close" (click)="modalRef.hide()">
-                    <strong translate="start"></strong>
-                  </button>
-                </div>
-                </div>
-              </ng-template> -->
-      <!-- <div *ngIf="questionary && !completed"> -->
-      <div>
-        <div class="row pt-2 ms-4 me-4 d-flex justify-content-end">
-          <button id="next-button" class="btn btn-default btn-lg" (click)="next()">
-            <span class="text-uppercase" translate="next"></span> <i class="bi bi-send"
-              style="transform: rotate(135deg);"></i>
-          </button>
-        </div>
-        <div class="row pt-2 ms-4 me-4">
-          <!-- <progress-bar progress="value" value="{{ 'current' + 1 }}" [max]="totalQuestions()"
+        <ng-template #template *ngIf="!completed">
+          <div class="ConfirmationModel" style="width: 800px !important">
+            <div class="modal-body modal-content">
+              <p>{{"questionary.instructions.text" | translate}}</p><br>
+              <p>{{"questionary.instructions.text1" | translate}}</p><br>
+              <p>{{"questionary.instructions.text2" | translate}}</p><br>
+              <p>{{"questionary.instructions.text3" | translate}}</p><br>
+              <p>{{"questionary.instructions.text4" | translate}}</p><br>
+              <p>{{"questionary.instructions.text5" | translate}}</p><br>
+              <p>{{"questionary.instructions.text6" | translate}}</p><br>
+              <p>{{"questionary.instructions.text6" | translate}}</p>
+              <button type="button" class="theme-btn w-auto" aria-label="close" (click)="modalRef.hide()">
+                <strong translate="start"></strong>
+              </button>
+            </div>
+          </div>
+        </ng-template>
+        <!-- <div *ngIf="questionary && !completed"> -->
+        <div>
+          <div class="row pt-2 ms-4 me-4 d-flex justify-content-end">
+            <button id="next-button" class="btn btn-default btn-lg" (click)="next()">
+              <span class="text-uppercase" translate="next"></span> <i class="bi bi-send"
+                style="transform: rotate(135deg);"></i>
+            </button>
+          </div>
+          <div class="row pt-2 ms-4 me-4">
+            <!-- <progress-bar progress="value" value="{{ 'current' + 1 }}" [max]="totalQuestions()"
             [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}"> <span>{{ 'current' + 1 }} / {{
               totalQuestions() }}</span>
           </progress-bar> -->
-          <div class="progress ps-0 pe-0" style="height: 30px; border-radius: 0;">
-            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0"
-              aria-valuemax="100">{{ current + 1 }} / {{totalQuestions()}} </div>
+            <div class="progress ps-0 pe-0" style="height: 30px; border-radius: 0;">
+              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100">{{ current + 1 }} / {{totalQuestions()}} </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

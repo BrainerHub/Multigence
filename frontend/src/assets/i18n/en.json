@@ -9,8 +9,16 @@
     "questionary": {
       "points": "Points",
       "instructions": {
-        "text": "This is how it works<br></br>You will be presented with 9 affirmations that are incomplete and a series of options to complete them.<br></br>With some of the options you will agree more, with some less. There is no right or wrong.<br></br>A total of 22 points per affirmation must be distributed among seven answers.<br></br>You can distribute the points as you wish across them. The way you spread your points indicates the importance of an answer over others.<br></br>You must distribute all points to a question in order to proceed to the next question.<br></br>You can take the test only once. If you choose to stop, you will be able to continue from where you left.<br></br>Answering usually takes 30-60 minutes. Time is not being tracked – go at your own pace.",
-        "title": "Welcome to Multigence Test!"
+        "text": "This is how it works",
+        "title": "Welcome to Multigence Test!",
+        "text1": "You will be presented with 9 affirmations that are incomplete and a series of options to complete them",
+        "text2":"With some of the options you will agree more, with some less. There is no right or wrong.",
+        "text3":"A total of 22 points per affirmation must be distributed among seven answers.",
+        "text4":"You can distribute the points as you wish across them. The way you spread your points indicates the importance of an answer over others",
+        "text5":"You must distribute all points to a question in order to proceed to the next question.",
+        "text6":"You can take the test only once. If you choose to stop, you will be able to continue from where you left.",
+        "text7":"Answering usually takes 30-60 minutes. Time is not being tracked – go at your own pace."
+
       },
       "completed": {
         "text": "You have completed the questionnaire.",

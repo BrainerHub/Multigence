@@ -28,7 +28,7 @@ export class QuestionaryComponent {
   params: any
   event: any;
   rootScope: any;
-  last: boolean;
+  last: boolean = false;
   amountParamsVisible: boolean
   count = 0;
   datacount:any;
@@ -37,6 +37,8 @@ export class QuestionaryComponent {
   pointCount = 22;
   progress = 0;
   maxPoint:any;
+  nextQue:any;
+  QuestionData:any;
   boxes = [{
     label: 'course 1',
     id: 1
@@ -73,10 +75,11 @@ export class QuestionaryComponent {
   }
 
   ngOnInit() {
+    this.current = 0;
     this.getMe();
-    this.loadQuestionary();
     //this.handleLanguageChange();
   }
+
   selectCourse(coursId:any) {
     if (!!!coursId) return;
     this.selectedCourses[coursId] = !this.selectedCourses[coursId];
@@ -100,6 +103,8 @@ export class QuestionaryComponent {
     return this.maxPoint - this.totalPoints();
   }
 
+  
+
   totalPoints(values?: number[]): number {
     if (values === undefined) {
       values = this.answers;
@@ -107,13 +112,22 @@ export class QuestionaryComponent {
     return values.reduce(function (a, b) {
       return (a || 0) + (b || 0);
     }, 0);
+    
+  
   }
 
   next(): void {
-    
+   
+     this.current++;
+     this.getUserQuestionaries();
+     this.availablePoints();
+     //this.loadQuestionary();
+     if( this.current === 2){
+       this.completed = true;
+     }
     if (this.current < this.totalQuestions()) {
-      this.postAnswers().subscribe(this.moveToNextQuestion, this.moveToNextQuestion);
-    }
+      this.currentQuestion();
+   }
   }
 
   moveToNextQuestion(): void {
@@ -130,9 +144,10 @@ export class QuestionaryComponent {
   }
 
   shuffleOptions(): void {
-    const question = this.currentQuestion();
+    var question = this.currentQuestion();
     question.options = this._.shuffle(question.options);
   }
+  
   get _(): any {
     return _;
   }
@@ -142,10 +157,10 @@ export class QuestionaryComponent {
     if (!this.questionary) {
       return 0;
     }
-    return this.questionary.length;
+    return this.QuestionData.questions.length;
   }
 
-  postAnswers() {
+  postAnswers(userId:any, questionaryId:any) {
     var question = this.currentQuestion();
     var options = question.options.map((option: any, index: any) => {
       var points = this.answers[index] || 0;
@@ -154,16 +169,17 @@ export class QuestionaryComponent {
         points: points,
       };
     });
-    const answer = {
+    var answer = {
       questionId: question.uuid,
       options: options,
     };
-    return this.questionaryService.postAnswer(this.questionary.uuid, answer);
+
+   return this.userService.postAnswer(userId,questionaryId, answer);
   }
 
  
   currentQuestion(): any {
-    return this.questionary.questions[this.current];
+    return this.questionary[this.current];
   }
  
   increment(index: number): void {
@@ -179,34 +195,41 @@ export class QuestionaryComponent {
   }
 
   loadQuestionary() {
-  // this.questionaryService.getAll(this.user, this.params).subscribe((questionaries: string | any[]) => {
- //   this.current = 0;
-  //    if (questionaries.length > 0) {
-    //    const questionary = questionaries[0];
-        // this.applyAnswers(questionary.uuid, questionary.questions).then((questions: any[]) => {
-        //   if (questions.every(this.isNotAnswered)) {
-        //     this.openModal();
-        //   }
-        //   questionary.questions = questions;
-        //   this.questionary = questionary;
-        //   this.shuffleOptions();
-        //   this.addGuards();
-        //   if (this.currentQuestion().answered) {
-        //     this.moveToNextQuestion();
-        //   }
-        // });
- //   } else {
-  //    this.questionary = null;
-  //  }
+    this.questionaryService.getAll(this.user.uuid,this.params).subscribe((questionaries: string | any[]) => {
+    this.current = 0;
+      if (questionaries?.length > 0) {
+         var questionary = questionaries[0];
+         this.applyAnswers(questionary.uuid, questionary.questions);
+    } else {
+      this.questionary = null;
+    }
       } 
-  // )}
+  )
+  }
 
-  applyAnswers(questionaryId: number, questions: any[]) {
-    this.questionaryService.getAnswers(questionaryId).subscribe((answers: any) => {
-      questions.map(question => {
-        const answer = _.find(answers, { uuid: question.uuid });
+  applyAnswers(questionaryId: number, userId:any) {
+    this.userService.getUserQuestionaryAnswers(questionaryId, userId).subscribe((answers: any) => {
+      answers.map((question:any) => {
+        var answer = _.find(answers, { uuid: question.uuid });
         question.answered = answer !== undefined && answer.options && answer.options.length > 0;
+        // this.shuffleOptions();
+        // this.addGuards();
+        //     if (this.currentQuestion().answered) {
+        //       this.moveToNextQuestion();
+        //     }
+        //     if (question.every(this.isNotAnswered)) {
+        //         //this.openModal();
+        //     }
+        //     if (this.currentQuestion().answered) {
+        //         this.moveToNextQuestion();
+        //     }
+        //     this.questionary = question;
+            //vm.questionary = questionary;
+           //console.log("ques....",question);
+       // this.postAnswers(questionaryId,userId);
+
         return question;
+       
       });
     });
   }
@@ -239,26 +262,28 @@ export class QuestionaryComponent {
     this.userService.getMe().subscribe((res: any) => {
       this.user = res;
       this.organization = res.company;
-      let questionaryId:any
-      let questions:any
       this.getOrganization();
       this.getUserQuestionaries();
-     // this.applyAnswers(questionaryId,questions)
-     // this.openModal();
+      this.openModal();
     });
   }
+
   getOrganization() {
     this.userService.getOrganization(this.organization).subscribe((res) => {});
   }
 
   getUserQuestionaries() {
-     this.current = 0;
+     //this.current = 0;
     this.userService
       .getUserQuestionaries(this.user.uuid)
       .subscribe((res) => {
-        this.questionary = res[0].questions[0];
+        this.QuestionData = res[0];
+        this.questionary = res[0].questions[this.current];
+        this.nextQue = res[0].questions[1];
         this.maxPoint = res[0].max_points;
-
+        var userId = this.user.uuid;
+        var queId = res[0].uuid;
+        this.applyAnswers(userId, queId)
       });
   }
  

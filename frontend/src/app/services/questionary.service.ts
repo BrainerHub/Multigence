@@ -34,29 +34,44 @@ export class QuestionaryService {
 
 
 
-  postAnswer(questionaryId:any, answer:any): Observable<any> {
-    return this.getUserId().pipe(
-      switchMap((userId) => {
+  // postAnswer(questionaryId:any, answer:any): Observable<any> {
+  //   return this.getUserId().pipe(
+  //     switchMap((userId) => {
+  //       debugger
+  //       return this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).pipe(
+  //         map((response) => response.data)
+  //       );
+  //     })
+  //   );
+  // }
+
+   postAnswer(questionaryId:any, answer:any,userId:any): Observable<any> {
+        debugger
         return this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).pipe(
           map((response) => response.data)
         );
-      })
-    );
   }
 
  
-  getAnswers(questionaryId:any): Observable<any> {
-    return this.getUserId().pipe(
-      switchMap((userId) => {
-        return this.userService.getUserQuestionaryAnswers(userId, questionaryId).pipe(
+  // getAnswers(questionaryId:any): Observable<any> {
+  //   return this.getUserId().pipe(
+  //     switchMap((userId) => {
+  //       return this.userService.getUserQuestionaryAnswers(userId, questionaryId).pipe(
+  //         map((response) => response.data)
+  //       );
+  //     })
+  //   );
+  // }
+  
+  getAnswers(questionaryId:any , userId:any): Observable<any> {
+
+    return this.userService.getUserQuestionaryAnswers(userId, questionaryId).pipe(
           map((response) => response.data)
         );
-      })
-    );
+    
+   
   }
   
- 
-
   getUserId(userId?:any): Observable<any> {
     const user = userId || new URLSearchParams(window.location.search).get('user');
     if (user) {
