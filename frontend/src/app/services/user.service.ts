@@ -209,6 +209,13 @@ acceptInvitation(uuid:any, data:any) {
     );
   }
   
+  getUserReport(userId:any){
+    return this.http.get<any>(`${this.apiUrl}` + '/user/'+userId+'/',).pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
   findUsers(params:any) {
     return this.http.get<any>(`${this.apiUrl}` + '/user/', params).pipe(
       map((user) => {
@@ -417,14 +424,14 @@ getMe() {
   }
 
   getCorridorReport(organizationId:any) {
-   
-    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=All+users&source=employees').pipe(
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=All&source=employees').pipe(
       map((report) => {
         return report;
       })
     );
   
   }
+
 
   getOrganizationData(organizationId:any) {
     return this.http.get<any>(`${this.apiUrl}` +'/organization/'+organizationId+'/').pipe(
@@ -444,6 +451,22 @@ getMe() {
   
   }
 
+  getCorridorEmployeeReport(organizationId:any , userId:any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/' +'?destination=all&source=' + userId).pipe(
+      map((report) => {
+        return report;
+      })
+    );
+  }
+ 
+
+  getCorridorDepartmentReport(organizationId:any , departmentId:any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?department=' + departmentId +'&destination=all&source=employees').pipe(
+      map((report) => {
+        return report;
+      })
+    );
+  }
 
  
 }

@@ -162,14 +162,15 @@
                           </div>
                           <div class="col-5">
                             <div class="form-group d-flex align-items-center gap-2">
-                              <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
-                              <select name="department" id="department" style="padding-bottom: 8px;"
-                                formControlName="department" (change)="onSelectDepartment($event)">
-                                <option *ngFor="let department of departments" [value]='department.uuid'>
-                                  {{ department.name }}
-                                </option>
-                              </select>
-                              <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                            <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
+                            <select name="department" id="department" style="padding-bottom: 8px;"
+                              formControlName="department" (change)="onSelectDepartment($event)">
+                              <option value="" style="display:none"></option>
+                              <option *ngFor="let department of departments" [value]='department.uuid'>
+                                {{ department.name }}
+                              </option>
+                            </select>
+                            <span class="bi bi-send"></span>
                             </div>
                           </div>
                           <div class="col-5">

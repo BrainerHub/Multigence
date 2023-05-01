@@ -73,6 +73,8 @@ textarea.form-control {
   background-color: transparent;
   border-bottom: 1px solid #ccc;
   color: #eeeeee;
+  background-image: unset;
+  z-index: -1;
   &:focus {
     box-shadow: unset;
   }
