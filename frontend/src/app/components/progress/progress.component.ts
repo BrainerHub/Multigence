@@ -109,8 +109,6 @@ export class ProgressComponent {
   getOrganizationUsers(){
     this.userService.getOrganizationUsers(this.organization,this.departments).subscribe((res) => {
      this.usersPage = res.employees;
-     console.log(" this.usersPage ", this.usersPage );
-     
     });
   }
 }

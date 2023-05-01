@@ -76,8 +76,6 @@ export class ProfileComponent {
     };
     this.userService.updateMe(data).subscribe((res: any) => {
       this.userUpdateData = res;
-      console.log(' this.userUpdateData', this.userUpdateData);
-
       this.getMe();
     });
     this.editProfile = true;

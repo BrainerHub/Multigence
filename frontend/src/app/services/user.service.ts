@@ -380,36 +380,20 @@ getMe() {
     );
    
   }
-
-  
-
-  // getDepartmentInfo(organizationId:any, departmentId:any) {
-  //   debugger
-  //    var info = {
-  //      users: [],
-  //      titles: [],
-  //      positions: []
-  //    };
-  //    var organizationPositions;
-  //    return  this.getPositions(organizationId).subscribe((res) => {
-  //      // this.positions = res[0]
-  //      organizationPositions = res;
-  //        return  this.getOrganizationUsers(organizationId,departmentId)
-  //        .subscribe((res) => {
-  //          var usertitleData = res;
-  //         // this.employees = usertitleData.employees;
-  //         // this.users = usertitleData.employees[0];
       
-  //        });
-  //     });
-    
- 
-  //  }
-
   getInviteOrganization(uuid: any) {
     return this.http.get<any>(`${this.apiUrl}` +  '/organization/' + uuid + '/').pipe(
       map((user) => {
         return user;
+      })
+    );
+  }
+
+
+  getCorridorEmployee(organizationId:any , userId:any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/' +'?destination=employees&source=employees').pipe(
+      map((report) => {
+        return report;
       })
     );
   }
@@ -423,8 +407,15 @@ getMe() {
     );
   }
 
+  getCorridorCandidate(organizationId:any , userId:any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/' +'?destination=candidate&source=employees').pipe(
+      map((report) => {
+        return report;
+      })
+    );
+  }
   getCorridorReport(organizationId:any) {
-    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=All&source=employees').pipe(
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=all&source=employees').pipe(
       map((report) => {
         return report;
       })

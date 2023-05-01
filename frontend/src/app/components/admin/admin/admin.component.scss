@@ -85,7 +85,7 @@
     .AcordionTitle {
       font-size: 14px;
       line-height: 1.42857143;
-      color: #333;
+      color:#ddd;
       padding: 12px 15px;
       background-color: #232323;
     }
@@ -252,8 +252,9 @@
 }
 .accordion-header {
   background-color: #eee;
-  padding: 1rem;
+  padding: 4rem;
   cursor: pointer;
+  
 }
 .accordion-body {
   padding: 1rem;

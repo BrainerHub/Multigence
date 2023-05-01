@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
@@ -45,6 +45,10 @@ export class CorridorReportComponent {
   MAX_PERSONS_IN_CORRIDOR = 5;
   onUserSelected: boolean = false;
   employeesData: any;
+  selectedGroup:any;
+  selectedEmployeeGroup: any
+  selectedDepartment: false;
+  selectedEmployee: false;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -55,6 +59,7 @@ export class CorridorReportComponent {
 
   ngOnInit(): void {
     this.getMe();
+   
   }
 
   getMe() {
@@ -68,18 +73,20 @@ export class CorridorReportComponent {
       this.getCorridorReport();
       this.getpersonListPage();
       this.getPositions();
-      this.getCorridorDepartmentReport();
       this.getUserReport();
+     
      
     });
   }
-
+ 
   setDepartment(department: any) {
     if (this.department !== this.department) {
-      this.departments = this.departments.uuid;
-    }
+      this.departments = this.departments[0].uuid;
+   }
+  this.selectedDepartment = department;
     this.getUserReport();
     this.getCorridorDepartmentReport();
+   
   }
 
   getDescription(user: any) {
@@ -92,11 +99,8 @@ export class CorridorReportComponent {
     }
   }
 
-
   setSource(employee: any){
-    if (this.department !== this.department) {
-      this.departments = this.departments.uuid;
-    }
+   this.selectedEmployee = employee;
    this.getCorridorEmployeeReport();
    this.getUserReport();
     
@@ -115,12 +119,11 @@ export class CorridorReportComponent {
     this.userService.getDepartments(this.organization).subscribe((res) => {
       var userDepartmentData = Array.from(Object.values(res));
       this.departments = userDepartmentData[0];
-
     });
   }
 
+ 
 
-  //issue
   getUserReport() {
     this.userService.getUserReport(this.user.uuid).subscribe((res) => {
     });
@@ -181,19 +184,22 @@ export class CorridorReportComponent {
   }
 
   getCorridorReport() {
+   
     this.userService
       .getCorridorReport(this.organization)
       .subscribe((res) => {});
+      
   }
 
   getCorridorDepartmentReport() {
-    this.userService.getCorridorDepartmentReport(this.organization, this.departments[0].uuid).subscribe((res) => {
+    this.userService.getCorridorDepartmentReport(this.organization,this.selectedGroup).subscribe((res) => {
         this.employeesData = res.users;
       });
   }
 
   getCorridorEmployeeReport() {
-    this.userService.getCorridorEmployeeReport(this.organization, this.users.uuid).subscribe((res) => { 
+    this.userService.getCorridorEmployeeReport(this.organization, this.selectedEmployeeGroup).subscribe((res) => { 
+      this.employeesData = res.users;
     });
   }
 

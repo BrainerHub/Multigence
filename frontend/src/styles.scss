@@ -19,7 +19,7 @@ body {
   .form-label {
     position: absolute;
     top: 8px;
-    left: 8px;
+    left: 0px;
     // z-index: -1;
     span {
       color: green;
@@ -30,7 +30,7 @@ body {
   display: block;
   width: 100%;
   height: 34px;
-  padding: 6px 12px;
+  padding: 6px 0px;
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
@@ -81,6 +81,7 @@ textarea.form-control {
   option {
     background-color: #0c0c0c;
     color: #fff;
+    
     &:hover {
       color: #00ff85;
     }
@@ -241,6 +242,7 @@ label {
     .companies {
       .AcordionTitle {
         background-color: #fff !important;
+        color: #000 !important;
       }
       .companies-list {
         li {
@@ -324,6 +326,7 @@ label {
       .form-select {
         &:hover {
           background-color: #d4d4d4;
+          z-index: -1;
         }
       }
     }
@@ -332,6 +335,70 @@ label {
 .modal-dialog {
   display: flex;
   align-items: center;
+  text-align: center;
   height: 100%;
   margin: 0 auto;
+  
+}
+.dark-btn-theme-selector, .light-btn-theme-selector{
+  width: 56px;
+  position: relative;
+}
+.dark-btn-theme-selector span, .light-btn-theme-selector span{
+  position: absolute;
+  left: 0px; 
+  right: 0;
+  top: 3px;
+  text-align: center;
+}
+.dark-btn-theme-selector svg, .dark-btn-theme-selector span.black-txt{
+  color: rgba(255, 255, 255, 0.5);
+  stroke: rgba(255, 255, 255, 0.5);
+}
+.dark-btn-theme-selector.theme-selected svg, .dark-btn-theme-selector.theme-selected span.black-txt,
+.dark-btn-theme-selector.theme-selected:hover svg, .dark-btn-theme-selector.theme-selected:hover span.black-txt{
+  color: #000;
+  stroke: #000;
+}
+.light-btn-theme-selector svg, .light-btn-theme-selector span.white-txt{
+  color: rgba(0, 0, 0, 0.5);
+  stroke: rgba(0, 0, 0, 0.5);
+}
+.light-btn-theme-selector.theme-selected svg, .light-btn-theme-selector.theme-selected span.white-txt,
+.light-btn-theme-selector.theme-selected:hover svg, .light-btn-theme-selector.theme-selected:hover span.white-txt{
+  color: #fff;
+  stroke: #fff;
+}
+
+.light-btn-theme-selector:hover svg,.dark-btn-theme-selector:hover svg,.dark-btn-theme-selector:hover span.black-txt, .light-btn-theme-selector:hover span.white-txt{
+  color: #00ff85;
+  stroke: #00ff85;
+  text-decoration: underline;
+}
+.dark-btn-theme-selector:hover span.black-txt{
+  text-decoration: underline;
+}
+.dark-theme-selector{
+  .lang-selector{
+    a{
+      color: #555555 !important;
+      border-color: #555555 !important;
+      &.active{
+        border-color: #fff !important;
+        color: #fff !important;
+      }
+    }
+  }
+}
+.white-theme-selector{
+  .lang-selector{
+    a{
+      color: #C6C6C6 !important;
+      border-color: #C6C6C6 !important;
+      &.active{
+        border-color: #000 !important;
+        color: #000 !important;
+      }
+    }
+  }
 }

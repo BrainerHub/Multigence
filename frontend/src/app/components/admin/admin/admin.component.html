@@ -3,7 +3,7 @@
   <div class="pad-top-30 pad-bottom-500 my-5">
     <div class="container-fluid admin-home">
       <div class="col-10 companies m-auto">
-        <div class="AcordionTitle" translate="admin.companies.title"></div>
+        <div class="AcordionTitle text-uppercase" translate="admin.companies.title"></div>
         <div class="companies-list">
           <ul>
             <li class="border-bottom">
@@ -92,10 +92,7 @@
 
               <form [formGroup]="createOrginationForm" class="">
                 <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(data)">
-                  <div *ngFor="s
-                      let organization of organizations().controls;
-                      let orgIndex = index
-                    ">
+                  <div *ngFor="let organization of organizations().controls; let orgIndex = index">
                     <div [formGroupName]="orgIndex">
                       <input class="form-control form-control-outline" name="name" formControlName="name"
                         [(ngModel)]="data.name" />
@@ -162,10 +159,10 @@
                           </div>
                           <div class="col-5">
                             <div class="form-group d-flex align-items-center gap-2">
-                            <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
+                            <!-- <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label> -->
                             <select name="department" id="department" style="padding-bottom: 8px;"
-                              formControlName="department" (change)="onSelectDepartment($event)">
-                              <option value="" style="display:none"></option>
+                              formControlName="department">
+                              <option>DEPARTMENT</option>
                               <option *ngFor="let department of departments" [value]='department.uuid'>
                                 {{ department.name }}
                               </option>

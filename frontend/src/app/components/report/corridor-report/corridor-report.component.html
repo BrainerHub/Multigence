@@ -29,38 +29,34 @@ report
                       <option>{{"trial.notAvailable" | translate}}</option>
                     </select>
                   </ng-container>
-                  <ng-container *ngIf="!trial" class="form-group">
-                    <select class="form-select" name="department" id="department" (click)="setDepartment(department)">
-                      <option>All departments</option>
-                      <option *ngFor="let department of departments" [value]="department.uuid">
+                  <ng-container class="form-group" *ngIf="!trial">
+                    <label class="form-label text-white" *ngIf="!selectedDepartment">All departments</label>
+                    <select class="form-select"  name="department" id="department" (change)="setDepartment($event)" [(ngModel)]="selectedGroup">
+                     <option [value]="department.uuid"  *ngFor="let department of departments ; let i = index" >
                         {{ department.name }}
                       </option>
                     </select>
+                    <span class="bi bi-send"></span>
                   </ng-container>
                 </div>
                 <div class="form-group w-75">
                   <ng-container *ngIf="trial">
-
                     <select class="form-select">
-                      <option>{{"employees" | uppercase}}</option>
                       <option>{{"trial.notAvailable" | translate}}</option>
                     </select>
                   </ng-container>
                   <ng-container *ngIf="!trial" class="form-group">
-                    <select class="form-select" name="employee" id="employee" (click)="setSource(employee)">
-                      <option>{{"employees" | uppercase}}</option>
+                    <label class="form-label text-white" *ngIf="!selectedEmployee">{{"employees" | uppercase}}</label>
+                    <select class="form-select" name="employee" id="employee" (change)="setSource($event)" [(ngModel)]="selectedEmployeeGroup">
+                     
                       <option *ngFor="let employee of employeesData" [value]="employee.uuid">
                         {{employee.first_name }}
                         {{employee.last_name }}
                       </option>
                     </select>
+                    <span class="bi bi-send"></span>
                   </ng-container>
-                  <!-- <div>
-                          <input type="text" (keyup)="onSeachDropdownValue($event)"/>
-                          <div class="dropdown-selector">
-                            <div class="dropdown-selector-option"  *ngFor="let employee of employees" (click)="onSelectDropdownValue(employee)">{{employee.name}}</div>
-                          </div>
-                        </div> -->
+                 
                 </div>
               </div>
             </div>
@@ -91,12 +87,12 @@ report
                 </select>
               </ng-container>
               <ng-container *ngIf="!trial" class="form-group">
-                <select class="form-select" name="employee" id="employee">
+                <select class="form-select" name="employee" id="employee" >
                   <option>All Users</option>
                   <option>Employees </option>
                   <option>Candidates</option>
-                  <option *ngFor="let title of titles" [value]="title.uuid">
-                    {{ title.name }}
+                  <option *ngFor="let title of employeesData" [value]="title.uuid">
+                    {{ title.first_name }}
                   </option>
                   <option *ngFor="let position of positions"[value]="position.uuid">
                     {{ position }}

@@ -27,13 +27,9 @@
           line-height: normal;
           text-transform: uppercase;
           text-decoration: none;
-          &.active {
-            border-color: #eeeeee !important;
-            color: #eeeeee !important;
-          }
-          &:hover {
-            color: #00ff85 !important;
-            border-color: #00ff85 !important;
+          &:hover, &:focus {
+            color: #00ff85 ;
+            border-color: #00ff85;
           }
         }
       }
@@ -115,6 +111,7 @@
       }
     }
   }
+ 
   .themeSelector {
     .theme-selected {
       display: inline-block;
@@ -124,21 +121,7 @@
       position: relative;
       max-width: 56px;
       transition: 0.2s;
-      svg {
-        stroke: #fff;
-      }
-      span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      &:hover svg {
-        stroke: #00ff85;
-      }
-      &:last-child {
-        margin-left: -6px;
-      }
+      
     }
   }
 }
@@ -152,4 +135,8 @@
 
 .first {
   background-color: yellow;
+}
+
+.light-btn-theme-selector{
+  margin-left: -6px;
 }
