@@ -209,6 +209,7 @@ getInviteOrganization(){
    
     
     onSelectDepartment(value: any) {
+      debugger
       this.selectedDepartment = value;
     }
     onSelectDepartments(value: any) {

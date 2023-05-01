@@ -324,6 +324,23 @@ getMe() {
     );
   }
 
+
+  getQuestionaryReport(organizationId:any, questionaryId: any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/questionary/' + questionaryId).pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
+
+  getQuestionarySummaryReport(organizationId:any, questionaryId: any) {
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/questionary-summary/' + questionaryId).pipe(
+      map((user) => {
+        return user;
+      })
+    );
+  }
+
   getUserQuestionaryAnswers(userId:any, questionaryId:any){
     var answered = {};
     answered = true ;

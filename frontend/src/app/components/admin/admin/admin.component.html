@@ -22,7 +22,9 @@
                   <div class="row align-items-baseline">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label class="form-label" for="name" *ngIf="!createCompanyForm.get('name')?.value">{{'admin.companies.new.form.name' | translate}}<span>*</span></label>
+                        <label class="form-label" for="name"
+                          *ngIf="!createCompanyForm.get('name')?.value">{{'admin.companies.new.form.name' |
+                          translate}}<span>*</span></label>
                         <input type="name" name="name" class="form-control form-control-outline" formControlName="name"
                           required />
                         <ng-container *ngIf="
@@ -87,7 +89,7 @@
               <a (click)="onShowCompanyList($event,data)" class="companyform" *ngIf="data != activeIndex">
                 {{ data.name }}
               </a>
-              
+
               <form [formGroup]="createOrginationForm" class="">
                 <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(data)">
                   <div *ngFor="s
@@ -160,14 +162,14 @@
                           </div>
                           <div class="col-5">
                             <div class="form-group d-flex align-items-center gap-2">
-                            <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
-                            <select name="department" id="department" style="padding-bottom: 8px;"
-                              formControlName="department" (change)="onSelectDepartment($event)">
-                              <option *ngFor="let department of departments" [value]='department.uuid'>
-                                {{ department.name }}
-                              </option>
-                            </select>
-                            <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                              <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
+                              <select name="department" id="department" style="padding-bottom: 8px;"
+                                formControlName="department" (change)="onSelectDepartment($event)">
+                                <option *ngFor="let department of departments" [value]='department.uuid'>
+                                  {{ department.name }}
+                                </option>
+                              </select>
+                              <span _ngcontent-sis-c26="" class="bi bi-send"></span>
                             </div>
                           </div>
                           <div class="col-5">
@@ -215,20 +217,20 @@
                           </div>
 
 
-                         
-                        <div class="row align-items-baseline" *ngFor="let manager of managers">
-                          <div class="col-6">
-                            <div class="form-control form-control-outline" >
-                              <p>{{manager.first_name}}</p>
+
+                          <div class="row align-items-baseline" *ngFor="let manager of managers">
+                            <div class="col-6">
+                              <div class="form-control form-control-outline">
+                                <p>{{manager.first_name}}</p>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="form-control form-control-outline">
+                                <p>{{manager.last_name}}</p>
+                              </div>
+
                             </div>
                           </div>
-                          <div class="col-6">
-                            <div class="form-control form-control-outline" >
-                              <p>{{manager.last_name}}</p>
-                            </div>
-                           
-                          </div>
-                        </div>
                         </div>
 
                         <div class="CreateFormBtnPart justify-content-between">
@@ -275,5 +277,3 @@
     <app-admin-footer></app-admin-footer>
   </div>
 </div>
-
-

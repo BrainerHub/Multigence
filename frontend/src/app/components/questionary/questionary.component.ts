@@ -39,6 +39,8 @@ export class QuestionaryComponent {
   maxPoint:any;
   nextQue:any;
   QuestionData:any;
+  questions: any;
+  nextBtn:boolean = true;
   boxes = [{
     label: 'course 1',
     id: 1
@@ -55,6 +57,7 @@ export class QuestionaryComponent {
     label: 'course 4',
     id: 4
   }]
+  QuizShow:boolean = false;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -78,6 +81,7 @@ export class QuestionaryComponent {
     this.current = 0;
     this.getMe();
     //this.handleLanguageChange();
+   // this.loadQuestionary();
   }
 
   selectCourse(coursId:any) {
@@ -94,17 +98,21 @@ export class QuestionaryComponent {
       animated: true,
       backdrop: 'static',
     });
+    this.getUserQuestionaries();
   }
 
+  QuizStart(){
+    this.modalRef.hide();
+    this.QuizShow = true;
+  }
+  
   availablePoints() {
     if (!this.questionary) {
       return 0;
     }
-    console.log(this.totalPoints);
+   
     return this.maxPoint - this.totalPoints();
   }
-
-  
 
   totalPoints(values?: number[]): number {
     if (values === undefined) {
@@ -114,18 +122,32 @@ export class QuestionaryComponent {
       return (a || 0) + (b || 0);
     }, 0);
     
-  
+    
   }
 
-  next(): void {
+  increment(index: number): void {
+   if(this.availablePoints() > 0 ) {
+    this.answers[index] = (this.answers[index] || 0) + 1;
+    }
    
+  }
+
+  decrement(index: number): void {
+   if(this.availablePoints() < this.maxPoint){
+      this.answers[index] = (this.answers[index] || 0) - 1;
+    }
+  }
+  next(): void {
+    //debugger
      this.current++;
+     this.answers = [];
      this.getUserQuestionaries();
      this.availablePoints();
      //this.loadQuestionary();
      if( this.current === 2){
        this.completed = true;
      }
+   
     if (this.current < this.totalQuestions()) {
       this.currentQuestion();
    }
@@ -163,20 +185,20 @@ export class QuestionaryComponent {
 
   postAnswers(userId:any, questionaryId:any) {
    
-    var question = this.currentQuestion();
-    var options = question.options.map((option: any, index: any) => {
-      var points = this.answers[index] || 0;
-      return {
-        uuid: option.uuid,
-        points: points,
-      };
-    });
-    var answer = {
-      questionId: question.uuid,
-      options: options,
-    };
+  //   var question = this.currentQuestion();
+  //   var options = question.options.map((option: any, index: any) => {
+  //     var points = this.answers[index] || 0;
+  //     return {
+  //       uuid: option.uuid,
+  //       points: points,
+  //     };
+  //   });
+  //   var answer = {
+  //     questionId: question.uuid,
+  //     options: options,
+  //   };
 
-   return this.userService.postAnswer(userId,questionaryId, answer);
+  //  return this.userService.postAnswer(userId,questionaryId, answer);
   }
 
  
@@ -184,24 +206,14 @@ export class QuestionaryComponent {
     return this.questionary[this.current];
   }
  
-  increment(index: number): void {
-    if(this.availablePoints() > 0 ) {
-    this.answers[index] = (this.answers[index] || 0) + 1;
-    }
-  }
-
-  decrement(index: number): void {
-    if(this.availablePoints() < this.maxPoint){
-      this.answers[index] = (this.answers[index] || 0) - 1;
-    }
-  }
-
   loadQuestionary() {
+    //debugger
     this.questionaryService.getAll(this.user.uuid,this.params).subscribe((questionaries: string | any[]) => {
     this.current = 0;
       if (questionaries?.length > 0) {
          var questionary = questionaries[0];
          this.applyAnswers(questionary.uuid, questionary.questions);
+         this.openModal();
     } else {
       this.questionary = null;
     }
@@ -265,7 +277,7 @@ export class QuestionaryComponent {
       this.user = res;
       this.organization = res.company;
       this.getOrganization();
-      this.getUserQuestionaries();
+     // this.getUserQuestionaries();
       this.openModal();
     });
   }
@@ -279,10 +291,9 @@ export class QuestionaryComponent {
     this.userService
       .getUserQuestionaries(this.user.uuid)
       .subscribe((res) => {
-       
+        //debugger
         this.QuestionData = res[0];
         this.questionary = res[0].questions[this.current];
-        this.nextQue = res[0].questions[1];
         this.maxPoint = res[0].max_points;
         var userId = this.user.uuid;
         var queId = res[0].uuid;
@@ -290,7 +301,6 @@ export class QuestionaryComponent {
       });
   }
  
-
   isNegative(value: number): boolean {
     return value < 0;
   }

@@ -9,8 +9,15 @@
     "questionary": {
       "points": "Punkte",
       "instructions": {
-        "text": "So funktioniert der Fragebogen:<br></br>Ihnen werden neun Aussagen vorgelegt, die Sie vervollständigen müssen. Dazu gibt es vorgefertigte Optionen.<br></br>Einigen von diesen werden Sie mehr zustimmen als anderen. Es gibt dabei kein richtig oder falsch, sondern das was am meisten ihrer eigenen Einstellung entspricht.<br></br>Insgesamt müssen pro Aussage 22 Punkte auf sieben Antwortgruppen verteilt werden.<br></br>Je mehr sie einer Antwortgruppe zustimmen, desto mehr Punkte sollte sie erhalten. Die Verteilung der Punkte auf die Antwortgruppen zeigt den Grad der Zustimmung im Vergleich zu den andern an.<br></br>Sie müssen alle 22 Punkte verteilen, bevor Sie zur nächsten Frage weiter können.<br></br>Den Test können Sie nur einmal machen. Üblicherweise dauert die Beantwortung zwischen 30-60 Minuten.<br></br>Die Zeit wird nicht getrackt –nehmen Sie sich die Zeit die Sie brauchen.",
-        "title": "Willkommen beim Test von Multigence"
+        "text": "So funktioniert der Fragebogen ",
+        "title": "Willkommen beim Test von Multigence",
+        "text1":"Ihnen werden neun Aussagen vorgelegt, die Sie vervollständigen müssen. Dazu gibt es vorgefertigte Optionen.",
+        "text2":"Einigen von diesen werden Sie mehr zustimmen als anderen. Es gibt dabei kein richtig oder falsch, sondern das was am meisten ihrer eigenen Einstellung entspricht.",
+        "text3":"Insgesamt müssen pro Aussage 22 Punkte auf sieben Antwortgruppen verteilt werden.",
+        "text4":"Je mehr sie einer Antwortgruppe zustimmen, desto mehr Punkte sollte sie erhalten. Die Verteilung der Punkte auf die Antwortgruppen zeigt den Grad der Zustimmung im Vergleich zu den andern an.",
+        "text5":"Sie müssen alle 22 Punkte verteilen, bevor Sie zur nächsten Frage weiter können.",
+        "text6":"Den Test können Sie nur einmal machen. Üblicherweise dauert die Beantwortung zwischen 30-60 Minuten.",
+        "text7":"Die Zeit wird nicht getrackt –nehmen Sie sich die Zeit die Sie brauchen."
       },
       "completed": {
         "text": "Sie haben den Fragebogen erfolgreich ausgefüllt.",
