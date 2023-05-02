@@ -6,7 +6,9 @@ import { AbstractControl,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { UserService } from 'app/services/user.service';
+import { values } from 'lodash';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -35,13 +37,15 @@ export class AdminComponent {
   send :boolean = false;
   selectedDepartment: false;
   selectedOption = false;
+  department: any;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
     private userService: UserService,
     modalRef: BsModalRef,
     private modalService: BsModalService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private translateService: TranslateService,
   ) {
    
   }
@@ -57,6 +61,7 @@ export class AdminComponent {
     });
     this.getAll();
     this.getMe();
+   
    
   }
 
@@ -149,22 +154,36 @@ getMe() {
   }
 
   saveAndOpenCompanyData() {
-  
-    let data = {
-      name: this.createCompanyForm.controls['name'].value,
-      trial:
-        this.createCompanyForm.controls['trial'].value === 'Trial version'
-          ? true
-          : false,
-      invitations: this.createCompanyForm.controls['invitations'].value,
-      managers: [{}],
-    };
-
-    this.userService.createOrganization(data).subscribe((res) => {
-      this.userService.getOrganizations().subscribe((res) => {
-        this.getAll();
+    if(this.createCompanyForm.controls['trial'].value === 'Full version'){
+      let data = {
+        name: this.createCompanyForm.controls['name'].value,
+        trial: this.createCompanyForm.controls['trial'].value === 'Trial version' && 'Full version'
+            ? true
+            : false,
+        managers: [{}],
+      };
+      this.userService.createOrganization(data).subscribe((res) => {
+        this.userService.getOrganizations().subscribe((res) => {
+          this.getAll();
+        });
       });
-    });
+    }
+    else{
+      let data = {
+        name: this.createCompanyForm.controls['name'].value,
+        trial: this.createCompanyForm.controls['trial'].value === 'Trial version' && 'Full version'
+            ? true
+            : false,
+        invitations: this.createCompanyForm.controls['invitations'].value,
+        managers: [{}],
+      };
+      this.userService.createOrganization(data).subscribe((res) => {
+        this.userService.getOrganizations().subscribe((res) => {
+          this.getAll();
+        });
+      });
+    }
+   
     this.createCompanyForm.reset();
     this.visible = false;
   }
@@ -186,6 +205,7 @@ getMe() {
   }
  
   onShowCompanyList(index: any, data: any) {
+    debugger
     this.visibleCompanyList = [];
     this.visibleCompanyList.push(data);
     if (this.activeIndex === data) {
@@ -203,6 +223,7 @@ getMe() {
     this.getManagers(data);
    
   }
+
   onCancelCreateCompany() {
     this.submitted = false;
     this.createCompanyForm.reset();

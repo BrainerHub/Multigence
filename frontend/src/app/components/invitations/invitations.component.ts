@@ -209,11 +209,6 @@ getInviteOrganization(){
    
     
     onSelectDepartment(value: any) {
-<<<<<<< Updated upstream
-      debugger
-=======
-
->>>>>>> Stashed changes
       this.selectedDepartment = value;
     }
     onSelectDepartments(value: any) {

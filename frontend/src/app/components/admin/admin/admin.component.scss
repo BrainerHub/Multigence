@@ -19,8 +19,12 @@
   }
   .manager-field {
     padding-top: 6px;
-    background-color: black-color;
-    border-bottom: 1px solid gray;
+    background-color: #0c0c0c;
+    border-bottom: 1px solid #555555;
+    margin-bottom: 10px;
+    .form-control {
+      border: none;
+    }
   }
 }
 
@@ -151,7 +155,7 @@
             border: 0;
             border-bottom: 1px solid #eeeeee;
             width: 100%;
-            padding: 9px 12px;
+            padding: 9px 2px;
             font-size: 14px;
             line-height: 1.42857143;
             position: relative;
@@ -275,8 +279,11 @@
     }
     .ModelBtnPart {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       margin-top: 50px;
+      button {
+        min-width: 70px;
+      }
     }
   }
 }

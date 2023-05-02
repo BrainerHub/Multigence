@@ -51,6 +51,7 @@ import { CorridorLegendItemComponent } from './components/report/corridor-legend
 import { CorridorGraphComponent } from './components/report/corridor-graph/corridor-graph.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ProgressBarModule} from "angular-progress-bar";
+
 @NgModule({
   declarations: [
     AppComponent,

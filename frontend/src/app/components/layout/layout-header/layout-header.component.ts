@@ -14,7 +14,7 @@ export class LayoutHeaderComponent {
   status = 'Enable';
   isAdmin = false;
   isManager = false;
-  selectedLanguage = 'en';
+  selectedLanguage:any = 'en';
   currentTheme = 'dark';
   constructor(
     private translate: TranslateService,
@@ -23,6 +23,12 @@ export class LayoutHeaderComponent {
     private renderer: Renderer2,
     private el: ElementRef
   ) {
+    // this.translate.onLangChange.subscribe((response: any) => {
+
+    //   console.log("response", response)
+
+    // })
+
     translate?.setDefaultLang('en');
     translate.use('en');
     this.renderer.addClass(
@@ -33,6 +39,8 @@ export class LayoutHeaderComponent {
 
   ngOnInit() {
     this.getRole();
+  this.selectedLanguage = localStorage.getItem('selectedLanguage')
+  this.translate.use(this.selectedLanguage);
   }
 
   getRole() {
