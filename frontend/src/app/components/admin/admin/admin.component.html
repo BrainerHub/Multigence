@@ -91,7 +91,8 @@
                         class="cform-inline"
                         *ngIf="
                           createCompanyForm.controls['trial'].value ==
-                          'Trial version'
+                          'Trial version' ||  createCompanyForm.controls['trial'].value ==
+                          'Testversion'
                         "
                       >
                         <div class="form-group d-flex align-items-center gap-2">

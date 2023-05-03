@@ -154,7 +154,7 @@ getMe() {
   }
 
   saveAndOpenCompanyData() {
-    if(this.createCompanyForm.controls['trial'].value === 'Full version'){
+    if(this.createCompanyForm.controls['trial'].value === 'Full version' ||  this.createCompanyForm.controls['trial'].value === 'Vollversion'){
       let data = {
         name: this.createCompanyForm.controls['name'].value,
         trial: this.createCompanyForm.controls['trial'].value === 'Trial version' && 'Full version'

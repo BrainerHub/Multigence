@@ -55,6 +55,12 @@
           border: none;
           color: #555;
         }
+        .form-control.disabled {
+          background-color: #eee;
+          &::placeholder {
+            color: #555;
+          }
+        }
         textarea.form-control {
           border-radius: 0;
           border: 1px solid rgba(255, 255, 255, 0.25);
@@ -82,6 +88,7 @@
         }
         .UpperLabel {
           position: absolute;
+          left: 23px;
         }
         textarea.form-control {
           padding: 10px;

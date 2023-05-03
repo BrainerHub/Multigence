@@ -3,11 +3,11 @@
   overflow: auto;
   top: 106px;
   position: relative;
-  background-color: black;
+  background-color: #fff;
 }
 .UploadQuestion {
   padding-top: 20px;
-  color: #fff;
+  // color: #fff;
   form {
     max-width: 370px;
     width: 100%;
@@ -21,6 +21,7 @@
     .theme-btn {
       font-size: 18px;
       line-height: 1.3333333;
+      padding: 10px 16px;
     }
   }
 }

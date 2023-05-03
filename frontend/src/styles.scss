@@ -19,7 +19,7 @@ body {
   .form-label {
     position: absolute;
     top: 8px;
-    // left: 0px;
+    left: 8px;
     // z-index: -1;
     span {
       color: green;
@@ -30,7 +30,7 @@ body {
   display: block;
   width: 100%;
   height: 34px;
-  padding: 6px 0px;
+  padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
@@ -460,6 +460,11 @@ label {
   .form-select {
     option {
       color: #555 !important;
+    }
+  }
+  .form-group {
+    .form-label.text-white {
+      color: #0e0e0e !important;
     }
   }
 }
