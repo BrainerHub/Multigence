@@ -23,7 +23,8 @@ export class QuestionaryService {
            
         //     }
             return this.userService.getUserQuestionaries(userId).pipe(
-              map((response) => response.data)
+              map((response) => response.data
+              )
             );
           })
        );
@@ -32,44 +33,23 @@ export class QuestionaryService {
   }
 
 
-
-
   // postAnswer(questionaryId:any, answer:any): Observable<any> {
   //   return this.getUserId().pipe(
   //     switchMap((userId) => {
   //       debugger
   //       return this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).pipe(
-  //         map((response) => response.data)
+  //         map((response) => response)
   //       );
   //     })
   //   );
   // }
 
-   postAnswer(questionaryId:any, answer:any,userId:any): Observable<any> {
-        debugger
-        return this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).pipe(
-          map((response) => response.data)
-        );
-  }
-
- 
-  // getAnswers(questionaryId:any): Observable<any> {
-  //   return this.getUserId().pipe(
-  //     switchMap((userId) => {
-  //       return this.userService.getUserQuestionaryAnswers(userId, questionaryId).pipe(
-  //         map((response) => response.data)
-  //       );
-  //     })
-  //   );
-  // }
   
   getAnswers(questionaryId:any , userId:any): Observable<any> {
 
     return this.userService.getUserQuestionaryAnswers(userId, questionaryId).pipe(
           map((response) => response.data)
-        );
-    
-   
+        )
   }
   
   getUserId(userId?:any): Observable<any> {

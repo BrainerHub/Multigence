@@ -81,7 +81,7 @@ export class QuestionaryComponent {
     this.current = 0;
     this.getMe();
     //this.handleLanguageChange();
-   // this.loadQuestionary();
+   //this.loadQuestionary();
   }
 
   selectCourse(coursId:any) {
@@ -98,7 +98,7 @@ export class QuestionaryComponent {
       animated: true,
       backdrop: 'static',
     });
-    this.getUserQuestionaries();
+   // this.getUserQuestionaries();
   }
 
   QuizStart(){
@@ -106,23 +106,24 @@ export class QuestionaryComponent {
     this.QuizShow = true;
   }
   
-  availablePoints() {
+  availablePoints(values?:any) {
     if (!this.questionary) {
       return 0;
     }
    
-    return this.maxPoint - this.totalPoints();
+    return this.maxPoint - this.totalPoints(values);
   }
 
   totalPoints(values?: number[]): number {
     if (values === undefined) {
       values = this.answers;
     }
+  
     return values.reduce(function (a, b) {
       return (a || 0) + (b || 0);
     }, 0);
     
-    
+   
   }
 
   increment(index: number): void {
@@ -138,18 +139,15 @@ export class QuestionaryComponent {
     }
   }
   next(): void {
-    //debugger
-     this.current++;
-     this.answers = [];
      this.getUserQuestionaries();
      this.availablePoints();
-     //this.loadQuestionary();
-     if( this.current === 2){
-       this.completed = true;
-     }
-   
+    //  if( this.current === 2){
+    //    this.completed = true;
+    //  }
+    var uuid = localStorage.getItem("userId");
+    var queId = localStorage.getItem("questionId");
     if (this.current < this.totalQuestions()) {
-      this.currentQuestion();
+     this.postAnswers(uuid,queId);  
    }
   }
 
@@ -162,7 +160,6 @@ export class QuestionaryComponent {
       }
       this.shuffleOptions();
       this.answers = [];
-      window.scrollTo(0, 0);
     }
   }
 
@@ -175,75 +172,57 @@ export class QuestionaryComponent {
     return _;
   }
 
-  totalQuestions(): number {
-
+  totalQuestions() {
     if (!this.questionary) {
       return 0;
     }
-    return this.QuestionData.questions.length;
+    return this.questionary.questions.length;
   }
+
 
   postAnswers(userId:any, questionaryId:any) {
-   
-  //   var question = this.currentQuestion();
-  //   var options = question.options.map((option: any, index: any) => {
-  //     var points = this.answers[index] || 0;
-  //     return {
-  //       uuid: option.uuid,
-  //       points: points,
-  //     };
-  //   });
-  //   var answer = {
-  //     questionId: question.uuid,
-  //     options: options,
-  //   };
-
-  //  return this.userService.postAnswer(userId,questionaryId, answer);
+    var question = this.currentQuestion();
+    var options = question.options.map((option: any, index: any) => {
+      var points = this.answers[index] || 0;
+      return {
+        uuid: option.uuid,
+        points: points,
+      };
+    });
+    var answer = {
+      questionId: question.uuid,
+      options: options,
+    };
+    this.userService.postUserQuestionaryAnswer(userId,questionaryId, answer);
+   //return this.userService.postUserQuestionaryAnswer(userId,questionaryId, answer);
   }
 
  
-  currentQuestion(): any {
-    return this.questionary[this.current];
+  currentQuestion(){
+   localStorage.setItem("userId",this.user.uuid);
+   localStorage.setItem("questionId",this.questionary.uuid)
+    return this.questionary.questions[this.current]; 
   }
  
-  loadQuestionary() {
-    //debugger
-    this.questionaryService.getAll(this.user.uuid,this.params).subscribe((questionaries: string | any[]) => {
-    this.current = 0;
-      if (questionaries?.length > 0) {
-         var questionary = questionaries[0];
-         this.applyAnswers(questionary.uuid, questionary.questions);
-         this.openModal();
-    } else {
-      this.questionary = null;
-    }
-      } 
-  )
-  }
 
-  applyAnswers(questionaryId: number, userId:any) {
-    this.userService.getUserQuestionaryAnswers(questionaryId, userId).subscribe((answers: any) => {
-      answers.map((question:any) => {
-        var answer = _.find(answers, { uuid: question.uuid });
+  applyAnswers(questionaryId: number, questions:any) {
+    var userId = this.user.uuid;
+    this.userService.getUserQuestionaryAnswers(questionaryId,userId).subscribe((answers: any) => {
+      questions.map((question:any) => {
+        var answer = _.find(answers, this.hasQuestionId(question.uuid));
         question.answered = answer !== undefined && answer.options && answer.options.length > 0;
-        // this.shuffleOptions();
-        // this.addGuards();
-        //     if (this.currentQuestion().answered) {
-        //       this.moveToNextQuestion();
-        //     }
-        //     if (question.every(this.isNotAnswered)) {
-        //         //this.openModal();
-        //     }
-        //     if (this.currentQuestion().answered) {
-        //         this.moveToNextQuestion();
-        //     }
-        //     this.questionary = question;
-            //vm.questionary = questionary;
-           //console.log("ques....",question);
-       this.postAnswers(questionaryId,userId);
-
-        return question;
-       
+            this.shuffleOptions();
+           // this.addGuards();
+           if(_.every(questions, this.isNotAnswered)){
+               this.openModal();
+           }
+           //debugger
+           this.questionary.questions = questions;
+            //this.questionary = questionary;
+            if (this.currentQuestion().answered) {
+               this.moveToNextQuestion();
+            }
+       return question;
       });
     });
   }
@@ -251,17 +230,8 @@ export class QuestionaryComponent {
   addGuards(){
 
   }
-
-  // handleLanguageChange(): void {
-  //   const langListener = this.rootScope.on('lang:change', () => {
-  //     this.loadQuestionary();
-  //   });
-  //   this.scope.on((destroyed:any, ) => {
-  //     langListener(); // stop listening
-  //   });
-  // }
   
-   isNotAnswered(question:any): boolean {
+   isNotAnswered(question:any) {
     return !question.answered;
   }
 
@@ -277,8 +247,7 @@ export class QuestionaryComponent {
       this.user = res;
       this.organization = res.company;
       this.getOrganization();
-     // this.getUserQuestionaries();
-      this.openModal();
+      this.getUserQuestionaries();
     });
   }
 
@@ -287,17 +256,22 @@ export class QuestionaryComponent {
   }
 
   getUserQuestionaries() {
-     //this.current = 0;
+     this.current = 0;
     this.userService
       .getUserQuestionaries(this.user.uuid)
       .subscribe((res) => {
-        //debugger
-        this.QuestionData = res[0];
-        this.questionary = res[0].questions[this.current];
-        this.maxPoint = res[0].max_points;
-        var userId = this.user.uuid;
-        var queId = res[0].uuid;
-        this.applyAnswers(userId, queId)
+        if(res.length > 0){
+           //this.QuestionData = res[0];
+           this.questionary = res[0];
+           this.maxPoint = res[0].max_points;
+           var userId = this.user.uuid;
+           var queId = res[0].uuid;
+          this.applyAnswers(this.questionary.uuid, this.questionary.questions);
+        }
+        else{
+          this.questionary = null;
+        }
+       // this.applyAnswers(queId,this.QuestionData.questions)
       });
   }
  

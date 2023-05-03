@@ -1,25 +1,23 @@
 <app-layout-header></app-layout-header>
 <div class="MainBodyPart">
 
-  <div class="question-header text-center pad-top-10 pad-bottom-10">
-    <!-- <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-      <span class="question-text">{{questionary.text}} ...</span>
-    </div> -->
-    <!-- <div class="question-header text-center pad-top-10 pad-bottom-10"> -->
-    <!-- <span class="question-text"
-    *ngIf="questionary.questions[current].text">{{questionary.questions[current].text}} ...</span> -->
+  <div class="question-header text-center pad-top-10 pad-bottom-10" *ngIf="!completed">
     <div class="col-sm-6 col-sm-offset-3 col-xs-12">
       <div *ngIf="questionary === null">
         <span class="question-text">You have no pending questionaries to complete! :</span>
       </div>
     </div>
 
-    <div class="col-sm-3 col-xs-12 points">
+
+    <div class="col-sm-12 col-xs-12 points" *ngIf="questionary && !completed">
       <!-- *ngIf="questionary && completed"maxPoint -->
-      <span *ngIf="questionary && !completed && QuizShow" maxPoint><span class="points-title max-value"
-          translate="questionary.points"></span>&nbsp;&nbsp;<span class="points-box max-value">{{totalPoints()}} |
-          {{maxPoint}}</span>&nbsp;&nbsp;</span>
-      <span *ngIf="totalPoints() == 22">hiii</span>
+      <h2 class="points-box max-value m-0">{{questionary?.questions[this.current].text}}</h2>
+      <span maxPoint class="points-upper-box">
+        <span class="points-title max-value" translate="questionary.points"></span>&nbsp;&nbsp;
+        <span class="points-box max-value">{{totalPoints()}} | {{maxPoint}}</span>&nbsp;&nbsp;
+      </span>
+
+      <!-- <span *ngIf="totalPoints() == 22">hiii</span> -->
     </div>
 
 
@@ -40,9 +38,8 @@
     <div class="container-fluid">
       <div class="row pt-5 ps-2 pe-2">
 
-        <form class="form-horizontal" *ngIf="QuizShow && questionary && !completed ">
-          <!-- <div>{{questionary.text}}</div> -->
-          <div class="cs-width col-md-6" *ngFor="let option of questionary?.options; let i = index">
+        <form class="form-horizontal" *ngIf="questionary && !completed ">
+          <div class="cs-width col-md-6" *ngFor="let option of questionary?.questions[current].options; let i = index">
             <div>
               <div>
                 <div class="panel panel-default question-box">
@@ -99,8 +96,7 @@
             [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}"> <span>{{ 'current' + 1 }} / {{
               totalQuestions() }}</span>
           </progress-bar> -->
-          <div class="progress ps-0 pe-0" style="height: 30px; border-radius: 0;"
-            *ngIf="questionary && !completed &&  QuizShow">
+          <div class="progress ps-0 pe-0" style="height: 30px; border-radius: 0;" *ngIf="questionary && !completed ">
             <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0"
               aria-valuemax="100">{{ current + 1 }} / {{totalQuestions()}} </div>
           </div>

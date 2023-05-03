@@ -8,9 +8,9 @@ import { Observable, Subject, map } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  postAnswer(userId: any, questionaryId: any, answer: { questionId: any; options: any; }) {
-    throw new Error('Method not implemented.');
-  }
+  // postAnswer(userId: any, questionaryId: any, answer: { questionId: any; options: any; }) {
+  //   throw new Error('Method not implemented.');
+  // }
   ROLE_MANAGER = 'MANAGER';
   ROLE_EMPLOYEE = 'EMPLOYEE';
   ROLE_APPLICANT = 'APPLICANT';
@@ -23,8 +23,6 @@ export class UserService {
     headers: new HttpHeaders({
       'Content-Type': ' ', 
       "Authorization":`Token`
-     
-      
     }),
   };
   constructor(private http: HttpClient, public router:Router) {}
@@ -351,22 +349,34 @@ getMe() {
   }
 
   getUserQuestionaryAnswers(userId:any, questionaryId:any){
+   // debugger
     var answered = {};
     answered = true ;
-    return this.http.get<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', answered).pipe(
+    return this.http.get<any>(`${this.apiUrl}` +'/user/' + questionaryId + '/questionary/' + userId + '/answer/', answered).pipe(
       map((user) => {
         return user;
       })
     );
   }
 
-  postUserQuestionaryAnswer(userId:any, questionaryId:any, answer:any){
-    return this.http.post<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', answer).pipe(
+  postUserQuestionaryAnswer(userId:any, questionaryId:any, answer?:any){
+    debugger
+    var data:any = {}
+    data.method = "POST"
+    data.headers = {Authorization : "Token 2861c43e3ecf390f25da4caa84590c89d425b142"}
+    data.params = {}
+    data.url = "http://localhost:8000/api/user/13eeff42-f6b3-4eac-9214-556f467a8fea/questionary/d077c625-991c-45f7-a171-f82593da332f/answer/"
+     this.http.post<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', true ).pipe(
       map((user) => {
+        debugger
         return user;
       })
-    );
+     );
   }
+
+  // _endpoint(path?:any) {
+  //   return config.get('apiEndpoint') + path;
+  // }
 
 
 
@@ -382,7 +392,8 @@ getMe() {
     );
    
   }
-      
+
+
   getInviteOrganization(uuid: any) {
     return this.http.get<any>(`${this.apiUrl}` +  '/organization/' + uuid + '/').pipe(
       map((user) => {
@@ -461,6 +472,8 @@ getMe() {
     );
   }
 
+
+  
  
 }
  

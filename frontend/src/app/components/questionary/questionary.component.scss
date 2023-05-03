@@ -176,8 +176,12 @@
   background-color: #0c0c0c;
   padding: 10px 0px;
 }
-.points {
-  text-align: right;
+.points h2 {
+  font-size: 24px;
+}
+.points-upper-box {
+  position: absolute;
+  right: 0;
 }
 .points-title {
   font-size: 18px;
