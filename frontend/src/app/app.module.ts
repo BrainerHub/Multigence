@@ -19,7 +19,6 @@ import { ForgetPasswordComponent } from './components/login/forget-password/forg
 import { SignupComponent } from './components/login/signup/signup.component';
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './Interceptor/auth.interceptor';
-import { ErrorInterceptor } from './Interceptor/error.interceptor';
 import { LayoutComponent } from './components/layout/layout.component';
 import { LayoutHeaderComponent } from './components/layout/layout-header/layout-header.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
@@ -114,11 +113,6 @@ import {ProgressBarModule} from "angular-progress-bar";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

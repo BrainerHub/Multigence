@@ -30,21 +30,16 @@ export class DataLoadComponent {
   }
 
   uploadFile() {
-    this.userService.uploadQuestions(this.file).subscribe(
-      (res: any) => {
-        if (res) {
-          this.message = 'Data uploaded successfully!';
-          this.messageHidden = true;
-        }
-        if (res && res.data && res.data.detail) {
-        }
-      },
-      (err) => {
-        this.errorMessage = err.error.detail;
-      }
-    );
-
     this.errorMessageHidden = true;
+    this.userService.uploadQuestions(this.file).subscribe((res: any) => {
+      if(res) {
+        this.message = 'Data uploaded successfully!';
+        this.messageHidden = true;
+      }
+    }, (err) => {
+      this.errorMessage = err.error.detail;
+    });
+    
   }
 
   getMe() {

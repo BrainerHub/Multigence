@@ -45,6 +45,7 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl}` + '/register/', data).pipe(
       map((user) => {
         localStorage.setItem('user', JSON.stringify(user));
+       
         return user;
       })
     );
@@ -70,7 +71,8 @@ export class UserService {
 
  //user logOut
   logout(){
-    localStorage.clear();
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 

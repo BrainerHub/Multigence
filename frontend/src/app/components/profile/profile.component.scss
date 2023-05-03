@@ -63,7 +63,9 @@
           border-radius: 0;
           border: none;
           border-bottom: 1px solid #000;
-          background-image: unset;;
+          background-image: unset;
+          z-index: 9;
+          position: relative;
           &:focus {
             box-shadow: unset;
           } 
@@ -74,6 +76,15 @@
           right: 15px;
           top: 5px;
           transform: rotate(132deg);
+        }
+        .form-label {
+          position: unset;
+        }
+        .UpperLabel {
+          position: absolute;
+        }
+        textarea.form-control {
+          padding: 10px;
         }
       }
     }

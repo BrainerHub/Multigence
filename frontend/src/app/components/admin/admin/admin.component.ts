@@ -205,7 +205,6 @@ getMe() {
   }
  
   onShowCompanyList(index: any, data: any) {
-    debugger
     this.visibleCompanyList = [];
     this.visibleCompanyList.push(data);
     if (this.activeIndex === data) {

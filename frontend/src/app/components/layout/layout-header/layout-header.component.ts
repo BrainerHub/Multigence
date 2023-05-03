@@ -14,8 +14,8 @@ export class LayoutHeaderComponent {
   status = 'Enable';
   isAdmin = false;
   isManager = false;
-  selectedLanguage:any = 'en';
-  currentTheme = 'dark';
+  selectedLanguage: any = 'en';
+  currentTheme: any = 'dark';
   constructor(
     private translate: TranslateService,
     public router: Router,
@@ -23,12 +23,6 @@ export class LayoutHeaderComponent {
     private renderer: Renderer2,
     private el: ElementRef
   ) {
-    // this.translate.onLangChange.subscribe((response: any) => {
-
-    //   console.log("response", response)
-
-    // })
-
     translate?.setDefaultLang('en');
     translate.use('en');
     this.renderer.addClass(
@@ -39,8 +33,11 @@ export class LayoutHeaderComponent {
 
   ngOnInit() {
     this.getRole();
-  this.selectedLanguage = localStorage.getItem('selectedLanguage')
-  this.translate.use(this.selectedLanguage);
+    this.currentTheme = localStorage.getItem('currentTheme');
+    this.selectedLanguage = localStorage.getItem('selectedLanguage');
+    this.translate.use(this.selectedLanguage);
+    this.setTheme(this.currentTheme)
+   
   }
 
   getRole() {
@@ -62,31 +59,20 @@ export class LayoutHeaderComponent {
 
   //user logout
   logOut() {
-    localStorage.clear();
-    this.router.navigate(['/login']);
+    this.userService.logout();
   }
 
-  myValue(value: any) {
+  setTheme(value: any) {
     if (value === 'dark') {
-      this.renderer.addClass(
-        this.el.nativeElement.ownerDocument.body,
-        'dark-theme-selector'
-      );
-      this.renderer.removeClass(
-        this.el.nativeElement.ownerDocument.body,
-        'white-theme-selector'
-      );
+      this.renderer.addClass( this.el.nativeElement.ownerDocument.body,'dark-theme-selector');
+      this.renderer.removeClass(this.el.nativeElement.ownerDocument.body,'white-theme-selector');
       this.currentTheme = 'dark';
     } else {
-      this.renderer.removeClass(
-        this.el.nativeElement.ownerDocument.body,
-        'dark-theme-selector'
-      );
-      this.renderer.addClass(
-        this.el.nativeElement.ownerDocument.body,
-        'white-theme-selector'
-      );
+      this.renderer.removeClass(this.el.nativeElement.ownerDocument.body,'dark-theme-selector');
+      this.renderer.addClass(this.el.nativeElement.ownerDocument.body, 'white-theme-selector');
       this.currentTheme = 'white';
     }
+    localStorage.setItem('currentTheme', value)
   }
+
 }

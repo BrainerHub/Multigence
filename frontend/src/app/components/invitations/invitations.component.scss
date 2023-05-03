@@ -54,6 +54,7 @@
     line-height: 1.42857143;
     position: relative;
     appearance: none;
+    z-index: 9;
     &:focus-visible {
       outline: none;
     }
@@ -102,6 +103,7 @@
       flex-wrap: wrap;
       position: relative;
       padding: 25px;
+      z-index: 9;
     }
   }
 }
@@ -110,18 +112,23 @@
   .modal-body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     border: 1px solid #fff;
-    // border-radius: 6px;
+    border-radius: 6px;
     background: #777777 url("../../../assets/images/modal-background.png")
       repeat center center;
-    padding: 50px 50px 50px 50px;
+    padding: 30px;
     p {
       color: #fff;
       text-align: center;
+      font-size: 32px;
     }
     .ModelBtnPart {
       display: flex;
       justify-content: center;
       margin-top: 20px;
+      button {
+        font-size: 18px;
+        padding: 10px 16px;
+      }
     }
   }
 }

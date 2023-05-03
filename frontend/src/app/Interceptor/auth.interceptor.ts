@@ -32,7 +32,6 @@ export class AuthInterceptor implements HttpInterceptor {
             )
     }
     else {
-        // this.sharedService.hideLoader();
         return next.handle(req).pipe(
             // Log when response observable either completes or errors
             finalize(() => {
