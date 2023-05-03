@@ -248,21 +248,23 @@
                             <div
                               class="form-group d-flex align-items-center gap-2"
                             >
-                              <label
+                              <!-- <label
                                 class="form-label text-white"
-                                *ngIf="!selectedDepartment"
+                                *ngIf="!selectedDepartment"  
+                                 (click)="onSelectDepartment($event)"
                                 >DEPARTMENT</label
-                              >
+                              > -->
                               <select
                                 name="department"
                                 id="department"
                                 style="padding-bottom: 8px"
                                 formControlName="department"
-                                (change)="onSelectDepartment($event)"
+                                class="selected"
                               >
+                           
                                 <option
                                   *ngFor="let department of departments"
-                                  [value]="department.name"
+                                  [value]="department.uuid"
                                 >
                                   {{ department.name }}
                                 </option>

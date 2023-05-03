@@ -38,6 +38,7 @@ export class AdminComponent {
   selectedDepartment: false;
   selectedOption = false;
   department: any;
+  
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,

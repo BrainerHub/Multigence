@@ -340,8 +340,8 @@
                   <tr *ngFor="let user of usersPage | filter : searchText">
                     <td scope="row">
 
-                      <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'" class="bi bi-triangle-fill"></i>
-                      <i *ngIf="user.role == 'APPLICANT'" class="bi bi-hexagon-fill"></i>
+                      <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'"   [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}" class="bi bi-triangle-fill"></i>
+                      <i *ngIf="user.role == 'APPLICANT'"  [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}" class="bi bi-hexagon-fill"></i>
                     </td>
 
                     <td>{{ user.first_name }}</td>
@@ -351,7 +351,7 @@
                     <td>{{ user.title }}</td>
                     <td>{{ user.invite }}</td>
                     <td>
-                      <div class="d-flex align-items-center gap-3 justify-content-between">
+                      <div class="d-flex align-items-center gap-3 justify-content-end">
                         <a *ngIf="
                             user.status === 'DONE' ||
                             user.status === 'IN_PROGRESS'

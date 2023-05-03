@@ -141,11 +141,15 @@
             margin: 0;
           }
           .form-control {
-            color: #333333;
+            // color: #333333;
+            color: #eeeeee;
             font-weight: bold;
             position: relative;
             &::placeholder {
               color: #333333;
+            }
+            p {
+              color: #333;
             }
           }
           select {
@@ -155,7 +159,7 @@
             border: 0;
             border-bottom: 1px solid #eeeeee;
             width: 100%;
-            padding: 9px 2px;
+            padding: 9px 12px;
             font-size: 14px;
             line-height: 1.42857143;
             position: relative;
@@ -168,6 +172,9 @@
             &:focus-visible {
               outline: none;
             }
+          }
+          select.selected {
+            color: #00ff85 !important;
           }
           select + .bi.bi-send {
             position: absolute;

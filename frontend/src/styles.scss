@@ -19,7 +19,7 @@ body {
   .form-label {
     position: absolute;
     top: 8px;
-    left: 8px;
+    left: 12px;
     // z-index: -1;
     span {
       color: green;
@@ -216,6 +216,9 @@ label {
 .status-danger {
   font-size: 14px !important;
 }
+.finished-color {
+  color: #00ff85;
+}
 .dark-theme {
   background: #252525;
 }
@@ -303,6 +306,9 @@ label {
           textarea.form-control {
             border: 1px solid #0e0e0e !important;
           }
+          .form-label {
+            color: #0c0c0c !important;
+          }
         }
       }
     }
@@ -313,6 +319,9 @@ label {
   .form-select {
     color: #0e0e0e;
     border-bottom: 1px solid #0e0e0e;
+    option {
+      background-color: #C6C6C6;
+    }
   }
   .form-control {
     color: #0e0e0e;
@@ -335,7 +344,7 @@ label {
         th,
         td {
           background-color: #c6c6c6;
-          color: #555555 !important;
+          color: #0c0c0c !important;
         }
       }
     }
@@ -410,6 +419,11 @@ label {
   stroke: #00ff85;
   text-decoration: underline;
 }
+.form-group {
+  select.selected {
+    color: #00ff85 !important;
+  }
+}
 .dark-btn-theme-selector:hover span.black-txt {
   text-decoration: underline;
 }
@@ -462,9 +476,31 @@ label {
       color: #555 !important;
     }
   }
+
   .form-group {
     .form-label.text-white {
       color: #0e0e0e !important;
+    }
+  }
+  .admin-home {
+    .companies-list {
+      .form-control {
+        color: #0e0e0e !important;
+      }
+      .form-group {
+        select {
+          border-bottom: 1px solid #0e0e0e !important;
+        }
+      }
+    }
+  }
+  .Custompagination {
+    background: #fff;
+    .pagination {
+      .page-link.active {
+        color: #0c0c0c;
+        background-color: #c6c6c6;
+      }
     }
   }
 }
