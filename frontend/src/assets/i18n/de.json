@@ -72,7 +72,7 @@
             "name": "Name des Unternehmen"
           }
         },
-        "title": "Company monitor"
+        "title": "UNTERNEHMENS MONITOR"
       },
       "form": {
         "invitations": "Invitations"
@@ -115,8 +115,8 @@
     },
     "form": {
       "company": "Company",
-      "createDepartment": "erstelle Abteilung",
-      "createJobId": "erstelle Job ID",
+      "CreateDepartment": "Erstelle Abteilung",
+      "CreateJobId": "Erstelle Job ID",
       "email": "Email",
       "firstname": "Vorname",
       "join": "Beitreten",
@@ -126,7 +126,15 @@
       "repeatPassword": "Passwort wiederholen",
       "reset": "zurücksetzten",
       "send": "Senden",
-      "setPassword": "Passwort eingeben"
+      "setPassword": "Passwort eingeben",
+      "firstName": "Vorname ist erforderlich!",
+      "LastName": "Nachname ist erforderlich!",
+      "Email": "E-Mail muss erforderlich sein!",
+      "valid": "Email ist ungültig",
+      "CreatedDepartment": "Abteilung erstellen ist erforderlich!",
+      "JobId": "JobId muss erforderlich sein!",
+      "VacancyRequired": "Vakanz/JobId ist erforderlich!"
+
     },
     "graphic": {
       "collective": "Kollektiv",
@@ -135,8 +143,8 @@
       "trialMessage": "Not avalaible in the Trial Version"
     },
     "invitation": {
-      "expired": null,
-      "maxReached": null,
+      "expired": "Die Einladung ist abgelaufen",
+      "maxReached": "Maximale Anzahl an Einladungen erreicht",
       "sentBeforeMessage": "Einladung wurde schon verschickt",
       "sentMessage": "Einladung verschickt",
       "userHasStartedQuizMessage": "Einladung wurde schon verschickt. Benutzer hat den Fragebogen gestartet"
@@ -244,7 +252,13 @@
         "submit": "Join",
         "terms": "Terms and conditions",
         "why": "Tell us why you want to join"
-      }
+      },
+      "firstName": "Vorname ist erforderlich!",
+      "LastName": "Nachname ist erforderlich!",
+      "Email": "E-Mail muss erforderlich sein!",
+      "Company": "Unternehmend ist erforderlich!",
+      "valid": "Email ist ungültig",
+      "acceptTerms": "Sie müssen unsere Allgemeinen Geschäftsbedingungen akzeptieren"
     },
     "software": {
       "version": {

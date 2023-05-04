@@ -39,7 +39,9 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="createInvitationForm.get('firstName')?.errors?.['required']">
-                              <span style="color: red">First name is required!</span>
+                              <span style="color: red">{{
+                                "form.firstName" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>
@@ -54,7 +56,9 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="createInvitationForm.get('lastName')?.errors?.['required']">
-                              <span style="color: red">Last name is required!</span>
+                              <span style="color: red">{{
+                                "form.LastName" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>
@@ -73,7 +77,7 @@
                       <div class="col-md-6">
                         <div class="form-group CustomAddBtn">
                           <input type="text" name="name" placeholder="{{
-                              'form.createDepartment' | translate
+                              'form.CreateDepartment' | translate
                             }}" class="form-control form-control-outline" formControlName="name" />
                           <button type="button" (click)="addDepartment($event)" class="plusIconBtn">
                             +
@@ -86,7 +90,9 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="createInvitationForm.get('name')?.errors?.['required']">
-                              <span style="color: red">Create Departament is required!</span>
+                              <span style="color: red">{{
+                                "form.CreatedDepartment" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>
@@ -102,11 +108,15 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="createInvitationForm.get('employeeEmail')?.errors?.['required']">
-                              <span style="color: red">Email must be required?</span>
+                              <span style="color: red">{{
+                                "form.Email" | translate
+                              }}</span>
                             </p>
                             <p class="caption status-danger"
                               *ngIf="createInvitationForm.get('employeeEmail')?.errors?.['pattern']">
-                              <span style="color: red">Email is not valid</span>
+                              <span style="color: red">{{
+                                "form.valid" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>
@@ -163,7 +173,9 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="CreateCandidateform.get('candidateFirstName')?.errors?.['required']">
-                              <span style="color: red">First name is required!</span>
+                              <span style="color: red">{{
+                                "form.firstName" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>
@@ -180,7 +192,9 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="CreateCandidateform.get('candidateLastName')?.errors?.['required']">
-                              <span style="color: red">Last name is required!</span>
+                              <span style="color: red">{{
+                                "form.LastName" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>
@@ -199,7 +213,7 @@
                       <div class="col-6">
                         <div class="form-group CustomAddBtn">
                           <input type="text" name="name" placeholder="{{
-                              'form.createDepartment' | translate
+                              'form.CreateDepartment' | translate
                             }}" class="form-control form-control-outline" formControlName="name" />
                           <button type="button" (click)="addCandidateDepartment($event)" class="plusIconBtn">
                             +
@@ -212,24 +226,28 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="CreateCandidateform.get('name')?.errors?.['required']">
-                              <span style="color: red">Departament is required!</span>
+                              <span style="color: red">{{
+                                "form.CreatedDepartment" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                          <select class="form-select" name="job" id="job" formControlName="job">
+                          <label class="form-label text-white" *ngIf="!selectJobId">VACANCY / JOB ID</label>
+                          <select class="form-select" name="job" id="job" formControlName="job" (change)="onSelectVacancy($event)">
                             <option *ngFor="let job of postions" [value]='job.uuid'>
                               {{ job.name }}
                             </option>
                           </select>
+                          <span class="bi bi-send"></span>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="form-group CustomAddBtn">
                           <input type="text" name="createJobID" class="form-control form-control-outline"
-                            placeholder="{{ 'form.createJobId' | translate }}" formControlName="createJobId" />
+                            placeholder="{{ 'form.CreateJobId' | translate }}" formControlName="createJobId" />
                           <button type="button" (click)="addPosition($event)" class="plusIconBtn">
                             +
                           </button>
@@ -239,7 +257,9 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="CreateCandidateform.get('createJobId')?.errors?.['required']">
-                              <span style="color: red">JobId must be required?</span>
+                              <span style="color: red">{{
+                                "form.JobId" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>
@@ -255,11 +275,15 @@
                             ">
                             <p class="caption status-danger"
                               *ngIf="CreateCandidateform.get('candidateEmail')?.errors?.['required']">
-                              <span style="color: red">Email must be required!</span>
+                              <span style="color: red">{{
+                                "form.Email" | translate
+                              }}</span>
                             </p>
                             <p class="caption status-danger"
                               *ngIf="CreateCandidateform.get('candidateEmail')?.errors?.['pattern']">
-                              <span style="color: red">Email is not valid</span>
+                              <span style="color: red">{{
+                                "form.valid" | translate
+                              }}</span>
                             </p>
                           </ng-container>
                         </div>

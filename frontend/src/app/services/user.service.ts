@@ -148,8 +148,8 @@ addPosition(organizationId:any , position:any) {
  
 
    //update Organisation
-  updateOrganization(uuid:any, datas:any ) {
-    return this.http.patch<any>(`${this.apiUrl}` + '/organization/'+uuid+'/', datas).pipe(
+  updateOrganization(uuid:any, data:any ) {
+    return this.http.patch<any>(`${this.apiUrl}` + '/organization/'+uuid+'/', data).pipe(
       map((user) => {
         return user;
       })

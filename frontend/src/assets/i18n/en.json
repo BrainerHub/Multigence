@@ -116,8 +116,8 @@
     },
     "form": {
       "company": "Company",
-      "createDepartment": "create Department",
-      "createJobId": "create Job ID",
+      "CreateDepartment": "Create Department",
+      "CreateJobId": "Create Job ID",
       "email": "Email",
       "firstname": "First Name",
       "join": "Join",
@@ -127,7 +127,14 @@
       "repeatPassword": "Repeat password",
       "reset": "reset",
       "send": "Send",
-      "setPassword": "Enter password"
+      "setPassword": "Enter password",
+      "firstName": "First name is required!",
+      "LastName": "Last name is required!",
+      "Email": "Email must be required!",
+      "valid": "Email is not valid",
+      "CreatedDepartment": "Create Department is required!",
+      "JobId": "JobId must be required!",
+      "VacancyRequired": "Vacancy/JobId is required!"
     },
     "graphic": {
       "collective": "Collective",
@@ -245,8 +252,18 @@
         "submit": "Join",
         "terms": "Terms and conditions",
         "why": "Tell us why you want to join"
-      }
+      },
+      "firstName": "First name is required!",
+      "LastName": "Last name is required!",
+      "Email": "Email must be required!",
+      "Company": "Email must be required!",
+      "valid": "Email is not valid",
+      "acceptTerms": "You must accept our terms and conditions"
     },
+
+
+
+
     "software": {
       "version": {
         "full": "Full version",

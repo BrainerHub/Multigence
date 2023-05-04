@@ -24,6 +24,7 @@ export class InvitationsComponent {
   postions:any = [];
   selectedDepartment: false;
   selectDepartment: false;
+  selectJobId: false;
   submitted!: boolean;
   jobs: any = [];
   inviteOrganaiztion:any = [];
@@ -213,6 +214,9 @@ getInviteOrganization(){
     }
     onSelectDepartments(value: any) {
       this.selectDepartment = value;
+    }
+    onSelectVacancy(value : any){
+      this.selectJobId = value;
     }
     inviteconfirmOkDialog(){
       this.modalRef.hide();

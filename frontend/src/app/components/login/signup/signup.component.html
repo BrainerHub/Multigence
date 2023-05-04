@@ -18,7 +18,7 @@
                         class="caption status-danger"
                         *ngIf="signupForm.get('first_name')?.errors?.['required']"
                       >
-                        <span style="color: red">{{"signup.form.error.firstname.required" | translate}}</span>
+                        <span style="color: red">{{"signup.firstName" | translate}}</span>
                       </p>
                      
                     </ng-container>
@@ -39,7 +39,7 @@
                         class="caption status-danger"
                         *ngIf="signupForm.get('last_name')?.errors?.['required']"
                       >
-                        <span style="color: red">{{"signup.form.error.lastname.required" | translate}}</span>
+                        <span style="color: red">{{"signup.LastName" | translate}}</span>
                       </p>
                      
                     </ng-container>
@@ -60,7 +60,7 @@
                         class="caption status-danger"
                         *ngIf="signupForm.get('company')?.errors?.['required']"
                       >
-                        <span style="color: red">{{"signup.form.error.company.required" | translate}}</span>
+                        <span style="color: red">{{"signup.Company" | translate}}</span>
                       </p>
                      
                     </ng-container>
@@ -81,13 +81,13 @@
                         class="caption status-danger"
                         *ngIf="signupForm.get('email')?.errors?.['required']"
                       >
-                        <span style="color: red">{{"signup.form.email.error.required" | translate}}</span>
+                        <span style="color: red">{{"signup.Email" | translate}}</span>
                       </p>
                       <p
                       class="caption status-danger"
                       *ngIf="signupForm.get('email')?.errors?.['pattern']"
                     >
-                      <span style="color: red">{{ "signup.form.error.email.invalid" | translate  }}</span>
+                      <span style="color: red">{{ "signup.valid" | translate  }}</span>
                     </p>
                      
                     </ng-container>
@@ -133,7 +133,7 @@
                           class="caption status-danger"
                           *ngIf="signupForm.get('acceptTerms')?.errors?.['required']"
                         >
-                          <span style="color: red">{{"signup.form.error.terms.required" | translate}}</span>
+                          <span style="color: red">{{"signup.acceptTerms" | translate}}</span>
                         </p>
                        
                       </ng-container>

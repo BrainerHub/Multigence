@@ -5,23 +5,45 @@
   position: relative;
   background-color: #212121;
 }
-.ConfirmationModel {
-  .modal-body {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    border: 1px solid #fff;
-    // border-radius: 6px;
-    background-color: #171717;
-    padding: 50px 50px 50px 50px;
-    p {
-      color: #fff;
-    }
-    .ModelBtnPart {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 50px;
+.dark-theme-selector{
+  .ConfirmationModel {
+    .modal-body {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      border: 1px solid #fff;
+      // border-radius: 6px;
+      background-color: #171717;
+      padding: 50px 50px 50px 50px;
+      p {
+        color: #fff;
+      }
+      .ModelBtnPart {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+      }
     }
   }
 }
+.white-theme-selector{
+  .ConfirmationModel {
+    .modal-body {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      border: 1px solid #fff;
+      // border-radius: 6px;
+      background-color: #fff;
+      padding: 50px 50px 50px 50px;
+      p {
+        color: #000;
+      }
+      .ModelBtnPart {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+      }
+    }
+  }
+}
+
 .switch {
   position: relative;
   display: inline-block;

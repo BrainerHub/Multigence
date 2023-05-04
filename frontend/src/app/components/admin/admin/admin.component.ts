@@ -190,23 +190,21 @@ getMe() {
   }
 
   saveNewCompanyName(newData: any) {
-    let data = {
+    let newDat = {
       uuid : newData.uuid,
       name : this.createOrginationForm.value.organizations[0].name,
       departments : this.departments,
-      managers: [],
     };
       
-    this.userService.updateOrganization(newData.uuid,data).subscribe((res) => {
+    this.userService.updateOrganization(newData.uuid,newDat).subscribe((res) => {
       this.getAll();
        
     })
-    
     this.onCancelVisibleCompany('index')
   }
  
   onShowCompanyList(index: any, data: any) {
-    this.visibleCompanyList = [];
+  this.visibleCompanyList = [];
     this.visibleCompanyList.push(data);
     if (this.activeIndex === data) {
       this.activeIndex = null;
