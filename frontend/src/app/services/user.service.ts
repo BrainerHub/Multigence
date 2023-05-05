@@ -19,13 +19,16 @@ export class UserService {
   storage = sessionStorage;
   apiUrl = environment.api;
   utils: any;
+  url: string;
   private headers = {
     headers: new HttpHeaders({
       'Content-Type': ' ', 
       "Authorization":`Token`
     }),
   };
-  constructor(private http: HttpClient, public router:Router) {}
+  constructor(private http: HttpClient, public router:Router) {
+    this.url = environment.api
+  }
 
 
     // Login User
@@ -164,6 +167,7 @@ addPosition(organizationId:any , position:any) {
     })
   );
 }
+
 getInvitation(uuid:any) {
   return this.http.get<any>(`${this.apiUrl}` + '/invite/' + uuid + '/').pipe(
     map((user) => {
@@ -359,27 +363,23 @@ getMe() {
     );
   }
 
-  postUserQuestionaryAnswer(userId:any, questionaryId:any, answer?:any){
-    debugger
-    var data:any = {}
-    data.method = "POST"
-    data.headers = {Authorization : "Token 2861c43e3ecf390f25da4caa84590c89d425b142"}
-    data.params = {}
-    data.url = "http://localhost:8000/api/user/13eeff42-f6b3-4eac-9214-556f467a8fea/questionary/d077c625-991c-45f7-a171-f82593da332f/answer/"
-     this.http.post<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', true ).pipe(
-      map((user) => {
-        debugger
-        return user;
-      })
-     );
-  }
-
-  // _endpoint(path?:any) {
-  //   return config.get('apiEndpoint') + path;
+  // postUserQuestionaryAnswer(userId:any, questionaryId:any, answer?:any){
+  //   console.log(answer,'asnser');
+  //   const apiUrl = "http://localhost:8000/api/user/13eeff42-f6b3-4eac-9214-556f467a8fea/questionary/d077c625-991c-45f7-a171-f82593da332f/answer/"
+  //  // return this.http.post<any>(apiUrl, answer)
+  //  // this.http.post<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', answer );
   // }
 
+  postUserQuestionaryAnswer(userId:any, questionaryId:any, answer?:any) {
+  //  var abcd =  this.http.post(this.url + '/user/' + userId+ '/questionary/' +questionaryId+ '/answer/', answer);
+    //console.log(abcd,'abcd');
+
+  //  return
+    return this.http.post<any>(this.apiUrl + '/user/' + userId + '/questionary/' + questionaryId + '/answer/', answer);
+  }
 
 
+ 
   getOrganizationUsers(organizationId:any, departmentId:any) {
     var params = {};
     if (departmentId !== undefined) {

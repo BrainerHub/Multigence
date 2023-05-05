@@ -14,7 +14,7 @@ import { QuestionaryService } from 'app/services/questionary.service';
 export class QuestionaryComponent {
   optionsForm!: FormGroup;
   @ViewChild('template') template: TemplateRef<HTMLDivElement>;
-  modalRef: BsModalRef;
+ modalRef: BsModalRef;
   user: any;
   data: any;
   departments: any;
@@ -61,44 +61,23 @@ export class QuestionaryComponent {
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
-    modalRef: BsModalRef,
+     modalRef: BsModalRef,
     private modalService: BsModalService,
     private userService: UserService,
     public route: ActivatedRoute,
     private questionaryService: QuestionaryService
   ) {
-    setInterval(()=> {
-      if(this.progress < 100){
-        this.progress = this.progress;
-      }
-      else{
-        this.progress = 0;
-      }
-    }, 100);
   }
 
   ngOnInit() {
-    this.current = 0;
     this.getMe();
-    //this.handleLanguageChange();
-   //this.loadQuestionary();
   }
 
-  selectCourse(coursId:any) {
-    if (!!!coursId) return;
-    this.selectedCourses[coursId] = !this.selectedCourses[coursId];
-    const arr = _.toArray(this.selectedCourses);
-    const trues = _.filter(arr, r => r === true).length;
-    const arrLength = this.boxes.length;
-    this.coursesPercentage = (trues / arrLength) * 100;
-  }
- 
   openModal() {
     this.modalRef = this.modalService.show(this.template, {
       animated: true,
       backdrop: 'static',
     });
-   // this.getUserQuestionaries();
   }
 
   QuizStart(){
@@ -138,12 +117,9 @@ export class QuestionaryComponent {
       this.answers[index] = (this.answers[index] || 0) - 1;
     }
   }
+
   next(): void {
-     this.getUserQuestionaries();
-     this.availablePoints();
-    //  if( this.current === 2){
-    //    this.completed = true;
-    //  }
+    this.getUserQuestionaries();
     var uuid = localStorage.getItem("userId");
     var queId = localStorage.getItem("questionId");
     if (this.current < this.totalQuestions()) {
@@ -193,8 +169,11 @@ export class QuestionaryComponent {
       questionId: question.uuid,
       options: options,
     };
-    this.userService.postUserQuestionaryAnswer(userId,questionaryId, answer);
-   //return this.userService.postUserQuestionaryAnswer(userId,questionaryId, answer);
+   
+  this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).subscribe((res: any) => {
+    console.log(res,'res');
+  } )
+  // return this.userService.postUserQuestionaryAnswer(userId,questionaryId, answer);
   }
 
  
@@ -213,12 +192,10 @@ export class QuestionaryComponent {
         question.answered = answer !== undefined && answer.options && answer.options.length > 0;
             this.shuffleOptions();
            // this.addGuards();
-           if(_.every(questions, this.isNotAnswered)){
-               this.openModal();
+           if(_.every(questions,this.isNotAnswered)){
+              //this.openModal();
            }
-           //debugger
-           this.questionary.questions = questions;
-            //this.questionary = questionary;
+            this.questionary.questions = questions;
             if (this.currentQuestion().answered) {
                this.moveToNextQuestion();
             }
@@ -243,6 +220,7 @@ export class QuestionaryComponent {
   }
   
   getMe() {
+   
     this.userService.getMe().subscribe((res: any) => {
       this.user = res;
       this.organization = res.company;
@@ -257,21 +235,22 @@ export class QuestionaryComponent {
 
   getUserQuestionaries() {
      this.current = 0;
+    
     this.userService
       .getUserQuestionaries(this.user.uuid)
       .subscribe((res) => {
         if(res.length > 0){
-           //this.QuestionData = res[0];
+           this.QuestionData = res[0];
            this.questionary = res[0];
            this.maxPoint = res[0].max_points;
            var userId = this.user.uuid;
            var queId = res[0].uuid;
-          this.applyAnswers(this.questionary.uuid, this.questionary.questions);
+           this.openModal();
+          this.applyAnswers(queId,this.QuestionData.questions);
         }
         else{
           this.questionary = null;
         }
-       // this.applyAnswers(queId,this.QuestionData.questions)
       });
   }
  

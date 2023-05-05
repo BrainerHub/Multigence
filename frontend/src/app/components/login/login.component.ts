@@ -16,6 +16,8 @@ export class LoginComponent {
   submitted!: boolean;
   user: any;
   userRole:any;
+  errormsg:any ;
+ 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -48,10 +50,31 @@ export class LoginComponent {
       email: this.loginForm.controls['email'].value,
       password: this.loginForm.controls['password'].value,
     };
-    this.userService.login(data).subscribe((response) => {  
-      localStorage.setItem("authToken",response.token)
-      return this.bootstrapService.bootstrap();
-    });
+    this.userService.login(data).subscribe( 
+
+      (response) => {   
+        
+        // if(response.status == 500){
+        //   this.errormsg = 'login.form.error.generic';
+        // }                      
+        localStorage.setItem("authToken",response.token)
+        return this.bootstrapService.bootstrap();
+      },
+      (error) => {                           
+        if(error.status == 400){
+          this.errormsg = 'login.form.error.badcredentials';
+        }
+        else {
+          this.errormsg = 'login.form.error.generic';
+        }
+      }
+
+      );
+
+
+
+    
+    
   }
 
 

@@ -1,20 +1,19 @@
 .MainBodyPart {
-  height: calc(100vh - 150px);
+  min-height: calc(100vh - 150px);
   overflow: auto;
-  top: 106px;
+  top: 110px;
   position: relative;
   background-color: #212121;
 }
 .dark-theme-selector {
   .ConfirmationModel {
     .modal-body {
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      border: 1px solid #fff;
-      border-radius: 6px;
-      background-color: #171717;
-      padding: 50px 50px 50px 50px;
+      border: none;
+      background-color: transparent;
       p {
         color: #333;
+        font-size: 15px;
+        margin: 0 0 22px;
       }
       .ModelBtnPart {
         display: flex;
@@ -52,7 +51,7 @@
   background-color: rgba(12, 12, 12, 0.5);
   border: none;
   margin: 20px 0px !important;
-  border-radius: 4px;
+  border-radius: 0;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
@@ -66,6 +65,7 @@
     overflow: auto;
     background-color: #0c0c0c;
     // @include border-radius(0);
+    padding: 15px;
     label {
       font-weight: normal;
     }
@@ -84,19 +84,21 @@
         width: auto;
         max-width: -webkit-fill-available;
         text-align: center;
-        border: 1px solid #525252;
+        border: 1px solid #fff;
         background: none;
-        color: #525252;
+        color: #888;
+        margin: 2px 0;
+        height: 30px;
       }
     }
     .plus-container {
       button {
         width: 100%;
-        border: none;
-        background: url(../../../assets/images/plus-white-btn.png);
+        // border: none;
+        // background: url(../../../assets/images/plus-white-btn.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        filter: opacity(0.7);
+        // filter: opacity(0.7);
       }
       .icon-plus {
         &.icon-icon-plus:hover {
@@ -108,11 +110,11 @@
     .minus-container {
       button {
         width: 100%;
-        border: none;
-        background: url(../../../assets/images/minus-white-btn.png);
-        background-repeat: no-repeat;
+        // border: none;
+        // background: url(../../../assets/images/minus-white-btn.png);
+        // background-repeat: no-repeat;
         background-size: 100% 100%;
-        filter: opacity(0.7);
+        // filter: opacity(0.7);
       }
       .icon-minus {
         &.icon-icon-minus:hover {
@@ -144,29 +146,34 @@
     }
   }
 }
-.progress .progress-bar {
-  background-color: #cceacd;
-  color: #006134;
-  border: 1px solid #006134;
-  line-height: 30px;
+.progress {
+  background-color: rgba(12, 12, 12, 0.5);
+  border-color: #3e3e3e;
+  .progress-bar {
+    line-height: 30px;
+    background-color: rgba(0, 255, 133, 0.4);
+    color: #00ff85;
+    border: 1px solid #00ff85;
+    line-height: 30px;
+  }
 }
 
 .max-value {
-  color: #00ff85 !important;
-  border-color: #00ff85 !important;
+  color: #eee !important;
+  border-color: #eee !important;
 }
 #next-button {
   float: right;
   padding: 2px 25px;
-  color: #0c0c0c;
-  border: 1px solid #0c0c0c;
+  color: #777777;
+  border: 1px solid #777777;
   width: auto;
   border-radius: 0px;
   i::before {
     transform: rotate(45deg);
   }
   .question-header {
-    position: fixed;
+    // position: fixed;
     width: 100% !important;
     top: 100px;
     z-index: 1000;
@@ -189,7 +196,7 @@
   margin: 0px 15px;
 }
 .question-header {
-  position: fixed;
+  // position: fixed;
   width: 100%;
   // top: 100px;
   z-index: 1000;
@@ -199,6 +206,8 @@
   text-align: center;
   font-size: large;
   border-bottom: 2px solid #c6c6c6;
+  // background-color: #0c0c0c;
+  // padding: 10px 0px;
 }
 .points h2 {
   font-size: 24px;
@@ -206,17 +215,122 @@
 .points-upper-box {
   position: absolute;
   right: 0;
+  display: inline-flex;
+  align-items: center;
+  span {
+    font-size: 18px !important;
+  }
 }
 .points-title {
   font-size: 18px;
   margin-right: 5px;
 }
 .points-box {
-  font-size: 18px;
+  font-size: 24px;
   display: inline-block;
-  line-height: 24px;
+  line-height: 30px;
   letter-spacing: normal;
   vertical-align: middle;
   position: relative;
-  top: -2px;
+  font-weight: 300;
+}
+
+.completedTitle {
+  font-size: 36px;
+  margin: 0 0 10px;
+}
+.completedSubTitle {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+.completedBlock {
+  padding: 90px 0 20px;
+}
+.question-heading {
+  padding: 10px;
+  min-height: 54px;
+  position: fixed;
+  z-index: 1;
+  background-color: #0c0c0c;
+}
+.white-theme-selector {
+  .ConfirmationModel {
+    .modal-body {
+      border: none;
+      background-color: transparent;
+      p {
+        color: #000;
+        font-size: 15px;
+        margin: 0 0 22px;
+      }
+      .ModelBtnPart {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+      }
+    }
+  }
+}
+.gradientBg {
+  background: linear-gradient(to bottom, #252525 0%, #111111 100%);
+}
+.ConfirmationModel {
+  width: 900px !important;
+  width: 100%;
+  padding: 20px 20px 40px 20px;
+  max-height: 95vh;
+  overflow-y: auto;
+  border-radius: 0;
+  border: 1px solid #eee;
+  background: #777;
+  background-image: url(../../../assets//images//background.png);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+  text-align: left;
+  &__btn {
+    text-align: right;
+    button {
+      border: 1px solid transparent;
+      color: #00ff85;
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.3333333;
+      text-transform: uppercase;
+    }
+  }
+}
+.question-box-counter {
+  button {
+    filter: opacity(1);
+    background: transparent;
+    color: #575756;
+    font-size: 24px;
+    line-height: 24px;
+    position: relative;
+    border: none !important;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &::after {
+      content: "\6a";
+      font-family: "multigence" !important;
+      font-size: 44px;
+    }
+    &:hover {
+      color: #00ff85;
+      border-color: #00ff85;
+    }
+  }
+  .minus-container button {
+    &::after {
+      content: "\69";
+      font-family: "multigence" !important;
+      font-size: 44px;
+    }
+  }
 }

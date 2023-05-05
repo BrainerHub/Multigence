@@ -166,7 +166,8 @@
           }
         },
         "error": {
-          "badcredentials": "Wrong email or password"
+          "badcredentials": "Wrong email or password",
+          "generic": "Login Error "
         },
         "forgotPassword": "forgotten password?",
         "join": "Join now",
