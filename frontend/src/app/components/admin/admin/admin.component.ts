@@ -10,11 +10,18 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from 'app/services/user.service';
 import { values } from 'lodash';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
+import { trigger, state, style, animate, transition } from '@angular/animations';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
+  animations: [
+    trigger('rotateIcon', [
+      state('rotated', style({ transform: 'rotate(-40deg)' })),
+      state('normal', style({ transform: 'rotate(138deg)' })),
+     
+    ])
+  ]
 })
 export class AdminComponent {
   activeIndex: any;
@@ -38,6 +45,8 @@ export class AdminComponent {
   selectedDepartment: false;
   selectedOption = false;
   department: any;
+  iconState = 'normal';
+  test : any
   
   constructor(
     public router: Router,
@@ -65,8 +74,8 @@ export class AdminComponent {
    
    
   }
-
-getMe() {
+ 
+ getMe() {
   this.userService.getMe().subscribe((res: any) => {
     this.user = res;
     this.organization = res.company;
@@ -83,7 +92,6 @@ getMe() {
    
   }
 
-  
   
   onSelect(event: any) {
     this.selectedOption = true;
@@ -132,7 +140,7 @@ getMe() {
     this.userService.getOrganization(this.organization).subscribe((res) => {});
   }
 
-  organizations(): FormArray {
+  organizations(): any {
     return this.createOrginationForm.get('organizations') as FormArray;
   }
 
@@ -152,6 +160,11 @@ getMe() {
   onShowCreateCompany() {
     this.createCompany = !this.createCompany; //not equal to condition
     this.visible = !this.visible;
+  }
+
+   rotateIcon(data: any) {
+    data.iconState = data.iconState === 'rotated' ? 'normal' : 'rotated';
+   this.onCancelVisibleCompany('index')
   }
 
   saveAndOpenCompanyData() {
@@ -190,17 +203,19 @@ getMe() {
   }
 
   saveNewCompanyName(newData: any) {
-    let newDat = {
+    let data = {
       uuid : newData.uuid,
       name : this.createOrginationForm.value.organizations[0].name,
       departments : this.departments,
     };
       
-    this.userService.updateOrganization(newData.uuid,newDat).subscribe((res) => {
-      this.getAll();
-       
+    this.userService.updateOrganization(newData.uuid,data).subscribe((res) => {
+
+    
     })
+    this.getAll();
     this.onCancelVisibleCompany('index')
+    
   }
  
   onShowCompanyList(index: any, data: any) {
@@ -208,8 +223,9 @@ getMe() {
     this.visibleCompanyList.push(data);
     if (this.activeIndex === data) {
       this.activeIndex = null;
-    } else {
+    } else {  
       this.activeIndex = data;
+      data.iconState = data.iconState === 'rotated' ? 'normal' : 'rotated';
     }
     this.userService.getDepartments(data.uuid).subscribe((res) => {
      this.departments = res.departments;
@@ -219,6 +235,7 @@ getMe() {
         this.updateAdminData = res ;
     });
     this.getManagers(data);
+  
    
   }
 

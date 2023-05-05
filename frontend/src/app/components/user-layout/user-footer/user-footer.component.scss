@@ -1,17 +1,39 @@
-.AccountFooter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+// .AccountFooter {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     a {
+//         color: #337ab7;
+//         text-decoration: none;
+//         &:hover {
+//             color: #00ff85;
+//             text-decoration: underline;
+//         }
+//     }
+//     ul.list-inline {
+//         display: flex;
+//         gap: 10px;
+//     }
+// }
+.footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
     a {
-        color: #337ab7;
-        text-decoration: none;
-        &:hover {
-            color: #00ff85;
-            text-decoration: underline;
-        }
-    }
-    ul.list-inline {
-        display: flex;
-        gap: 10px;
-    }
+              color: #337ab7;
+              text-decoration: none;
+              &:hover {
+                  color: #00ff85;
+                  text-decoration: underline;
+              }
+          }
+          ul.list-inline {
+              display: flex;
+              gap: 10px;
+          }
+  }
+  .copyright {
+    display: flex;
+    justify-content: space-between;
 }

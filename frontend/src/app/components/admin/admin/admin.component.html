@@ -133,13 +133,12 @@
           </ul>
           <ul>
             <li
-              *ngFor="let data of getAllOrgination; trackBy: trackByFn"
+              *ngFor="let data of getAllOrgination; let i = index; trackBy: trackByFn"
               class=""
             >
-              <span class="bi bi-send"></span>
-              <span class="bi bi-send"></span>
+            <span class="bi bi-send" [@rotateIcon]="data.iconState" (click)="rotateIcon(data)"></span>
               <a
-                (click)="onShowCompanyList($event, data)"
+                (click)="onShowCompanyList(i, data)"
                 class="companyform"
                 *ngIf="data != activeIndex"
               >
@@ -151,13 +150,8 @@
                   formArrayName="organizations"
                   *ngIf="visibleCompanyList.includes(data)"
                 >
-                  <div
-                    *ngFor="
-                      let organization of organizations().controls;
-                      let orgIndex = index
-                    "
-                  >
-                    <div [formGroupName]="orgIndex">
+                  <div *ngFor="let organization of  organizations().controls; let orgIndex=index" [formGroupName]="orgIndex">
+                    <div>
                       <input
                         class="form-control form-control-outline"
                         name="name"
@@ -182,7 +176,9 @@
                                 type="text"
                                 name="managerName"
                                 class="form-control form-control-outline"
-                                formControlName="managerName"
+                                [formControlName]="organization.managerName"
+                                [value]='organization.managerName'
+                                
                                 placeholder="{{
                                   'admin.companies.new.form.managerName'
                                     | translate
@@ -218,7 +214,8 @@
                                 type="text"
                                 name="managerLastName"
                                 class="form-control form-control-outline"
-                                formControlName="managerLastName"
+                                [formControlName]="organization.managerLastName"
+                               
                                 placeholder="{{
                                   'admin.companies.new.form.managerLastName'
                                     | translate
@@ -248,23 +245,13 @@
                             <div
                               class="form-group d-flex align-items-center gap-2"
                             >
-                              <!-- <label
+                              <label
                                 class="form-label text-white"
                                 *ngIf="!selectedDepartment"  
-                                 (click)="onSelectDepartment($event)"
                                 >DEPARTMENT</label
-                              > -->
-                              <select
-                                name="department"
-                                id="department"
-                                style="padding-bottom: 8px"
-                                formControlName="department"
-                                class="selected"
                               >
-                                <option
-                                  *ngFor="let department of departments"
-                                  [value]="department.uuid"
-                                >
+                              <select class="form-select" name="department" id="department" [formControlName]="organization.department" (click)="onSelectDepartment($event)">
+                                <option *ngFor="let department of departments" [value]='department.uuid'>
                                   {{ department.name }}
                                 </option>
                               </select>
@@ -281,7 +268,7 @@
                                 type="email"
                                 name="managerEmail"
                                 class="form-control form-control-outline"
-                                formControlName="managerEmail"
+                                [formControlName]="organization.managerEmail"
                                 placeholder="{{
                                   'admin.companies.new.form.managerEmail'
                                     | translate
