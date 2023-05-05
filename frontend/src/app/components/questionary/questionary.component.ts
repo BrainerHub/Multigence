@@ -71,6 +71,7 @@ export class QuestionaryComponent {
 
   ngOnInit() {
     this.getMe();
+   
   }
 
   openModal() {
@@ -119,11 +120,14 @@ export class QuestionaryComponent {
   }
 
   next(): void {
-    this.getUserQuestionaries();
+    //this.current++;
+    //this.answers = [];
+    debugger
+   // this.getUserQuestionaries();
     var uuid = localStorage.getItem("userId");
     var queId = localStorage.getItem("questionId");
     if (this.current < this.totalQuestions()) {
-     this.postAnswers(uuid,queId);  
+       this.postAnswers(uuid,queId);  
    }
   }
 
@@ -157,6 +161,7 @@ export class QuestionaryComponent {
 
 
   postAnswers(userId:any, questionaryId:any) {
+    debugger
     var question = this.currentQuestion();
     var options = question.options.map((option: any, index: any) => {
       var points = this.answers[index] || 0;
@@ -193,9 +198,10 @@ export class QuestionaryComponent {
             this.shuffleOptions();
            // this.addGuards();
            if(_.every(questions,this.isNotAnswered)){
-              //this.openModal();
+             // this.openModal();
            }
             this.questionary.questions = questions;
+             //this.questionary = question;
             if (this.currentQuestion().answered) {
                this.moveToNextQuestion();
             }
@@ -234,18 +240,24 @@ export class QuestionaryComponent {
   }
 
   getUserQuestionaries() {
+   
+ 
      this.current = 0;
     
     this.userService
       .getUserQuestionaries(this.user.uuid)
       .subscribe((res) => {
         if(res.length > 0){
+          
            this.QuestionData = res[0];
            this.questionary = res[0];
+           if(this.completed){
+             this.openModal();
+          }
            this.maxPoint = res[0].max_points;
            var userId = this.user.uuid;
            var queId = res[0].uuid;
-           this.openModal();
+         
           this.applyAnswers(queId,this.QuestionData.questions);
         }
         else{

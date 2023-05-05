@@ -362,24 +362,11 @@ getMe() {
       })
     );
   }
-
-  // postUserQuestionaryAnswer(userId:any, questionaryId:any, answer?:any){
-  //   console.log(answer,'asnser');
-  //   const apiUrl = "http://localhost:8000/api/user/13eeff42-f6b3-4eac-9214-556f467a8fea/questionary/d077c625-991c-45f7-a171-f82593da332f/answer/"
-  //  // return this.http.post<any>(apiUrl, answer)
-  //  // this.http.post<any>(`${this.apiUrl}` +'/user/' + userId + '/questionary/' + questionaryId + '/answer/', answer );
-  // }
-
+  
   postUserQuestionaryAnswer(userId:any, questionaryId:any, answer?:any) {
-  //  var abcd =  this.http.post(this.url + '/user/' + userId+ '/questionary/' +questionaryId+ '/answer/', answer);
-    //console.log(abcd,'abcd');
-
-  //  return
     return this.http.post<any>(this.apiUrl + '/user/' + userId + '/questionary/' + questionaryId + '/answer/', answer);
   }
 
-
- 
   getOrganizationUsers(organizationId:any, departmentId:any) {
     var params = {};
     if (departmentId !== undefined) {
