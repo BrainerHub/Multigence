@@ -221,7 +221,7 @@
           <div class="container">
             <div class="UserTable table-hover">
               <div class="">
-                <div class="Custompagination">
+                <div class="Custompagination p-0">
                   <ul class="pagination">
                     <li class="page-item">
                       <a class="page-link Previous-page" aria-label="Previous">
@@ -232,7 +232,7 @@
                       <a class="page-link Previous-page" aria-label="Previous">
                         <span class="bi bi-send"></span>
                       </a>
-                    </li> 
+                    </li>
                     <li class="page-item">
                       <a class="page-link active">001</a>
                     </li>
@@ -340,8 +340,12 @@
                   <tr *ngFor="let user of usersPage | filter : searchText">
                     <td scope="row">
 
-                      <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'"   [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}" class="bi bi-triangle-fill"></i>
-                      <i *ngIf="user.role == 'APPLICANT'"  [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}" class="bi bi-hexagon-fill"></i>
+                      <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'"
+                        [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
+                        class="bi bi-triangle-fill"></i>
+                      <i *ngIf="user.role == 'APPLICANT'"
+                        [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
+                        class="bi bi-hexagon-fill"></i>
                     </td>
 
                     <td>{{ user.first_name }}</td>
@@ -362,7 +366,7 @@
                           <img src="../../../../assets/images/CrossIcon.png" alt="" />
                         </button>
                         <ng-template #template>
-                          <div class="ConfirmationModel">
+                          <div class="ConfirmationModel deleteModel">
                             <div class="modal-body">
                               {{"admin.users.deleteConfirm.text" | translate}}
                               <div class="ModelBtnPart">

@@ -3,79 +3,46 @@
   <div class="pad-top-30 pad-bottom-500 my-5">
     <div class="container-fluid admin-home">
       <div class="col-10 companies m-auto">
-        <div
-          class="AcordionTitle text-uppercase"
-          translate="admin.companies.title"
-        ></div>
+        <div class="AcordionTitle text-uppercase" translate="admin.companies.title"></div>
         <div class="companies-list">
           <ul>
             <li class="border-bottom">
               <form [formGroup]="createCompanyForm" class="">
-                <button
-                  (click)="onShowCreateCompany()"
-                  type="button"
-                  class="companyform text-uppercase bold"
-                >
+                <button (click)="onShowCreateCompany()" type="button" class="companyform text-uppercase bold">
                   {{
-                    (createCompany
-                      ? "admin.companies.add"
-                      : "admin.companies.add"
-                    ) | translate
+                  (createCompany
+                  ? "admin.companies.add"
+                  : "admin.companies.add"
+                  ) | translate
                   }}
-                  <img
-                    src="../../../../assets/images/plusIcon.svg"
-                    alt=""
-                    *ngIf="!visible"
-                  />
+                  <img src="../../../../assets/images/plusIcon.svg" alt="" *ngIf="!visible" />
                 </button>
                 <div class="CreateCompanyForm" *ngIf="visible">
                   <div class="row align-items-baseline">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label
-                          class="form-label"
-                          for="name"
-                          *ngIf="!createCompanyForm.get('name')?.value"
-                          >{{ "admin.companies.new.form.name" | translate
-                          }}<span>*</span></label
-                        >
-                        <input
-                          type="name"
-                          name="name"
-                          class="form-control form-control-outline"
-                          formControlName="name"
-                          required
-                        />
-                        <ng-container
-                          *ngIf="
+                        <label class="form-label" for="name" *ngIf="!createCompanyForm.get('name')?.value">{{
+                          "admin.companies.new.form.name" | translate
+                          }}<span>*</span></label>
+                        <input type="name" name="name" class="form-control form-control-outline" formControlName="name"
+                          required />
+                        <ng-container *ngIf="
                             createCompanyForm.get('name')?.invalid &&
                             createCompanyForm.get('name')?.touched
-                          "
-                        >
-                          <p
-                            class="caption status-danger"
-                            *ngIf="createCompanyForm.get('name')?.errors?.['required']"
-                          >
+                          ">
+                          <p class="caption status-danger" *ngIf="createCompanyForm.get('name')?.errors?.['required']">
                             <span style="color: red">{{
                               "admin.forms.name" | translate
-                            }}</span>
+                              }}</span>
                           </p>
                         </ng-container>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label
-                          class="form-label text-white"
-                          for="trial"
-                          *ngIf="!selectedOption"
-                          >{{ "admin.version.select" | translate }}</label
-                        >
-                        <select
-                          formControlName="trial"
-                          style="padding-bottom: 8px"
-                          (change)="onSelect($event)"
-                        >
+                        <label class="form-label text-white" for="trial" *ngIf="!selectedOption">{{
+                          "admin.version.select" | translate }}</label>
+                        <select formControlName="trial" style="padding-bottom: 8px" (change)="onSelect($event)">
                           <option>
                             {{ "software.version.trial" | translate }}
                           </option>
@@ -87,43 +54,26 @@
                       </div>
                     </div>
                     <div class="col-md-3">
-                      <div
-                        class="cform-inline"
-                        *ngIf="
+                      <div class="cform-inline" *ngIf="
                           createCompanyForm.controls['trial'].value ==
                           'Trial version' ||  createCompanyForm.controls['trial'].value ==
                           'Testversion'
-                        "
-                      >
+                        ">
                         <div class="form-group d-flex align-items-center gap-2">
                           <label for="invitations">{{
                             "admin.form.invitations" | translate
-                          }}</label>
-                          <input
-                            type="number"
-                            class="form-control form-control-box"
-                            id="invitations"
-                            placeholder="10"
-                            formControlName="invitations"
-                            style="width: 50px"
-                          />
+                            }}</label>
+                          <input type="number" class="form-control form-control-box" id="invitations" placeholder="10"
+                            formControlName="invitations" style="width: 50px" />
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="CreateFormBtnPart">
-                    <button
-                      type="reset"
-                      class="theme-btn"
-                      (click)="onCancelCreateCompany()"
-                    >
+                    <button type="reset" class="theme-btn" (click)="onCancelCreateCompany()">
                       Cancel
                     </button>
-                    <button
-                      type="submit"
-                      (click)="saveAndOpenCompanyData()"
-                      class="theme-btn"
-                    >
+                    <button type="submit" (click)="saveAndOpenCompanyData()" class="theme-btn">
                       Save
                     </button>
                   </div>
@@ -132,32 +82,19 @@
             </li>
           </ul>
           <ul>
-            <li
-              *ngFor="let data of getAllOrgination; let i = index; trackBy: trackByFn"
-              class=""
-            >
-            <span class="bi bi-send" [@rotateIcon]="data.iconState" (click)="rotateIcon(data)"></span>
-              <a
-                (click)="onShowCompanyList(i, data)"
-                class="companyform"
-                *ngIf="data != activeIndex"
-              >
+            <li *ngFor="let data of getAllOrgination; let i = index; trackBy: trackByFn" class="">
+              <span class="bi bi-send" [@rotateIcon]="data.iconState" (click)="rotateIcon(data)"></span>
+              <a (click)="onShowCompanyList(i, data)" class="companyform" *ngIf="data != activeIndex">
                 {{ data.name }}
               </a>
 
               <form [formGroup]="createOrginationForm" class="">
-                <div
-                  formArrayName="organizations"
-                  *ngIf="visibleCompanyList.includes(data)"
-                >
-                  <div *ngFor="let organization of  organizations().controls; let orgIndex=index" [formGroupName]="orgIndex">
+                <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(data)">
+                  <div *ngFor="let organization of  organizations().controls; let orgIndex=index"
+                    [formGroupName]="orgIndex">
                     <div>
-                      <input
-                        class="form-control form-control-outline"
-                        name="name"
-                        formControlName="name"
-                        [(ngModel)]="data.name"
-                      />
+                      <input class="form-control form-control-outline" name="name" formControlName="name"
+                        [(ngModel)]="data.name" />
 
                       <div class="CreateCompanyForm">
                         <div class="row align-items-baseline">
@@ -170,35 +107,24 @@
                             <div class="form-group">
                               <label for="managerName" hidden>{{
                                 "admin.companies.new.form.managerName"
-                                  | translate
-                              }}</label>
-                              <input
-                                type="text"
-                                name="managerName"
-                                class="form-control form-control-outline"
-                                [formControlName]="organization.managerName"
-                                
-                                placeholder="{{
+                                | translate
+                                }}</label>
+                              <input type="text" name="managerName" class="form-control form-control-outline"
+                                formControlName="managerName" placeholder="{{
                                   'admin.companies.new.form.managerName'
                                     | translate
-                                }}"
-                                required
-                              />
-                              <ng-container
-                                *ngIf="
+                                }}" required />
+                              <ng-container *ngIf="
                                   createOrginationForm.get('managerName')
                                     ?.invalid &&
                                   createOrginationForm.get('managerName')
                                     ?.touched
-                                "
-                              >
-                                <p
-                                  class="caption status-danger"
-                                  *ngIf="createOrginationForm.get('managerName')?.errors?.['required']"
-                                >
+                                ">
+                                <p class="caption status-danger"
+                                  *ngIf="createOrginationForm.get('managerName')?.errors?.['required']">
                                   <span style="color: red">{{
                                     "admin.forms.firstName" | translate
-                                  }}</span>
+                                    }}</span>
                                 </p>
                               </ng-container>
                             </div>
@@ -207,49 +133,33 @@
                             <div class="form-group">
                               <label for="managerLastName" hidden>{{
                                 "admin.companies.new.form.managerLastName"
-                                  | translate
-                              }}</label>
-                              <input
-                                type="text"
-                                name="managerLastName"
-                                class="form-control form-control-outline"
-                                [formControlName]="organization.managerLastName"
-                               
-                                placeholder="{{
+                                | translate
+                                }}</label>
+                              <input type="text" name="managerLastName" class="form-control form-control-outline"
+                                formControlName="managerLastName" placeholder="{{
                                   'admin.companies.new.form.managerLastName'
                                     | translate
-                                }}"
-                                required
-                              />
-                              <ng-container
-                                *ngIf="
+                                }}" required />
+                              <ng-container *ngIf="
                                   createOrginationForm.get('managerLastName')
                                     ?.invalid &&
                                   createOrginationForm.get('managerLastName')
                                     ?.touched
-                                "
-                              >
-                                <p
-                                  class="caption status-danger"
-                                  *ngIf="createOrginationForm.get('managerLastName')?.errors?.['required']"
-                                >
+                                ">
+                                <p class="caption status-danger"
+                                  *ngIf="createOrginationForm.get('managerLastName')?.errors?.['required']">
                                   <span style="color: red">{{
                                     "admin.forms.lastName" | translate
-                                  }}</span>
+                                    }}</span>
                                 </p>
                               </ng-container>
                             </div>
                           </div>
                           <div class="col-5">
-                            <div
-                              class="form-group d-flex align-items-center gap-2"
-                            >
-                              <label
-                                class="form-label text-white"
-                                *ngIf="!selectedDepartment"  
-                                >DEPARTMENT</label
-                              >
-                              <select class="form-select" name="department" id="department" [formControlName]="organization.department" (click)="onSelectDepartment($event)">
+                            <div class="form-group d-flex align-items-center gap-2">
+                              <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
+                              <select class="form-select" name="department" id="department"
+                                [formControlName]="organization.department" (click)="onSelectDepartment($event)">
                                 <option *ngFor="let department of departments" [value]='department.uuid'>
                                   {{ department.name }}
                                 </option>
@@ -261,67 +171,48 @@
                             <div class="form-group">
                               <label for="managerEmail" hidden>{{
                                 "admin.companies.new.form.managerEmail"
-                                  | translate
-                              }}</label>
-                              <input
-                                type="email"
-                                name="managerEmail"
-                                class="form-control form-control-outline"
-                                [formControlName]="organization.managerEmail"
-                                placeholder="{{
+                                | translate
+                                }}</label>
+                              <input type="email" name="managerEmail" class="form-control form-control-outline"
+                                formControlName="managerEmail" placeholder="{{
                                   'admin.companies.new.form.managerEmail'
                                     | translate
-                                }}"
-                                required
-                              />
-                              <ng-container
-                                *ngIf="
+                                }}" required />
+                              <ng-container *ngIf="
                                   createOrginationForm.get('managerEmail')
                                     ?.invalid &&
                                   createOrginationForm.get('managerEmail')
                                     ?.touched
-                                "
-                              >
-                                <p
-                                  class="caption status-danger"
-                                  *ngIf="createOrginationForm.get('managerEmail')?.errors?.['required']"
-                                >
+                                ">
+                                <p class="caption status-danger"
+                                  *ngIf="createOrginationForm.get('managerEmail')?.errors?.['required']">
                                   <span style="color: red">{{
                                     "admin.forms.email" | translate
-                                  }}</span>
+                                    }}</span>
                                 </p>
-                                <p
-                                  class="caption status-danger"
-                                  *ngIf="createOrginationForm.get('managerEmail')?.errors?.['pattern']"
-                                >
+                                <p class="caption status-danger"
+                                  *ngIf="createOrginationForm.get('managerEmail')?.errors?.['pattern']">
                                   <span style="color: red">{{
                                     "admin.forms.valid" | translate
-                                  }}</span>
+                                    }}</span>
                                 </p>
                               </ng-container>
                             </div>
                           </div>
                           <div class="col-2">
                             <div class="text-end">
-                              <button
-                                [ngClass]="
+                              <button [ngClass]="
                                   !createOrginationForm.valid
                                     ? 'theme-btn disabled w-auto'
                                     : 'theme-btn w-auto'
-                                "
-                                (click)="onInviteManager()"
-                                [disabled]="!createOrginationForm.valid"
-                              >
+                                " (click)="onInviteManager()" [disabled]="!createOrginationForm.valid">
                                 <span>Invite</span>
                               </button>
                             </div>
                           </div>
                         </div>
 
-                        <div
-                          class="row align-items-baseline manager-field"
-                          *ngFor="let manager of managers"
-                        >
+                        <div class="row align-items-baseline manager-field" *ngFor="let manager of managers">
                           <div class="col-5">
                             <div class="form-control form-control-outline">
                               <p>{{ manager.first_name }}</p>
@@ -335,11 +226,7 @@
                         </div>
 
                         <div class="CreateFormBtnPart justify-content-between">
-                          <button
-                            type="reset"
-                            class="theme-btn"
-                            (click)="openConfirmationModal(template)"
-                          >
+                          <button type="reset" class="theme-btn" (click)="openConfirmationModal(template)">
                             Delete
                           </button>
                           <ng-template #template>
@@ -347,25 +234,17 @@
                               <div class="modal-body">
                                 <p>
                                   {{
-                                    "admin.organization.deleteConfirm.text"
-                                      | translate
+                                  "admin.organization.deleteConfirm.text"
+                                  | translate
                                   }}
                                 </p>
                                 <div class="ModelBtnPart">
-                                  <button
-                                    type="button"
-                                    class="theme-btn w-auto"
-                                    (click)="declineDeleteModal()"
-                                  >
+                                  <button type="button" class="theme-btn w-auto" (click)="declineDeleteModal()">
                                     Cancel
                                   </button>
-                                  <button
-                                    type="button"
-                                    class="theme-btn w-auto"
-                                    (click)="
+                                  <button type="button" class="theme-btn w-auto" (click)="
                                       confirmDeleteDialog(data.uuid, data)
-                                    "
-                                  >
+                                    ">
                                     Ok
                                   </button>
                                 </div>
@@ -373,18 +252,10 @@
                             </div>
                           </ng-template>
                           <div class="">
-                            <button
-                              type="reset"
-                              class="theme-btn me-2"
-                              (click)="onCancelVisibleCompany(data)"
-                            >
+                            <button type="reset" class="theme-btn me-2" (click)="onCancelVisibleCompany(data)">
                               Cancel
                             </button>
-                            <button
-                              type="submit"
-                              class="theme-btn"
-                              (click)="saveNewCompanyName(data)"
-                            >
+                            <button type="submit" class="theme-btn" (click)="saveNewCompanyName(data)">
                               Save
                             </button>
                           </div>

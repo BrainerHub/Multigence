@@ -1,7 +1,19 @@
 .MainBodyPart {
-  height: calc(100vh - 150px);
+  height: calc(100vh - 110px);
   overflow: auto;
-  top: 106px;
+  top: 110px;
   position: relative;
-  background-color: #212121;
+  background-color: #212121 !important;
+  .headers {
+    margin: 20px 0 10px;
+    font-size: 30px;
+    color: #eee;
+  }
+  hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+    opacity: 1 !important;
+  }
 }

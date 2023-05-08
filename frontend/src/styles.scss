@@ -258,11 +258,51 @@ label {
       }
       .ModelBtnPart {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         margin-top: 50px;
         button {
           min-width: 70px;
         }
+      }
+    }
+    &.deleteModel {
+      background: linear-gradient(to bottom, #252525 0%, #111111 100%);
+      border: 1px solid #eee;
+      padding: 50px;
+      text-align: left;
+      width: 600px;
+      transform: translateX(-50px);
+      p {
+        color: #fff;
+        font-size: 15px;
+        margin: 0 0 22px;
+      }
+    }
+  }
+  .acceptModel {
+    background: linear-gradient(to bottom, #252525 0%, #111111 100%);
+    border: 1px solid #eee;
+    padding: 20px 20px 20px 20px !important;
+    max-height: 95vh !important;
+    .modal-body {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      p {
+        color: #eee !important;
+        font-size: 2em !important;
+        text-align: center !important;
+      }
+      .ModelBtnPart {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+      }
+      button {
+        padding: 8px 16px;
+        font-size: 18px;
+        line-height: 18px;
+        text-transform: capitalize;
       }
     }
   }
@@ -285,15 +325,54 @@ label {
       border-radius: 0;
       padding: 0;
       p {
-        color: #fff;
+        color: #eeeeee;
       }
       .ModelBtnPart {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         margin-top: 50px;
         button {
           min-width: 70px;
         }
+      }
+    }
+    &.deleteModel {
+      background: #fff;
+      border: 1px solid #eee;
+      padding: 50px;
+      text-align: left;
+      width: 600px;
+      transform: translateX(-50px);
+      p {
+        color: #eeeeee;
+        font-size: 15px;
+        margin: 0 0 22px;
+      }
+    }
+  }
+  .acceptModel {
+    background: #777777 url(/images/background.png) repeat center center !important;
+    padding: 20px 20px 20px 20px !important;
+    max-height: 95vh !important;
+    .modal-body {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      p {
+        color: #eee !important;
+        font-size: 2em !important;
+        text-align: center !important;
+      }
+      .ModelBtnPart {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+      }
+      button {
+        padding: 8px 16px;
+        font-size: 18px;
+        line-height: 18px;
+        text-transform: capitalize;
       }
     }
   }
