@@ -47,7 +47,7 @@
                       <button (click)="increment(i)"></button>
                     </div>
                     <div class="id-input">
-                      <input type="text" min="0" name="{{'option' + i}}" [(ngModel)]="answers[i]" readonly />
+                      <input type="number" min="0" name="{{'option' + i}}" [(value)]="answers[i]" readonly />
                     </div>
                     <div class="minus-container background-minus-custom">
                       <button (click)="decrement(i)"></button>
