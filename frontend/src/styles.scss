@@ -262,6 +262,7 @@ label {
         margin-top: 50px;
         button {
           min-width: 70px;
+          padding: 8px 15px;
         }
       }
     }
@@ -272,8 +273,9 @@ label {
       text-align: left;
       width: 600px;
       transform: translateX(-50px);
+      border-radius: 6px;
       p {
-        color: #fff;
+        color: #333;
         font-size: 15px;
         margin: 0 0 22px;
       }
@@ -343,8 +345,9 @@ label {
       text-align: left;
       width: 600px;
       transform: translateX(-50px);
+      border-radius: 6px;
       p {
-        color: #eeeeee;
+        color: #333;
         font-size: 15px;
         margin: 0 0 22px;
       }

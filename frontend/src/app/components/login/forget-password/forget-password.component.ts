@@ -54,9 +54,9 @@ export class ForgetPasswordComponent {
         this._router.navigate(['']);
       },
       (err) => {
-        this.errormsg = this._translate.instant(
-          'forgotpassword.emailNotExists'
-        );
+         this.errormsg =
+          'forgotpassword.emailNotExists';
+        
       }
     );
   }
