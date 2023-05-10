@@ -20,7 +20,6 @@ export class QuestionaryComponent {
   departments: any;
   organization: any;
   completed: boolean = false;
-  // private _: any;
   questionary: any;
   current = 0;
   answers: any[] = [];
@@ -28,36 +27,17 @@ export class QuestionaryComponent {
   params: any
   event: any;
   rootScope: any;
-  last: boolean = false;
   amountParamsVisible: boolean
   count = 0;
   datacount:any;
   coursesPercentage: number;
   selectedCourses: any = {};
-  pointCount = 22;
   progress = 0;
   maxPoint:any;
   nextQue:any;
   QuestionData:any;
   questions: any;
   nextBtn:boolean = true;
-  boxes = [{
-    label: 'course 1',
-    id: 1
-  },
-  {
-    label: 'course 2',
-    id: 2
-  },
-  {
-    label: 'course 3',
-    id: 3
-  },
-  {
-    label: 'course 4',
-    id: 4
-  }]
-  QuizShow:boolean = false;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -71,7 +51,6 @@ export class QuestionaryComponent {
 
   ngOnInit() {
     this.getMe();
-   
   }
 
   openModal() {
@@ -83,14 +62,12 @@ export class QuestionaryComponent {
 
   QuizStart(){
     this.modalRef.hide();
-    this.QuizShow = true;
   }
   
   availablePoints(values?:any) {
     if (!this.questionary) {
       return 0;
     }
-   
     return this.maxPoint - this.totalPoints(values);
   }
 
@@ -98,32 +75,26 @@ export class QuestionaryComponent {
     if (values === undefined) {
       values = this.answers;
     }
-  
     return values.reduce(function (a, b) {
       return (a || 0) + (b || 0);
     }, 0);
-    
-   
   }
 
   increment(index: number): void {
    if(this.availablePoints() > 0 ) {
     this.answers[index] = (this.answers[index] || 0) + 1;
     }
-   
   }
 
   decrement(index: number): void {
-   if(this.availablePoints() < this.maxPoint){
-      this.answers[index] = (this.answers[index] || 0) - 1;
+   if(this.answers[index] != 0){
+      if(this.availablePoints() < this.maxPoint){
+        this.answers[index] = (this.answers[index] || 0) - 1;
+      }
     }
   }
 
   next(): void {
-    //this.current++;
-    //this.answers = [];
-    debugger
-   // this.getUserQuestionaries();
     var uuid = localStorage.getItem("userId");
     var queId = localStorage.getItem("questionId");
     if (this.current < this.totalQuestions()) {
@@ -161,7 +132,6 @@ export class QuestionaryComponent {
 
 
   postAnswers(userId:any, questionaryId:any) {
-    debugger
     var question = this.currentQuestion();
     var options = question.options.map((option: any, index: any) => {
       var points = this.answers[index] || 0;
@@ -175,10 +145,10 @@ export class QuestionaryComponent {
       options: options,
     };
    
-  this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).subscribe((res: any) => {
+   this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).subscribe((res: any) => {
     console.log(res,'res');
-  } )
-  // return this.userService.postUserQuestionaryAnswer(userId,questionaryId, answer);
+   } )
+ 
   }
 
  
@@ -226,7 +196,6 @@ export class QuestionaryComponent {
   }
   
   getMe() {
-   
     this.userService.getMe().subscribe((res: any) => {
       this.user = res;
       this.organization = res.company;
@@ -240,10 +209,7 @@ export class QuestionaryComponent {
   }
 
   getUserQuestionaries() {
-   
- 
-     this.current = 0;
-    
+    this.current = 0;
     this.userService
       .getUserQuestionaries(this.user.uuid)
       .subscribe((res) => {

@@ -9,8 +9,8 @@
       </div>
     </div>
 
-    <div class="col-sm-12 col-xs-12 points question-heading " *ngIf="questionary && !completed">
-      <h2 class="points-box max-value m-0">{{questionary?.questions[this.current]?.text}}</h2>
+    <div class="col-sm-12 col-xs-12 points question-heading" *ngIf="questionary && !completed ">
+      <h2 class="points-box max-value m-0">{{questionary?.questions[current]?.text}}</h2>
       <span maxPoint class="points-upper-box">
         <span class="points-title max-value" translate="questionary.points"></span>&nbsp;&nbsp;
         <span class="points-box max-value">{{totalPoints()}} | {{maxPoint}}</span>&nbsp;&nbsp;
@@ -47,7 +47,8 @@
                       <button (click)="increment(i)"></button>
                     </div>
                     <div class="id-input">
-                      <input type="number" min="0" name="{{'option' + i}}" [(value)]="answers[i]" readonly />
+                      <input type="number" min="0" name="{{'option' + i}}" placeholder="0" [value]="answers[i]"
+                        readonly />
                     </div>
                     <div class="minus-container background-minus-custom">
                       <button (click)="decrement(i)"></button>
@@ -61,7 +62,7 @@
       </div>
 
       <div>
-        <div *ngIf="questionary && !completed " class="row pt-2 ms-4 me-4 d-flex justify-content-end">
+        <div class="row pt-2 ms-4 me-4 d-flex justify-content-end" *ngIf="questionary && !completed ">
           <button id="next-button" class="btn btn-default btn-lg" (click)="next()" [disabled]="availablePoints() > 0 ">
             <span class="text-uppercase" translate="next"></span> <i class="bi bi-send"
               style="transform: rotate(135deg);"></i>
