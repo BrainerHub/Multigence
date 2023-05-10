@@ -3,7 +3,7 @@
   <div class="bg-gradient pad-top-100 pad-bottom-100 profile">
     <div class="container">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-lg-4">
           <div class="picture-container mar-bottom-10">
             <div class="picture">
               <img
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="editProfile" class="col-md-6">
+        <div *ngIf="editProfile" class="col-lg-8">
           <div class="pad-bottom-10 profile-text text-uppercase">
             {{ "profile.profileHeader" | translate }}
           </div>
@@ -111,7 +111,7 @@
             </button>
           </div>
         </div>
-        <div *ngIf="!editProfile" class="col-md-6 hidden-overflow">
+        <div *ngIf="!editProfile" class="col-lg-8 hidden-overflow">
           <div class="pad-bottom-10 profile-text text-uppercase">
             {{ "profile.editProfileHeader" | translate }}
           </div>

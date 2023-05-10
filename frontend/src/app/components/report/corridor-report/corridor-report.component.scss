@@ -1,53 +1,65 @@
 .MainBodyPart {
-    height: calc(100vh - 150px);
-    overflow: auto;
-    top: 106px;
+  height: calc(100vh - 150px);
+  overflow: auto;
+  top: 106px;
+  position: relative;
+  background-color: #212121;
+}
+
+.corridor {
+  padding-top: 30px;
+  padding-bottom: 50px;
+  .legend-content-size {
+    min-height: 138px;
+  }
+  .corridor-filters {
+    background-color: rgba(12, 12, 12, 0.5);
+    border: 1px solid #555555;
+  }
+  .form-group {
+    margin-bottom: 0;
+    li {
+      list-style-type: none;
+    }
+    .form-select {
+      cursor: pointer;
+    }
+    select + .bi.bi-send {
+      position: absolute;
+      color: #fff;
+      right: 5px;
+      top: 5px;
+      transform: rotate(132deg);
+    }
+  }
+  .SearchForm {
     position: relative;
-    background-color: #212121;
-  }
-  
-  .corridor {
-    padding-top: 30px;
-    padding-bottom: 50px;
-    .legend-content-size {
-      min-height: 138px;
-    }
-    .corridor-filters {
-      background-color: rgba(12, 12, 12, 0.5);
-      border: 1px solid #555555;
-    }
-    .form-group {
-      margin-bottom: 0;
-      li {
-        list-style-type: none;
-      }
-      .form-select {
-        cursor: pointer;
-      }
-      select + .bi.bi-send {
-        position: absolute;
-        color: #fff;
-        right: 5px;
-        top: 5px;
-        transform: rotate(132deg);
-      }
-    }
-    .SearchForm {
-      position: relative;
-      img {
-        position: absolute;
-        right: 15px;
-        top: 10px;
-      }
-    }
-    .corridor-graph {
-      padding: 11px 11px 62px 30px;
-      border: 1px solid #555555;
-      margin-top: 1.5em;
-      position: relative;
-    }
-    .person-list-form {
-      margin-top: 52px;
-      margin-bottom: 48px;
+    img {
+      position: absolute;
+      right: 15px;
+      top: 10px;
     }
   }
+  .corridor-graph {
+    padding: 11px 11px 62px 30px;
+    border: 1px solid #555555;
+    margin-top: 1.5em;
+    position: relative;
+  }
+  .person-list-form {
+    margin-top: 52px;
+    margin-bottom: 48px;
+  }
+}
+.reportTable {
+  max-width: 1000px;
+  width: 100%;
+  overflow-x: auto;
+  table {
+    background-color: #0c0c0c;
+    td {
+      color: #333;
+      background: transparent !important;
+    }
+  }
+}

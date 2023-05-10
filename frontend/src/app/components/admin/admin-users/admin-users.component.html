@@ -30,7 +30,7 @@
               <div class="FilterBoxInner">
                 <div class="container-fluid">
                   <div class="row align-items-center mb-3" *ngFor="let status of statusList; let i = index">
-                    <div class="col-sm-9">
+                    <div class="col-9">
                       <div class="checkbox m-0">
                         <!-- <input
                           type="checkbox"
@@ -44,7 +44,7 @@
                         <label for="progress-pending">{{ status }}</label>
                       </div>
                     </div>
-                    <div class="col-sm-3 text-end">
+                    <div class="col-3 text-end">
                       <p>({{ counters?.progress[status] || 0 }})</p>
                     </div>
                   </div>
@@ -88,7 +88,7 @@
               <div class="FilterBoxInner">
                 <div class="container-fluid">
                   <div class="row align-items-center mb-3" *ngFor="let company of companyList; let i = index">
-                    <div class="col-sm-9">
+                    <div class="col-9">
                       <div class="checkbox m-0">
                         <input type="checkbox" [checked]="filters.company[company.uuid] || false" name="company{{ i }}"
                           id="company{{ i }}" (change)="onChecked($event, company.uuid, 'company')" />
@@ -97,7 +97,7 @@
                           }}</label>
                       </div>
                     </div>
-                    <div class="col-sm-3 text-end">
+                    <div class="col-3 text-end">
                       <p>({{ counters.company[company.uuid] || 0 }})</p>
                     </div>
                   </div>
@@ -139,7 +139,7 @@
                     class="row align-items-center mb-3"
                     *ngFor="let department of filteredUsersPage; let i=index"
                   > -->
-                    <div class="col-sm-9">
+                    <div class="col-9">
                       <div class="checkbox m-0">
                         <input type="checkbox" [checked]="
                             filters.department[department.uuid] || false
@@ -151,7 +151,7 @@
                           }}</label>
                       </div>
                     </div>
-                    <div class="col-sm-3 text-end">
+                    <div class="col-3 text-end">
                       <p>({{ counters.department[department.uuid] || 0 }})</p>
                     </div>
                   </div>
@@ -163,7 +163,7 @@
               <div class="FilterBoxInner">
                 <div class="container-fluid">
                   <div class="row align-items-center mb-3" *ngFor="let role of roleList; let i = index">
-                    <div class="col-sm-9">
+                    <div class="col-9">
                       <div class="checkbox m-0">
                         <!-- <input
                           type="checkbox"
@@ -176,7 +176,7 @@
                         <label for="role-manager">{{ role }}</label>
                       </div>
                     </div>
-                    <div class="col-sm-3 text-end">
+                    <div class="col-3 text-end">
                       <p>({{ counters?.role.MANAGER || 0 }})</p>
                     </div>
                   </div>
@@ -249,142 +249,144 @@
                   </ul>
                 </div>
               </div>
-              <table class="table table-dark">
-                <thead>
-                  <tr>
-                    <th scope="col">
-                      <div class="d-flex align-items-center gap-2"></div>
-                    </th>
-                    <th scope="col">
-                      <div class="d-flex align-items-center gap-2">
-                        FIRST NAME
-                        <div>
+              <div class="scrollTable">
+                <table class="table table-dark">
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                        <div class="d-flex align-items-center gap-2"></div>
+                      </th>
+                      <th scope="col">
+                        <div class="d-flex align-items-center gap-2">
+                          FIRST NAME
                           <div>
-                            <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
-                          </div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
-                    <th scope="col">
-                      <div class="d-flex align-items-center gap-2">
-                        LAST NAME
-                        <div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
-                          </div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
-                    <th scope="col">
-                      <div class="d-flex align-items-center gap-2">
-                        COMPANY
-                        <div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
-                          </div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
-                    <th scope="col">
-                      <div class="d-flex align-items-center gap-2">
-                        DEPARTMENT
-                        <div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
-                          </div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
-                    <th scope="col">
-                      <div class="d-flex align-items-center gap-2">
-                        POSITION
-                        <div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
-                          </div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
-                    <th scope="col">
-                      <div class="d-flex align-items-center gap-2">
-                        INVITES
-                        <div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
-                          </div>
-                          <div>
-                            <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of usersPage | filter : searchText">
-                    <td scope="row">
-
-                      <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'"
-                        [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
-                        class="bi bi-triangle-fill"></i>
-                      <i *ngIf="user.role == 'APPLICANT'"
-                        [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
-                        class="bi bi-hexagon-fill"></i>
-                    </td>
-
-                    <td>{{ user.first_name }}</td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.company.name }}</td>
-                    <td>{{ user.department.name }}</td>
-                    <td>{{ user.title }}</td>
-                    <td>{{ user.invite }}</td>
-                    <td>
-                      <div class="d-flex align-items-center gap-3 justify-content-end">
-                        <a *ngIf="
-                            user.status === 'DONE' ||
-                            user.status === 'IN_PROGRESS'
-                          " href="">
-                          <img height="13" width="13" src="../../../../assets/images/download.svg" alt="" />
-                        </a>
-                        <button type="reset" class="DeleteBtn" (click)="openConfirmationModal(template)">
-                          <img src="../../../../assets/images/CrossIcon.png" alt="" />
-                        </button>
-                        <ng-template #template>
-                          <div class="ConfirmationModel deleteModel">
-                            <div class="modal-body">
-                              {{"admin.users.deleteConfirm.text" | translate}}
-                              <div class="ModelBtnPart">
-                                <button type="button" class="theme-btn w-auto" (click)="confirmDeleteDialog('id')">
-                                  Ok
-                                </button>
-                                <button type="button" class="theme-btn w-auto" (click)="declineDeleteModal()">
-                                  Cancel
-                                </button>
-                              </div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
+                            </div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
                             </div>
                           </div>
-                        </ng-template>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        </div>
+                      </th>
+                      <th scope="col">
+                        <div class="d-flex align-items-center gap-2">
+                          LAST NAME
+                          <div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
+                            </div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      <th scope="col">
+                        <div class="d-flex align-items-center gap-2">
+                          COMPANY
+                          <div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
+                            </div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      <th scope="col">
+                        <div class="d-flex align-items-center gap-2">
+                          DEPARTMENT
+                          <div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
+                            </div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      <th scope="col">
+                        <div class="d-flex align-items-center gap-2">
+                          POSITION
+                          <div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
+                            </div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      <th scope="col">
+                        <div class="d-flex align-items-center gap-2">
+                          INVITES
+                          <div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-up" (click)="onSortTableData($event)"></i>
+                            </div>
+                            <div>
+                              <i class="my-icon fa fa-chevron-down" (click)="onSortTableData($event)"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of usersPage | filter : searchText">
+                      <td scope="row">
+
+                        <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'"
+                          [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
+                          class="bi bi-triangle-fill"></i>
+                        <i *ngIf="user.role == 'APPLICANT'"
+                          [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}"
+                          class="bi bi-hexagon-fill"></i>
+                      </td>
+
+                      <td>{{ user.first_name }}</td>
+                      <td>{{ user.last_name }}</td>
+                      <td>{{ user.company.name }}</td>
+                      <td>{{ user.department.name }}</td>
+                      <td>{{ user.title }}</td>
+                      <td>{{ user.invite }}</td>
+                      <td>
+                        <div class="d-flex align-items-center gap-3 justify-content-end">
+                          <a *ngIf="
+                              user.status === 'DONE' ||
+                              user.status === 'IN_PROGRESS'
+                            " href="">
+                            <img height="13" width="13" src="../../../../assets/images/download.svg" alt="" />
+                          </a>
+                          <button type="reset" class="DeleteBtn" (click)="openConfirmationModal(template)">
+                            <img src="../../../../assets/images/CrossIcon.png" alt="" />
+                          </button>
+                          <ng-template #template>
+                            <div class="ConfirmationModel deleteModel">
+                              <div class="modal-body">
+                                {{"admin.users.deleteConfirm.text" | translate}}
+                                <div class="ModelBtnPart">
+                                  <button type="button" class="theme-btn w-auto" (click)="confirmDeleteDialog('id')">
+                                    Ok
+                                  </button>
+                                  <button type="button" class="theme-btn w-auto" (click)="declineDeleteModal()">
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

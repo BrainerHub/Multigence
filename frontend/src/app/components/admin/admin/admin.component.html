@@ -1,8 +1,8 @@
 <app-layout-header></app-layout-header>
 <div class="MainBodyPart">
-  <div class="pad-top-30 pad-bottom-500 my-5">
+  <div class="my-3">
     <div class="container-fluid admin-home">
-      <div class="col-10 companies m-auto">
+      <div class="col-md-10 col-11 companies m-auto">
         <div class="AcordionTitle text-uppercase" translate="admin.companies.title"></div>
         <div class="companies-list">
           <ul>
@@ -90,20 +90,19 @@
 
               <form [formGroup]="createOrginationForm" class="">
                 <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(data)">
-                  <div *ngFor="let organization of  organizations().controls; let orgIndex=index"
-                    [formGroupName]="orgIndex">
-                    <div>
+                  <div *ngFor="let organization of  organizations().controls; let orgIndex=index">
+                    <div [formGroupName]='orgIndex'>
                       <input class="form-control form-control-outline" name="name" formControlName="name"
                         [(ngModel)]="data.name" />
 
                       <div class="CreateCompanyForm">
                         <div class="row align-items-baseline">
-                          <div class="col-12">
+                          <div class="col-md-12">
                             <div class="form-group">
                               <label for="name">MANAGERS</label>
                             </div>
                           </div>
-                          <div class="col-5">
+                          <div class="col-md-5">
                             <div class="form-group">
                               <label for="managerName" hidden>{{
                                 "admin.companies.new.form.managerName"
@@ -129,7 +128,7 @@
                               </ng-container>
                             </div>
                           </div>
-                          <div class="col-7">
+                          <div class="col-md-7">
                             <div class="form-group">
                               <label for="managerLastName" hidden>{{
                                 "admin.companies.new.form.managerLastName"
@@ -155,7 +154,7 @@
                               </ng-container>
                             </div>
                           </div>
-                          <div class="col-5">
+                          <div class="col-md-5">
                             <div class="form-group d-flex align-items-center gap-2">
                               <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
                               <select class="form-select" name="department" id="department"
@@ -167,7 +166,7 @@
                               <span class="bi bi-send"></span>
                             </div>
                           </div>
-                          <div class="col-5">
+                          <div class="col-md-5">
                             <div class="form-group">
                               <label for="managerEmail" hidden>{{
                                 "admin.companies.new.form.managerEmail"
@@ -199,7 +198,7 @@
                               </ng-container>
                             </div>
                           </div>
-                          <div class="col-2">
+                          <div class="col-md-2">
                             <div class="text-end">
                               <button [ngClass]="
                                   !createOrginationForm.valid
@@ -213,12 +212,12 @@
                         </div>
 
                         <div class="row align-items-baseline manager-field" *ngFor="let manager of managers">
-                          <div class="col-5">
+                          <div class="col-md-5">
                             <div class="form-control form-control-outline">
                               <p>{{ manager.first_name }}</p>
                             </div>
                           </div>
-                          <div class="col-7">
+                          <div class="col-md-7">
                             <div class="form-control form-control-outline">
                               <p>{{ manager.last_name }}</p>
                             </div>

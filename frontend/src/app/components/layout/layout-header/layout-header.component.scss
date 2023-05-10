@@ -1,9 +1,8 @@
 .layout-content {
   .header {
     .navbar {
-      padding-left: 15px;
-      padding-right: 15px;
       background-color: #252525;
+      padding: 5px 15px;
       .navbar-brand {
         max-width: 197px;
         width: 100%;
@@ -27,9 +26,10 @@
           line-height: normal;
           text-transform: uppercase;
           text-decoration: none;
-          &:hover, &:focus {
-            color: #00ff85 ;
-            border-color: #00ff85;
+          &:hover,
+          &:focus {
+            color: #00ff85 !important;
+            border-color: #00ff85 !important;
           }
         }
       }
@@ -41,6 +41,10 @@
         align-items: center;
         gap: 15px;
         li {
+          max-width: 130px;
+          width: 100%;
+          text-align: center;
+          margin: 0 40px;
           a {
             font-size: 14px;
             line-height: 20px;
@@ -48,8 +52,10 @@
             display: inline-block;
             text-decoration: none;
             text-transform: uppercase;
+            color: #777777;
+            stroke: #777777;
             span {
-              margin-top: 5px;
+              // margin-top: 5px;
               display: block;
             }
             &:hover {
@@ -62,6 +68,24 @@
         }
       }
     }
+    .navbar-toggler {
+      border: none;
+      .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+        background-color: #eeeeee;
+        margin: 5px 0;
+      }
+      &:focus {
+        outline: none;
+        box-shadow: unset;
+        .icon-bar {
+          background-color: #00ff85;
+        }
+      }
+    }
   }
 }
 .LogOutBtn {
@@ -71,7 +95,7 @@
   align-items: center;
   justify-content: space-between;
   background-image: url(../../../../assets/images/bg-subheader.png);
-  padding: 4px 15px;
+  padding: 3px 15px;
   position: relative;
   &::before {
     background: linear-gradient(
@@ -111,7 +135,7 @@
       }
     }
   }
- 
+
   .themeSelector {
     .theme-selected {
       display: inline-block;
@@ -121,7 +145,6 @@
       position: relative;
       max-width: 56px;
       transition: 0.2s;
-      
     }
   }
 }
@@ -137,6 +160,45 @@
   background-color: yellow;
 }
 
-.light-btn-theme-selector{
+.light-btn-theme-selector {
   margin-left: -6px;
+}
+@media only screen and (max-width: 991px) {
+  .layout-content {
+    .header {
+      .navbar {
+        .navbar-collapse {
+          margin: 0 !important;
+          padding: 0 15px;
+          ul {
+            margin: 0 !important;
+            display: block !important;
+            border-bottom: 1px solid #555555;
+            li {
+              margin: 0 !important;
+              a {
+                display: block;
+                text-align: left;
+                margin-bottom: 10px;
+                svg {
+                  display: none !important;
+                }
+              }
+            }
+          }
+          .lang-selector {
+            margin: 15px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .submenu-gradient {
+    .background-label {
+      padding-right: 10px;
+    }
+  }
 }

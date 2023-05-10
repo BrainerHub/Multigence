@@ -1,6 +1,5 @@
 .AccountTabbing {
   display: flex;
-
   gap: 15px;
   .nav-pills {
     width: 28%;
@@ -9,6 +8,7 @@
       padding: 10px 15px;
       color: #337ab7;
       margin-bottom: 3px;
+      text-align: left;
       &:hover {
         color: #00ff85;
         background-color: #eee;
@@ -37,11 +37,30 @@
   }
 }
 .account-section {
-  background-color: #0c0c0c;
-  color: #eeeeee;
+  background-color: #fff;
   padding: 100px 0px;
+  p,
+  input {
+    color: #333 !important;
+  }
+  form {
+    label {
+      color: #eeeeee;
+    }
+  }
 }
 
-.account-section .AccountTabbing form label {
-  color: #eeeeee;
+@media only screen and (max-width: 767px) {
+  .AccountTabbing {
+    flex-wrap: wrap;
+    .nav-pills {
+      width: 100%;
+    }
+    .tab-content {
+      width: 100%;
+      form {
+        max-width: 100%;
+      }
+    }
+  }
 }
