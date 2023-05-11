@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent,canActivate: [AuthGuard]},
   {path: 'reset-password', component: ForgetPasswordComponent},
-  {path: 'change-password', component: ChangePasswordComponent},
+  {path: 'reset-password/change', component: ChangePasswordComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   {path: 'users', component: AdminUsersComponent,canActivate: [AuthGuard]},

@@ -1,7 +1,27 @@
 .MainBodyPart {
-    height: calc(100vh - 150px);
-    overflow: auto;
-    top: 106px;
-    position: relative;
-    background-color: #212121;
+  height: calc(100vh - 150px);
+  overflow: auto;
+  top: 106px;
+  position: relative;
+  background-color: #212121;
+}
+.reportTable {
+  max-width: 1000px;
+  width: 100%;
+  overflow-x: auto;
+  table {
+    background-color: #000;
+    tr {
+      border: none;
+      td {
+        color: #333;
+        background-color: transparent !important;
+        i.bi.bi-send {
+          &::before {
+            transform: rotate(138deg);
+          }
+        }
+      }
+    }
   }
+}

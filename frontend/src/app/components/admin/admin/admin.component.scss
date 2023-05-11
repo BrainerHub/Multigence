@@ -89,7 +89,7 @@
     .AcordionTitle {
       font-size: 14px;
       line-height: 1.42857143;
-      color:#ddd;
+      color: #ddd;
       padding: 12px 15px;
       background-color: #232323;
     }
@@ -168,7 +168,7 @@
             z-index: 9;
             option {
               background-color: #000;
-              color:#fff;
+              color: #fff;
               border-bottom: 1px solid #ccc;
               min-height: 1.2em;
             }
@@ -184,7 +184,7 @@
             color: #fff;
             right: 5px;
             top: 5px;
-           // transform: rotate(132deg);
+            // transform: rotate(132deg);
           }
           .form-control.form-control-box {
             border-radius: 0;
@@ -269,7 +269,6 @@
   background-color: #eee;
   padding: 4rem;
   cursor: pointer;
-  
 }
 .accordion-body {
   padding: 1rem;
@@ -279,3 +278,17 @@
   display: block;
 }
 
+@media only screen and (max-width: 767px) {
+  .admin-home {
+    .companies {
+      .companies-list {
+        ul {
+          padding-left: 10px;
+          .CreateFormBtnPart {
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+}

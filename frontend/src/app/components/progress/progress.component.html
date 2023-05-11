@@ -108,29 +108,31 @@
               </li>
             </ul>
           </div>
-          <div class="UserTable table-hover">
-            <div class="col-xs-1">
+          <div class="scrollTable">
+            <div class="UserTable table-hover">
+              <div class="col-xs-1">
+              </div>
+              <table class="table table-dark">
+                <tbody>
+                  <tr *ngFor="let user of userStatusListPage | filter : searchText">
+                    <td scope="row">
+                      <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}" class="bi bi-triangle-fill"></i>
+                      <i *ngIf="user.role == 'APPLICANT'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}" class="bi bi-hexagon-fill"></i>
+                    </td>
+                    <td>{{ user.first_name}}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{
+                      user.role == "EMPLOYEE"
+                      ? user.title
+                      : user.position_name
+                      }}</td>
+                    <td>{{ user.department_name }}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+
             </div>
-            <table class="table table-dark">
-              <tbody>
-                <tr *ngFor="let user of userStatusListPage | filter : searchText">
-                  <td scope="row">
-                    <i *ngIf="user.role === 'EMPLOYEE' || user.role === 'MANAGER'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}" class="bi bi-triangle-fill"></i>
-                    <i *ngIf="user.role == 'APPLICANT'" [ngClass]="{'pending-color': user.status == 'CREATED', 'progressing-color': user.status == 'IN_PROGRESS', 'finished-color': user.status == 'DONE'}" class="bi bi-hexagon-fill"></i>
-                  </td>
-                  <td>{{ user.first_name}}</td>
-                  <td>{{ user.last_name }}</td>
-                  <td>{{
-                    user.role == "EMPLOYEE"
-                    ? user.title
-                    : user.position_name
-                    }}</td>
-                  <td>{{ user.department_name }}</td>
-                </tr>
-
-              </tbody>
-            </table>
-
           </div>
         </div>
       </div>

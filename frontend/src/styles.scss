@@ -100,7 +100,7 @@ textarea.form-control {
   }
 }
 .theme-btn {
-  padding: 6px 12px;
+  padding: 8px 12px;
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
@@ -128,6 +128,9 @@ a {
   &:hover {
     color: #00ff85;
   }
+}
+.link-Blue {
+  color: #337ab7;
 }
 .checkbox,
 .radio {
@@ -177,7 +180,7 @@ label {
 .Custompagination {
   width: 100%;
   border: 1px solid #555555;
-  padding: 23px;
+  // padding: 23px;
   .pagination {
     margin: 0;
     justify-content: center;
@@ -236,6 +239,14 @@ label {
 .headers {
   margin-top: 30px;
 }
+.ConfirmationModel {
+  background-color: #2f2f2f !important;
+  padding: 30px;
+  border-radius: 6px;
+  p {
+    font-size: 2em !important;
+  }
+}
 .dark-theme-selector {
   background-color: black !important;
   .MainBodyPart {
@@ -253,7 +264,7 @@ label {
       padding: 0;
       p {
         color: #fff;
-        font-size: 15px;
+        font-size: 15px !important;
         margin: 0 0 22px;
       }
       .ModelBtnPart {
@@ -339,7 +350,7 @@ label {
       }
     }
     &.deleteModel {
-      background: #fff;
+      background: #fff !important;
       border: 1px solid #eee;
       padding: 50px;
       text-align: left;
@@ -348,13 +359,14 @@ label {
       border-radius: 6px;
       p {
         color: #333;
-        font-size: 15px;
+        font-size: 15px !important;
         margin: 0 0 22px;
       }
     }
   }
   .acceptModel {
-    background: #777777 url(/images/background.png) repeat center center !important;
+    // background: #777777 url(/images/background.png) repeat center center !important;
+    background: #2f2f2f !important;
     padding: 20px 20px 20px 20px !important;
     max-height: 95vh !important;
     .modal-body {
@@ -509,7 +521,7 @@ label {
       background-color: transparent !important;
     }
     .corridor-legend {
-      background-color: #c6c6c6 !important;
+      // background-color: #c6c6c6 !important;
     }
     .form-group {
       .form-select {
@@ -636,7 +648,6 @@ label {
       color: #555 !important;
     }
   }
-
   .form-group {
     .form-label.text-white {
       color: #0e0e0e !important;
@@ -662,6 +673,17 @@ label {
         background-color: #c6c6c6;
       }
     }
+  }
+  .reportTable {
+    table {
+      background-color: #c6c6c6 !important;
+    }
+    table.transparant {
+      background-color: transparent !important;
+    }
+  }
+  .corridorGraph {
+    background-color: transparent !important;
   }
 }
 .white-theme-selector .question-header {
@@ -711,5 +733,14 @@ label {
     background-color: #cceacd !important;
     color: #006134 !important;
     border: 1px solid #006134 !important;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .ConfirmationModel {
+    padding: 15px;
+    .ModelBtnPart {
+      margin-top: 20px !important;
+    }
   }
 }

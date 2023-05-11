@@ -1,5 +1,60 @@
-#divChart{
-    display: block;
-    width: 400px;
-    height: 400px;
+#divChart {
+  display: block;
+  width: 400px;
+  height: 400px;
+}
+.corridorGraph {
+  position: relative;
+  background-color: rgba(12, 12, 12, 0.5);
+  border: 1px solid #555555;
+  margin-top: 20px;
+  padding: 11px 11px 62px 30px;
+  canvas {
+    height: auto !important;
+    width: 100% !important;
+  }
+  .corridor-filters {
+    .label {
+      color: #0c0c0c;
+      position: absolute;
+    }
+    .points-label {
+      top: 50%;
+      font-size: 14px;
+      left: 0;
+      transform: rotate(269deg);
+    }
+    .individual-label {
+      position: absolute;
+      bottom: 20px;
+      left: 20%;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+    }
+    .collective-label {
+      position: absolute;
+      bottom: 20px;
+      right: 20%;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .corridorGraph {
+    padding: 11px 11px 30px 30px;
+    .corridor-filters {
+      .individual-label {
+        bottom: 5px;
+        left: 12%;
+      }
+      .collective-label {
+        bottom: 5px;
+        right: 12%;
+      }
+    }
+  }
 }

@@ -1,6 +1,9 @@
 .navbar-inverse {
   border-bottom: 1px solid #080808;
   background-color: #252525;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
   .navbar {
     background-color: #252525;
     .navbar-brand {

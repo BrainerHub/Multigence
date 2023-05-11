@@ -52,11 +52,10 @@ export class ChangePasswordComponent implements OnInit {
         },
         (err) => {
           if (err.status == 409) {
-            this.errormsg = this._translate.instant(
-              'changePassword.form.error.passwordIsNotNew'
-            );
+            this.errormsg = 
+              'changePassword.form.error.passwordIsNotNew';
           }else{
-            this.errormsg =this._translate.instant('changePassword.form.error.passwordNotMatch');
+            this.errormsg ='changePassword.form.error.passwordNotMatch';
           }
         }
       );

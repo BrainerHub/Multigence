@@ -19,11 +19,11 @@
           Send invitation to employees and candidates:
         </p>
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6">
             <form [formGroup]="createInvitationForm" class="profile" (ngSubmit)="inviteEmployee($event)">
               <button (click)="onShowInvitationForm()" type="button" class="companyform text-uppercase bold">
                 {{( createInvitation ? "invitations.dropdown.employee" : "invitations.dropdown.employee" ) | translate}}
-                <span class="bi bi-send" style="transform: rotate(135deg);" *ngIf="!visible"></span>
+                <span class="bi bi-send" style="transform: rotate(135deg);"></span>
               </button>
               <div class="createInvitationForm CreateCompanyForm" *ngIf="visible">
                 <div class="profile-container">
@@ -132,7 +132,7 @@
                               <div class="modal-body">
                                 <p *ngIf="send">{{'invitation.sentMessage'| translate}}</p>
                                 <p *ngIf="!send">{{'invitation.sentBeforeMessage'| translate}}</p>
-                                <div class="ModelBtnPart">
+                                <div class="ModelBtnPart justify-content-center">
                                   <button type="button" class="theme-btn w-auto" (click)="confirmOkDialog()">
                                     Ok
                                   </button>
@@ -149,19 +149,19 @@
               </div>
             </form>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6">
             <form [formGroup]="CreateCandidateform" class="profile" (ngSubmit)="inviteCandidate($event)">
               <button (click)="onShowcandidateform()" type="button" class="companyform text-uppercase bold">
                 {{
                 (candidateform ? "invitations.dropdown.candidate" : "invitations.dropdown.candidate") | translate
                 }}
-                <span class="bi bi-send" style="transform: rotate(135deg);" *ngIf="!IsVisible"></span>
+                <span class="bi bi-send" style="transform: rotate(135deg);"></span>
               </button>
               <div class="candidateform CreateCompanyForm" *ngIf="IsVisible">
                 <div class="profile-container">
                   <div class="profile-container2">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group relative">
                           <input type="text" name="candidateFirstName" class="form-control form-control-outline"
                             placeholder="{{'form.firstname' | translate}}" formControlName="candidateFirstName" />
@@ -180,7 +180,7 @@
                           </ng-container>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group">
                           <input type="text" name="candidateLastName" class="form-control form-control-outline"
                             placeholder="{{'form.lastname' | translate}}" formControlName="candidateLastName" />
@@ -199,7 +199,7 @@
                           </ng-container>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group dropdown">
                           <label class="form-label text-white" *ngIf="!selectDepartment">DEPARTMENT</label>
                           <select class="form-select" name="department" id="department" formControlName="department" (change)="onSelectDepartments($event)">
@@ -210,7 +210,7 @@
                           <span class="bi bi-send"></span>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group CustomAddBtn">
                           <input type="text" name="name" placeholder="{{
                               'form.CreateDepartment' | translate
@@ -233,7 +233,7 @@
                           </ng-container>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group">
                           <label class="form-label text-white" *ngIf="!selectJobId">VACANCY / JOB ID</label>
                           <select class="form-select" name="job" id="job" formControlName="job" (change)="onSelectVacancy($event)">
@@ -244,7 +244,7 @@
                           <span class="bi bi-send"></span>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group CustomAddBtn">
                           <input type="text" name="createJobID" class="form-control form-control-outline"
                             placeholder="{{ 'form.CreateJobId' | translate }}" formControlName="createJobId" />
@@ -264,7 +264,7 @@
                           </ng-container>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group">
                           <input type="email" name="candidateEmail" class="form-control form-control-outline"
                             placeholder="Email" formControlName="candidateEmail" />
@@ -288,14 +288,14 @@
                           </ng-container>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-sm-6">
                         <div class="form-group text-end">
                           <button type="submit" [disabled]="!CreateCandidateform.valid" class="theme-btn w-auto"
                             (click)="openConfirmationModal(template)">
                             {{ "form.send" | translate }}
                           </button>
                           <ng-template #template>
-                            <div class="ConfirmationModel">
+                            <div class="ConfirmationModel deleteModel">
                               <div class="modal-body">
                                 <p>{{'invitationMessage'| translate}}</p>
                                 <div class="ModelBtnPart">

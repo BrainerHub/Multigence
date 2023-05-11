@@ -2,7 +2,8 @@
     <div (click)="toggle()">
       <div class="close-icon" (mouseenter) = "changeColor(true)" (mouseleave) = "changeColor(false)" (click)="deleteUser()">
     </div>
-      <table class="table table-light">
+    <div class="reportTable">
+      <table class="table table-light transparant">
         <tbody>
           <tr>
             <td >
@@ -16,37 +17,38 @@
           </tr>
         </tbody>
       </table>
-   
-  
-    <div class="row details" *ngIf="expanded">
-      <div class="col-xs-9 col-xs-offset-1">
-          <div class="row" style="margin-bottom: 10px;">
-              <div class="col-xs-12">
-                <div class="col-xs-3 col-lg-2">{{"graphic.individual" | translate}}:</div>
-                <div class="col-xs-9 col-lg-10">{{individual[0]}}&nbsp;({{"sphere.individual.wissen"| translate}}); {{individual[1]}}&nbsp;({{"sphere.individual.ware" | translate}}); {{individual[2]}}&nbsp;({{"sphere.individual.territorium" | translate}}); {{individual[3]}}&nbsp;({{"sphere.none.welt" | translate}})</div>
+      <div class="row details" *ngIf="expanded">
+        <div class="col-10" style="padding-left: 45px;">
+            <div class="row" style="margin-bottom: 10px;">
+                  <div class="col-3">{{"graphic.individual" | translate}}:</div>
+                  <div class="col-9">{{individual[0]}}&nbsp;({{"sphere.individual.wissen"| translate}}); {{individual[1]}}&nbsp;({{"sphere.individual.ware" | translate}}); {{individual[2]}}&nbsp;({{"sphere.individual.territorium" | translate}}); {{individual[3]}}&nbsp;({{"sphere.none.welt" | translate}})</div>
+              
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                  <div class="col-3">{{"graphic.collective" | translate}}:</div>
+                  <div class="col-9">{{collective[2]}}&nbsp;({{"sphere.collective.wissen" | translate}}); {{collective[1]}}&nbsp;({{"sphere.collective.ware" | translate}}); {{collective[0]}}&nbsp;({{"sphere.collective.territorium" | translate}});</div>
+                
+            </div>
+            <div class="row trial-message">
+              <div class="col-9">
+                  {{"trial.notAvailable" | translate}}
               </div>
-          </div>
-  
+            </div>
+        </div>
+        <div class="col-2">
           <div class="row">
-              <div class="col-xs-12">
-                <div class="col-xs-3 col-lg-2">{{"graphic.collective" | translate}}:</div>
-                <div class="col-xs-9 col-lg-10">{{collective[2]}}&nbsp;({{"sphere.collective.wissen" | translate}}); {{collective[1]}}&nbsp;({{"sphere.collective.ware" | translate}}); {{collective[0]}}&nbsp;({{"sphere.collective.territorium" | translate}});</div>
-              </div>
-          </div>
-  
-      </div>
-      <div class="col-xs-2">
-        Page: {{page}}
-      </div>
-      <div class="row trial-message">
-        <div class="col-xs-9 col-xs-offset-1">
-            {{"trial.notAvailable" | translate}}
+            <div class="col-12">
+              Page: {{page}}
+            </div>
+            <div class="col-12">
+              Page: {{page}}
+            </div>
         </div>
-        <div class="col-xs-2">
-          Page: {{page}}
         </div>
+        
       </div>
     </div>
+  
     
 
   

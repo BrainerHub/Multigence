@@ -1,14 +1,15 @@
 import { Component, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-// import { UserService } from 'src/app/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
+import { state, style, trigger } from '@angular/animations';
 @Component({
   selector: 'app-invitations',
   templateUrl: './invitations.component.html',
-  styleUrls: ['./invitations.component.scss']
+  styleUrls: ['./invitations.component.scss'],
+  
 })
 export class InvitationsComponent {
   [x: string]: any;
@@ -37,16 +38,13 @@ export class InvitationsComponent {
   INVITATION_SENT_BEFORE_MSG:any = 'invitation.sentBeforeMessage';
   USER_HAS_STARTED_QUIZ = 'invitation.userHasStartedQuizMessage';
   INVITATION_MAX_REACHED = 'invitation.maxReached';
-
+  isActive: boolean = false;
   modalRef: BsModalRef<unknown>;
   constructor(private userService: UserService,private formBuilder: FormBuilder,
     private translate: TranslateService,    
     public _router: Router,
     private modalService: BsModalService){
-   
   }
-
-
 
   ngOnInit(): void {
     this.getUser();

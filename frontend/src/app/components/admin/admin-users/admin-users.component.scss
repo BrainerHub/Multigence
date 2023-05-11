@@ -18,7 +18,7 @@
 }
 .FooterTop {
   position: relative;
-  top: 106px !important;
+  top: 98px !important;
   .progress-chart {
     position: absolute;
     top: 50%;
@@ -111,7 +111,7 @@
     max-width: 12px;
   }
 }
-.dark-theme-selector{
+.dark-theme-selector {
   .ConfirmationModel {
     .modal-body {
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -130,7 +130,7 @@
     }
   }
 }
-.white-theme-selector{
+.white-theme-selector {
   .ConfirmationModel {
     .modal-body {
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -146,6 +146,35 @@
         justify-content: space-between;
         margin-top: 50px;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .scrollTable {
+    max-width: 803px;
+    overflow-x: auto;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .AdminUser {
+    padding: 15px 0 15px 15px;
+  }
+  .progress-footer.FooterTop {
+    padding-bottom: 30px;
+    .progress-chart {
+      top: unset;
+      transform: translate(-50%, -50%);
+      bottom: 0;
+      left: 50%;
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .AdminUser {
+    padding: 15px;
+    .container {
+      padding: 0;
     }
   }
 }

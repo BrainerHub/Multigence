@@ -122,7 +122,10 @@
                     <div class="col-xs-12">
                       <div class="checkbox">
                         <input type="checkbox" formControlName="acceptTerms" id="termsaccept" name="terms" required>
-                        <label for="termsaccept">&nbsp;<span >{{"signup.form.acceptTerms" | translate}}</span> <a class="underline" href="" target="_blanck" >{{"signup.form.terms" | translate}}</a></label>
+                        <label for="termsaccept">&nbsp;
+                          <span >{{"signup.form.acceptTerms" | translate}}</span> 
+                          <a class="underline link-Blue" href="" target="_blanck" >{{"signup.form.terms" | translate}}</a>
+                        </label>
                         <ng-container
                         *ngIf="
                         signupForm.get('acceptTerms')?.invalid &&
@@ -138,7 +141,9 @@
                        
                       </ng-container>
                     
-                    </div></div> </div>
+                    </div>
+                  </div> 
+                </div>
               
               
                 <button type="submit" class="theme-btn text-uppercase">{{"signup.form.submit" | translate}}</button>
