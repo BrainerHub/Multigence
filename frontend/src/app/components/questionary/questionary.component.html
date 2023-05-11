@@ -17,6 +17,7 @@
       </span>
     </div>
 
+
     <div *ngIf="completed" class="completedBlock">
       <div>
         <a class="navbar-brand" data-toggle="collapse" data-target=".navbar-collapse.in">
@@ -47,7 +48,7 @@
                       <button (click)="increment(i)"></button>
                     </div>
                     <div class="id-input">
-                      <input type="number" min="0" name="{{'option' + i}}" placeholder="0" [value]="answers[i]"
+                      <input type="number" min="0" name="{{'option' + i}}" [value]="answers[i]" placeholder="0"
                         readonly />
                     </div>
                     <div class="minus-container background-minus-custom">
@@ -79,8 +80,8 @@
   </div>
 
   <div>
-    <ng-template #template>
-      <div class="ConfirmationModel" *ngIf="questionary && !completed">
+    <ng-template #content let-modal>
+      <div class="ConfirmationModel">
         <div class="modal-body modal-content">
           <p>{{"questionary.instructions.text" | translate}}</p>
           <p>{{"questionary.instructions.text1" | translate}}</p>
@@ -91,12 +92,15 @@
           <p>{{"questionary.instructions.text6" | translate}}</p>
           <p>{{"questionary.instructions.text6" | translate}}</p>
           <div class="ConfirmationModel__btn">
-            <button type="button" class="theme-btn w-auto" aria-label="close" (click)="QuizStart()">
+            <!-- <button type="button" class="theme-btn w-auto" aria-label="close" (click)="QuizStart()">
               <strong translate="start"></strong>
-            </button>
+            </button> -->
+            <button type="button" class="theme-btn w-auto" (click)="modal.close('Save click')"><strong
+                translate="start"></strong></button>
           </div>
         </div>
       </div>
     </ng-template>
   </div>
+
 </div>

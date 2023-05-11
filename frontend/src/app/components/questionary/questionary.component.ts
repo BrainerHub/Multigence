@@ -1,4 +1,5 @@
-import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef,AfterViewInit, TemplateRef, ViewChild } from '@angular/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -38,6 +39,9 @@ export class QuestionaryComponent {
   QuestionData:any;
   questions: any;
   nextBtn:boolean = true;
+  modelShow:any ;
+  closeResult: string;
+  @ViewChild('content') content:any;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -45,7 +49,8 @@ export class QuestionaryComponent {
     private modalService: BsModalService,
     private userService: UserService,
     public route: ActivatedRoute,
-    private questionaryService: QuestionaryService
+    private questionaryService: QuestionaryService,
+    private modalservice: NgbModal
   ) {
   }
 
@@ -53,11 +58,9 @@ export class QuestionaryComponent {
     this.getMe();
   }
 
-  openModal() {
-    this.modalRef = this.modalService.show(this.template, {
-      animated: true,
-      backdrop: 'static',
-    });
+ 
+  openModal(){
+    this.modalservice.open(this.content, { centered: true });
   }
 
   QuizStart(){
@@ -86,8 +89,8 @@ export class QuestionaryComponent {
     }
   }
 
-  decrement(index: number): void {
-   if(this.answers[index] != 0){
+  decrement(index: any): void {
+   if(this.answers[index] > 0){
       if(this.availablePoints() < this.maxPoint){
         this.answers[index] = (this.answers[index] || 0) - 1;
       }
@@ -146,30 +149,32 @@ export class QuestionaryComponent {
     };
    
    this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).subscribe((res: any) => {
-    console.log(res,'res');
+       //this.getUserQuestionaries();
+       window.location.reload();
    } )
- 
   }
 
- 
   currentQuestion(){
    localStorage.setItem("userId",this.user.uuid);
    localStorage.setItem("questionId",this.questionary.uuid)
     return this.questionary.questions[this.current]; 
   }
  
-
   applyAnswers(questionaryId: number, questions:any) {
     var userId = this.user.uuid;
     this.userService.getUserQuestionaryAnswers(questionaryId,userId).subscribe((answers: any) => {
       questions.map((question:any) => {
         var answer = _.find(answers, this.hasQuestionId(question.uuid));
+        //debugger
         question.answered = answer !== undefined && answer.options && answer.options.length > 0;
-            this.shuffleOptions();
-           // this.addGuards();
-           if(_.every(questions,this.isNotAnswered)){
-             // this.openModal();
-           }
+        localStorage.setItem("aaa",question.answered);
+           this.shuffleOptions();
+           this.addGuards();
+             if(_.every(questions,this.isNotAnswered)){
+                if(question.text != 'Question 2'){
+                  this.openModal();
+                } 
+             }
             this.questionary.questions = questions;
              //this.questionary = question;
             if (this.currentQuestion().answered) {
@@ -214,17 +219,12 @@ export class QuestionaryComponent {
       .getUserQuestionaries(this.user.uuid)
       .subscribe((res) => {
         if(res.length > 0){
-          
            this.QuestionData = res[0];
            this.questionary = res[0];
-           if(this.completed){
-             this.openModal();
-          }
            this.maxPoint = res[0].max_points;
            var userId = this.user.uuid;
            var queId = res[0].uuid;
-         
-          this.applyAnswers(queId,this.QuestionData.questions);
+           this.applyAnswers(queId,this.QuestionData.questions);
         }
         else{
           this.questionary = null;
