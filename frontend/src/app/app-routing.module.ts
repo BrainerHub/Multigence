@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin/admin.component';
 import { LayoutHeaderComponent } from './components/layout/layout-header/layout-header.component';
-import { LayoutComponent } from './components/layout/layout.component';
 import { ChangePasswordComponent } from './components/login/change-password/change-password.component';
 import { ForgetPasswordComponent } from './components/login/forget-password/forget-password.component';
 import { LoginComponent } from './components/login/login.component';
@@ -23,9 +22,9 @@ import { QuestionaryReportComponent } from './components/report/questionary-repo
 import { CorridorLegendItemComponent } from './components/report/corridor-legend-item/corridor-legend-item.component';
 
 const routes: Routes = [
-{path: '', redirectTo: 'admin', pathMatch: 'full',},
+{path: '', redirectTo: 'admin', pathMatch: 'full'},
   {path: '', component: LoginComponent},
-  {path: 'login', component: LoginComponent,canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
   {path: 'reset-password', component: ForgetPasswordComponent},
   {path: 'reset-password/change', component: ChangePasswordComponent},
   {path: 'signup', component: SignupComponent},

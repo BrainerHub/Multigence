@@ -33,6 +33,11 @@
       .form-control {
         border: 1px solid #ccc;
       }
+      .InputForm {
+        label {
+          width: 100%;
+        }
+      }
     }
   }
 }
@@ -60,6 +65,17 @@
       width: 100%;
       form {
         max-width: 100%;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 575px) {
+  .AccountTabbing {
+    .tab-content {
+      form {
+        .InputForm {
+          margin-top: 15px;
+        }
       }
     }
   }

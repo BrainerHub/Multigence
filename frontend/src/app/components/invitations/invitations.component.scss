@@ -108,56 +108,27 @@
     }
   }
 }
-
-// .dark-theme-selector {
-  .ConfirmationModel {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    border: 1px solid #fff;
-    border-radius: 6px;
-    background: #777777 url("../../../assets/images/modal-background.png")
-      repeat center center;
-    padding: 30px;
-    .modal-body {
-      p {
-        color: #fff;
-        text-align: center;
-        font-size: 32px;
-      }
-      .ModelBtnPart {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        button {
-          font-size: 18px;
-          padding: 10px 16px;
-        }
-      }
+.ConfirmationModel {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+  border-radius: 6px;
+  background: #777777 url("../../../assets/images/modal-background.png") repeat
+    center center;
+  padding: 30px;
+  .modal-body {
+    p {
+      color: #fff;
+      text-align: center;
+      font-size: 32px !important;
     }
-  }
-// }
-.white-theme-selector {
-  .ConfirmationModel {
-    .modal-body {
-      // box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      // border: 1px solid #fff;
-      // border-radius: 6px;
-      // background: #fff url("../../../assets/images/modal-background.png") repeat
-      //   center center;
-      // padding: 30px;
-      // p {
-      //   color: #000;
-      //   text-align: center;
-      //   font-size: 32px;
-      // }
-      // .ModelBtnPart {
-      //   display: flex;
-      //   justify-content: center;
-      //   margin-top: 20px;
-      //   button {
-      //     font-size: 18px;
-      //     padding: 10px 16px;
-      //   }
-      // }
+    .ModelBtnPart {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      button {
+        font-size: 18px;
+        padding: 10px 16px;
+      }
     }
   }
 }
@@ -175,6 +146,16 @@
     padding-bottom: 30px;
     .invitation-text {
       margin: 15px 0px 25px;
+    }
+  }
+}
+@media only screen and (max-width: 575px) {
+  .ConfirmationModel {
+    width: 100%;
+    .modal-body {
+      p {
+        font-size: 15px !important;
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
 <div class="MainBodyPart">
   <div class="my-3">
     <div class="container-fluid admin-home">
-      <div class="col-md-10 col-11 companies m-auto">
+      <div class="col-11 companies m-auto">
         <div class="AcordionTitle text-uppercase" translate="admin.companies.title"></div>
         <div class="companies-list">
           <ul>
@@ -19,7 +19,7 @@
                 </button>
                 <div class="CreateCompanyForm" *ngIf="visible">
                   <div class="row align-items-baseline">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                       <div class="form-group">
                         <label class="form-label" for="name" *ngIf="!createCompanyForm.get('name')?.value">{{
                           "admin.companies.new.form.name" | translate
@@ -38,7 +38,7 @@
                         </ng-container>
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4 col-sm-5 ">
                       <div class="form-group">
                         <label class="form-label text-white" for="trial" *ngIf="!selectedOption">{{
                           "admin.version.select" | translate }}</label>
@@ -53,7 +53,7 @@
                         <span _ngcontent-sis-c26="" class="bi bi-send"></span>
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-sm-3">
                       <div class="cform-inline" *ngIf="
                           createCompanyForm.controls['trial'].value ==
                           'Trial version' ||  createCompanyForm.controls['trial'].value ==
@@ -90,10 +90,11 @@
 
               <form [formGroup]="createOrginationForm" class="">
                 <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(data)">
-                  <div *ngFor="let organization of  organizations().controls; let orgIndex=index">
-                    <div [formGroupName]='orgIndex'>
+                  <div *ngFor="let organization of  organizations().controls; let i = index"
+                    [formGroupName]="i">
+                    <div>
                       <input class="form-control form-control-outline" name="name" formControlName="name"
-                        [(ngModel)]="data.name" />
+                        [(ngModel)]="data.name"/>
 
                       <div class="CreateCompanyForm">
                         <div class="row align-items-baseline">
@@ -108,7 +109,7 @@
                                 "admin.companies.new.form.managerName"
                                 | translate
                                 }}</label>
-                              <input type="text" name="managerName" class="form-control form-control-outline"
+                              <input type="text" name="managerName" [(ngModel)]="organization.managerName" class="form-control form-control-outline" 
                                 formControlName="managerName" placeholder="{{
                                   'admin.companies.new.form.managerName'
                                     | translate
@@ -134,9 +135,8 @@
                                 "admin.companies.new.form.managerLastName"
                                 | translate
                                 }}</label>
-                              <input type="text" name="managerLastName" class="form-control form-control-outline"
-                                formControlName="managerLastName" placeholder="{{
-                                  'admin.companies.new.form.managerLastName'
+                              <input type="text" name="managerLastName" [(ngModel)]="organization.managerLastName" class="form-control form-control-outline"
+                                formControlName="managerLastName" placeholder="{{ 'admin.companies.new.form.managerLastName'
                                     | translate
                                 }}" required />
                               <ng-container *ngIf="
@@ -157,9 +157,9 @@
                           <div class="col-md-5">
                             <div class="form-group d-flex align-items-center gap-2">
                               <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
-                              <select class="form-select" name="department" id="department"
-                                [formControlName]="organization.department" (click)="onSelectDepartment($event)">
-                                <option *ngFor="let department of departments" [value]='department.uuid'>
+                              <select class="form-select" name="department" id="department" [(ngModel)]="organization.department"
+                                formControlName="department" (click)="onSelectDepartment($event)">
+                                <option *ngFor="let department of departments" [value]='department.name'>
                                   {{ department.name }}
                                 </option>
                               </select>
@@ -172,7 +172,7 @@
                                 "admin.companies.new.form.managerEmail"
                                 | translate
                                 }}</label>
-                              <input type="email" name="managerEmail" class="form-control form-control-outline"
+                              <input type="email" name="managerEmail" [(ngModel)]="organization.managerEmail" class="form-control form-control-outline"
                                 formControlName="managerEmail" placeholder="{{
                                   'admin.companies.new.form.managerEmail'
                                     | translate
@@ -191,10 +191,10 @@
                                 </p>
                                 <p class="caption status-danger"
                                   *ngIf="createOrginationForm.get('managerEmail')?.errors?.['pattern']">
-                                  <span style="color: red">{{
+                                 
+                                </p> <span style="color: red">{{
                                     "admin.forms.valid" | translate
                                     }}</span>
-                                </p>
                               </ng-container>
                             </div>
                           </div>
@@ -231,12 +231,7 @@
                           <ng-template #template>
                             <div class="ConfirmationModel deleteModel">
                               <div class="modal-body">
-                                <p>
-                                  {{
-                                  "admin.organization.deleteConfirm.text"
-                                  | translate
-                                  }}
-                                </p>
+                                {{"admin.organization.deleteConfirm.text" | translate}}
                                 <div class="ModelBtnPart">
                                   <button type="button" class="theme-btn w-auto" (click)="declineDeleteModal()">
                                     Cancel

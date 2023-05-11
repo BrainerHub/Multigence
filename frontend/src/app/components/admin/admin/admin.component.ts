@@ -47,7 +47,7 @@ export class AdminComponent {
   department: any;
   iconState = 'normal';
   test : any
-  
+
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -65,13 +65,11 @@ export class AdminComponent {
       trial: [null, Validators.required],
       invitations: [null, Validators.required],
     });
-  
+    this.getAll();
+    this.getMe();
     this.createOrginationForm = this.formBuilder.group({
       organizations: this.formBuilder.array([]),
     });
-    this.getAll();
-    this.getMe();
-   
    
   }
  
@@ -144,16 +142,16 @@ export class AdminComponent {
     return this.createOrginationForm.get('organizations') as FormArray;
   }
 
-  newOrganization(): FormGroup {
+  newOrganization(): any {
     this.visible = false;
     return this.formBuilder.group({
-      name : '',
-      managerName: '',
-      managerLastName: '',
-      managerEmail: '',
-      department:''
+      name : ["",Validators.required],
+      managerName:["",Validators.required],
+      managerLastName: ["",Validators.required],
+      managerEmail: ["",Validators.required],
+      department:["",Validators.required]
     });
-    
+   
   }
 
   //onclick toggling
@@ -203,23 +201,24 @@ export class AdminComponent {
   }
 
   saveNewCompanyName(newData: any) {
+  
+    this.createOrginationForm.value
     let data = {
       uuid : newData.uuid,
       name : this.createOrginationForm.value.organizations[0].name,
       departments : this.departments,
     };
-      
+     
     this.userService.updateOrganization(newData.uuid,data).subscribe((res) => {
-
-    
-    })
     this.getAll();
+    })
+   
     this.onCancelVisibleCompany('index')
     
   }
  
   onShowCompanyList(index: any, data: any) {
-  this.visibleCompanyList = [];
+    this.visibleCompanyList = [];
     this.visibleCompanyList.push(data);
     if (this.activeIndex === data) {
       this.activeIndex = null;
@@ -229,11 +228,14 @@ export class AdminComponent {
     }
     this.userService.getDepartments(data.uuid).subscribe((res) => {
      this.departments = res.departments;
-    })
    
+     
+    })
+  
     this.userService.getOrganizations().subscribe((res) => {
-        this.updateAdminData = res ;
+    this.updateAdminData = res ;
     });
+    this.createOrginationForm.reset();
     this.getManagers(data);
   
    

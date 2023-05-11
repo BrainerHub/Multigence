@@ -145,7 +145,7 @@
               <tbody (click)="toggleUser(user)">
                 <tr>
                   <td scope="row">
-                    <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-triangle-fill" hidden></i>
+                    <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-hexagon-fill" ></i>
                     <i *ngIf="user.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
                   </td>
                   <td>{{user.first_name}}</td>
