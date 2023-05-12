@@ -47,8 +47,9 @@ export class CorridorReportComponent {
   employeesData: any;
   selectedGroup:any;
   selectedEmployeeGroup: any
-  selectedDepartment: false;
+  selectedDepartment: any;
   selectedEmployee: false;
+  invitationDepartment: any;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -89,6 +90,25 @@ export class CorridorReportComponent {
    
   }
 
+  // onChangeDepartment(event:any){
+  //   debugger
+  //   if (this.department !== this.department) {
+  //     this.departments = this.departments[0].uuid;
+     
+  //  }
+  // this.departments.find(
+  //   (visibleCompany: any) => {
+  //     if(visibleCompany.name == event){
+  //         this.invitationDepartment = visibleCompany.uuid;
+  //     }
+  //   }
+  // );
+  //   this.getUserReport();
+  //   this.getCorridorDepartmentReport();
+  //   this.selectedDepartment = event;
+   
+  // }
+   
   getDescription(user: any) {
     if (user.role === this.ROLE_EMPLOYEE) {
       return user.title;

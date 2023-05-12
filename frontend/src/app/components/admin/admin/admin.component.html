@@ -9,11 +9,7 @@
             <li class="border-bottom">
               <form [formGroup]="createCompanyForm" class="">
                 <button (click)="onShowCreateCompany()" type="button" class="companyform text-uppercase bold">
-                  {{
-                  (createCompany
-                  ? "admin.companies.add"
-                  : "admin.companies.add"
-                  ) | translate
+                  {{ (createCompany ? "admin.companies.add" : "admin.companies.add") | translate
                   }}
                   <img src="../../../../assets/images/plusIcon.svg" alt="" *ngIf="!visible" />
                 </button>
@@ -40,6 +36,7 @@
                     </div>
                     <div class="col-md-4 col-sm-5 ">
                       <div class="form-group">
+
                         <label class="form-label text-white" for="trial" *ngIf="!selectedOption">{{
                           "admin.version.select" | translate }}</label>
                         <select formControlName="trial" style="padding-bottom: 8px" (change)="onSelect($event)">
@@ -54,8 +51,7 @@
                       </div>
                     </div>
                     <div class="col-sm-3">
-                      <div class="cform-inline" *ngIf="
-                          createCompanyForm.controls['trial'].value ==
+                      <div class="cform-inline" *ngIf="createCompanyForm.controls['trial'].value ==
                           'Trial version' ||  createCompanyForm.controls['trial'].value ==
                           'Testversion'
                         ">
@@ -90,7 +86,7 @@
 
               <form [formGroup]="createOrginationForm" class="">
                 <div formArrayName="organizations" *ngIf="visibleCompanyList.includes(data)">
-                  <div *ngFor="let organization of  organizations().controls; let i = index"
+                  <div *ngFor="let organization of organizations().controls; let i = index"
                     [formGroupName]="i">
                     <div>
                       <input class="form-control form-control-outline" name="name" formControlName="name"
@@ -109,8 +105,8 @@
                                 "admin.companies.new.form.managerName"
                                 | translate
                                 }}</label>
-                              <input type="text" name="managerName" [(ngModel)]="organization.managerName" class="form-control form-control-outline" 
-                                formControlName="managerName" placeholder="{{
+                              <input type="text" name="managerName"  class="form-control form-control-outline" [(ngModel)]="organization.managerName"
+                                formControlName="managerName"  placeholder="{{
                                   'admin.companies.new.form.managerName'
                                     | translate
                                 }}" required />
@@ -156,14 +152,16 @@
                           </div>
                           <div class="col-md-5">
                             <div class="form-group d-flex align-items-center gap-2">
-                              <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
-                              <select class="form-select" name="department" id="department" [(ngModel)]="organization.department"
-                                formControlName="department" (click)="onSelectDepartment($event)">
-                                <option *ngFor="let department of departments" [value]='department.name'>
-                                  {{ department.name }}
-                                </option>
-                              </select>
-                              <span class="bi bi-send"></span>
+                              <div class="dropdown customDrpDown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  {{selectedDepartment ? selectedDepartment : "DEPARTMENT"}}
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li (click)="onChangeDepartment(department.name)" *ngFor="let department of departments; let i = index"><a class="dropdown-item" href="javascript:void(0)"> {{ department.name }}</a></li>
+                                </ul>
+                                <span class="bi bi-send"></span>
+                              </div>
+                             
                             </div>
                           </div>
                           <div class="col-md-5">
@@ -246,7 +244,7 @@
                             </div>
                           </ng-template>
                           <div class="">
-                            <button type="reset" class="theme-btn me-2" (click)="onCancelVisibleCompany(data)">
+                            <button type="reset" class="theme-btn me-2" (click)="onCancelVisibleCompany(data, false)">
                               Cancel
                             </button>
                             <button type="submit" class="theme-btn" (click)="saveNewCompanyName(data)">

@@ -273,6 +273,7 @@ label {
       border: none;
       background-color: transparent;
       padding: 0;
+      color: #333;
       p {
         color: #fff;
         font-size: 15px !important;
@@ -408,6 +409,50 @@ label {
     color: #0e0e0e !important;
   }
 }
+.customDrpDown {
+  width: 100%;
+  button {
+    width: 100%;
+    appearance: none;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    text-align: left;
+    border-bottom: 1px solid #fff;
+    color: #eeeeee;
+    &:after {
+      content: unset;
+    }
+    &:hover {
+      background-color: #e6e6e6;
+    }
+  }
+  span {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    transform: rotate(137deg);
+    color: #eee;
+  }
+  ul {
+    width: 100%;
+    border-radius: 0;
+    background-color: #0c0c0c;
+    padding: 0;
+    a {
+      color: #eee;
+      padding: 3px 5px;
+      font-size: 14px;
+      &:hover {
+        color: #00ff85;
+      }
+      &.active {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
 .white-theme-selector {
   .MainBodyPart {
     background-color: #fff !important;
@@ -541,6 +586,24 @@ label {
         &:hover {
           // background-color: #d4d4d4;
           // z-index: -1;
+        }
+      }
+    }
+  }
+  .customDrpDown {
+    button {
+      border-color: #ccc;
+      color: #0c0c0c;
+    }
+    span {
+      color: #0e0e0e;
+    }
+    ul {
+      background-color: #c6c6c6;
+      a {
+        &:hover {
+          background-color: #eeeeee;
+          color: #262626;
         }
       }
     }
@@ -749,6 +812,13 @@ label {
   }
 }
 
+@media only screen and (max-width: 991px) {
+  .checkbox {
+    label {
+      padding-left: 10px;
+    }
+  }
+}
 @media only screen and (max-width: 575px) {
   .ConfirmationModel {
     padding: 25px !important;

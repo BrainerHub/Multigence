@@ -42,11 +42,12 @@ export class AdminComponent {
   user:any;
   ROLE_MANGER = 'MANAGER';
   send :boolean = false;
-  selectedDepartment: false;
+  selectedDepartment: any;
   selectedOption = false;
   department: any;
   iconState = 'normal';
   test : any
+  selectedVersion: any
 
   constructor(
     public router: Router,
@@ -89,15 +90,17 @@ export class AdminComponent {
     });
    
   }
-
+  onChangeDepartment(event:any){
+    this.selectedDepartment = event;
+    }
   
   onSelect(event: any) {
     this.selectedOption = true;
   }
  
-  onSelectDepartment(value: any) {
-    this.selectedDepartment = value;
-  }
+  onChangeVersion(event:any){
+    this.selectedVersion = event;
+    }
 
   getManagers(organization:any) {
     this.userService.getAllUsers({role:'MANAGER',organization:organization.uuid}).subscribe((managers) => {
@@ -138,23 +141,23 @@ export class AdminComponent {
     this.userService.getOrganization(this.organization).subscribe((res) => {});
   }
 
-  organizations(): any {
+   organizations(): any {
     return this.createOrginationForm.get('organizations') as FormArray;
   }
 
   newOrganization(): any {
     this.visible = false;
     return this.formBuilder.group({
-      name : ["",Validators.required],
-      managerName:["",Validators.required],
-      managerLastName: ["",Validators.required],
-      managerEmail: ["",Validators.required],
-      department:["",Validators.required]
+      name : [null,Validators.required],
+      managerName:[null,Validators.required],
+      managerLastName: [null,Validators.required],
+      managerEmail: [null,Validators.required],
+      department:[null,Validators.required]
     });
    
   }
 
-  //onclick toggling
+  //onClick toggling
   onShowCreateCompany() {
     this.createCompany = !this.createCompany; //not equal to condition
     this.visible = !this.visible;
@@ -162,7 +165,7 @@ export class AdminComponent {
 
    rotateIcon(data: any) {
     data.iconState = data.iconState === 'rotated' ? 'normal' : 'rotated';
-   this.onCancelVisibleCompany('index')
+    this.onCancelVisibleCompany('index', true)
   }
 
   saveAndOpenCompanyData() {
@@ -201,7 +204,6 @@ export class AdminComponent {
   }
 
   saveNewCompanyName(newData: any) {
-  
     this.createOrginationForm.value
     let data = {
       uuid : newData.uuid,
@@ -210,11 +212,11 @@ export class AdminComponent {
     };
      
     this.userService.updateOrganization(newData.uuid,data).subscribe((res) => {
-    this.getAll();
+   // this.getAll();
     })
+   this.submitted = true;
+  this.onCancelVisibleCompany('index', true)
    
-    this.onCancelVisibleCompany('index')
-    
   }
  
   onShowCompanyList(index: any, data: any) {
@@ -247,20 +249,29 @@ export class AdminComponent {
     this.visible = false;
   }
 
-  onCancelVisibleCompany(index: any) {
-    this.submitted = false;
-    this.createCompanyForm.reset();
+  onCancelVisibleCompany(index: any, data: any ) {
+  if(data === false){
+    this.createOrginationForm.reset();
+    this.visibleCompanyList = this.visibleCompanyList.filter(
+      (visibleCompany: any) => visibleCompany != index
+    );
+    this.getAll();
+  }else {
     this.visibleCompanyList = this.visibleCompanyList.filter(
       (visibleCompany: any) => visibleCompany != index
     );
     this.getAll();
   }
+  }
 
 
 
-  trackByFn(index: number, data: any): any {
+  public trackByFn(index: number, data: any): any {
     return data.id; 
   }
+  // trackByFn(index: number, data: any): any {
+  //   return this.getAllOrgination ? this.getAllOrgination  : undefined
+  // }
   
   confirmDeleteDialog(id: any, index: any) {
     this.userService.deleteOrganization(id).subscribe((res) => {

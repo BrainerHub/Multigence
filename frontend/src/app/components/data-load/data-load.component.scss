@@ -26,3 +26,13 @@
     }
   }
 }
+
+@media only screen and (max-width: 575px) {
+  .UploadQuestion {
+    form {
+      input {
+        padding: 0;
+      }
+    }
+  }
+}

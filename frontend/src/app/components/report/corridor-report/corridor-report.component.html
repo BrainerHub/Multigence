@@ -20,6 +20,15 @@
               <div class="corridor-filters legend-content-size px-4">
                 <div class="form-group w-75">
                   <ng-container *ngIf="trial">
+                    <!-- <div class="dropdown customDrpDown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{selectedDepartment ? selectedDepartment : "All departments"}}
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li (click)="onChangeDepartment(department)"><a class="dropdown-item" href="javascript:void(0)">{{"trial.notAvailable" | translate}}</a></li>
+                      </ul>
+                      <span class="bi bi-send"></span>
+                    </div> -->
                     <select class="form-select">
                       <option>All departments</option>
                       <option>{{"trial.notAvailable" | translate}}</option>
@@ -27,9 +36,21 @@
                     <span class="bi bi-send"></span>
                   </ng-container>
                   <ng-container class="form-group" *ngIf="!trial">
+                    <!-- <div class="dropdown customDrpDown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{selectedDepartment ? selectedDepartment : "All departments"}}
+                      </button>
+                      <ul class="dropdown-menu" [(ngModel)]="selectedGroup">
+                        <li *ngFor="let department of departments"><a class="dropdown-item" href="javascript:void(0)" (click)="onChangeDepartment(department.name)"> {{ department.name }}</a></li>
+                      </ul>
+                      <span class="bi bi-send"></span>
+                    </div> -->
+
+
+
                     <label class="form-label text-white" *ngIf="!selectedDepartment">All departments</label>
                     <select class="form-select"  name="department" id="department" (change)="setDepartment($event)" [(ngModel)]="selectedGroup">
-                     <option [value]="department.uuid"  *ngFor="let department of departments ; let i = index" >
+                     <option [value]="department.uuid" *ngFor="let department of departments ; let i = index" >
                         {{ department.name }}
                       </option>
                     </select>
@@ -47,7 +68,9 @@
                   <ng-container *ngIf="!trial" class="form-group">
                     <label class="form-label text-white" *ngIf="!selectedEmployee">{{"employees" | uppercase}}</label>
                     <select class="form-select" name="employee" id="employee" (change)="setSource($event)" [(ngModel)]="selectedEmployeeGroup">
-                      <option *ngFor="let employee of employeesData" [value]="employee.uuid">
+                     
+                      <option *ngFor="let employee of employeesData ; let i = index" [value]="employee.uuid">
+                        
                         {{employee.first_name }}
                         {{employee.last_name }}
                       </option>

@@ -65,15 +65,23 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group dropdown">
-                          <label class="form-label text-white" *ngIf="!selectedDepartment">DEPARTMENT</label>
-                          <select class="form-select" name="department" id="department" formControlName="department" (change)="onSelectDepartment($event)">
-                            <option *ngFor="let department of departments" [value]='department.uuid'>
-                              {{ department.name }}
-                            </option>
-                          </select>
-                          <span class="bi bi-send"></span>
+                          <div class="dropdown customDrpDown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              {{selectedDepartment ? selectedDepartment : "DEPARTMENT"}}
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li *ngFor="let department of departments; let i = index">
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="onChangeDepartment(department.name)"> {{ department.name }}</a>
+                              </li>
+                            </ul>
+                            <span class="bi bi-send"></span>
+                          </div>
+                          
+
                         </div>
                       </div>
+
+
                       <div class="col-md-6">
                         <div class="form-group CustomAddBtn">
                           <input type="text" name="name" placeholder="{{
@@ -123,7 +131,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group text-end">
-                          <button type="submit" [disabled]="!createInvitationForm.valid" class="theme-btn w-auto"
+                          <button type="submit"  class="theme-btn w-auto"
                             (click)="openConfirmationModal(template)">
                             {{ "form.send" | translate }}
                           </button>
@@ -201,13 +209,23 @@
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group dropdown">
-                          <label class="form-label text-white" *ngIf="!selectDepartment">DEPARTMENT</label>
+                          <div class="dropdown customDrpDown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              {{selectDepartment ? selectDepartment : "DEPARTMENT"}}
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li (click)="onChangeDepartments(department.name)" *ngFor="let department of departments; let i = index"><a class="dropdown-item" href="javascript:void(0)"> {{ department.name }}</a></li>
+                            </ul>
+                            <span class="bi bi-send"></span>
+                          </div>
+
+                          <!-- <label class="form-label text-white" *ngIf="!selectDepartment">DEPARTMENT</label>
                           <select class="form-select" name="department" id="department" formControlName="department" (change)="onSelectDepartments($event)">
                             <option *ngFor="let department of departments" [value]='department.uuid'>
                               {{ department.name }}
                             </option>
                           </select>
-                          <span class="bi bi-send"></span>
+                          <span class="bi bi-send"></span> -->
                         </div>
                       </div>
                       <div class="col-sm-6">
@@ -235,13 +253,23 @@
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
-                          <label class="form-label text-white" *ngIf="!selectJobId">VACANCY / JOB ID</label>
+                          <div class="dropdown customDrpDown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              {{selectedJob ? selectedJob : "VACANCY / JOB ID"}}
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li (click)="onChangeJob(job.name)" *ngFor="let job of postions; let i = index"><a class="dropdown-item" href="javascript:void(0)"> {{ job.name }}</a></li>
+                            </ul>
+                            <span class="bi bi-send"></span>
+                          </div>
+                          
+                          <!-- <label class="form-label text-white" *ngIf="!selectJobId">VACANCY / JOB ID</label>
                           <select class="form-select" name="job" id="job" formControlName="job" (change)="onSelectVacancy($event)">
                             <option *ngFor="let job of postions" [value]='job.uuid'>
                               {{ job.name }}
                             </option>
                           </select>
-                          <span class="bi bi-send"></span>
+                          <span class="bi bi-send"></span> -->
                         </div>
                       </div>
                       <div class="col-sm-6">

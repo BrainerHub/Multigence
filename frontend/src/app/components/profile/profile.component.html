@@ -152,7 +152,16 @@
                   />
                 </div>
                 <div class="form-group w-50">
-                  <label class="form-label" hidden>{{
+                  <div class="dropdown customDrpDown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{selectedGender ? selectedGender : "profile.gender" | translate}}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li *ngFor="let gender of genderList"><a class="dropdown-item" href="javascript:void(0)" (click)="onChangeGender(gender)"> {{ gender }}</a></li>
+                    </ul>
+                    <span class="bi bi-send"></span>
+                  </div>
+                  <!-- <label class="form-label" hidden>{{
                     "profile.gender" | translate
                   }}</label>
                   <select
@@ -165,7 +174,7 @@
                       {{ gender }}
                     </option>
                   </select>
-                  <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                  <span _ngcontent-sis-c26="" class="bi bi-send"></span> -->
                 </div>
                 <div class="form-group w-50">
                   <input
@@ -193,7 +202,17 @@
                   />
                 </div>
                 <div class="form-group w-50">
-                  <label
+                  <div class="dropdown customDrpDown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{selectedDepartment ? selectedDepartment : "DEPARTMENT"}}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li *ngFor="let department of departments"><a class="dropdown-item" href="javascript:void(0)" (click)="onChangeDepartment(department.name)"> {{ department.name }}</a></li>
+                    </ul>
+                    <span class="bi bi-send"></span>
+                  </div>
+
+                  <!-- <label
                     class="form-label text-white UpperLabel"
                     *ngIf="!selectedDepartment"
                     >DEPARTMENT</label>
@@ -211,7 +230,7 @@
                       {{ department.name }}
                     </option>
                   </select>
-                  <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                  <span _ngcontent-sis-c26="" class="bi bi-send"></span> -->
                 </div>
                 <div class="form-group w-50">
                   <input

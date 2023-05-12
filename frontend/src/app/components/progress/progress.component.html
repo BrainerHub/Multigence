@@ -25,55 +25,61 @@
                 autocomplete="off" />
               <div class="FilterBox mt-4">
                 <div class="form-group mb-4">
-                  <label class="form-label text-white text-uppercase" *ngIf="!selectedOption">{{"progress.progress" | translate}}</label>
-                  <select class="form-select" name="progress" id="progress" (change)="onSelect($event)" >
-                    <option value="" style="display:none"></option>
-                    <option *ngFor="let progress of progressList; let i = index">
-                      {{ progress }}
-                    </option>
-                  </select>
-                  <span class="bi bi-send"></span>
+                  <div class="dropdown customDrpDown">
+                    <button class="btn btn-secondary dropdown-toggle text-uppercase" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{selectedValue ? selectedValue : "progress.progress" | translate}}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li (click)="onChangeProgress(progress)" *ngFor="let progress of progressList; let i = index"><a class="dropdown-item" href="javascript:void(0)">{{ progress }}</a></li>
+                    </ul>
+                    <span class="bi bi-send"></span>
+                  </div>
                 </div>
                 <div class="form-group mb-4">
-                  <select class="form-select" name="role" id="role">
-                    <option *ngFor="let rol of userRolList; let i = index">
-                      {{ rol }}
-                    </option>
-                  </select>
-                  <span class="bi bi-send"></span>
+                  <div class="dropdown customDrpDown">
+                    <button class="btn btn-secondary dropdown-toggle text-uppercase" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{selectedRole ? selectedRole : "All users"}}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li (click)="onChangeRole(rol)" *ngFor="let rol of userRolList; let i = index"><a class="dropdown-item" href="javascript:void(0)"> {{ rol }}</a></li>
+                    </ul>
+                    <span class="bi bi-send"></span>
+                  </div>
                 </div>
                 <div class="form-group mb-4">
-              <label class="form-label text-white text-uppercase" *ngIf="!selectedDepartment">{{"progress.department" | translate}}</label>
-                  <select class="form-select" name="department" id="department" (change)="onSelectDepartment($event)">
-                    <option value="" style="display:none"></option>
-                    <option *ngFor="let department of departments; let i = index">
-                      {{ department.name }}
-                    </option>
-                  </select>
-                  <span _ngcontent-sis-c26="" class="bi bi-send"></span>
-
-                  
+                  <div class="dropdown customDrpDown">
+                    <button class="btn btn-secondary dropdown-toggle text-uppercase" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{selectedDepartment ? selectedDepartment : "progress.department" | translate}}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li (click)="onChangeDepartment(department.name)" *ngFor="let department of departments; let i = index"><a class="dropdown-item" href="javascript:void(0)"> {{ department.name }}</a></li>
+                    </ul>
+                    <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                  </div>
                  
                 </div>
                 <div class="form-group mb-4">
-                  <label class="form-label text-white text-uppercase" *ngIf="!selectedJob">{{"progress.jobTitle" | translate}}</label>
-                  <select class="form-select" name="title" id="title" (change)="onSelectJob($event)">
-                    <option value="" style="display:none"></option>
-                    <option *ngFor="let title of titles" value="{title.uuid}">
-                      {{ title }}
-                    </option>
-                  </select>
-                  <span class="bi bi-send"></span>
+                  <div class="dropdown customDrpDown">
+                    <button class="btn btn-secondary dropdown-toggle text-uppercase" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{selectedJobTitle ? selectedJobTitle : "progress.jobTitle" | translate}}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li (click)="onChangeJobTitle(title.name)" *ngFor = "let title of titles; let i = index"><a class="dropdown-item" href="javascript:void(0)">  {{ title }}</a></li>
+                    </ul>
+                    <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                  </div>
+
                 </div>
                 <div class="form-group mb-4">
-                  <label class="form-label text-white text-uppercase" *ngIf="!selectedJobId">{{"progress.jobId" | translate}}</label>
-                  <select class="form-select" name="title" id="title" (change)="onSelectJobId($event)">
-                    <option value="" style="display:none"></option>
-                    <option *ngFor="let position of positions" value="{position.uuid}">
-                      {{ position.name }}
-                    </option>
-                  </select>
-                  <span class="bi bi-send"></span>
+                  <div class="dropdown customDrpDown">
+                    <button class="btn btn-secondary dropdown-toggle text-uppercase" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{selectedJobId ? selectedJobId : "progress.jobId" | translate}}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li (click)="onChangeJobId(position.name)" *ngFor="let position of positions; let i = index"><a class="dropdown-item" href="javascript:void(0)">{{ position.name }}</a></li>
+                    </ul>
+                    <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                  </div>
                 </div>
               </div>
             </div>

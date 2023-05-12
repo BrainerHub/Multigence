@@ -14,7 +14,7 @@ export class ProgressComponent {
   usersPage: any = [];
   progressList: any;
   userRolList: any = [];
-  rol: any
+  rol: any;
   user: any;
   data: any;
   departments: any;
@@ -23,17 +23,17 @@ export class ProgressComponent {
   positions: any = [];
   userStatus: any = [];
   userStatusListPage: any;
-  questionStatus:any;
-  selectedDepartment: false;
-  selectedOption = false;
-  selectedJob = false;
-  selectedJobId = false;
-  selectedUsers = false
+  questionStatus: any;
+  selectedDepartment: any;
+  selectedValue: any;
+  selectedRole: any;
+  selectedJobTitle: any;
+  selectedJobId: any;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
     public route: ActivatedRoute,
-     public _router: Router,
+    public _router: Router
   ) {}
   ngOnInit() {
     this.progressList = ['Pending', 'Progressing', 'Finished'];
@@ -52,32 +52,13 @@ export class ProgressComponent {
       this.getOrganization();
       this.getQuestionaryStatus();
       this.getOrganizationUsers();
-
-      
     });
   }
   getInfo() {}
 
-  onSelect(event: any) {
-    this.selectedOption = true;
-  }
-  
-  onSelectDepartment(value: any) {
-    this.selectedDepartment = value;
-  }
-  onSelectJob(value: any) {
-    this.selectedJob = value;
-  }
-  onSelectJobId(value: any) {
-    this.selectedJobId = value;
-  }
-  onSelectUsers(value: any) {
-    this.selectedUsers = value;
-  }
-   viewResult(){
+  viewResult() {
     this._router.navigate(['/report']);
   }
-
 
   getDepartment() {
     this.userService.getDepartments(this.organization).subscribe((res) => {
@@ -88,27 +69,46 @@ export class ProgressComponent {
 
   getPositions() {
     this.userService.getPositions(this.organization).subscribe((res) => {
-     this.positions = res[0]
+      this.positions = res[0];
     });
   }
   getOrganization() {
-    this.userService.getOrganization(this.organization).subscribe((res) => {
-
-
-    });
+    this.userService.getOrganization(this.organization).subscribe((res) => {});
   }
 
   getQuestionaryStatus() {
-    this.userService.getQuestionaryStatus(this.organization).subscribe((res) => {
-      var userData = Array.from(Object.values(res));
-      this.userStatusListPage = userData[0];
-      
-    });
+    this.userService
+      .getQuestionaryStatus(this.organization)
+      .subscribe((res) => {
+        var userData = Array.from(Object.values(res));
+        this.userStatusListPage = userData[0];
+      });
   }
 
-  getOrganizationUsers(){
-    this.userService.getOrganizationUsers(this.organization,this.departments).subscribe((res) => {
-     this.usersPage = res.employees;
-    });
+  getOrganizationUsers() {
+    this.userService
+      .getOrganizationUsers(this.organization, this.departments)
+      .subscribe((res) => {
+        this.usersPage = res.employees;
+      });
+  }
+
+  onChangeProgress(event: any) {
+    this.selectedValue = event;
+  }
+  onChangeRole(event: any) {
+    this.selectedRole = event;
+  }
+
+  onChangeDepartment(event: any) {
+    this.selectedDepartment = event;
+  }
+  
+  onChangeJobTitle(event: any) {
+    this.selectedJobTitle = event;
+  }
+
+  onChangeJobId(event: any) {
+    this.selectedJobId = event;
   }
 }

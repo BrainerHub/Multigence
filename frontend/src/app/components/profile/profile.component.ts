@@ -15,10 +15,13 @@ export class ProfileComponent {
   userProfileForm!: FormGroup;
   user: any;
   userUpdateData: any;
-  selectedDepartment: false;
+  selectedDepartment: any;
+  selectedGender: any;
+  selectGender: any;
   data: any;
   departments: any;
   organization: any = [];
+  invitationDepartment: any;
   genderList: ['Male', 'Female', 'Prefer not to say'];
   constructor(
     private userService: UserService,
@@ -57,15 +60,17 @@ export class ProfileComponent {
     });
   }
 
-  onSelectDepartment(value: any) {
-    this.selectedDepartment = value;
-  }
+  // onSelectDepartment(value: any) {
+  //   this.selectedDepartment = value;
+  // }
   saveProfile() {
     this.submitted = true;
     let data = {
       first_name: this.userProfileForm.controls['first_name'].value,
       last_name: this.userProfileForm.controls['last_name'].value,
       title: this.userProfileForm.controls['title'].value,
+      department: this.invitationDepartment,
+      gender: this.selectGender,
       address: this.userProfileForm.controls['address'].value,
       zipcode: this.userProfileForm.controls['zipcode'].value,
       state: this.userProfileForm.controls['state'].value,
@@ -87,7 +92,23 @@ export class ProfileComponent {
       this.departments = userDepartmentData[0];
     });
   }
+  onChangeDepartment(event: any) {
+    this.departments.find((visibleCompany: any) => {
+      if (visibleCompany.name == event) {
+        this.invitationDepartment = visibleCompany.name;
+      }
+    });
+    this.selectedDepartment = event;
+  }
 
+  onChangeGender(event: any) {
+    (visible: any) => {
+      if (visible.name == event) {
+        this.selectGender = visible.name;
+      }
+    };
+    this.selectedGender = event;
+  }
   openEdit() {
     this.userProfileForm.controls['title'].setValue(this.user.title);
     this.userProfileForm.controls['address'].setValue(this.user.address);
