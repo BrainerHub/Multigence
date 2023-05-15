@@ -36,25 +36,20 @@
                     </div>
                     <div class="col-md-4 col-sm-5 ">
                       <div class="form-group">
-
-                        <label class="form-label text-white" for="trial" *ngIf="!selectedOption">{{
-                          "admin.version.select" | translate }}</label>
-                        <select formControlName="trial" style="padding-bottom: 8px" (change)="onSelect($event)">
-                          <option>
-                            {{ "software.version.trial" | translate }}
-                          </option>
-                          <option>
-                            {{ "software.version.full" | translate }}
-                          </option>
-                        </select>
-                        <span _ngcontent-sis-c26="" class="bi bi-send"></span>
+                        <div class="dropdown customDrpDown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{selectedVersion ? selectedVersion : "admin.version.select" | translate  | uppercase}}
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li name="Trail version"><a class="dropdown-item" href="javascript:void(0)" (click)="onChangeVersion('Trial version')"> {{ "software.version.trial" | translate }}</a></li>
+                            <li><a class="dropdown-item" href="javtrialascript:void(0)" (click)="onChangeVersion('Full version')">{{ "software.version.full" | translate }}</a></li>
+                          </ul>
+                          <span class="bi bi-send"></span>
+                        </div>
                       </div>
                     </div>
                     <div class="col-sm-3">
-                      <div class="cform-inline" *ngIf="createCompanyForm.controls['trial'].value ==
-                          'Trial version' ||  createCompanyForm.controls['trial'].value ==
-                          'Testversion'
-                        ">
+                      <div class="cform-inline" *ngIf="invitationVersion">
                         <div class="form-group d-flex align-items-center gap-2">
                           <label for="invitations">{{
                             "admin.form.invitations" | translate

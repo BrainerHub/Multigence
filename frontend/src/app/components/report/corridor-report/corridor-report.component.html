@@ -125,11 +125,17 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <select class="form-select" (click)="getpersonListPage()">
-                    <option>{{ "sort.asc" | translate }}</option>
-                    <option>{{ "sort.desc" | translate}}</option>
-                  </select>
-                  <span class="bi bi-send"></span>
+                  <div class="dropdown customDrpDown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{selectedSorting ? selectedSorting : "sort.asc" | translate }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li ><a class="dropdown-item" href="javascript:void(0)" (click)="setSorting('Closest')">{{ "sort.asc" | translate }}</a></li>
+                      <li><a class="dropdown-item" href="javascript:void(0)" (click)="setSorting('Furthest')">{{ "sort.desc" | translate}}</a></li>
+                        
+                    </ul>
+                    <span class="bi bi-send"></span>
+                  </div>
                 </div>
               </div>
             </div>

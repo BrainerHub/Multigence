@@ -53,6 +53,7 @@ export class CorridorReportComponent {
   invitationDepartment: any;
   invitationEmployee: any;
   selectedUser: any;
+  selectedSorting: any;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -130,6 +131,41 @@ setCandidateUser(candidate: any){
     }
   }
 
+
+  setSorting(event: any){
+    if(localStorage.getItem('selectedLanguage') == 'de'){
+      if(event == 'Closest'){
+        event = 'Am nächsten';
+      }else{
+        event = 'Am weitesten'
+      }
+      this.selectedSorting = event;
+    } if(localStorage.getItem('selectedLanguage') == 'en'){
+      if(event == 'Closest'){
+        event = 'Closest';
+      }else{
+        event = 'Furthest'
+      }
+      this.selectedSorting = event;
+    }
+    this.sortOrder = this.sortOrder === 'Closest' ? 'Furthest' : 'Closest';
+    this.sortOrders = this.sortOrders === 'Closest' ? 'Furthest' : 'Closest';
+    this.selectedSorting =
+    this.getUserReport();
+    let uuid = this.user.uuid;
+    this.userService.getReportUser(uuid).subscribe((res) => {
+      this.personListPage = res;
+      this.titles = res[0];
+    
+    });
+
+
+
+
+
+
+  this.selectedSorting = event
+  }
  
   onSeachDropdownValue($event: any) {
     const value = $event.target.value;
@@ -163,7 +199,7 @@ setCandidateUser(candidate: any){
       if (this.corridorPersons.length < this.MAX_PERSONS_IN_CORRIDOR) {
         this.corridorPersons = this.corridorPersons.concat([user]);
         user.selected = true;
-        this.pagesSelected.push(this.page);
+        this.pagesSelected?.push(this.page);
       }
     } else {
       user.selected = false;
@@ -200,6 +236,7 @@ setCandidateUser(candidate: any){
   getpersonListPage() {
     this.sortOrder = this.sortOrder === 'Closest' ? 'Furthest' : 'Closest';
     this.sortOrders = this.sortOrders === 'Closest' ? 'Furthest' : 'Closest';
+    this.selectedSorting =
     this.getUserReport();
     let uuid = this.user.uuid;
     this.userService.getReportUser(uuid).subscribe((res) => {

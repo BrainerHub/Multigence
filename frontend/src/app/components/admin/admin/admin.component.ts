@@ -48,7 +48,7 @@ export class AdminComponent {
   iconState = 'normal';
   test : any
   selectedVersion: any
-
+  invitationVersion:any
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -94,12 +94,29 @@ export class AdminComponent {
     this.selectedDepartment = event;
     }
   
-  onSelect(event: any) {
-    this.selectedOption = true;
-  }
  
   onChangeVersion(event:any){
-    this.selectedVersion = event;
+    if(localStorage.getItem('selectedLanguage') == 'de'){
+      if(event == 'Trial version'){
+        event = 'Testversion';
+      }else{
+        event = 'Vollversion'
+      }
+      this.selectedVersion = event;
+    }
+    if(localStorage.getItem('selectedLanguage') == 'en'){
+      if(event == 'Trial version'){
+        event = 'Trial version';
+      }else{
+        event = 'Full version'
+      }
+      this.selectedVersion = event;
+    }
+    if(event == 'Full version' || event == 'Vollversion'){
+      this.invitationVersion = false;
+    }else {
+      this.invitationVersion = true;
+    }
     }
 
   getManagers(organization:any) {
@@ -169,10 +186,10 @@ export class AdminComponent {
   }
 
   saveAndOpenCompanyData() {
-    if(this.createCompanyForm.controls['trial'].value === 'Full version' ||  this.createCompanyForm.controls['trial'].value === 'Vollversion'){
+    if(this.selectedVersion == 'Full version' ||  this.selectedVersion == 'Vollversion'){
       let data = {
         name: this.createCompanyForm.controls['name'].value,
-        trial: this.createCompanyForm.controls['trial'].value === 'Trial version' && 'Full version'
+        trial: this.selectedVersion === 'Trial version' && 'Full version'
             ? true
             : false,
         managers: [{}],
@@ -186,7 +203,7 @@ export class AdminComponent {
     else{
       let data = {
         name: this.createCompanyForm.controls['name'].value,
-        trial: this.createCompanyForm.controls['trial'].value === 'Trial version' && 'Full version'
+        trial: this.selectedVersion == 'Trial version' && 'Full version'
             ? true
             : false,
         invitations: this.createCompanyForm.controls['invitations'].value,

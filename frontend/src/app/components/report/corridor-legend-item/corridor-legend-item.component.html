@@ -7,12 +7,12 @@
         <tbody>
           <tr>
             <td >
-              <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-triangle-fill"></i>
-              <i *ngIf="user.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
+              <i *ngIf="user?.role != 'EMPLOYEE'" class="bi bi-triangle-fill"></i>
+              <i *ngIf="user?.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
               
             </td>
-            <td>{{ user.first_name}}</td>
-            <td>{{ user.last_name }}</td>
+            <td>{{ user?.first_name}}</td>
+            <td>{{ user?.last_name }}</td>
             <td><i class ="bi bi-send" ></i></td>
           </tr>
         </tbody>
@@ -29,17 +29,18 @@
                   <div class="col-9">{{collective[2]}}&nbsp;({{"sphere.collective.wissen" | translate}}); {{collective[1]}}&nbsp;({{"sphere.collective.ware" | translate}}); {{collective[0]}}&nbsp;({{"sphere.collective.territorium" | translate}});</div>
                 
             </div>
-            <div class="row trial-message">
+            <div class="row trial-message" *ngIf="trial">
               <div class="col-9">
                   {{"trial.notAvailable" | translate}}
               </div>
+              <div class="col-12">
+                Page: {{page}}
+              </div>
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-2" *ngIf="!trial">
           <div class="row">
-            <div class="col-12">
-              Page: {{page}}
-            </div>
+           
             <div class="col-12">
               Page: {{page}}
             </div>
