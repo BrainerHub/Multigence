@@ -11,7 +11,6 @@
                   <li>
                     <app-corridor-legend-item *ngIf="onUserSelected"></app-corridor-legend-item>
                   </li>
-
                 </ul>
               </div>
             </div>
@@ -20,62 +19,53 @@
               <div class="corridor-filters legend-content-size px-4">
                 <div class="form-group w-75">
                   <ng-container *ngIf="trial">
-                    <!-- <div class="dropdown customDrpDown">
+                    <div class="dropdown customDrpDown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{selectedDepartment ? selectedDepartment : "All departments"}}
                       </button>
                       <ul class="dropdown-menu">
-                        <li (click)="onChangeDepartment(department)"><a class="dropdown-item" href="javascript:void(0)">{{"trial.notAvailable" | translate}}</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)">{{"trial.notAvailable" | translate}}</a></li>
                       </ul>
                       <span class="bi bi-send"></span>
-                    </div> -->
-                    <select class="form-select">
-                      <option>All departments</option>
-                      <option>{{"trial.notAvailable" | translate}}</option>
-                    </select>
+                    </div>
+                  
                     <span class="bi bi-send"></span>
                   </ng-container>
                   <ng-container class="form-group" *ngIf="!trial">
-                    <!-- <div class="dropdown customDrpDown">
+                    <div class="dropdown customDrpDown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{selectedDepartment ? selectedDepartment : "All departments"}}
                       </button>
-                      <ul class="dropdown-menu" [(ngModel)]="selectedGroup">
-                        <li *ngFor="let department of departments"><a class="dropdown-item" href="javascript:void(0)" (click)="onChangeDepartment(department.name)"> {{ department.name }}</a></li>
+                      <ul class="dropdown-menu">
+                        <li *ngFor="let department of departments"><a class="dropdown-item" href="javascript:void(0)" (click)="setDepartment(department.name)"> {{ department.name }}</a></li>
                       </ul>
                       <span class="bi bi-send"></span>
-                    </div> -->
-
-
-
-                    <label class="form-label text-white" *ngIf="!selectedDepartment">All departments</label>
-                    <select class="form-select"  name="department" id="department" (change)="setDepartment($event)" [(ngModel)]="selectedGroup">
-                     <option [value]="department.uuid" *ngFor="let department of departments ; let i = index" >
-                        {{ department.name }}
-                      </option>
-                    </select>
-                    <span class="bi bi-send"></span>
+                    </div>
                   </ng-container>
                 </div>
                 <div class="form-group w-75">
                   <ng-container *ngIf="trial">
-                    <select class="form-select">
-                      <option>EMPLOYEES</option>
-                      <option>{{"trial.notAvailable" | translate}}</option>
-                    </select>
-                    <span class="bi bi-send"></span>
+                    <div class="dropdown customDrpDown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{selectedEmployee ? selectedEmployee : "EMPLOYEES"}}
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:void(0)">{{"trial.notAvailable" | translate}}</a></li>
+                      </ul>
+                      <span class="bi bi-send"></span>
+                    </div>
                   </ng-container>
                   <ng-container *ngIf="!trial" class="form-group">
-                    <label class="form-label text-white" *ngIf="!selectedEmployee">{{"employees" | uppercase}}</label>
-                    <select class="form-select" name="employee" id="employee" (change)="setSource($event)" [(ngModel)]="selectedEmployeeGroup">
-                     
-                      <option *ngFor="let employee of employeesData ; let i = index" [value]="employee.uuid">
-                        
-                        {{employee.first_name }}
-                        {{employee.last_name }}
-                      </option>
-                    </select>
-                    <span class="bi bi-send"></span>
+                    <div class="dropdown customDrpDown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{selectedEmployee ? selectedEmployee : "EMPLOYEES"}}
+                      </button>
+                      <ul class="dropdown-menu" *ngFor="let employee of employeesData ">
+                        <li ><a class="dropdown-item" href="javascript:void(0)" (click)="setSource(employee)"> {{employee.first_name }}
+                          {{employee.last_name }}</a></li>
+                      </ul>
+                      <span class="bi bi-send"></span>
+                    </div>
                   </ng-container>
                  
                 </div>
@@ -93,25 +83,32 @@
           <div class="corridor-filters px-4">
             <div class="form-group person-list-form w-75">
               <ng-container *ngIf="trial">
-                <select class="form-select">
-                  <option>All Users</option>
-                  <option>{{"trial.notAvailable" | translate}}</option>
-                </select>
-                <span class="bi bi-send"></span>
+                <div class="dropdown customDrpDown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{selectedUser ? selectedUser : "All Users"}}
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="javascript:void(0)">{{"trial.notAvailable" | translate}}</a></li>
+                  </ul>
+                  <span class="bi bi-send"></span>
+                </div>
               </ng-container>
               <ng-container *ngIf="!trial" class="form-group">
-                <select class="form-select" name="employee" id="employee" >
-                  <option>All Users</option>
-                  <option>Employees </option>
-                  <option>Candidates</option>
-                  <option *ngFor="let title of employeesData" [value]="title.uuid">
-                    {{ title.first_name }}
-                  </option>
-                  <option *ngFor="let position of positions"[value]="position.uuid">
-                    {{ position }}
-                  </option>
-                </select>
-                <span class="bi bi-send"></span>
+                <div class="dropdown customDrpDown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{selectedUser ? selectedUser : "All Users"}}
+                  </button>
+
+                  <ul class="dropdown-menu">
+                    <li ><a class="dropdown-item" href="javascript:void(0)" (click)="setEmployeeUser('Employees')">
+                    Employees</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0)" (click)="setCandidateUser('Candidates')">
+                      Candidates</a></li>
+                      <li *ngFor="let position of positions"><a class="dropdown-item" href="javascript:void(0)" (click)="setCandidateUser(employee)">
+                        {{ position }}</a></li>
+                  </ul>
+                  <span class="bi bi-send"></span>
+                </div>
               </ng-container>
 
             </div>
@@ -163,16 +160,16 @@
             </ul>
 
           </div>
-          <div class="reportTable">
+          <div class="reportTable" *ngIf="selectedUser !='Candidates'">
             <table class="table table-dark">
               <tbody (click)="toggleUser(user)">
                 <tr>
                   <td scope="row">
-                    <i *ngIf="user.role != 'EMPLOYEE'" class="bi bi-hexagon-fill" ></i>
-                    <i *ngIf="user.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
+                    <i *ngIf="user?.role != 'EMPLOYEE'" class="bi bi-hexagon-fill" ></i>
+                    <i *ngIf="user?.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
                   </td>
-                  <td>{{user.first_name}}</td>
-                  <td>{{user.last_name}}</td>
+                  <td>{{user?.first_name}}</td>
+                  <td>{{user?.last_name}}</td>
                   <td>{{getDescription(user)}}</td>
                 </tr>
               </tbody>

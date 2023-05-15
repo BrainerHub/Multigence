@@ -41,7 +41,8 @@ export class InvitationsComponent {
   isActive: boolean = false;
   modalRef: BsModalRef<unknown>;
   invitationDepartment:any;
-  invitationEmployee:any;
+  CandidateDepartment:any;
+  invitationJob: any;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -146,18 +147,24 @@ export class InvitationsComponent {
     this.selectedDepartment = event;
   }
 
-  onChangeDepartments(event: any) {
-    debugger
+  onChangeCandidateDepartment(event: any) {
     this.departments.find(
       (visibleEmployeeCompany: any) => {
         if(visibleEmployeeCompany.name == event){
-            this.invitationEmployee = visibleEmployeeCompany.uuid;
+            this.CandidateDepartment = visibleEmployeeCompany.uuid;
         }
       }
     );
     this.selectDepartment = event;
   }
   onChangeJob(event: any) {
+    this.postions.find(
+      (visiblePostions: any) => {
+        if(visiblePostions.name == event){
+            this.invitationJob = visiblePostions.uuid;
+        }
+      }
+    );
     this.selectedJob = event;
   }
   onShowInvitationForm() {
@@ -176,7 +183,6 @@ export class InvitationsComponent {
   resetForms() {}
 
   inviteEmployee(template: TemplateRef<any>) {
-    debugger;
     var data: any = {};
     data.email = this.createInvitationForm.controls['employeeEmail'].value;
     data.role = this.ROLE_EMPLOYEE;
@@ -184,8 +190,6 @@ export class InvitationsComponent {
     data.last_name = this.createInvitationForm.controls['lastName'].value;
     data.department =  this.invitationDepartment;
     data.uri = this._uri();
-
-    console.log("ssssss")
     this.userService.invite(data).subscribe(
       (res) => {
         if (res.data['first_invitation']) {
@@ -210,8 +214,8 @@ export class InvitationsComponent {
       this.CreateCandidateform.controls['candidateFirstName'].value;
     data.last_name =
       this.CreateCandidateform.controls['candidateLastName'].value;
-    data.department = this.invitationEmployee;
-    data.position = this.CreateCandidateform.controls['job'].value;
+    data.department = this.CandidateDepartment;
+    data.position = this.invitationJob;
     data.uri = this._uri();
     this.userService.invite(data).subscribe(
       (res) => {
@@ -239,19 +243,13 @@ export class InvitationsComponent {
   }
 
   openConfirmationModal(template: TemplateRef<any>) {
-    console.log("Sssssqqqqqqqq");
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
   onSelectDepartment(value: any) {
     this.selectedDepartment = value;
   }
-  // onSelectDepartments(value: any) {
-  //   this.selectDepartment = value;
-  // }
-  // onSelectVacancy(value : any){
-  //   this.selectJobId = value;
-  // }
+  
   inviteconfirmOkDialog() {
     this.modalRef.hide();
   }
