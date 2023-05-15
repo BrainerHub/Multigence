@@ -159,11 +159,6 @@ setCandidateUser(candidate: any){
     
     });
 
-
-
-
-
-
   this.selectedSorting = event
   }
  
@@ -184,7 +179,11 @@ setCandidateUser(candidate: any){
     });
   }
 
- 
+  setUser(event: any){
+    this.selectedUser = event;
+    this.getUserReport();
+    this.getCorridorReport();
+  }
 
   getUserReport() {
     this.userService.getUserReport(this.user.uuid).subscribe((res) => {
