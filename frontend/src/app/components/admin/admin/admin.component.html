@@ -152,8 +152,11 @@
                                   {{selectedDepartment ? selectedDepartment : "DEPARTMENT"}}
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li (click)="onChangeDepartment(department.name)" *ngFor="let department of departments; let i = index"><a class="dropdown-item" href="javascript:void(0)"> {{ department.name }}</a></li>
+                                  <li *ngFor="let department of departments; let i = index">
+                                    <a class="dropdown-item" href="javascript:void(0)" (click)="onChangeDepartment(department.name)"> {{ department.name }}</a>
+                                  </li>
                                 </ul>
+
                                 <span class="bi bi-send"></span>
                               </div>
                              
@@ -193,13 +196,9 @@
                           </div>
                           <div class="col-md-2">
                             <div class="text-end">
-                              <button [ngClass]="
-                                  !createOrginationForm.valid
-                                    ? 'theme-btn disabled w-auto'
-                                    : 'theme-btn w-auto'
-                                " (click)="onInviteManager()" [disabled]="!createOrginationForm.valid">
-                                <span>Invite</span>
-                              </button>
+                              <button class="theme-btn w-auto" (click)="onInviteManager()">
+                            <span>Invite</span>
+                          </button>
                             </div>
                           </div>
                         </div>

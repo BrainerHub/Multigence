@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
-import { AbstractControl,
+import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormGroup,
@@ -10,7 +11,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from 'app/services/user.service';
 import { values } from 'lodash';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -19,9 +26,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     trigger('rotateIcon', [
       state('rotated', style({ transform: 'rotate(-40deg)' })),
       state('normal', style({ transform: 'rotate(138deg)' })),
-     
-    ])
-  ]
+    ]),
+  ],
 })
 export class AdminComponent {
   activeIndex: any;
@@ -37,18 +43,19 @@ export class AdminComponent {
   getAllOrgination: any;
   departments: any;
   modalRef: BsModalRef<unknown>;
-  updateAdminData:any;
-  managers : any;
-  user:any;
+  updateAdminData: any;
+  managers: any;
+  user: any;
   ROLE_MANGER = 'MANAGER';
-  send :boolean = false;
+  send: boolean = false;
   selectedDepartment: any;
   selectedOption = false;
   department: any;
   iconState = 'normal';
-  test : any
-  selectedVersion: any
-  invitationVersion:any
+  test: any;
+  selectedVersion: any;
+  invitationVersion: any;
+  invitationDepartments:any;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -56,10 +63,8 @@ export class AdminComponent {
     modalRef: BsModalRef,
     private modalService: BsModalService,
     private cd: ChangeDetectorRef,
-    private translateService: TranslateService,
-  ) {
-   
-  }
+    private translateService: TranslateService
+  ) {}
   ngOnInit() {
     this.createCompanyForm = this.formBuilder.group({
       name: [null, Validators.required],
@@ -71,107 +76,117 @@ export class AdminComponent {
     this.createOrginationForm = this.formBuilder.group({
       organizations: this.formBuilder.array([]),
     });
-   
   }
- 
- getMe() {
-  this.userService.getMe().subscribe((res: any) => {
-    this.user = res;
-    this.organization = res.company;
-   this.getOrganization();
-   this.organizations().push(this.newOrganization());
-  
-  });
-}
+
+  getMe() {
+    this.userService.getMe().subscribe((res: any) => {
+      this.user = res;
+      this.organization = res.company;
+      this.getOrganization();
+      this.organizations().push(this.newOrganization());
+    });
+  }
   getAll() {
     this.userService.getOrganizations().subscribe((res) => {
       this.getAllOrgination = res;
-      
     });
-   
   }
-  onChangeDepartment(event:any){
+  // onChangeDepartment(event: any) {
+  //   this.selectedDepartment = event;
+  // }
+
+  onChangeDepartment(event: any) {
+    this.departments.find(
+      (visibleCompany: any) => {
+        if(visibleCompany.name == event){
+            this.invitationDepartments = visibleCompany.uuid;
+        }
+      }
+    );
     this.selectedDepartment = event;
-    }
-  
- 
-  onChangeVersion(event:any){
-    if(localStorage.getItem('selectedLanguage') == 'de'){
-      if(event == 'Trial version'){
+  }
+
+
+
+  onChangeVersion(event: any) {
+    if (localStorage.getItem('selectedLanguage') == 'de') {
+      if (event == 'Trial version') {
         event = 'Testversion';
-      }else{
-        event = 'Vollversion'
+      } else {
+        event = 'Vollversion';
       }
       this.selectedVersion = event;
     }
-    if(localStorage.getItem('selectedLanguage') == 'en'){
-      if(event == 'Trial version'){
+    if (localStorage.getItem('selectedLanguage') == 'en') {
+      if (event == 'Trial version') {
         event = 'Trial version';
-      }else{
-        event = 'Full version'
+      } else {
+        event = 'Full version';
       }
       this.selectedVersion = event;
     }
-    if(event == 'Full version' || event == 'Vollversion'){
+    if (event == 'Full version' || event == 'Vollversion') {
       this.invitationVersion = false;
-    }else {
+    } else {
       this.invitationVersion = true;
     }
-    }
+  }
 
-  getManagers(organization:any) {
-    this.userService.getAllUsers({role:'MANAGER',organization:organization.uuid}).subscribe((managers) => {
-      this.managers = managers;
-    });
+  getManagers(organization: any) {
+    this.userService
+      .getAllUsers({ role: 'MANAGER', organization: organization.uuid })
+      .subscribe((managers) => {
+        this.managers = managers;
+      });
   }
 
   onInviteManager() {
-    var data:any = {};
+    var data: any = {};
     const myArray = this.createOrginationForm.get('organizations') as FormArray;
-    const firstItemValue = myArray.at(0).value; 
-    data.email= firstItemValue.managerEmail;
+    const firstItemValue = myArray.at(0).value;
+    data.email = firstItemValue.managerEmail;
     data.role = this.ROLE_MANGER;
-    data.first_name =firstItemValue.managerName;
-    data.last_name =firstItemValue.managerLastName;
-    data.department =firstItemValue.department;
-    data.uri = this._uri()
-    this.userService.invite(data).subscribe((res) => {
-   
-      if(res.data['first_invitation']){
-        this.send = false;
+    data.first_name = firstItemValue.managerName;
+    data.last_name = firstItemValue.managerLastName;
+   // data.department = firstItemValue.department;
+   data.department = this.invitationDepartments;
+    data.uri = this._uri();
+    this.userService.invite(data).subscribe(
+      (res) => {
+        if (res.data['first_invitation']) {
+          this.send = false;
+        }
+      },
+      (err) => {
+        return err('Invitation of manager unsend... ');
       }
-    },
-    (err) => {
-      return err("Invitation of manager unsend... ")
-    }
-    ) }
+    );
+  }
 
-  _uri(){
+  _uri() {
     var currentPath = window.location.href;
     var uri = window.location.href.concat('/accept');
     window.location.href.concat(currentPath);
     return uri;
   }
 
-
   getOrganization() {
     this.userService.getOrganization(this.organization).subscribe((res) => {});
   }
 
-   organizations(): any {
+  organizations(): any {
     return this.createOrginationForm.get('organizations') as FormArray;
   }
 
   newOrganization(): any {
     this.visible = false;
     return this.formBuilder.group({
-      name : [null,Validators.required],
-      managerName:[null,Validators.required],
-      managerLastName: [null,Validators.required],
-      managerEmail: [null,Validators.required],
-      department:[null,Validators.required]
+      name: [null, Validators.required],
+      managerName: [null, Validators.required],
+      managerLastName: [null, Validators.required],
+      managerEmail: [null, Validators.required],
+      department: [null, Validators.required],
     });
-   
   }
 
   //onClick toggling
@@ -180,16 +195,20 @@ export class AdminComponent {
     this.visible = !this.visible;
   }
 
-   rotateIcon(data: any) {
+  rotateIcon(data: any) {
     data.iconState = data.iconState === 'rotated' ? 'normal' : 'rotated';
-    this.onCancelVisibleCompany('index', true)
+    this.onCancelVisibleCompany('index', true);
   }
 
   saveAndOpenCompanyData() {
-    if(this.selectedVersion == 'Full version' ||  this.selectedVersion == 'Vollversion'){
+    if (
+      this.selectedVersion == 'Full version' ||
+      this.selectedVersion == 'Vollversion'
+    ) {
       let data = {
         name: this.createCompanyForm.controls['name'].value,
-        trial: this.selectedVersion === 'Trial version' && 'Full version'
+        trial:
+          this.selectedVersion === 'Trial version' && 'Full version'
             ? true
             : false,
         managers: [{}],
@@ -199,11 +218,11 @@ export class AdminComponent {
           this.getAll();
         });
       });
-    }
-    else{
+    } else {
       let data = {
         name: this.createCompanyForm.controls['name'].value,
-        trial: this.selectedVersion == 'Trial version' && 'Full version'
+        trial:
+          this.selectedVersion == 'Trial version' && 'Full version'
             ? true
             : false,
         invitations: this.createCompanyForm.controls['invitations'].value,
@@ -215,49 +234,44 @@ export class AdminComponent {
         });
       });
     }
-   
+
     this.createCompanyForm.reset();
     this.visible = false;
   }
 
   saveNewCompanyName(newData: any) {
-    this.createOrginationForm.value
+    this.createOrginationForm.value;
     let data = {
-      uuid : newData.uuid,
-      name : this.createOrginationForm.value.organizations[0].name,
-      departments : this.departments,
+      uuid: newData.uuid,
+      name: this.createOrginationForm.value.organizations[0].name,
+      departments: this.departments,
     };
-     
-    this.userService.updateOrganization(newData.uuid,data).subscribe((res) => {
-   // this.getAll();
-    })
-   this.submitted = true;
-  this.onCancelVisibleCompany('index', true)
-   
+
+    this.userService.updateOrganization(newData.uuid, data).subscribe((res) => {
+      // this.getAll();
+    });
+    this.submitted = true;
+    this.onCancelVisibleCompany('index', true);
   }
- 
+
   onShowCompanyList(index: any, data: any) {
     this.visibleCompanyList = [];
     this.visibleCompanyList.push(data);
     if (this.activeIndex === data) {
       this.activeIndex = null;
-    } else {  
+    } else {
       this.activeIndex = data;
       data.iconState = data.iconState === 'rotated' ? 'normal' : 'rotated';
     }
     this.userService.getDepartments(data.uuid).subscribe((res) => {
-     this.departments = res.departments;
-   
-     
-    })
-  
+      this.departments = res.departments;
+    });
+
     this.userService.getOrganizations().subscribe((res) => {
-    this.updateAdminData = res ;
+      this.updateAdminData = res;
     });
     this.createOrginationForm.reset();
     this.getManagers(data);
-  
-   
   }
 
   onCancelCreateCompany() {
@@ -266,30 +280,28 @@ export class AdminComponent {
     this.visible = false;
   }
 
-  onCancelVisibleCompany(index: any, data: any ) {
-  if(data === false){
-    this.createOrginationForm.reset();
-    this.visibleCompanyList = this.visibleCompanyList.filter(
-      (visibleCompany: any) => visibleCompany != index
-    );
-    this.getAll();
-  }else {
-    this.visibleCompanyList = this.visibleCompanyList.filter(
-      (visibleCompany: any) => visibleCompany != index
-    );
-    this.getAll();
+  onCancelVisibleCompany(index: any, data: any) {
+    if (data === false) {
+      this.createOrginationForm.reset();
+      this.visibleCompanyList = this.visibleCompanyList.filter(
+        (visibleCompany: any) => visibleCompany != index
+      );
+      this.getAll();
+    } else {
+      this.visibleCompanyList = this.visibleCompanyList.filter(
+        (visibleCompany: any) => visibleCompany != index
+      );
+      this.getAll();
+    }
   }
-  }
-
-
 
   public trackByFn(index: number, data: any): any {
-    return data.id; 
+    return data.id;
   }
   // trackByFn(index: number, data: any): any {
   //   return this.getAllOrgination ? this.getAllOrgination  : undefined
   // }
-  
+
   confirmDeleteDialog(id: any, index: any) {
     this.userService.deleteOrganization(id).subscribe((res) => {
       this.getAll();
@@ -308,6 +320,4 @@ export class AdminComponent {
   declineDeleteModal(): void {
     this.modalRef.hide();
   }
-
- 
 }
