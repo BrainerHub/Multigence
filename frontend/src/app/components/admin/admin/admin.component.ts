@@ -91,9 +91,6 @@ export class AdminComponent {
       this.getAllOrgination = res;
     });
   }
-  // onChangeDepartment(event: any) {
-  //   this.selectedDepartment = event;
-  // }
 
   onChangeDepartment(event: any) {
     this.departments.find(
@@ -148,7 +145,6 @@ export class AdminComponent {
     data.role = this.ROLE_MANGER;
     data.first_name = firstItemValue.managerName;
     data.last_name = firstItemValue.managerLastName;
-   // data.department = firstItemValue.department;
    data.department = this.invitationDepartments;
     data.uri = this._uri();
     this.userService.invite(data).subscribe(
@@ -248,8 +244,8 @@ export class AdminComponent {
     };
 
     this.userService.updateOrganization(newData.uuid, data).subscribe((res) => {
-      // this.getAll();
     });
+    this.getAll();
     this.submitted = true;
     this.onCancelVisibleCompany('index', true);
   }
@@ -298,9 +294,7 @@ export class AdminComponent {
   public trackByFn(index: number, data: any): any {
     return data.id;
   }
-  // trackByFn(index: number, data: any): any {
-  //   return this.getAllOrgination ? this.getAllOrgination  : undefined
-  // }
+ 
 
   confirmDeleteDialog(id: any, index: any) {
     this.userService.deleteOrganization(id).subscribe((res) => {
