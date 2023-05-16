@@ -3,6 +3,8 @@ import { Route, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Renderer2, ElementRef } from '@angular/core';
 import { UserService } from 'app/services/user.service';
+import { distinctUntilChanged, interval, switchMap } from 'rxjs';
+import { uid } from 'chart.js/dist/helpers/helpers.core';
 
 @Component({
   selector: 'app-layout-header',
@@ -16,6 +18,7 @@ export class LayoutHeaderComponent {
   isManager = false;
   selectedLanguage: any = 'en';
   currentTheme: any = 'dark';
+  newValue: string = 'Initial Value';
   constructor(
     private translate: TranslateService,
     public router: Router,
@@ -55,9 +58,18 @@ export class LayoutHeaderComponent {
     this.selectedLanguage = event;
     this.translate.use(this.selectedLanguage);
     localStorage.setItem('selectedLanguage', lang);
+    this.userService.loadLang.next(lang)
+   
+     let lang1 = localStorage.getItem('selectedLanguage');
+    let uId = localStorage.getItem('userId')
+   // window.location.reload();
+    this.userService.getUserQuestionaries(uId).subscribe((res)=>{
+    this.userService.updateValues(res, lang1);
+    })
   }
 
-  //user logout
+
+ 
   logOut() {
     this.userService.logout();
   }

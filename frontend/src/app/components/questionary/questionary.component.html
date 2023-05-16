@@ -10,9 +10,11 @@
     </div>
 
     <div class="col-sm-12 col-xs-12 points question-heading" *ngIf="questionary && !completed ">
+      <!-- <h2 class="points-box max-value m-0">{{ value.questions[0].text }}</h2> -->
       <h2 class="points-box max-value m-0">{{questionary?.questions[current]?.text}}</h2>
       <span maxPoint class="points-upper-box">
-        <span class="points-title max-value" translate="questionary.points"></span>&nbsp;&nbsp;
+
+        <span class="points-title max-value">{{"questionary.points" | translate}}</span>&nbsp;&nbsp;
         <span class="points-box max-value">{{totalPoints()}} | {{maxPoint}}</span>&nbsp;&nbsp;
       </span>
     </div>

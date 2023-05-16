@@ -1,4 +1,4 @@
-import { Component, ElementRef,AfterViewInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef,AfterViewInit, TemplateRef, ViewChild, Input } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { UserService } from 'app/services/user.service';
 import * as _ from 'lodash';
 import { QuestionaryService } from 'app/services/questionary.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-questionary',
@@ -41,7 +42,12 @@ export class QuestionaryComponent {
   nextBtn:boolean = true;
   modelShow:any ;
   closeResult: string;
+  loadData :any;
   @ViewChild('content') content:any;
+  //@Input() value: string;
+  value: any;
+  language:any;
+  private subscription: Subscription;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -52,10 +58,21 @@ export class QuestionaryComponent {
     private questionaryService: QuestionaryService,
     private modalservice: NgbModal
   ) {
+
   }
 
   ngOnInit() {
     this.getMe();
+    this.subscription = this.userService.values$.subscribe(({ value1, value2 }) => {
+      console.log(value2,'243546')
+      this.value = value1;
+      this.language = value2;
+      this.getMe();
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
  
@@ -150,6 +167,7 @@ export class QuestionaryComponent {
    
    this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).subscribe((res: any) => {
        //this.getUserQuestionaries();
+       
        window.location.reload();
    } )
   }
@@ -165,13 +183,12 @@ export class QuestionaryComponent {
     this.userService.getUserQuestionaryAnswers(questionaryId,userId).subscribe((answers: any) => {
       questions.map((question:any) => {
         var answer = _.find(answers, this.hasQuestionId(question.uuid));
-        //debugger
         question.answered = answer !== undefined && answer.options && answer.options.length > 0;
         localStorage.setItem("aaa",question.answered);
            this.shuffleOptions();
            this.addGuards();
              if(_.every(questions,this.isNotAnswered)){
-                if(question.text != 'Question 2'){
+                if(question.text != 'Question 2' && question.text != 'Frage 2'){
                   this.openModal();
                 } 
              }
@@ -215,10 +232,14 @@ export class QuestionaryComponent {
 
   getUserQuestionaries() {
     this.current = 0;
-    this.userService
-      .getUserQuestionaries(this.user.uuid)
+    this.value
+   
+      this.userService
+      .getUserQuestionaries(this.user.uuid,this.loadData)
       .subscribe((res) => {
+      // debugger
         if(res.length > 0){
+          console.log(res,"----")
            this.QuestionData = res[0];
            this.questionary = res[0];
            this.maxPoint = res[0].max_points;
@@ -226,10 +247,11 @@ export class QuestionaryComponent {
            var queId = res[0].uuid;
            this.applyAnswers(queId,this.QuestionData.questions);
         }
-        else{
-          this.questionary = null;
+       else{
+         // this.questionary = null;
         }
-      });
+      }
+      );
   }
  
   isNegative(value: number): boolean {

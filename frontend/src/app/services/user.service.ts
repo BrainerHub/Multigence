@@ -15,19 +15,24 @@ export class UserService {
   ROLE_EMPLOYEE = 'EMPLOYEE';
   ROLE_APPLICANT = 'APPLICANT';
   ROLE_ADMIN = 'ADMIN';
+  lang:any 
+  loadLang: Subject<any> = new Subject();
   me: any;
   storage = sessionStorage;
   apiUrl = environment.api;
   utils: any;
   url: string;
-  private headers = {
-    headers: new HttpHeaders({
-      'Content-Type': ' ', 
-      "Authorization":`Token`
-    }),
-  };
+  
+  
+  private valuesSource = new Subject<{ value1: string, value2: number }>();
+  values$ = this.valuesSource.asObservable();
+  
   constructor(private http: HttpClient, public router:Router) {
     this.url = environment.api
+  }
+
+  updateValues(value1: any, value2: any) {
+    this.valuesSource.next({ value1, value2 });
   }
 
 
@@ -353,7 +358,6 @@ getMe() {
   }
 
   getUserQuestionaryAnswers(userId:any, questionaryId:any){
-   // debugger
     var answered = {};
     answered = true ;
     return this.http.get<any>(`${this.apiUrl}` +'/user/' + questionaryId + '/questionary/' + userId + '/answer/', answered).pipe(
@@ -433,13 +437,18 @@ getMe() {
     
   }
  //get UserQuestionaries
- getUserQuestionaries(userId: any) {
-    return this.http.get<any>(`${this.apiUrl}` + '/user/' + userId + '/questionary/').pipe(
+ getUserQuestionaries(userId: any,res?:any) {
+  let getToken = 'Token ' + localStorage.getItem('authToken');
+  this.lang = localStorage.getItem('selectedLanguage');
+  const headers = new HttpHeaders({
+    'Accept-Language': res ? res : this.lang
+  });
+ const requestOptions = { headers: headers };
+    return this.http.get<any>(`${this.apiUrl}` + '/user/' + userId + '/questionary/',requestOptions).pipe(
       map((sphere) => {
         return sphere;
       })
     );
-  
   }
 
   getCorridorEmployeeReport(organizationId:any , userId:any) {
