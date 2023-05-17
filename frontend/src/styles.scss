@@ -761,7 +761,22 @@ label {
   .corridorGraph {
     background-color: transparent !important;
   }
+  .AdminUser {
+    .right-inner-addon {
+      svg {
+        fill: #555555;
+      }
+    }
+  }
+  .corridor {
+    .SearchForm {
+      svg {
+        fill: #555555;
+      }
+    }
+  }
 }
+
 .white-theme-selector .question-header {
   background-color: #fff !important;
   color: #000 !important;

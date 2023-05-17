@@ -1,5 +1,10 @@
 import { Component, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
@@ -45,11 +50,11 @@ export class CorridorReportComponent {
   MAX_PERSONS_IN_CORRIDOR = 5;
   onUserSelected: boolean = false;
   employeesData: any;
-  selectedEmployeeGroup: any
+  selectedEmployeeGroup: any;
   selectedDepartment: any;
-  fName:any;
-  lName:any;
-  selectedEmployee: any
+  fName: any;
+  lName: any;
+  selectedEmployee: any;
   invitationDepartment: any;
   invitationEmployee: any;
   selectedUser: any;
@@ -60,7 +65,7 @@ export class CorridorReportComponent {
     private _translate: TranslateService,
     public _router: Router,
     private bootstrapService: BootstrapService
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.getMe();
@@ -78,48 +83,39 @@ export class CorridorReportComponent {
       this.getpersonListPage();
       this.getPositions();
       this.getUserReport();
-     
-     
     });
   }
- 
 
-  setDepartment(department:any){
-  this.departments.find(
-    (visibleCompany: any) => {
-      if(visibleCompany.name == department){
-          this.invitationDepartment = visibleCompany.uuid;
+  setDepartment(department: any) {
+    this.departments.find((visibleCompany: any) => {
+      if (visibleCompany.name == department) {
+        this.invitationDepartment = visibleCompany.uuid;
       }
-    },
-   
-  );
-   this.selectedDepartment = department,
-    this.getUserReport();
+    });
+    (this.selectedDepartment = department), this.getUserReport();
     this.getCorridorDepartmentReport();
   }
 
-
-
- setSource(employee: any){
- this.fName = employee.first_name;
- this.lName = employee.last_name;
-    this.selectedEmployee = employee.first_name +' ' +  employee.last_name;
-   this.selectedEmployeeGroup = employee.uuid; 
-   this.getCorridorEmployeeReport();
-   this.getUserReport();
+  setSource(employee: any) {
+    this.fName = employee.first_name;
+    this.lName = employee.last_name;
+    this.selectedEmployee = employee.first_name + ' ' + employee.last_name;
+    this.selectedEmployeeGroup = employee.uuid;
+    this.getCorridorEmployeeReport();
+    this.getUserReport();
   }
 
-  setEmployeeUser(event: any){
-    this.selectedUser = event
+  setEmployeeUser(event: any) {
+    this.selectedUser = event;
     this.getCorridorEmployee();
     this.getUserReport();
   }
 
-setCandidateUser(candidate: any){
-  this.selectedUser = candidate
-  this.getCorridorCandidate();
-  this.getUserReport();
-}
+  setCandidateUser(candidate: any) {
+    this.selectedUser = candidate;
+    this.getCorridorCandidate();
+    this.getUserReport();
+  }
 
   getDescription(user: any) {
     if (user?.role === this.ROLE_EMPLOYEE) {
@@ -131,37 +127,35 @@ setCandidateUser(candidate: any){
     }
   }
 
-
-  setSorting(event: any){
-    if(localStorage.getItem('selectedLanguage') == 'de'){
-      if(event == 'Closest'){
+  setSorting(event: any) {
+    if (localStorage.getItem('selectedLanguage') == 'de') {
+      if (event == 'Closest') {
         event = 'Am nächsten';
-      }else{
-        event = 'Am weitesten'
+      } else {
+        event = 'Am weitesten';
       }
       this.selectedSorting = event;
-    } if(localStorage.getItem('selectedLanguage') == 'en'){
-      if(event == 'Closest'){
+    }
+    if (localStorage.getItem('selectedLanguage') == 'en') {
+      if (event == 'Closest') {
         event = 'Closest';
-      }else{
-        event = 'Furthest'
+      } else {
+        event = 'Furthest';
       }
       this.selectedSorting = event;
     }
     this.sortOrder = this.sortOrder === 'Closest' ? 'Furthest' : 'Closest';
     this.sortOrders = this.sortOrders === 'Closest' ? 'Furthest' : 'Closest';
-    this.selectedSorting =
-    this.getUserReport();
+    this.selectedSorting = this.getUserReport();
     let uuid = this.user.uuid;
     this.userService.getReportUser(uuid).subscribe((res) => {
       this.personListPage = res;
       this.titles = res[0];
-    
     });
 
-  this.selectedSorting = event
+    this.selectedSorting = event;
   }
- 
+
   onSeachDropdownValue($event: any) {
     const value = $event.target.value;
     this.employees = this.employee.filter((employee: string | any[]) =>
@@ -179,17 +173,16 @@ setCandidateUser(candidate: any){
     });
   }
 
-  setUser(event: any){
+  setUser(event: any) {
     this.selectedUser = event;
     this.getUserReport();
     this.getCorridorReport();
   }
 
   getUserReport() {
-    this.userService.getUserReport(this.user.uuid).subscribe((res) => {
-    });
+    this.userService.getUserReport(this.user.uuid).subscribe((res) => {});
   }
-  
+
   getStatus() {}
   toggleUser(user: any) {
     if (!user.selected) {
@@ -235,13 +228,11 @@ setCandidateUser(candidate: any){
   getpersonListPage() {
     this.sortOrder = this.sortOrder === 'Closest' ? 'Furthest' : 'Closest';
     this.sortOrders = this.sortOrders === 'Closest' ? 'Furthest' : 'Closest';
-    this.selectedSorting =
-    this.getUserReport();
+    this.selectedSorting = this.getUserReport();
     let uuid = this.user.uuid;
     this.userService.getReportUser(uuid).subscribe((res) => {
       this.personListPage = res;
       this.titles = res[0];
-    
     });
   }
 
@@ -249,29 +240,36 @@ setCandidateUser(candidate: any){
     this.userService
       .getCorridorReport(this.organization)
       .subscribe((res) => {});
-      
   }
 
   getCorridorDepartmentReport() {
-    this.userService.getCorridorDepartmentReport(this.organization,this.invitationDepartment).subscribe((res) => {
+    this.userService
+      .getCorridorDepartmentReport(this.organization, this.invitationDepartment)
+      .subscribe((res) => {
         this.employeesData = res.users;
       });
   }
 
   getCorridorEmployeeReport() {
-    this.userService.getCorridorEmployeeReport(this.organization, this.selectedEmployeeGroup).subscribe((res) => { 
-      this.employeesData = res.users;
-    });
+    this.userService
+      .getCorridorEmployeeReport(this.organization, this.selectedEmployeeGroup)
+      .subscribe((res) => {
+        this.employeesData = res.users;
+      });
   }
 
   getCorridorEmployee() {
-    this.userService.getCorridorEmployee(this.organization, this.selectedUser).subscribe((res) => {
+    this.userService
+      .getCorridorEmployee(this.organization, this.selectedUser)
+      .subscribe((res) => {
         this.employeesData = res.users;
       });
   }
 
   getCorridorCandidate() {
-    this.userService.getCorridorCandidate(this.organization,this.selectedUser).subscribe((res) => {
+    this.userService
+      .getCorridorCandidate(this.organization, this.selectedUser)
+      .subscribe((res) => {
         this.employeesData = res.users;
       });
   }

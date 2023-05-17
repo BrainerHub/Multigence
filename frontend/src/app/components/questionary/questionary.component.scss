@@ -304,7 +304,16 @@
       font-size: 18px;
       line-height: 1.3333333;
       text-transform: uppercase;
+      &:hover {
+        border: 1px solid #00ff85;
+      }
+      &:focus-visible {
+        outline: none;
+      }
     }
+  }
+  p {
+    font-size: 1.1em !important;
   }
 }
 .question-box-counter {
