@@ -3,8 +3,9 @@
   border-color: #080808;
 }
 .MainBodyPart {
-  height: calc(100vh - 57px);
+  height: calc(100vh - 98px);
   overflow: auto;
-  top: 80px;
+  top: 98px;
   position: relative;
+  padding: 0 15px;
 }
