@@ -64,7 +64,6 @@ export class QuestionaryComponent {
   ngOnInit() {
     this.getMe();
     this.subscription = this.userService.values$.subscribe(({ value1, value2 }) => {
-      console.log(value2,'243546')
       this.value = value1;
       this.language = value2;
       this.getMe();
@@ -167,7 +166,6 @@ export class QuestionaryComponent {
    
    this.userService.postUserQuestionaryAnswer(userId, questionaryId, answer).subscribe((res: any) => {
        //this.getUserQuestionaries();
-       
        window.location.reload();
    } )
   }
@@ -237,9 +235,7 @@ export class QuestionaryComponent {
       this.userService
       .getUserQuestionaries(this.user.uuid,this.loadData)
       .subscribe((res) => {
-      // debugger
         if(res.length > 0){
-          console.log(res,"----")
            this.QuestionData = res[0];
            this.questionary = res[0];
            this.maxPoint = res[0].max_points;
@@ -248,7 +244,7 @@ export class QuestionaryComponent {
            this.applyAnswers(queId,this.QuestionData.questions);
         }
        else{
-         // this.questionary = null;
+          this.questionary = null;
         }
       }
       );
