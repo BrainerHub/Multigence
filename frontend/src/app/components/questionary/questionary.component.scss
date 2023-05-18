@@ -1,9 +1,9 @@
 .MainBodyPart {
-  min-height: calc(100vh - 150px);
+  min-height: calc(100vh - 142px);
   overflow: auto;
-  top: 110px;
+  top: 98px;
   position: relative;
-  background-color: #212121;
+  background-color: #fff;
 }
 .dark-theme-selector {
   .ConfirmationModel {
@@ -81,14 +81,23 @@
     }
     .id-input {
       input {
-        width: auto;
-        max-width: -webkit-fill-available;
+        width: 100%;
         text-align: center;
         border: 1px solid #fff;
         background: none;
         color: #888;
         margin: 2px 0;
         height: 30px;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
       }
     }
     .plus-container {
@@ -177,7 +186,7 @@
     width: 100% !important;
     top: 100px;
     z-index: 1000;
-    border-bottom: 2px solid #c6c6c6;
+    border-bottom: 2px solid  #c6c6c6;;
     background-color: #ffffff;
   }
 }
@@ -196,8 +205,8 @@
   flex-wrap: wrap;
 }
 .form-horizontal .cs-width {
-  width: calc(50% - 30px);
-  margin: 0px 15px;
+  // width: calc(50% - 30px);
+  // margin: 0px 15px;
 }
 .question-header {
   // position: fixed;
@@ -206,10 +215,10 @@
   z-index: 1000;
   background-color: #0c0c0c;
   padding: 10px 0px;
-  color: #ffffff;
+  color: #fff;
   text-align: center;
   font-size: large;
-  border-bottom: 2px solid #c6c6c6;
+  border-bottom: 2px solid #0c0c0c;
   // background-color: #0c0c0c;
   // padding: 10px 0px;
 }
@@ -219,8 +228,7 @@
 .points-upper-box {
   position: absolute;
   right: 0;
-  display: inline-flex;
-  align-items: center;
+  width: auto;
   span {
     font-size: 18px !important;
   }
@@ -252,11 +260,12 @@
   padding: 90px 0 20px;
 }
 .question-heading {
-  padding: 10px;
-  min-height: 54px;
-  position: fixed;
-  z-index: 1;
-  background-color: #0c0c0c;
+  // padding: 10px;
+  // min-height: 54px;
+  // position: fixed;
+  // z-index: 1;
+  // background-color: #0c0c0c;
+  border: none;
 }
 .white-theme-selector {
   .ConfirmationModel {
@@ -345,5 +354,15 @@
       font-family: "multigence" !important;
       font-size: 44px;
     }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .points-upper-box {
+    position: unset;
+    width: 100%;
+    padding: 0;
+    display: block;
+    padding-top: 5px;
   }
 }

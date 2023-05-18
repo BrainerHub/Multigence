@@ -767,6 +767,14 @@ label {
         fill: #555555;
       }
     }
+    .theme-btn {
+      color: #0c0c0c;
+      border: 1px solid #0c0c0c;
+      &:hover {
+        color: #00ff85;
+        border: 1px solid #00ff85;
+      }
+    }
   }
   .corridor {
     .SearchForm {

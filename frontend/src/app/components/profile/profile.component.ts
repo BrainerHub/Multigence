@@ -60,9 +60,6 @@ export class ProfileComponent {
     });
   }
 
-  // onSelectDepartment(value: any) {
-  //   this.selectedDepartment = value;
-  // }
   saveProfile() {
     this.submitted = true;
     let data = {
@@ -117,9 +114,7 @@ export class ProfileComponent {
     this.userProfileForm.controls['country'].setValue(this.user.country);
     this.userProfileForm.controls['telephone'].setValue(this.user.telephone);
     this.userProfileForm.controls['website'].setValue(this.user.website);
-    this.userProfileForm.controls['description'].setValue(
-      this.user.description
-    );
+    this.userProfileForm.controls['description'].setValue(this.user.description);
     this.editProfile = false;
   }
   closeEdit() {

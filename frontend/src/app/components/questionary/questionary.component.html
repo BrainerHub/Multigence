@@ -2,22 +2,25 @@
 
 <div class="MainBodyPart">
 
-  <div class="question-header text-center pad-top-10 pad-bottom-10">
-    <div class="">
-      <div *ngIf="questionary === null">
-        <span class="question-text">You have no pending questionaries to complete! :</span>
+  <div class="question-header text-center">
+    <div *ngIf="questionary === null">
+      <span class="question-text">You have no pending questionaries to complete! :</span>
+    </div>
+    <div class="points question-heading" *ngIf="questionary && !completed ">
+      <!-- <h2 class="points-box max-value m-0">{{ value.questions[0].text }}</h2> -->
+      <div class="row w-100">
+        <!-- <div class="col-md-6"> -->
+          <h2 class="points-box max-value m-0">{{questionary?.questions[current]?.text}}...</h2>
+        <!-- </div>
+        <div class="col-md-6"> -->
+          <span maxPoint class="points-upper-box">
+            <span class="points-title max-value">{{"questionary.points" | translate}}</span>&nbsp;&nbsp;
+            <span class="points-box max-value">{{totalPoints()}} | {{maxPoint}}</span>&nbsp;&nbsp;
+          </span>
+        <!-- </div> -->
       </div>
     </div>
 
-    <div class="col-sm-12 col-xs-12 points question-heading" *ngIf="questionary && !completed ">
-      <!-- <h2 class="points-box max-value m-0">{{ value.questions[0].text }}</h2> -->
-      <h2 class="points-box max-value m-0">{{questionary?.questions[current]?.text}}</h2>
-      <span maxPoint class="points-upper-box">
-
-        <span class="points-title max-value">{{"questionary.points" | translate}}</span>&nbsp;&nbsp;
-        <span class="points-box max-value">{{totalPoints()}} | {{maxPoint}}</span>&nbsp;&nbsp;
-      </span>
-    </div>
 
 
     <div *ngIf="completed" class="completedBlock">
@@ -34,33 +37,31 @@
 
   <div class="gradientBg pt-5 pb-5" *ngIf="questionary && !completed ">
     <div class="container-fluid">
-      <div class="row pt-5 ps-2 pe-2">
+      <div class="row ps-2 pe-2">
         <form class="form-horizontal">
+          <div class="row w-100">
           <div class="cs-width col-md-6" *ngFor="let option of questionary?.questions[current]?.options; let i = index">
-            <div>
-              <div>
-                <div class="panel panel-default question-box">
-                  <div class="panel-body question-box-body">
-                    <ng-contianer>
-                      <div class="text-justify text-white">{{option.text}}</div>
-                    </ng-contianer>
-                  </div>
-                  <div class="question-box-counter no-gutter">
-                    <div class="plus-container background-plus-custom">
-                      <button (click)="increment(i)"></button>
-                    </div>
-                    <div class="id-input">
-                      <input type="number" min="0" name="{{'option' + i}}" [value]="answers[i]" placeholder="0"
-                        readonly />
-                    </div>
-                    <div class="minus-container background-minus-custom">
-                      <button (click)="decrement(i)"></button>
-                    </div>
-                  </div>
+            <div class="panel panel-default question-box">
+              <div class="panel-body question-box-body">
+                <ng-contianer>
+                  <div class="text-justify text-white">{{'... ' + option.text}}</div>
+                </ng-contianer>
+              </div>
+              <div class="question-box-counter no-gutter">
+                <div class="plus-container background-plus-custom">
+                  <button (click)="increment(i)"></button>
+                </div>
+                <div class="id-input">
+                  <input type="number" min="0" name="{{'option' + i}}" [value]="answers[i]" placeholder="0"
+                    readonly />
+                </div>
+                <div class="minus-container background-minus-custom">
+                  <button (click)="decrement(i)"></button>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         </form>
       </div>
 
@@ -73,9 +74,11 @@
         </div>
         <div class="row pt-2 ms-4 me-4">
           <div class="progress ps-0 pe-0" style="height: 30px; border-radius: 0;" *ngIf="questionary && !completed ">
-            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0"
-              aria-valuemax="100">{{ current + 1 }} / {{totalQuestions()}} </div>
-          </div>
+            <!-- <div class="col-6"> -->
+              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100">{{ current + 1 }} / {{totalQuestions()}} </div>
+            </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -94,9 +97,6 @@
           <p>{{"questionary.instructions.text6" | translate}}</p>
           <p>{{"questionary.instructions.text6" | translate}}</p>
           <div class="ConfirmationModel__btn">
-            <!-- <button type="button" class="theme-btn w-auto" aria-label="close" (click)="QuizStart()">
-              <strong translate="start"></strong>
-            </button> -->
             <button type="button" class="theme-btn w-auto" (click)="modal.close('Save click')"><strong
                 translate="start"></strong></button>
           </div>
