@@ -40,10 +40,10 @@ export class AdminUsersComponent {
   statusList = ['CREATED', 'IN_PROGRESS', 'DONE'];
   roleList = ['MANAGER', 'EMPLOYEE', 'APPLICANT'];
   filters: any = {
-    status: {},
-    role: {},
-    department: {},
-    company: {},
+    status: [],
+    role: [],
+    department: [],
+    company: [],
   };
 
   constructor(
@@ -111,77 +111,26 @@ export class AdminUsersComponent {
     };
   }
 
-  onFilterSelect(property: any, filter: any) {
-    // Object.keys(property).map((key: any) => {
-    //   let arr: Array<any> = Object.entries(property[key])
-    //   arr.forEach((element) => {
-    //     if (element[1]) {
-    //         if(key == 'company' || key == 'department') {
-
-    //         } else {
-    //           this.usersPage.filter((user: any) => console.log(user.uuid,'user')
-    //           )
-    //         }
-    //       }
-    //   })
-    // })
-    Object.keys(this.filters).map((key: any) => {
-      let arr: Array<any> = Object.entries(this.filters[key]);
-      arr.forEach((element) => {
-        if (element[1]) {
-          if (key == 'company' || key == 'department') {
-            this.usersPage = this.usersPage.filter((user: any) => {
-              return user[key].uuid == element[0];
-            });
-          } else {
-            // this.usersPage = this.usersPage.filter((user:any) => {return user[key] == element[0]})
-
-            console.log(this.usersPage, 'page');
-            console.log(element[0]);
-
-            if (element[0] == 'CREATED' || element[0] == 'DONE' || element[0] == 'IN_PROGRESS') {
-              //console.log(this.usersPage, 'page');
-              this.usersPage = this.usersPage.filter((user: any) => {
-                return user[key] == element[0];
-              });
-            }
-
-            if (element[0] == 'MANAGER' || element[0] == 'EMPLOYEE' || element[0] == 'APPLICANT') {
-              //console.log(this.usersPage, 'page');
-            
-              this.usersPage = this.usersPage.filter((user: any) => {
-                //this.finalArray.push( this.usersPage);
-               
-                return user[key] == element[0];
-                
-              });
-            }
-         
-            // if(element[0] == 'IN_PROGRESS ') {
-            //   //this.usersPage = this.usersPage.filter((user:any) => {return user[key] == 'IN_PROGRESS'})
-            // }
-            // if(element[0] == 'DONE')
-            // this.usersPage = this.usersPage.filter((user:any) => {return console.log(user[key])})
-            //this.usersPage = this.usersPage.filter((user:any) => {return user[key] == 'DONE'})
-          }
-        }
-        this._updateCounters();
-      });
-    });
-  }
 
   onChecked(event: any, value: any, filterBy: any) {
     this.usersPage = this.usersFiltered;
+    // const users = this.usersFiltered; 
+    // this.usersPage = []
     if (event.target.checked) {
-      this.filters[filterBy][value] = true;
+      this.filters[filterBy].push(value);
     } else {
-      this.filters[filterBy][value] = false;
+      this.filters[filterBy] = this.filters[filterBy].filter((item:any) => item != value);
     }
-    //const statusFilterd = this.onFilterSelect(this.filters.status, 'status')
-    this.onFilterSelect(this.filters, 'status');
-    var roleFilters = this.onFilterSelect(this.filters, 'role');
-    
+
+    this.usersPage = this.usersPage.filter((user: any) => ((this.filters['status'].length>0 ? this.filters['status'].includes(user['status']) : true) && (this.filters['department'].length>0 ? this.filters['department'].includes(user['department'].uuid) : true) && (this.filters['company'].length>0 ? this.filters['company'].includes(user['company'].uuid) : true) && (this.filters['role'].length>0 ? this.filters['role'].includes(user['role']) : true )));
+
+    // users.forEach((user: any) => {
+    //   if ((this.filters['status'].length>0 ? this.filters['status'].includes(user['status']) : true) && (this.filters['department'].length>0 ? this.filters['department'].includes(user['department'].uuid) : true) && (this.filters['company'].length>0 ? this.filters['company'].includes(user['company'].uuid) : true) && (this.filters['role'].length>0 ? this.filters['role'].includes(user['role']) : true) ){
+    //     this.usersPage.push(user)
+    //   }
+    // });
   }
+  
 
   progressFilter(event: any, progress: string) {
     const checked = event.target.checked;
