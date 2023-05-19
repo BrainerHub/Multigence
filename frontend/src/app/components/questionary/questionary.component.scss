@@ -3,7 +3,7 @@
   overflow: auto;
   top: 98px;
   position: relative;
-  background-color: #fff;
+  // background-color: #fff;
 }
 .dark-theme-selector {
   .ConfirmationModel {
@@ -218,7 +218,7 @@
   color: #fff;
   text-align: center;
   font-size: large;
-  border-bottom: 2px solid #0c0c0c;
+  // border-bottom: 2px solid #0c0c0c;
   // background-color: #0c0c0c;
   // padding: 10px 0px;
 }
@@ -356,6 +356,20 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 991px) {
+  .completedBlock {
+    .navbar-brand {
+      img {
+        height: auto !important;
+        width: 90%;
+      }
+    }
+
+  }
+}
+
 
 @media only screen and (max-width: 767px) {
   .points-upper-box {

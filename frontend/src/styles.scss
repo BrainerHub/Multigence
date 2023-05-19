@@ -851,3 +851,13 @@ label {
     }
   }
 }
+@media only screen and (max-width: 575px) {
+  .customDrpDown {
+    button {
+      font-size: 13px;
+    }
+    span {
+      right: 0;
+    }
+  }
+}
