@@ -1,18 +1,16 @@
 <div class="corridorGraph">
   <div class="corridor-filters legend-content-size corridor-graph">
-    <div class="individual-label label" >{{ "graphic.individual" | translate }}</div>
-    <div class="collective-label label" >{{ "graphic.collective" | translate }}</div>
-    <div class="points-label label" >{{ "graphic.points" | translate }}</div>
+    <div class="individual-label label">{{ "graphic.individual" | translate }}</div>
+    <div class="collective-label label">{{ "graphic.collective" | translate }}</div>
+    <div class="points-label label">{{ "graphic.points" | translate }}</div>
   </div>
   <div style="display: block">
-    <canvas
-      baseChart
-      [datasets]="barChartData"
-      [labels]="mbarChartLabels"
-      [options]="barChartOptions"
-      [legend]="barChartLegend"
-      (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)"
-    ></canvas>
+
+    <canvas id="lineChart"></canvas>
+    <!-- <canvas baseChart [datasets]="barChartData" [labels]="mbarChartLabels" [options]="barChartOptions"
+      [legend]="barChartLegend" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas> -->
+    <!-- <div>
+      <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+    </div> -->
   </div>
 </div>
