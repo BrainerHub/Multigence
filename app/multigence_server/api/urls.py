@@ -3,7 +3,7 @@ from django.urls import include, path
 from rest_framework_nested import routers
 
 from multigence_server.api.resources import ping
-from multigence_server.api.resources import user, question_upload, sphere, invitation, password_reset, registration
+from multigence_server.api.resources import user, question_upload, sphere, invitation, password_reset, registration, report
 from multigence_server.api.resources.answer import AnswerViewSet
 from multigence_server.api.resources.corridor import CorridorViewSet
 from multigence_server.api.resources.organization import OrganizationUserViewSet, OrganizationDepartmentViewSet,OrganizationViewSet, \
@@ -22,6 +22,7 @@ base_router.register('questionUpload', question_upload.QuestionUploadViewSet, ba
 base_router.register('resetPassword', password_reset.PasswordResetViewSet, basename='reset_password')
 base_router.register('changePassword', password_reset.ChangePasswordViewSet, basename='change_password')
 base_router.register('register', registration.RegistrationViewSet, basename='register')
+base_router.register('report_sphere', report.ReportSphere, basename='report_sphere')
 
 questionary_router = routers.NestedSimpleRouter(base_router, 'user', lookup='user')
 questionary_router.register('questionary', QuestionaryViewSet, basename='questionary')
