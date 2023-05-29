@@ -28,7 +28,7 @@ class ReportSphere(viewsets.ModelViewSet):
         sphere_point_list = []
         for group in groups:
             sphere_point_dict = {}
-            for item in group:
+            for item in group[1]:
                 sphere_point_dict[item['sphere_name']] = item['point']
                 question_name = item['question_name']
                 sphere_point_list.append(sphere_point_dict)
@@ -37,5 +37,5 @@ class ReportSphere(viewsets.ModelViewSet):
                 'question': question_name,
                 'points': point_list
             })
-        return Response(data={'sphere_list': sphere_list, 'point_list': point_list})
+        return Response(data={'sphere_list': sphere_list, 'final_list': final_list})
     
