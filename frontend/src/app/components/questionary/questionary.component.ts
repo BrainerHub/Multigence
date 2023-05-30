@@ -205,7 +205,7 @@ export class QuestionaryComponent {
 
   }
   
-   isNotAnswered(question:any) {
+  isNotAnswered(question:any) {
     return !question.answered;
   }
 
@@ -232,13 +232,10 @@ export class QuestionaryComponent {
   getUserQuestionaries() {
     this.current = 0;
     this.value
-   
       this.userService
       .getUserQuestionaries(this.user.uuid,this.loadData)
       .subscribe((res) => {
-      // debugger
         if(res.length > 0){
-          console.log(res,"----")
            this.QuestionData = res[0];
            this.questionary = res[0];
            this.maxPoint = res[0].max_points;

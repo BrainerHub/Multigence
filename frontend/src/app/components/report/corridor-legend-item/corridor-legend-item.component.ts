@@ -18,6 +18,10 @@ export class CorridorLegendItemComponent {
   trial: any;
   progressOrganaiztion: any;
   summary: any;
+
+
+
+  
   spheres: any;
   getSphereName: any;
   report: any;
@@ -29,6 +33,7 @@ export class CorridorLegendItemComponent {
   collective = [];
   userDataIndividual = '';
   userDataColective = '';
+
   page = 1
   expand: boolean =true;
   constructor(
@@ -41,7 +46,6 @@ export class CorridorLegendItemComponent {
 
   ngOnInit(): void {
     this.getMe();
-
   }
  
   toggle() {
@@ -69,7 +73,6 @@ export class CorridorLegendItemComponent {
 
   getSpheres() {
     this.userService.getSpheres().subscribe((res) => {
-
       // this.userService.getAll().then(function(spheres:any){
       //   var groups = _.groupBy(spheres, 'type');
       //   return (groups['INDIVIDUAL'].concat(groups['NONE'])).concat(groups['COLLECTIVE']);
@@ -86,11 +89,6 @@ export class CorridorLegendItemComponent {
       //     }
       //   });
       // });
-
-
-
-
-
     });
   }
 
@@ -111,6 +109,7 @@ export class CorridorLegendItemComponent {
         this.progressOrganaiztion = userInviteData[0];
       });
   }
+  
 }
 function _byId(uuid: any): _.ListIteratorTypeGuard<unknown, unknown> {
   throw new Error('Function not implemented.');

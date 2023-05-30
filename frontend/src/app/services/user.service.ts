@@ -469,8 +469,13 @@ getMe() {
   }
 
 
-  
- 
+  multiLinechart() {
+    return this.http.get<any>(`${this.apiUrl}` +'/report_sphere/').pipe(
+      map((report) => {
+        return report;
+      })
+    );
+  }
 }
  
 
