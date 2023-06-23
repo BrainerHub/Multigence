@@ -59,6 +59,8 @@ export class CorridorReportComponent {
   invitationEmployee: any;
   selectedUser: any;
   selectedSorting: any;
+  ShowData: boolean = true;
+  visiblityData: boolean = false;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -85,7 +87,10 @@ export class CorridorReportComponent {
       this.getUserReport();
     });
   }
-
+  onShowAllData() {
+    this.ShowData = !this.ShowData; 
+    this.visiblityData = !this.visiblityData;
+  }
   setDepartment(department: any) {
     this.departments.find((visibleCompany: any) => {
       if (visibleCompany.name == department) {
