@@ -6,7 +6,7 @@
     </button>
     <div class="container-fluid">
       <div class="row" >
-        <div class="col-lg-9">
+          <div [ngClass]="{' col-lg-9': visiblityData, ' col-lg-12': !visiblityData }">
           <div class="row justify-content-between">
             <ng-container *ngIf="visiblityData">
             <div class="col-lg-7">
