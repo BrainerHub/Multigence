@@ -40,6 +40,7 @@ class CorridorDestinationDataSerializerV2(serializers.BaseSerializer):
                 'data': {
                     'spheres': user.sphere_data['spheres'],
                     'points': user.sphere_data['points'],
+                    'total_points': user.sphere_data['total_points']
                 },
                 'first_name': user.first_name_alias,
                 'last_name': user.last_name_alias
@@ -50,6 +51,7 @@ class CorridorDestinationDataSerializerV2(serializers.BaseSerializer):
                 'data': {
                     'spheres': user.sphere_data['spheres'],
                     'points': user.sphere_data['points'],
+                    'total_points': user.sphere_data['total_points']
                 },
                 'first_name': user.first_name,
                 'last_name': user.last_name
@@ -146,6 +148,7 @@ class CorridorViewSetV2(viewsets.ViewSet):
                 except ValueError:
                     raise serializers.ValidationError("User with uuid = " + source + " does not exist")
                 corridor_data = get_corridor_source_data(company, user_id=source)
+
             seprate_data = extract_sphere_points_v2(corridor_data)
             department_list.append({
                 'data': seprate_data
