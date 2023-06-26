@@ -1,9 +1,11 @@
 <app-layout-header></app-layout-header>
 <div class="MainBodyPart">
   <div class="corridor">
+    <div class="d-flex justify-content-end me-3 mb-3">
     <button (click)="onShowAllData()" type="button" class="btn  btn-danger">
-      {{ShowData?"Show Data":"Hide Data"}}
+      <i class="fa fa-filter" aria-hidden="true"></i> {{ShowData?"Show Data":"Hide Data"}} 
     </button>
+    </div>
     <div class="container-fluid">
       <div class="row" >
           <div [ngClass]="{' col-lg-9': visiblityData, ' col-lg-12': !visiblityData }">

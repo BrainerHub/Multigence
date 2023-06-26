@@ -5,7 +5,7 @@ from rest_framework_nested import routers
 from multigence_server.api.resources import ping
 from multigence_server.api.resources import user, question_upload, sphere, invitation, password_reset, registration, report
 from multigence_server.api.resources.answer import AnswerViewSet
-from multigence_server.api.resources.corridor import CorridorViewSet
+from multigence_server.api.resources.corridor import CorridorViewSet, CorridorViewSetV2
 from multigence_server.api.resources.organization import OrganizationUserViewSet, OrganizationDepartmentViewSet,OrganizationViewSet, \
     OrganizationPositionViewSet, OrganizationInvitationsViewSet
 from multigence_server.api.resources.questionary import QuestionaryViewSet, QuestionaryStatusViewSet
@@ -48,6 +48,9 @@ organization_department_router.register('position', OrganizationPositionViewSet,
 
 organization_report_corridor_router = routers.NestedSimpleRouter(base_router, 'organization', lookup='organization')
 organization_report_corridor_router.register('report/corridor', CorridorViewSet, basename='corridor')
+
+organization_report_corridor_router = routers.NestedSimpleRouter(base_router, 'organization', lookup='organization')
+organization_report_corridor_router.register('report/corridor_v2', CorridorViewSetV2, basename='report_corridor')
 
 organization_questionary_status_router = routers.NestedSimpleRouter(base_router, 'organization', lookup='organization')
 organization_questionary_status_router.register('questionary/status', QuestionaryStatusViewSet, basename='questionary_status')

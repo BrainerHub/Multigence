@@ -28,6 +28,30 @@ def get_corridor_destination_data(user_id):
         data.append({'sphereId': sphere.uuid, 'totalPoints': sphere_points})
     return data
 
+
+def get_corridor_destination_data_v2(user_id):
+    data = []
+    spheres = Sphere.objects.all().order_by('index')
+    for sphere in spheres:
+        sphere_points = get_sphere_points_v2(sphere, user_id=user_id)
+        data.append({'sphereId': sphere.uuid, 'totalPoints': sphere_points})
+
+    sphere_list = []
+    point_list = []
+    for i in data:
+        sphere_list.append(str(i['sphereId']))
+        for j in i['totalPoints']:
+            if len(point_list) == len(i['totalPoints']):
+                for d in point_list:
+                    if d and d['question'] and d['question'] == j['question']:
+                        d['point'] += j['point']
+            else:
+                point_list.append({
+                    'question': j['question'],
+                    'point': j['point']
+                })
+    return {'spheres': sphere_list, 'points': point_list}
+
 # -- Source
 
 def get_corridor_source_data(company, role=None, user_id=None, department_uuid=None):
@@ -51,6 +75,15 @@ def extract_sphere_points(sphere_points_list):
     for item in sphere_points_list:
         sphere_points.append(item['totalPoints'])
     return sphere_points
+
+def extract_sphere_points_v2(sphere_points_list):
+    spheres = []
+    points = []
+    for item in sphere_points_list:
+        points.append(item['totalPoints'])
+        spheres.append(item['sphereId'])
+    
+    return {'spheres': spheres, 'points': points}
 
 # -- retrieve sphere points
 
@@ -97,6 +130,19 @@ def get_sphere_points(sphere, company=None, role=None, user_id=None, department_
     query = "select p.uuid, p.points, p.question_option_id " + get_sphere_query(sphere, company=company, role=role, user_id=user_id, department_uuid=department_uuid, title=title, position=position)
     answer_points = AnswerQuestionOptionPoints.objects.raw(query)
     return sum(answer_point.points for answer_point in answer_points)
+
+
+def get_sphere_points_v2(sphere, company=None, role=None, user_id=None, department_uuid=None, title=None, position=None):
+    query = "select p.uuid, p.points, p.question_option_id " + get_sphere_query(sphere, company=company, role=role, user_id=user_id, department_uuid=department_uuid, title=title, position=position)
+    answer_points = AnswerQuestionOptionPoints.objects.raw(query)
+    q_dict = []
+    for point in answer_points:
+        dict_ = {
+            'question': point.question_option.question.text['en'],
+            'point': [point.points]
+        }
+        q_dict.append(dict_)
+    return q_dict
 
 
 def get_sphere_count(sphere, company=None, role=None, user_id=None, department_uuid=None, title=None, position=None):
