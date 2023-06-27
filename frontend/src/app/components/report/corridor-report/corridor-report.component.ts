@@ -10,7 +10,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import { BootstrapService } from 'app/services/bootstrap.service';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 @Component({
   selector: 'app-corridor-report',
   templateUrl: './corridor-report.component.html',
