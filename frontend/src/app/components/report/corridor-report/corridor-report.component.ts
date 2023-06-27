@@ -51,7 +51,8 @@ export class CorridorReportComponent {
   onUserSelected: boolean = false;
   employeesData: any;
   selectedEmployeeGroup: any;
-  selectedDepartment: any;
+  selectedDepartment:  string | undefined;
+  selectedDepartment2: string | undefined;
   fName: any;
   lName: any;
   selectedEmployee: any;
@@ -61,13 +62,16 @@ export class CorridorReportComponent {
   selectedSorting: any;
   ShowData: boolean = true;
   visiblityData: boolean = false;
+  compareData: boolean = false;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
     private _translate: TranslateService,
     public _router: Router,
     private bootstrapService: BootstrapService
-  ) {}
+  ) {
+   
+  }
 
   ngOnInit(): void {
     this.getMe();
@@ -91,16 +95,32 @@ export class CorridorReportComponent {
     this.ShowData = !this.ShowData; 
     this.visiblityData = !this.visiblityData;
   }
-  setDepartment(department: any) {
+  setDepartment(departmentName: any) {
     this.departments.find((visibleCompany: any) => {
-      if (visibleCompany.name == department) {
+      if (visibleCompany.name == departmentName) {
         this.invitationDepartment = visibleCompany.uuid;
       }
     });
-    (this.selectedDepartment = department), this.getUserReport();
+    this.selectedDepartment = departmentName,
+    this.getUserReport();
     this.getCorridorDepartmentReport();
   }
 
+  setDepartment2(departmentName: string) {
+    this.departments.find((visibleCompany: any) => {
+      if (visibleCompany.name == departmentName) {
+        this.invitationDepartment = visibleCompany.uuid;
+      }
+    });
+    this.selectedDepartment2 = departmentName,
+     this.getUserReport();
+    this.getCorridorDepartmentReport();
+  }
+  onShowcompareData(){
+  this.compareData = true;
+  }
+
+  
   setSource(employee: any) {
     this.fName = employee.first_name;
     this.lName = employee.last_name;
