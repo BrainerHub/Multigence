@@ -50,7 +50,7 @@ import { CorridorLegendItemComponent } from './components/report/corridor-legend
 import { CorridorGraphComponent } from './components/report/corridor-graph/corridor-graph.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ProgressBarModule} from "angular-progress-bar";
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,6 +98,7 @@ import {ProgressBarModule} from "angular-progress-bar";
     ProgressBarModule,
     TabsModule.forRoot(),
     PaginationModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
    // PaginationConfig ,
     ModalModule.forRoot(),
     TranslateModule.forRoot({
@@ -106,7 +107,9 @@ import {ProgressBarModule} from "angular-progress-bar";
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
+      
     }),
+  
   ],
   providers: [
     UserService,

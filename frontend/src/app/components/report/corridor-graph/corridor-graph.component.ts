@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserService } from 'app/services/user.service';
 import { Chart } from 'chart.js';
 import { forEach } from 'lodash';
+
 @Component({
   selector: 'app-corridor-graph',
   templateUrl: './corridor-graph.component.html',
@@ -12,58 +13,150 @@ export class CorridorGraphComponent {
   sphereList:any;
   colour:any;
   dataset: Array<any> = [];
+  organization: any = [];
+  retrievedObject: any = [];
+  user:any;
+  departments: any;
+  employee: any;
+  selectedDepartment:any;
+  invitationDepartment:any;
+  employeesData:any;
+  DefultDept:any =[];
+  selectedDept:any = [];
+  @Input() childItems: any[] = [];
   constructor(
     private userService: UserService,
   ) {
-
+   
   }
 
   ngOnInit() {
-    this.userService.multiLinechart().subscribe((res) => {
-    this.sphereList = res.sphere_list;
-    for(let i = 0; i < res.final_list.length  ; i++){
+   
+   //debugger
+    this.report();
+  } 
+
+report(){
+  this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment')|| '{}');
+  //this.selectedDept = JSON.parse(localStorage.getItem('selectedDepartment')|| '{}');
+  console.log("---D-->",this.DefultDept)
+  console.log("--S--%%",this.selectedDept)
+  this.userService.multiLinechart().subscribe((res) => {
+  this.sphereList = res.sphere_list;
+ 
+    
+
+   
+      // for(let i = 0; i < this.selectedDept.data.length; i++){
+      //   const newData = {
+      //       label: "All Data",
+      //       data: this.DefultDept.data[i].data.points,
+      //       backgroundColor: this.colour,
+      //       borderColor: this.colour,
+      //       fill: false,
+      //       lineTension: 0,
+      //       radius: 1,     
+      //   }
+      //     this.dataset.push(newData)
+      // }
+   
+      
+      for(let i = 0; i < this.DefultDept.data.length; i++){
+        const newData = {
+            label: "All Data",
+            data: this.DefultDept.data[i].data.points,
+            backgroundColor: this.colour,
+            borderColor: this.colour,
+            fill: false,
+            lineTension: 0,
+            radius: 1,     
+        }
+        this.dataset.push(newData)
+    
+    }
+ 
+for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
       const newData = {
-          label: res.final_list[i].question,
-          data: res.final_list[i].points,
+          label: this.DefultDept.users[0].data.points[i].question,
+          data: this.DefultDept.users[0].data.points[i].point,
           backgroundColor: this.colour,
           borderColor: this.colour,
           fill: false,
           lineTension: 0,
-          radius: 1,
+          radius: 1,     
       }
         this.dataset.push(newData)
       }
-    let ctx: any = document.getElementById('lineChart') as HTMLElement;
-    //var data= this.reportData;
-    var data = {
-      labels : res.sphere_list,
-      datasets: this.dataset
+  let ctx: any = document.getElementById('lineChart') as HTMLElement;
+  var test= res.sphere_list;
+  var data = {
+    labels :test,
+    datasets: this.dataset
+  };
+    var options = {
+      responsive: true,
+      title: {
+        display: true,
+        position: 'top',
+        text: 'Line Graph',
+        fontSize: 18,
+        fontColor: '#111',
+      },
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: {
+          fontColor: '#333',
+          fontSize: 16,
+        },
+      },
     };
-      var options = {
-        responsive: true,
-        title: {
-          display: true,
-          position: 'top',
-          text: 'Line Graph',
-          fontSize: 18,
-          fontColor: '#111',
-        },
-        legend: {
-          display: true,
-          position: 'bottom',
-          labels: {
-            fontColor: '#333',
-            fontSize: 16,
-          },
-        },
-      };
-      var chart = new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: options,
-      });
-  })  
-} 
+    var chart = new Chart(ctx, {
+      type: 'line',
+      data: data,
+      options: options,
+    });
+})  
+}
+save(){
+  //debugger
+  console.log("----***",this.childItems);
+  this.selectedDept = this.childItems;
+  this.report();
+}
+
+
+getMe() {
+  this.userService.getMe().subscribe((res: any) => {
+    this.user = res;
+    this.organization = res.company;
+      this.getUserReport();
+  });
+}
+
+getUserReport() {
+  this.userService.getUserReport(this.user.uuid).subscribe((res) => {});
+}
+
+setDepartment(department: any) {
+  this.departments.find((visibleCompany: any) => {
+    if (visibleCompany.name == department) {
+      this.invitationDepartment = visibleCompany.uuid;
+    }
+  });
+  (this.selectedDepartment = department), this.getUserReport();
+    this.getCorridorDepartmentReport();
+}
+
+getCorridorDepartmentReport() {
+  this.userService
+    .getCorridorDepartmentReport(this.organization, this.invitationDepartment)
+    .subscribe((res) => {
+      this.employeesData = res.users;
+      console.log("data---",this.employeesData);
+    });
+}
+
 
  getRandomColor2() {
   var length = 6;

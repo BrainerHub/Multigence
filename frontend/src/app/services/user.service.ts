@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'enviroment/enviroment';
@@ -108,7 +108,8 @@ export class UserService {
 
    // get organization with id
     getOrganization(id:any) {
-      return this.http.get<any>(`${this.apiUrl}` + '/organization/'+id+'/').pipe(
+      return this.http.get<any>(`${this.apiUrl}` + '/organization/'+id+'/'
+      ).pipe(
         map((user) => {
           return user;
         })
@@ -317,8 +318,6 @@ getMe() {
     });
   }
 
-
-
   isManager() {
       return this.getMe().subscribe((user) => {
         return user.role === this.ROLE_MANAGER;
@@ -418,24 +417,41 @@ getMe() {
       })
     );
   }
-  getCorridorReport(organizationId:any) {
+
+  getCorridorReport1(organizationId:any,department:any) {
     return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?destination=all&source=employees').pipe(
       map((report) => {
         return report;
       })
     );
-  
-  }
 
+  }
+   
+  getCorridorReport(organizationId:any,department1:any ,department2?:any) {
+    var url = ''
+    if (department2){
+      url = `${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor_v2/'+'?destination=all&source=employees&department='+department1+'&department2='+ department2 
+    }
+    else {
+      url = `${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor_v2/'+'?destination=all&source=employees&department='+department1
+    }
+      
+    return this.http.get<any>(url).pipe(
+      map((report) => {
+        return report;
+      })
+    );
+
+  }
 
   getOrganizationData(organizationId:any) {
     return this.http.get<any>(`${this.apiUrl}` +'/organization/'+organizationId+'/').pipe(
       map((user) => {
         return user;
       })
-    );
-    
+    );  
   }
+
  //get UserQuestionaries
  getUserQuestionaries(userId: any,res?:any) {
   let getToken = 'Token ' + localStorage.getItem('authToken');
@@ -461,7 +477,7 @@ getMe() {
  
 
   getCorridorDepartmentReport(organizationId:any , departmentId:any) {
-    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor/'+'?department=' + departmentId +'&destination=all&source=employees').pipe(
+    return this.http.get<any>(`${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor_v2/'+'?department=' + departmentId +'&destination=all&source=employees').pipe(
       map((report) => {
         return report;
       })

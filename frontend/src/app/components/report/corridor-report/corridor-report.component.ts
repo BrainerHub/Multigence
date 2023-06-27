@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -10,13 +10,16 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import { BootstrapService } from 'app/services/bootstrap.service';
-
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 @Component({
   selector: 'app-corridor-report',
   templateUrl: './corridor-report.component.html',
   styleUrls: ['./corridor-report.component.scss'],
 })
 export class CorridorReportComponent {
+  dropdownList:any = [];
+  selectedItems:any = [];
+  dropdownSettings = {};
   searchText: any;
   ROLE_EMPLOYEE = 'EMPLOYEE';
   ROLE_APPLICANT = 'APPLICANT';
@@ -45,7 +48,8 @@ export class CorridorReportComponent {
   sortOrders = 'Furthest';
   isAscendingSort: boolean = false;
   expand: boolean;
-  department: any;
+  department: any = '13eeff42-f6b3-4eac-9214-556f467a8fea';
+  department2:any;
   pagesSelected: any;
   MAX_PERSONS_IN_CORRIDOR = 5;
   onUserSelected: boolean = false;
@@ -60,9 +64,15 @@ export class CorridorReportComponent {
   invitationEmployee: any;
   selectedUser: any;
   selectedSorting: any;
+  showdata: boolean =false;
   ShowData: boolean = true;
   visiblityData: boolean = false;
-  compareData: boolean = false;
+  itemDisabled1:any;
+ // selectedDepartment2: string | undefined;
+  @Input() item : any
+  @Input() items: any[] = [];
+  parentMessage = "message from parent";
+  selectedDept:any =[];
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -73,8 +83,35 @@ export class CorridorReportComponent {
    
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.getMe();
+    this.dropdownList = [
+      { item_id: 1, item_text: 'Mumbai' },
+      { item_id: 2, item_text: 'Bangaluru' },
+      { item_id: 3, item_text: 'Pune' },
+      { item_id: 4, item_text: 'Navsari' },
+      { item_id: 5, item_text: 'New Delhi' }
+    ];
+    this.selectedItems = [
+      { item_id: 3, item_text: 'Pune' },
+      { item_id: 4, item_text: 'Navsari' }
+    ];
+  //  this.dropdownSettings : IDropdownSettings = {};
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
   }
 
   getMe() {
@@ -85,24 +122,54 @@ export class CorridorReportComponent {
       this.getOrganizationUsers();
       this.getInviteOrganization();
       this.getSpheres();
+      //this.getCorridorReport1();
       this.getCorridorReport();
       this.getpersonListPage();
       this.getPositions();
       this.getUserReport();
     });
   }
-  onShowAllData() {
-    this.ShowData = !this.ShowData; 
-    this.visiblityData = !this.visiblityData;
+
+  getCorridorEmployee() {
+    this.userService
+      .getCorridorEmployee(this.organization, this.selectedUser)
+      .subscribe((res) => {
+      
+        this.employeesData = res.users;
+       //console.log("data1",this.employeesData)
+      });
   }
+
+  getDepartment() {
+    this.userService.getDepartments(this.organization).subscribe((res) => {
+      var userDepartmentData = Array.from(Object.values(res));
+      this.departments = userDepartmentData[0];
+      this.department2 =  userDepartmentData[0];
+    });
+  }
+  
+  getCorridorReport() {
+   
+      this.userService
+        .getCorridorReport(this.organization,this.department)
+        .subscribe((res) => {
+          this.item = res;
+         // console.log("+++----",this.item)
+          localStorage.setItem('defultDepartment', JSON.stringify(res));
+        });
+    }
+  
   setDepartment(departmentName: any) {
+  
     this.departments.find((visibleCompany: any) => {
       if (visibleCompany.name == departmentName) {
         this.invitationDepartment = visibleCompany.uuid;
       }
     });
+   
     this.selectedDepartment = departmentName,
-    this.getUserReport();
+    //this.getUserReport();
+    //this.getCorridorReport();
     this.getCorridorDepartmentReport();
   }
 
@@ -112,14 +179,16 @@ export class CorridorReportComponent {
         this.invitationDepartment = visibleCompany.uuid;
       }
     });
+  
     this.selectedDepartment2 = departmentName,
-     this.getUserReport();
-    this.getCorridorDepartmentReport();
-  }
-  onShowcompareData(){
-  this.compareData = true;
+     //this.getUserReport();
+    this.getCorridorReport();
+   // this.getCorridorDepartmentReport();
   }
 
+  compare(){
+    this.showdata = true;
+  }
   
   setSource(employee: any) {
     this.fName = employee.first_name;
@@ -177,7 +246,6 @@ export class CorridorReportComponent {
       this.personListPage = res;
       this.titles = res[0];
     });
-
     this.selectedSorting = event;
   }
 
@@ -188,14 +256,9 @@ export class CorridorReportComponent {
     );
   }
 
-  onSelectDropdownValue(option: any) {
-    // Do something with selected value
-  }
-  getDepartment() {
-    this.userService.getDepartments(this.organization).subscribe((res) => {
-      var userDepartmentData = Array.from(Object.values(res));
-      this.departments = userDepartmentData[0];
-    });
+  onShowAllData() {
+    this.ShowData = !this.ShowData;
+    this.visiblityData = !this.visiblityData;
   }
 
   setUser(event: any) {
@@ -258,34 +321,22 @@ export class CorridorReportComponent {
     this.userService.getReportUser(uuid).subscribe((res) => {
       this.personListPage = res;
       this.titles = res[0];
+      
     });
   }
-
-  getCorridorReport() {
-    this.userService
-      .getCorridorReport(this.organization)
-      .subscribe((res) => {});
-  }
-
+  
   getCorridorDepartmentReport() {
     this.userService
       .getCorridorDepartmentReport(this.organization, this.invitationDepartment)
       .subscribe((res) => {
-        this.employeesData = res.users;
+        this.employeesData = res;
+        this.items = res;
       });
   }
 
   getCorridorEmployeeReport() {
     this.userService
       .getCorridorEmployeeReport(this.organization, this.selectedEmployeeGroup)
-      .subscribe((res) => {
-        this.employeesData = res.users;
-      });
-  }
-
-  getCorridorEmployee() {
-    this.userService
-      .getCorridorEmployee(this.organization, this.selectedUser)
       .subscribe((res) => {
         this.employeesData = res.users;
       });
@@ -298,6 +349,7 @@ export class CorridorReportComponent {
         this.employeesData = res.users;
       });
   }
+
   getPositions() {
     this.userService.getPositions(this.organization).subscribe((res) => {
       this.positions = res[0];
@@ -311,6 +363,7 @@ export class CorridorReportComponent {
         var usertitleData = res;
         this.employees = usertitleData.employees;
         this.users = usertitleData.employees[0];
+         
       });
   }
 }
