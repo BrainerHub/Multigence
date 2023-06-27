@@ -184,7 +184,7 @@ export class CorridorReportComponent {
     this.selectedDepartment2 = departmentName,
      //this.getUserReport();
     this.getCorridorReport();
-   // this.getCorridorDepartmentReport();
+    this.getCorridorDepartmentReport();
   }
 
   compare(){

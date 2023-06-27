@@ -41,8 +41,8 @@ report(){
  // console.log("--S--%%",this.selectedDept)
   this.userService.multiLinechart().subscribe((res) => {
   this.sphereList = res.sphere_list;
- 
-  if(!this.selectedDept){
+  console.log(this.selectedDept)
+  if(this.selectedDept.length === 0){
     for(let i = 0; i < this.DefultDept.data?.length; i++){
       const newData = {
           label: "Defult",
@@ -80,18 +80,18 @@ report(){
       }
         this.dataset.push(newData)
     }
-    for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
-      const newData = {
-          label: this.DefultDept.users[0].data.points[i].question,
-          data: this.DefultDept.users[0].data.points[i].point,
-          backgroundColor: this.colour,
-          borderColor: this.colour,
-          fill: false,
-          lineTension: 0,
-          radius: 1,     
-      }
-        this.dataset.push(newData)
-      }
+    // for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
+    //   const newData = {
+    //       label: this.DefultDept.users[0].data.points[i].question,
+    //       data: this.DefultDept.users[0].data.points[i].point,
+    //       backgroundColor: this.colour,
+    //       borderColor: this.colour,
+    //       fill: false,
+    //       lineTension: 0,
+    //       radius: 1,     
+    //   }
+    //     this.dataset.push(newData)
+    //   }
   } 
   let ctx: any = document.getElementById('lineChart') as HTMLElement;
   var test= res.sphere_list;
@@ -163,7 +163,6 @@ getCorridorDepartmentReport() {
       console.log("data---",this.employeesData);
     });
 }
-
 
  getRandomColor2() {
   var length = 6;
