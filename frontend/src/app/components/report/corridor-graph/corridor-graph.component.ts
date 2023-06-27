@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { UserService } from 'app/services/user.service';
 import { Chart } from 'chart.js';
 import { forEach } from 'lodash';
@@ -8,7 +8,7 @@ import { forEach } from 'lodash';
   templateUrl: './corridor-graph.component.html',
   styleUrls: ['./corridor-graph.component.scss'],
 })
-export class CorridorGraphComponent {
+export class CorridorGraphComponent implements OnInit, OnChanges{
   chart: any;
   sphereList:any;
   colour:any;
@@ -23,30 +23,38 @@ export class CorridorGraphComponent {
   employeesData:any;
   DefultDept:any =[];
   selectedDept:any = [];
-  @Input() childItems: any[] = [];
+  @Input() childItems: any;
+  
   constructor(
     private userService: UserService,
+    private cd: ChangeDetectorRef
   ) {
    
   }
+  ngOnChanges(): void {
+    console.log(this.childItems,'child item');
+    this.dataset = [];
+    if(this.chart){
+      this.chart.destroy();
+      
+    }
+    this.report();
+    this.cd.detectChanges();
+  }
 
   ngOnInit() {
-   this.report();
+    // this.report();
   } 
 
 report(){
   this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment')|| '{}');
-  //this.selectedDept = JSON.parse(localStorage.getItem('selectedDepartment')|| '{}');
- // console.log("---D-->",this.DefultDept)
- // console.log("--S--%%",this.selectedDept)
   this.userService.multiLinechart().subscribe((res) => {
   this.sphereList = res.sphere_list;
-  console.log(this.selectedDept)
   if(this.selectedDept.length === 0){
-    for(let i = 0; i < this.DefultDept.data?.length; i++){
+    for(let i = 0; i < this.childItems.data?.length; i++){
       const newData = {
-          label: "Defult",
-          data: this.DefultDept.data[i].data.points,
+          label: `Department_${i}`,
+          data: this.childItems.data[i].data.points,
           backgroundColor: this.colour,
           borderColor: this.colour,
           fill: false,
@@ -68,6 +76,8 @@ report(){
         this.dataset.push(newData)
       }
   }else{
+    console.log('else');
+    
     for(let i = 0; i < this.selectedDept.data?.length; i++){
       const newData = {
           label: "selected",
@@ -125,10 +135,10 @@ report(){
 })  
 }
 save(){
-
-  this.chart.destroy();
+  if(this.chart){
+    this.chart.destroy();
+  }
   this.selectedDept = this.childItems;
-  console.log("----***",this.selectedDept);
   this.report();
 }
 
@@ -160,7 +170,6 @@ getCorridorDepartmentReport() {
     .getCorridorDepartmentReport(this.organization, this.invitationDepartment)
     .subscribe((res) => {
       this.employeesData = res.users;
-      console.log("data---",this.employeesData);
     });
 }
 

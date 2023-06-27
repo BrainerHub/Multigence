@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -16,7 +16,7 @@ import { BootstrapService } from 'app/services/bootstrap.service';
   templateUrl: './corridor-report.component.html',
   styleUrls: ['./corridor-report.component.scss'],
 })
-export class CorridorReportComponent {
+export class CorridorReportComponent implements OnChanges{
   dropdownList:any = [];
   selectedItems:any = [];
   dropdownSettings = {};
@@ -68,7 +68,9 @@ export class CorridorReportComponent {
   ShowData: boolean = true;
   visiblityData: boolean = false;
   itemDisabled1:any;
- // selectedDepartment2: string | undefined;
+  d1 :any;
+  d2:any;
+ 
   @Input() item : any
   @Input() items: any[] = [];
   parentMessage = "message from parent";
@@ -81,6 +83,9 @@ export class CorridorReportComponent {
     private bootstrapService: BootstrapService
   ) {
    
+  }
+  ngOnChanges(): void {
+    throw new Error('Method not implemented.');
   }
 
   ngOnInit(){
@@ -134,9 +139,7 @@ export class CorridorReportComponent {
     this.userService
       .getCorridorEmployee(this.organization, this.selectedUser)
       .subscribe((res) => {
-      
         this.employeesData = res.users;
-       //console.log("data1",this.employeesData)
       });
   }
 
@@ -151,11 +154,10 @@ export class CorridorReportComponent {
   getCorridorReport() {
    
       this.userService
-        .getCorridorReport(this.organization,this.department)
+        .getCorridorReport(this.organization,this.d1,this.d2)
         .subscribe((res) => {
           this.item = res;
           this.items= res;
-         // console.log("+++----",this.item)
           localStorage.setItem('defultDepartment', JSON.stringify(res));
         });
     }
@@ -167,22 +169,21 @@ export class CorridorReportComponent {
         this.invitationDepartment = visibleCompany.uuid;
       }
     });
-   
+    this.d1 = this.invitationDepartment;
     this.selectedDepartment = departmentName,
     //this.getUserReport();
-    //this.getCorridorReport();
+    this.getCorridorReport();
     this.getCorridorDepartmentReport();
   }
 
-  setDepartment2(departmentName: string) {
+  setDepartment2(departmentName:any) {
     this.departments.find((visibleCompany: any) => {
       if (visibleCompany.name == departmentName) {
         this.invitationDepartment = visibleCompany.uuid;
       }
     });
-  
+    this.d2 = this.invitationDepartment
     this.selectedDepartment2 = departmentName,
-     //this.getUserReport();
     this.getCorridorReport();
     this.getCorridorDepartmentReport();
   }
@@ -365,7 +366,6 @@ export class CorridorReportComponent {
         var usertitleData = res;
         this.employees = usertitleData.employees;
         this.users = usertitleData.employees[0];
-         
       });
   }
 }
