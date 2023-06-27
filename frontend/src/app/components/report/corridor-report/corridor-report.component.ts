@@ -154,6 +154,7 @@ export class CorridorReportComponent {
         .getCorridorReport(this.organization,this.department)
         .subscribe((res) => {
           this.item = res;
+          this.items= res;
          // console.log("+++----",this.item)
           localStorage.setItem('defultDepartment', JSON.stringify(res));
         });
@@ -188,6 +189,7 @@ export class CorridorReportComponent {
 
   compare(){
     this.showdata = true;
+    this.getCorridorDepartmentReport();
   }
   
   setSource(employee: any) {

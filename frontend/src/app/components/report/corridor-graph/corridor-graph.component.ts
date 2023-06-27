@@ -31,51 +31,31 @@ export class CorridorGraphComponent {
   }
 
   ngOnInit() {
-   
-   //debugger
-    this.report();
+   this.report();
   } 
 
 report(){
   this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment')|| '{}');
   //this.selectedDept = JSON.parse(localStorage.getItem('selectedDepartment')|| '{}');
-  console.log("---D-->",this.DefultDept)
-  console.log("--S--%%",this.selectedDept)
+ // console.log("---D-->",this.DefultDept)
+ // console.log("--S--%%",this.selectedDept)
   this.userService.multiLinechart().subscribe((res) => {
   this.sphereList = res.sphere_list;
  
-    
-
-   
-      // for(let i = 0; i < this.selectedDept.data.length; i++){
-      //   const newData = {
-      //       label: "All Data",
-      //       data: this.DefultDept.data[i].data.points,
-      //       backgroundColor: this.colour,
-      //       borderColor: this.colour,
-      //       fill: false,
-      //       lineTension: 0,
-      //       radius: 1,     
-      //   }
-      //     this.dataset.push(newData)
-      // }
-   
-      
-      for(let i = 0; i < this.DefultDept.data.length; i++){
-        const newData = {
-            label: "All Data",
-            data: this.DefultDept.data[i].data.points,
-            backgroundColor: this.colour,
-            borderColor: this.colour,
-            fill: false,
-            lineTension: 0,
-            radius: 1,     
-        }
-        this.dataset.push(newData)
-    
+  if(!this.selectedDept){
+    for(let i = 0; i < this.DefultDept.data?.length; i++){
+      const newData = {
+          label: "Defult",
+          data: this.DefultDept.data[i].data.points,
+          backgroundColor: this.colour,
+          borderColor: this.colour,
+          fill: false,
+          lineTension: 0,
+          radius: 1,     
+      }
+      this.dataset.push(newData)
     }
- 
-for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
+    for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
       const newData = {
           label: this.DefultDept.users[0].data.points[i].question,
           data: this.DefultDept.users[0].data.points[i].point,
@@ -87,6 +67,32 @@ for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
       }
         this.dataset.push(newData)
       }
+  }else{
+    for(let i = 0; i < this.selectedDept.data?.length; i++){
+      const newData = {
+          label: "selected",
+          data: this.selectedDept.data[0].data.points,
+          backgroundColor: this.colour,
+          borderColor: this.colour,
+          fill: false,
+          lineTension: 0,
+          radius: 1,     
+      }
+        this.dataset.push(newData)
+    }
+    for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
+      const newData = {
+          label: this.DefultDept.users[0].data.points[i].question,
+          data: this.DefultDept.users[0].data.points[i].point,
+          backgroundColor: this.colour,
+          borderColor: this.colour,
+          fill: false,
+          lineTension: 0,
+          radius: 1,     
+      }
+        this.dataset.push(newData)
+      }
+  } 
   let ctx: any = document.getElementById('lineChart') as HTMLElement;
   var test= res.sphere_list;
   var data = {
@@ -111,7 +117,7 @@ for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
         },
       },
     };
-    var chart = new Chart(ctx, {
+    this.chart = new Chart(ctx, {
       type: 'line',
       data: data,
       options: options,
@@ -119,9 +125,10 @@ for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
 })  
 }
 save(){
-  //debugger
-  console.log("----***",this.childItems);
+
+  this.chart.destroy();
   this.selectedDept = this.childItems;
+  console.log("----***",this.selectedDept);
   this.report();
 }
 
