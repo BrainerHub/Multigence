@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from multigence_server.core.models import Company, User, QuestionaryResult
+from multigence_server.core.models import Company, User, QuestionaryResult, Department
 from multigence_server.report.services import get_corridor_source_data, get_corridor_destination_data, \
     extract_sphere_points, distance, extract_sphere_points_v2, get_corridor_destination_data_v2
 
@@ -133,7 +133,16 @@ class CorridorViewSetV2(viewsets.ViewSet):
         # SOURCE (corridor data)
         #
 
-        departments = request.data.get('department')
+        departments = []
+        department = request.GET.get('department')
+        if department == 'all':
+            objs = Department.objects.all().values('uuid')
+            departments = [str(obj['uuid']) for obj in objs]
+        else:
+            departments.append(department)
+        department2 = request.GET.get('department2')
+        if department2:
+            departments.append(department2)
         department_list = []
         for department in departments:
             source = request.GET.get('source')
