@@ -162,28 +162,32 @@ export class CorridorReportComponent implements OnChanges{
         });
     }
   
-  setDepartment(departmentName: any) {
-  
-    this.departments.find((visibleCompany: any) => {
-      if (visibleCompany.name == departmentName) {
-        this.invitationDepartment = visibleCompany.uuid;
-      }
-    });
-    this.d1 = this.invitationDepartment;
-    this.selectedDepartment = departmentName,
+  setDepartment(department: any) {
+    this.d1 = department.uuid
+    this.selectedDepartment = department.name
+    // this.departments.find((visibleCompany: any) => {
+    //   if (visibleCompany.name == departmentName) {
+    //     this.invitationDepartment = visibleCompany.uuid;
+    //   }
+    // });
+    // this.d1 = this.invitationDepartment;
+    // this.selectedDepartment = departmentName,
     //this.getUserReport();
     this.getCorridorReport();
     this.getCorridorDepartmentReport();
   }
 
-  setDepartment2(departmentName:any) {
-    this.departments.find((visibleCompany: any) => {
-      if (visibleCompany.name == departmentName) {
-        this.invitationDepartment = visibleCompany.uuid;
-      }
-    });
-    this.d2 = this.invitationDepartment
-    this.selectedDepartment2 = departmentName,
+  setDepartment2(department:any) {
+    this.d2 = department.uuid
+    this.selectedDepartment2 = department.name
+    this.invitationDepartment = department.uuid
+    // this.departments.find((visibleCompany: any) => {
+    //   if (visibleCompany.name == department) {
+    //     this.invitationDepartment = visibleCompany.uuid;
+    //   }
+    // });
+    // this.d2 = this.invitationDepartment
+    // this.selectedDepartment2 = department,
     this.getCorridorReport();
     this.getCorridorDepartmentReport();
   }
