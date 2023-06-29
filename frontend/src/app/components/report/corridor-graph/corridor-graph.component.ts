@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { UserService } from 'app/services/user.service';
 import { Chart } from 'chart.js';
 import { forEach } from 'lodash';
@@ -17,7 +17,7 @@ export class CorridorGraphComponent implements OnInit, OnChanges{
   DefultDept:any =[];
   selectedDept:any = [];
   @Input() childItems: any;
-  
+  @Input() empData: any;
   constructor(
     private userService: UserService,
     private cd: ChangeDetectorRef
@@ -36,17 +36,14 @@ export class CorridorGraphComponent implements OnInit, OnChanges{
 
   ngOnInit() {
     // this.report();
+  
   } 
-
+ 
 report(){
-  //this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment')|| '{}');
-  console.log("------childItems---------", this.childItems)
-
-  // this.userService.multiLinechart().subscribe((res) => {
-  // this.sphereList = res.sphere_list;
+this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment')|| '{}')
   if(this.selectedDept.length === 0){
-    for(let i = 0; i < this.childItems.data?.length; i++){
-      this.sphereList = this.childItems.data[i].data.spheres
+    for(let i = 0; i < this.childItems?.data?.length; i++){
+      this.sphereList = this.childItems?.data[i].data.spheres
       const newData = {
           label: `Department_${i}`,
           data: this.childItems.data[i].data.points,
@@ -58,23 +55,11 @@ report(){
       }
       this.dataset.push(newData)
     }
-    // for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
-    //   const newData = {
-    //       label: this.DefultDept.users[0].data.points[i].question,
-    //       data: this.DefultDept.users[0].data.points[i].point,
-    //       backgroundColor: this.colour,
-    //       borderColor: this.colour,
-    //       fill: false,
-    //       lineTension: 0,
-    //       radius: 1,     
-    //   }
-    //     this.dataset.push(newData)
-    //   }
-  }else{
-    for(let i = 0; i < this.selectedDept.data?.length; i++){
+  if (this.empData?.length != 0){
+    for(let i = 0; i < this.empData?.users[0].data.points.length; i++){
       const newData = {
-          label: "selected",
-          data: this.selectedDept.data[0].data.points,
+          label: this.empData.users[0].data.points[i].question,
+          data: this.empData.users[0].data.points[i].point,
           backgroundColor: this.colour,
           borderColor: this.colour,
           fill: false,
@@ -82,19 +67,9 @@ report(){
           radius: 1,     
       }
         this.dataset.push(newData)
-    }
-    // for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
-    //   const newData = {
-    //       label: this.DefultDept.users[0].data.points[i].question,
-    //       data: this.DefultDept.users[0].data.points[i].point,
-    //       backgroundColor: this.colour,
-    //       borderColor: this.colour,
-    //       fill: false,
-    //       lineTension: 0,
-    //       radius: 1,     
-    //   }
-    //     this.dataset.push(newData)
-    //   }
+      }
+  }
+  }else{
   } 
   let ctx: any = document.getElementById('lineChart') as HTMLElement;
   // var test= res.sphere_list;
@@ -125,7 +100,6 @@ report(){
       data: data,
       options: options,
     });
-// })  
 }
 
  getRandomColor2() {

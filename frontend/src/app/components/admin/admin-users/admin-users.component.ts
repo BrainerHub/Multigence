@@ -6,8 +6,6 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-// import { User } from 'src/app/models/user';
-// import { UserService } from 'src/app/services/user.service';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import * as _ from 'lodash';
 import { pluck } from 'rxjs/operators';
@@ -114,8 +112,6 @@ export class AdminUsersComponent {
 
   onChecked(event: any, value: any, filterBy: any) {
     this.usersPage = this.usersFiltered;
-    // const users = this.usersFiltered; 
-    // this.usersPage = []
     if (event.target.checked) {
       this.filters[filterBy].push(value);
     } else {
@@ -124,11 +120,6 @@ export class AdminUsersComponent {
 
     this.usersPage = this.usersPage.filter((user: any) => ((this.filters['status'].length>0 ? this.filters['status'].includes(user['status']) : true) && (this.filters['department'].length>0 ? this.filters['department'].includes(user['department'].uuid) : true) && (this.filters['company'].length>0 ? this.filters['company'].includes(user['company'].uuid) : true) && (this.filters['role'].length>0 ? this.filters['role'].includes(user['role']) : true )));
 
-    // users.forEach((user: any) => {
-    //   if ((this.filters['status'].length>0 ? this.filters['status'].includes(user['status']) : true) && (this.filters['department'].length>0 ? this.filters['department'].includes(user['department'].uuid) : true) && (this.filters['company'].length>0 ? this.filters['company'].includes(user['company'].uuid) : true) && (this.filters['role'].length>0 ? this.filters['role'].includes(user['role']) : true) ){
-    //     this.usersPage.push(user)
-    //   }
-    // });
   }
   
 

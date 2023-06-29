@@ -84,16 +84,11 @@
                           {{selectedEmployee ? selectedEmployee : "EMPLOYEES"}}
                         </button>
                         <ul class="dropdown-menu">
-                          <li *ngFor="let employee of employeeData" [ngClass]="{ 'd-none': employee.name === selectedEmployee  || employee.name === selectedEmployee2  }">
-                            <a class="dropdown-item" href="javascript:void(0)" (click)="setEmployee(employee)">
-                            {{employee.id }}
-                            {{employee.name }}</a></li>
-                      </ul>
-                        <!-- <ul class="dropdown-menu" *ngFor="let employee of employeesData ">
-                          <li><a class="dropdown-item" href="javascript:void(0)" (click)="setSource(employee)">
+                          <li *ngFor="let employee of employees" 
+                          [ngClass]="{ 'd-none': ((employee.first_name + ' ' + employee.last_name) === selectedEmployee  || (employee.first_name + ' ' + employee.last_name) === selectedEmployee2) }"><a class="dropdown-item" href="javascript:void(0)" (click)="setEmployee(employee)">
                               {{employee.first_name }}
                               {{employee.last_name }}</a></li>
-                        </ul> -->
+                        </ul>
                         <span class="bi bi-send"></span>
                       </div>
                     </ng-container>
@@ -159,18 +154,11 @@
                           {{selectedEmployee2 ? selectedEmployee2 : "EMPLOYEES"}}
                         </button>
                         <ul class="dropdown-menu" >
-                          <li *ngFor="let employee of employeeData" [ngClass]="{ 'd-none': employee.name === selectedEmployee  || employee.name === selectedEmployee2  }"><a class="dropdown-item" href="javascript:void(0)" (click)="setEmployee2(employee)">
-                              {{employee.id }}
-                              {{employee.name }}</a></li>
-                        </ul>
-
-
-
-                        <!-- <ul class="dropdown-menu" *ngFor="let employee of employeesData ">
-                          <li><a class="dropdown-item" href="javascript:void(0)" (click)="setSource(employee)">
+                          <li *ngFor="let employee of employees"
+                          [ngClass]="{ 'd-none': ((employee.first_name + ' ' + employee.last_name) === selectedEmployee  || (employee.first_name + ' ' + employee.last_name) === selectedEmployee2)}"><a class="dropdown-item" href="javascript:void(0)" (click)="setEmployee2(employee)">
                               {{employee.first_name }}
                               {{employee.last_name }}</a></li>
-                        </ul> -->
+                        </ul>
                         <span class="bi bi-send"></span>
                       </div>
                     </ng-container>
@@ -180,7 +168,8 @@
               </div>
             </ng-container>
             <div class="col-lg-24">
-              <app-corridor-graph [childItems]="items"></app-corridor-graph>
+              <app-corridor-graph [childItems]="items" [empData]="empitem" > </app-corridor-graph>
+              
             </div>
           </div>
         </div>
@@ -222,7 +211,7 @@
                     <span class="bi bi-send"></span>
                   </div>
                 </ng-container>
-
+              
               </div>
             </div>
             <div class="corridor-filters px-4 py-3">
@@ -250,7 +239,6 @@
                             "sort.asc" | translate }}</a></li>
                         <li><a class="dropdown-item" href="javascript:void(0)" (click)="setSorting('Furthest')">{{
                             "sort.desc" | translate}}</a></li>
-
                       </ul>
                       <span class="bi bi-send"></span>
                     </div>
@@ -287,14 +275,13 @@
             <div class="reportTable" *ngIf="selectedUser !='Candidates'">
               <table class="table table-dark">
                 <tbody (click)="toggleUser(user)">
-                  <tr>
+                  <tr *ngFor="let employee of employees | filter : searchText">
                     <td scope="row">
                       <i *ngIf="user?.role != 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
                       <i *ngIf="user?.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
                     </td>
-                    <td>{{user?.first_name}}</td>
-                    <td>{{user?.last_name}}</td>
-                    <td>{{getDescription(user)}}</td>
+                    <td>{{employee?.first_name}}</td>
+                    <td>{{employee?.last_name}}</td>
                   </tr>
                 </tbody>
               </table>

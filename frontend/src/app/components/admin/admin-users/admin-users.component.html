@@ -35,15 +35,8 @@
                   <div class="row align-items-center mb-3" *ngFor="let status of statusList; let i = index">
                     <div class="col-10 pe-0 ps-0">
                       <div class="checkbox m-0">
-                        <!-- <input
-                          type="checkbox"
-                          (change)="progressFilter($event, 'CREATED')"
-                          id="progress-pending"
-                          name="progress-pending"
-                        /> -->
                         <input type="checkbox" [checked]="filters.status[status] || false"
                           (change)="onChecked($event, status, 'status')" id="status{{ i }}" name="status{{ i }}" />
-                        <!---->
                         <label for="progress-pending">{{ status }}</label>
                       </div>
                     </div>
@@ -51,38 +44,6 @@
                       <p>({{ counters?.progress[status] || 0 }})</p>
                     </div>
                   </div>
-                  <!-- <div class="row align-items-center mb-3">
-                    <div class="col-sm-9">
-                      <div class="checkbox m-0">
-                        <input
-                          type="checkbox"
-                          (change)="progressFilter($event, 'IN_PROGRESS')"
-                          id="progress-process"
-                          name="progress-pending"
-                        />
-                        <label for="progress-process">In process</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 text-end">
-                      <p>({{ counters.progress.IN_PROGRESS || 0 }})</p>
-                    </div>
-                  </div>
-                  <div class="row align-items-center">
-                    <div class="col-sm-9">
-                      <div class="checkbox m-0">
-                        <input
-                          type="checkbox"
-                          [(ngModel)]="filters.status.DONE" 
-                          id="progress-finished"
-                          name="progress-finished"
-                        />
-                        <label for="progress-finished">Finished</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 text-end">
-                      <p>({{ counters.progress.DONE || 0 }})</p>
-                    </div>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -105,32 +66,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="container-fluid"> 
-                  <div
-                  class="row align-items-center mb-3"
-                  *ngFor="let company of usersPage; let i=index"
-                >
-                    <div class="col-sm-9">
-
-
-                      
-                      <div class="checkbox m-0">
-                        <input
-                          type="checkbox"
-                          name="company{{i}}"
-                          [(ngModel)]="filters.companyData.name"
-                          id="company{{i}}"
-                        />
-                        <label class="text-capitalize">{{
-                          company.company.name
-                        }}</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 text-end">
-                      <p>({{ counters.company[company.company.uuid] || 0 }})</p>
-                    </div>
-                  </div>
-                </div> -->
               </div>
             </div>
             <div class="FilterBox">
@@ -138,10 +73,6 @@
               <div class="FilterBoxInner">
                 <div class="container-fluid">
                   <div class="row align-items-center mb-3" *ngFor="let department of departments; let i = index">
-                    <!-- <div
-                    class="row align-items-center mb-3"
-                    *ngFor="let department of filteredUsersPage; let i=index"
-                  > -->
                     <div class="col-10 pe-0 ps-0">
                       <div class="checkbox m-0">
                         <input type="checkbox" [checked]="
@@ -168,12 +99,6 @@
                   <div class="row align-items-center mb-3" *ngFor="let role of roleList; let i = index">
                     <div class="col-10 pe-0 ps-0">
                       <div class="checkbox m-0">
-                        <!-- <input
-                          type="checkbox"
-                          id="role-manager"
-                          [(ngModel)]="filters.role.MANAGER"
-                          name="role-manager"
-                        /> -->
                         <input type="checkbox" [checked]="filters.role[role] || false"
                           (change)="onChecked($event, role, 'role')" id="role{{ i }}" name="role{{ i }}" />
                         <label for="role-manager">{{ role }}</label>
@@ -183,38 +108,6 @@
                       <p>({{ counters?.role.MANAGER || 0 }})</p>
                     </div>
                   </div>
-                  <!-- <div class="row align-items-center mb-3">
-                    <div class="col-sm-9">
-                      <div class="checkbox m-0">
-                        <input
-                          type="checkbox"
-                          id="role-employee"
-                          name="role-employee"
-                          [(ngModel)]="filters.role.EMPLOYEE"
-                        />
-                        <label for="role-employee">Employee</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 text-end">
-                      <p>({{ counters.role.EMPLOYEE || 0 }})</p>
-                    </div>
-                  </div>
-                  <div class="row align-items-center mb-3">
-                    <div class="col-sm-9">
-                      <div class="checkbox m-0">
-                        <input
-                          type="checkbox"
-                          id="role-applicant"
-                          name="role-applicant"
-                          [(ngModel)]="filters.role.APPLICANT"
-                        />
-                        <label for="role-applicant">Candidate</label>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 text-end">
-                      <p>({{ counters.role.APPLICANT || 0 }})</p>
-                    </div>
-                  </div> -->
                 </div>
               </div>
             </div>
