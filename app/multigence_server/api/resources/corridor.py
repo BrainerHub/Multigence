@@ -133,26 +133,15 @@ class CorridorViewSetV2(viewsets.ViewSet):
         # SOURCE (corridor data)
         #
 
-        # departments = []
-        # department = request.GET.get('department')
-        # if department == 'all':
-        #     objs = Department.objects.all().values('uuid')
-        #     departments = [str(obj['uuid']) for obj in objs]
-        # else:
-        #     departments.append(department)
-        # department2 = request.GET.get('department2')
-        # if department2:
-        #     departments.append(department2)
         department_list = []
         import json
         import urllib
-        encoded_objects = request.GET.getlist('objects')
-        departments = [json.loads(urllib.parse.unquote(obj)) for obj in encoded_objects]
-        print("---------------", departments)
+        encoded_objects = request.GET.get('objects')
+        encoded_objects = json.loads(encoded_objects)
+        departments = [obj for obj in encoded_objects]
         for obj in departments:
-            department = obj['department']
+            department = obj.get('department', None)
             source = obj['source']
-            # source = request.GET.get('source')
             if not source:
                 raise serializers.ValidationError("source required")
 

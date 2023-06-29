@@ -13,14 +13,7 @@ export class CorridorGraphComponent implements OnInit, OnChanges{
   sphereList:any;
   colour:any;
   dataset: Array<any> = [];
-  organization: any = [];
-  retrievedObject: any = [];
   user:any;
-  departments: any;
-  employee: any;
-  selectedDepartment:any;
-  invitationDepartment:any;
-  employeesData:any;
   DefultDept:any =[];
   selectedDept:any = [];
   @Input() childItems: any;
@@ -32,7 +25,6 @@ export class CorridorGraphComponent implements OnInit, OnChanges{
    
   }
   ngOnChanges(): void {
-    console.log(this.childItems,'child item');
     this.dataset = [];
     if(this.chart){
       this.chart.destroy();
@@ -47,7 +39,7 @@ export class CorridorGraphComponent implements OnInit, OnChanges{
   } 
 
 report(){
-  this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment')|| '{}');
+  //this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment')|| '{}');
   this.userService.multiLinechart().subscribe((res) => {
   this.sphereList = res.sphere_list;
   if(this.selectedDept.length === 0){
@@ -63,21 +55,19 @@ report(){
       }
       this.dataset.push(newData)
     }
-    for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
-      const newData = {
-          label: this.DefultDept.users[0].data.points[i].question,
-          data: this.DefultDept.users[0].data.points[i].point,
-          backgroundColor: this.colour,
-          borderColor: this.colour,
-          fill: false,
-          lineTension: 0,
-          radius: 1,     
-      }
-        this.dataset.push(newData)
-      }
+    // for(let i = 0; i < this.DefultDept.users[0].data.points.length; i++){
+    //   const newData = {
+    //       label: this.DefultDept.users[0].data.points[i].question,
+    //       data: this.DefultDept.users[0].data.points[i].point,
+    //       backgroundColor: this.colour,
+    //       borderColor: this.colour,
+    //       fill: false,
+    //       lineTension: 0,
+    //       radius: 1,     
+    //   }
+    //     this.dataset.push(newData)
+    //   }
   }else{
-    console.log('else');
-    
     for(let i = 0; i < this.selectedDept.data?.length; i++){
       const newData = {
           label: "selected",
@@ -133,44 +123,6 @@ report(){
       options: options,
     });
 })  
-}
-save(){
-  if(this.chart){
-    this.chart.destroy();
-  }
-  this.selectedDept = this.childItems;
-  this.report();
-}
-
-
-getMe() {
-  this.userService.getMe().subscribe((res: any) => {
-    this.user = res;
-    this.organization = res.company;
-      this.getUserReport();
-  });
-}
-
-getUserReport() {
-  this.userService.getUserReport(this.user.uuid).subscribe((res) => {});
-}
-
-setDepartment(department: any) {
-  this.departments.find((visibleCompany: any) => {
-    if (visibleCompany.name == department) {
-      this.invitationDepartment = visibleCompany.uuid;
-    }
-  });
-  (this.selectedDepartment = department), this.getUserReport();
-    this.getCorridorDepartmentReport();
-}
-
-getCorridorDepartmentReport() {
-  this.userService
-    .getCorridorDepartmentReport(this.organization, this.invitationDepartment)
-    .subscribe((res) => {
-      this.employeesData = res.users;
-    });
 }
 
  getRandomColor2() {

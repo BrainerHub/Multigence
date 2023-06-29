@@ -427,14 +427,8 @@ getMe() {
 
   }
    
-  getCorridorReport(organizationId:any,department1:any ,department2?:any) {
-    var url = ''
-    if (department2){
-      url = `${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor_v2/'+'?destination=all&source=employees&department='+department1+'&department2='+ department2 
-    }
-    else {
-      url = `${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor_v2/'+'?destination=all&source=employees&department='+department1
-    }
+  getCorridorReport(organizationId:any, objects:any) {
+    var url = `${this.apiUrl}` +'/organization/' + organizationId + '/report/corridor_v2/'+'?destination=all&objects='+ objects
       
     return this.http.get<any>(url).pipe(
       map((report) => {

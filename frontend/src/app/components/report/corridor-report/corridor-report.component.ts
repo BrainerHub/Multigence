@@ -10,16 +10,13 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import { BootstrapService } from 'app/services/bootstrap.service';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-corridor-report',
   templateUrl: './corridor-report.component.html',
   styleUrls: ['./corridor-report.component.scss'],
 })
 export class CorridorReportComponent implements OnChanges{
-  dropdownList:any = [];
-  selectedItems:any = [];
-  dropdownSettings = {};
   searchText: any;
   ROLE_EMPLOYEE = 'EMPLOYEE';
   ROLE_APPLICANT = 'APPLICANT';
@@ -39,15 +36,15 @@ export class CorridorReportComponent implements OnChanges{
   postions: any;
   submitted!: boolean;
   progressOrganaiztion: any;
-  QuestionaryStatus: any;
+  //QuestionaryStatus: any;
   users: any;
   trial: boolean;
   personListPages: any;
-  send: boolean = true;
+ // send: boolean = true;
   sortOrder = 'Closest';
   sortOrders = 'Furthest';
   isAscendingSort: boolean = false;
-  expand: boolean;
+  //expand: boolean;
   department: any = '13eeff42-f6b3-4eac-9214-556f467a8fea';
   department2:any;
   pagesSelected: any;
@@ -59,22 +56,32 @@ export class CorridorReportComponent implements OnChanges{
   selectedDepartment2: string | undefined;
   fName: any;
   lName: any;
-  selectedEmployee: any;
+  selectedEmployee: string | undefined;
+  selectedEmployee2: string | undefined;
+  departmentobjects: any = [{'department': null, 'source': 'employees'}];
   invitationDepartment: any;
   invitationEmployee: any;
   selectedUser: any;
   selectedSorting: any;
-  showdata: boolean =false;
+  showComparedata: boolean =false;
   ShowData: boolean = true;
   visiblityData: boolean = false;
-  itemDisabled1:any;
   d1 :any;
   d2:any;
- 
+  employee1 :any;
+  employee2:any;
   @Input() item : any
   @Input() items: any[] = [];
-  parentMessage = "message from parent";
   selectedDept:any =[];
+  selectedEmp:any[] =[];
+  employeeData= [
+    { id: 'employees', name: 'EMPLOYEES'},
+    { id: 1, name: 'employee 1' },
+    { id: 2, name: 'employee 2' },
+    { id: 3, name: 'employee 3' },
+    { id: 4, name: 'employee 4' },
+    { id: 5, name: 'employee 5' },
+  ]
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -85,39 +92,13 @@ export class CorridorReportComponent implements OnChanges{
    
   }
   ngOnChanges(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
   ngOnInit(){
     this.getMe();
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
-    ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
-    ];
-  //  this.dropdownSettings : IDropdownSettings = {};
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
   }
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
+ 
 
   getMe() {
     this.userService.getMe().subscribe((res: any) => {
@@ -152,10 +133,8 @@ export class CorridorReportComponent implements OnChanges{
   }
   
   getCorridorReport() {
-   
-      this.userService
-        .getCorridorReport(this.organization,this.d1,this.d2)
-        .subscribe((res) => {
+    const selectedObj = JSON.stringify(this.departmentobjects);
+      this.userService.getCorridorReport(this.organization, selectedObj).subscribe((res) => {
           this.item = res;
           this.items= res;
           localStorage.setItem('defultDepartment', JSON.stringify(res));
@@ -165,14 +144,9 @@ export class CorridorReportComponent implements OnChanges{
   setDepartment(department: any) {
     this.d1 = department.uuid
     this.selectedDepartment = department.name
-    // this.departments.find((visibleCompany: any) => {
-    //   if (visibleCompany.name == departmentName) {
-    //     this.invitationDepartment = visibleCompany.uuid;
-    //   }
-    // });
-    // this.d1 = this.invitationDepartment;
-    // this.selectedDepartment = departmentName,
+    this.departmentobjects[0]['department'] = department.uuid
     //this.getUserReport();
+    this.selectedEmp.push({department:this.d1});
     this.getCorridorReport();
     this.getCorridorDepartmentReport();
   }
@@ -181,19 +155,40 @@ export class CorridorReportComponent implements OnChanges{
     this.d2 = department.uuid
     this.selectedDepartment2 = department.name
     this.invitationDepartment = department.uuid
-    // this.departments.find((visibleCompany: any) => {
-    //   if (visibleCompany.name == department) {
-    //     this.invitationDepartment = visibleCompany.uuid;
-    //   }
-    // });
-    // this.d2 = this.invitationDepartment
-    // this.selectedDepartment2 = department,
+    if (this.departmentobjects.length == 1){
+      this.departmentobjects.push({'department': department.uuid, 'source': 'employees'})
+    } else {
+      this.departmentobjects[1]['department'] = department.uuid
+    }
     this.getCorridorReport();
     this.getCorridorDepartmentReport();
   }
 
+  setEmployee(employee: any){
+    this.employee1 = employee.id
+    this.selectedEmp.push({department:this.d1, source:this.employee1});
+    this.selectedEmployee = employee.name;
+    if (this.departmentobjects == 0){
+      this.departmentobjects.push({'department': null, 'source': employee.id})
+    } else {
+      this.departmentobjects[0]['source'] = employee.id
+    }
+    this.getCorridorReport();
+  }
+  setEmployee2(employee: any){
+    this.employee2 = employee.id
+    this.selectedEmployee2 = employee.name;
+    this.selectedEmp.push({department:this.d2, source:this.employee2});
+    if (this.departmentobjects.length == 1){
+      this.departmentobjects.push({'department': null, 'source': employee.id})
+    } else {
+      this.departmentobjects[1]['source'] = employee.id
+    }
+
+    this.getCorridorReport();
+  }
   compare(){
-    this.showdata = true;
+    this.showComparedata = true;
     this.getCorridorDepartmentReport();
   }
   
@@ -279,6 +274,7 @@ export class CorridorReportComponent implements OnChanges{
   }
 
   getStatus() {}
+  
   toggleUser(user: any) {
     if (!user.selected) {
       user.page = this.page;
@@ -341,9 +337,10 @@ export class CorridorReportComponent implements OnChanges{
       });
   }
 
+
   getCorridorEmployeeReport() {
     this.userService
-      .getCorridorEmployeeReport(this.organization, this.selectedEmployeeGroup)
+      .getCorridorEmployeeReport(this.organization, this.selectedDept)
       .subscribe((res) => {
         this.employeesData = res.users;
       });
