@@ -40,10 +40,13 @@ export class CorridorGraphComponent implements OnInit, OnChanges{
 
 report(){
   //this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment')|| '{}');
-  this.userService.multiLinechart().subscribe((res) => {
-  this.sphereList = res.sphere_list;
+  console.log("------childItems---------", this.childItems)
+
+  // this.userService.multiLinechart().subscribe((res) => {
+  // this.sphereList = res.sphere_list;
   if(this.selectedDept.length === 0){
     for(let i = 0; i < this.childItems.data?.length; i++){
+      this.sphereList = this.childItems.data[i].data.spheres
       const newData = {
           label: `Department_${i}`,
           data: this.childItems.data[i].data.points,
@@ -94,9 +97,9 @@ report(){
     //   }
   } 
   let ctx: any = document.getElementById('lineChart') as HTMLElement;
-  var test= res.sphere_list;
+  // var test= res.sphere_list;
   var data = {
-    labels :test,
+    labels :this.sphereList,
     datasets: this.dataset
   };
     var options = {
@@ -122,7 +125,7 @@ report(){
       data: data,
       options: options,
     });
-})  
+// })  
 }
 
  getRandomColor2() {
