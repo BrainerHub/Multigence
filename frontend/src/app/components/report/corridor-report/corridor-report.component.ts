@@ -10,7 +10,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import { BootstrapService } from 'app/services/bootstrap.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-corridor-report',
   templateUrl: './corridor-report.component.html',
@@ -23,39 +22,31 @@ export class CorridorReportComponent implements OnChanges {
   personListPage: any;
   titles: any;
   page = 1;
-  userRolList: any = [];
   positions: any;
   departments: any;
   employee: any;
   organization: any = [];
-  corridorPersons: any = [];
   user: any;
-  employees: any;
-  postions: any;
-  progressOrganaiztion: any;
-  users: any;
+  employees: any = [];
+  progressOrganization: any;
   trial: boolean;
   sortOrder = 'Closest';
   sortOrders = 'Furthest';
   department: any = '13eeff42-f6b3-4eac-9214-556f467a8fea';
   department2: any;
-  pagesSelected: any;
-  MAX_PERSONS_IN_CORRIDOR = 5;
   onUserSelected: boolean = false;
   employeesData: any;
-  selectedEmployeeGroup: any;
   selectedDepartment: string | undefined;
   selectedDepartment2: string | undefined;
-  fName: any;
-  lName: any;
+  firstName: any;
+  lastName: any;
   selectedEmployee: string | undefined;
   selectedEmployee2: string | undefined;
   departmentobjects: any = [{ 'department': null, 'source': 'employees' }];
   invitationDepartment: any;
-  invitationEmployee: any;
   selectedUser: any;
   selectedSorting: any;
-  showComparedata: boolean = false;
+ // showComparedata: boolean = false;
   ShowData: boolean = true;
   visiblityData: boolean = false;
   setSelectedDepartment1: any;
@@ -66,15 +57,13 @@ export class CorridorReportComponent implements OnChanges {
   @Input() empitem: any = [];
   selectedDept: any = [];
   selectedEmp: any[] = [];
- 
+  selectedUsers: any = [];
+  selectedDepartments: string[] = [];
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder,
-    private _translate: TranslateService,
     public _router: Router,
-    private bootstrapService: BootstrapService
   ) {
-
+    
   }
   ngOnChanges(): void {
 
@@ -82,8 +71,8 @@ export class CorridorReportComponent implements OnChanges {
 
   ngOnInit() {
     this.getMe();
-  }
 
+  }
 
   getMe() {
     this.userService.getMe().subscribe((res: any) => {
@@ -125,33 +114,51 @@ export class CorridorReportComponent implements OnChanges {
     });
   }
 
-  setDepartment(department: any) {
-    this.setSelectedDepartment1 = department.uuid
-    this.selectedDepartment = department.name
-    this.departmentobjects[0]['department'] = department.uuid
-    //this.getUserReport();
-    this.selectedEmp.push({ department: this.setSelectedDepartment1 });
-    this.getCorridorReport();
-    this.getCorridorDepartmentReport();
-  }
 
-  setDepartment2(department: any) {
-    this.setSelectedDepartment2 = department.uuid
-    this.selectedDepartment2 = department.name
+setDepartments(department: any) {
+  const index = this.selectedDepartments.indexOf(department.name);
+  if (index !== -1) {
+    this.selectedDepartments.splice(index, 1);
+  } else {
+    this.setSelectedDepartment1 = department.uuid
+    this.selectedDepartments.push(department.name);
     this.invitationDepartment = department.uuid
-    if (this.departmentobjects.length == 1) {
+    if (this.departmentobjects) {
       this.departmentobjects.push({ 'department': department.uuid, 'source': 'employees' })
     } else {
-      this.departmentobjects[1]['department'] = department.uuid
+      this.departmentobjects['department'] = department.uuid
     }
     this.getCorridorReport();
     this.getCorridorDepartmentReport();
-  }
+   }
+}
+  // setDepartment(department: any) {
+  //   this.setSelectedDepartment1 = department.uuid
+  //   this.selectedDepartment = department.name
+  //   this.departmentobjects[0]['department'] = department.uuid
+  //   //this.getUserReport();
+  //   this.selectedEmp.push({ department: this.setSelectedDepartment1 });
+  //   this.getCorridorReport();
+  //   this.getCorridorDepartmentReport();
+  // }
+
+  // setDepartment2(department: any) {
+  //   this.setSelectedDepartment2 = department.uuid
+  //   this.selectedDepartment2 = department.name
+  //   this.invitationDepartment = department.uuid
+  //   if (this.departmentobjects.length == 1) {
+  //     this.departmentobjects.push({ 'department': department.uuid, 'source': 'employees' })
+  //   } else {
+  //     this.departmentobjects[1]['department'] = department.uuid
+  //   }
+  //   this.getCorridorReport();
+  //   this.getCorridorDepartmentReport();
+  // }
 
   setEmployee(employee: any) {
     this.employee1 = employee.uuid
-    this.fName = employee.first_name;
-    this.lName = employee.last_name;
+    this.firstName = employee.first_name;
+    this.lastName = employee.last_name;
     this.selectedEmployee = employee.first_name + ' ' + employee.last_name;
     this.selectedEmp.push({ department: this.setSelectedDepartment1, source: this.employee1 });
     if (this.departmentobjects == 0) {
@@ -163,8 +170,8 @@ export class CorridorReportComponent implements OnChanges {
   }
   setEmployee2(employee: any) {
     this.employee2 =  employee.uuid
-    this.fName = employee.first_name;
-    this.lName = employee.last_name;
+    this.firstName = employee.first_name;
+    this.lastName = employee.last_name;
     this.selectedEmployee2 = employee.first_name + ' ' + employee.last_name;
     this.selectedEmp.push({ department: this.setSelectedDepartment2, source: this.employee2 });
     if (this.departmentobjects.length == 1) {
@@ -172,13 +179,12 @@ export class CorridorReportComponent implements OnChanges {
     } else {
       this.departmentobjects[1]['source'] = employee.uuid
     }
-
     this.getCorridorReport();
   }
-  compare() {
-    this.showComparedata = true;
-    this.getCorridorDepartmentReport();
-  }
+  // compare() {
+  //   this.showComparedata = true;
+  //   this.getCorridorDepartmentReport();
+  // }
 
   setEmployeeUser(event: any) {
     this.selectedUser = event;
@@ -244,22 +250,15 @@ export class CorridorReportComponent implements OnChanges {
     this.userService.getUserReport(this.user.uuid).subscribe((res) => { });
   }
 
-  toggleUser(user: any) {
-    if (!user.selected) {
-      user.page = this.page;
-      this.onUserSelected = true;
-
-      if (this.corridorPersons.length < this.MAX_PERSONS_IN_CORRIDOR) {
-        this.corridorPersons = this.corridorPersons.concat([user]);
-        user.selected = true;
-        this.pagesSelected?.push(this.page);;
-      }
-      this.empitem = this.items;
+  showUserIndicators(employee: any){
+    if (this.selectedUsers.includes(employee.uuid)){
+      this.selectedUsers = this.selectedUsers.filter((user:any) => user != employee.uuid)
     } else {
-      //user.selected = false;
-      //this.onUserSelected = false;
-     // this.empitem = localStorage.setItem('defultDepartment', JSON.stringify(this.items));
+      this.selectedUsers.push(employee.uuid)
     }
+    this.empitem = this.items?.users.filter((item: any) => {
+      return this.selectedUsers.includes(item.uuid)
+    })
   }
 
   getInviteOrganization() {
@@ -268,7 +267,7 @@ export class CorridorReportComponent implements OnChanges {
       .subscribe((res) => {
         var userInviteData = Array.from(Object.values(res));
         this.trial = res.trial;
-        this.progressOrganaiztion = userInviteData[0];
+        this.progressOrganization = userInviteData[0];
       });
   }
 
@@ -337,9 +336,7 @@ export class CorridorReportComponent implements OnChanges {
     this.userService
       .getOrganizationUsers(this.organization, this.departments)
       .subscribe((res) => {
-        var usertitleData = res;
-        this.employees = usertitleData.employees;
-        this.users = usertitleData.employees[0];
+        this.employees = res.employees;
       });
   }
 }

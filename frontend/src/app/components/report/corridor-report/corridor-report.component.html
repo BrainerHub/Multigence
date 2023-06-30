@@ -38,10 +38,9 @@
                         </ul>
                         <span class="bi bi-send"></span>
                       </div>
-
-                      <span class="bi bi-send"></span>
-                    </ng-container> <button (click)="compare()">compare Data</button>
-                    <ng-container class="form-group" *ngIf="!trial">
+                    </ng-container> 
+                    <!-- <button (click)="compare()">compare Data</button> -->
+                    <!-- <ng-container class="form-group" *ngIf="!trial">
                       <div class="dropdown customDrpDown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                           aria-expanded="false">
@@ -53,6 +52,24 @@
                           <li *ngFor="let department of departments"
                             [ngClass]="{ 'd-none': department.name === selectedDepartment || department.name === selectedDepartment2 }">
                             <a class="dropdown-item" href="javascript:void(0)" (click)="setDepartment(department)">
+                              {{ department.name }}
+                            </a>
+                          </li>
+                        </ul>
+                        <span class="bi bi-send"></span>
+                      </div>
+                    </ng-container> -->
+                    <ng-container class="form-group" *ngIf="!trial">
+                      <div class="dropdown customDrpDown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{ selectedDepartments.length ? selectedDepartments.join(', ') : "All departments" }}
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="setDepartments('All departments')">All departments</a>
+                          </li>
+                          <li *ngFor="let department of departments"  >
+                            <a class="dropdown-item" href="javascript:void(0)" (click)="setDepartments(department)">
                               {{ department.name }}
                             </a>
                           </li>
@@ -95,7 +112,7 @@
 
                   </div>
                 </div>
-                <div class="corridor-filters legend-content-size px-4" *ngIf="showComparedata">
+                <!-- <div class="corridor-filters legend-content-size px-4" *ngIf="showComparedata">
                   <div class="form-group w-75">
                     <ng-container *ngIf="trial">
                       <div class="dropdown customDrpDown">
@@ -131,6 +148,7 @@
                         <span class="bi bi-send"></span>
                       </div>
                     </ng-container>
+                    
                   </div>
                   <div class="form-group w-75">
                     <ng-container *ngIf="trial">
@@ -164,12 +182,11 @@
                     </ng-container>
 
                   </div>
-                </div>
+                </div> -->
               </div>
             </ng-container>
             <div class="col-lg-24">
               <app-corridor-graph [childItems]="items" [empData]="empitem" > </app-corridor-graph>
-              
             </div>
           </div>
         </div>
@@ -272,10 +289,26 @@
               </ul>
 
             </div>
+            <!-- <div class="reportTable" *ngIf="selectedUser !='Candidates'">
+              <table class="table table-dark">
+                <tbody (click)="toggleUser(user)" >
+                  <tr *ngFor="let employee of employees | filter : searchText">
+                    <td scope="row">
+                      <i *ngIf="user?.role != 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
+                      <i *ngIf="user?.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
+                    </td>
+                    <td>{{employee?.first_name}}</td>
+                    <td>{{employee?.last_name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div> -->
+
+           
             <div class="reportTable" *ngIf="selectedUser !='Candidates'">
               <table class="table table-dark">
-                <tbody (click)="toggleUser(user)">
-                  <tr *ngFor="let employee of employees | filter : searchText">
+                <tbody>
+                  <tr *ngFor="let employee of employees | filter : searchText let idx=index; let even=even" (click)="showUserIndicators(employee)">
                     <td scope="row">
                       <i *ngIf="user?.role != 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
                       <i *ngIf="user?.role == 'EMPLOYEE'" class="bi bi-hexagon-fill"></i>
