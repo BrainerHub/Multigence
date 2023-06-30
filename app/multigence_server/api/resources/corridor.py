@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from multigence_server.core.models import Company, User, QuestionaryResult, Department
+from multigence_server.core.models import Company, User, QuestionaryResult, Sphere
 from multigence_server.report.services import get_corridor_source_data, get_corridor_destination_data, \
     extract_sphere_points, distance, extract_sphere_points_v2, get_corridor_destination_data_v2
 
