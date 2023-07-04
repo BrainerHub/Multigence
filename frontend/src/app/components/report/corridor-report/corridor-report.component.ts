@@ -16,6 +16,7 @@ import { BootstrapService } from 'app/services/bootstrap.service';
   styleUrls: ['./corridor-report.component.scss'],
 })
 export class CorridorReportComponent implements OnChanges {
+  colour: any;
   searchText: any;
   ROLE_EMPLOYEE = 'EMPLOYEE';
   ROLE_APPLICANT = 'APPLICANT';
@@ -33,7 +34,7 @@ export class CorridorReportComponent implements OnChanges {
   sortOrder = 'Closest';
   sortOrders = 'Furthest';
   department: any = '13eeff42-f6b3-4eac-9214-556f467a8fea';
-  department2: any;
+  // department2: any;
   onUserSelected: boolean = false;
   employeesData: any;
   selectedDepartment: string | undefined;
@@ -46,7 +47,7 @@ export class CorridorReportComponent implements OnChanges {
   invitationDepartment: any;
   selectedUser: any;
   selectedSorting: any;
- // showComparedata: boolean = false;
+  // showComparedata: boolean = false;
   ShowData: boolean = true;
   visiblityData: boolean = false;
   setSelectedDepartment1: any;
@@ -59,14 +60,16 @@ export class CorridorReportComponent implements OnChanges {
   selectedEmp: any[] = [];
   selectedUsers: any = [];
   selectedDepartments: string[] = [];
+  questionColors: any = [];
+  departmentColors: any = [];
+  employeesColors: any = [];
   constructor(
     private userService: UserService,
     public _router: Router,
   ) {
-    
+
   }
   ngOnChanges(): void {
-
   }
 
   ngOnInit() {
@@ -102,7 +105,7 @@ export class CorridorReportComponent implements OnChanges {
     this.userService.getDepartments(this.organization).subscribe((res) => {
       var userDepartmentData = Array.from(Object.values(res));
       this.departments = userDepartmentData[0];
-      this.department2 = userDepartmentData[0];
+      // this.department2 = userDepartmentData[0];
     });
   }
 
@@ -115,23 +118,54 @@ export class CorridorReportComponent implements OnChanges {
   }
 
 
-setDepartments(department: any) {
-  const index = this.selectedDepartments.indexOf(department.name);
-  if (index !== -1) {
-    this.selectedDepartments.splice(index, 1);
-  } else {
-    this.setSelectedDepartment1 = department.uuid
-    this.selectedDepartments.push(department.name);
-    this.invitationDepartment = department.uuid
-    if (this.departmentobjects) {
-      this.departmentobjects.push({ 'department': department.uuid, 'source': 'employees' })
+  setDepartments(department: any, isAllDepartments: boolean = false) {
+    if (isAllDepartments) {
+      const selectedState = !this.isAllSelected();
+      this.departments.forEach((dep: any) => {
+        dep.selected = selectedState;
+        if (selectedState) {
+          this.selectedDepartments.push(dep.name);
+          this.departmentobjects.push({ department: dep.uuid, source: 'employees' });
+        } else {
+          const index = this.selectedDepartments.indexOf(dep.name);
+          if (index !== -1) {
+            this.selectedDepartments.splice(index, 1);
+            const departmentObjectIndex = this.departmentobjects.findIndex((obj: any) => obj.department === dep.uuid);
+            if (departmentObjectIndex !== -1) {
+              this.departmentobjects.splice(departmentObjectIndex, 1);
+            }
+          }
+        }
+      });
     } else {
-      this.departmentobjects['department'] = department.uuid
+      department.selected = !department.selected;
+      if (!department.selected) {
+        const index = this.selectedDepartments.indexOf(department.name);
+        if (index !== -1) {
+          this.selectedDepartments.splice(index, 1);
+          const departmentObjectIndex = this.departmentobjects.findIndex((obj: any) => obj.department === department.uuid);
+          if (departmentObjectIndex !== -1) {
+            this.departmentobjects.splice(departmentObjectIndex, 1);
+          }
+        }
+      } else {
+        this.selectedDepartments.push(department.name);
+        this.departmentobjects.push({ department: department.uuid, source: 'employees' });
+      }
     }
+
     this.getCorridorReport();
     this.getCorridorDepartmentReport();
-   }
-}
+  }
+
+  isAllSelected() {
+    return this.departments.every((dep: any) => dep.selected);
+  }
+  showDepartmentSelection(department: any) {
+    department.selected = department.selected;
+    this.setDepartments(department);
+  }
+
   // setDepartment(department: any) {
   //   this.setSelectedDepartment1 = department.uuid
   //   this.selectedDepartment = department.name
@@ -169,7 +203,7 @@ setDepartments(department: any) {
     this.getCorridorReport();
   }
   setEmployee2(employee: any) {
-    this.employee2 =  employee.uuid
+    this.employee2 = employee.uuid
     this.firstName = employee.first_name;
     this.lastName = employee.last_name;
     this.selectedEmployee2 = employee.first_name + ' ' + employee.last_name;
@@ -249,16 +283,35 @@ setDepartments(department: any) {
   getUserReport() {
     this.userService.getUserReport(this.user.uuid).subscribe((res) => { });
   }
+  isSelected(employee: any): boolean {
+    return this.selectedUsers.includes(employee.uuid);
+  }
 
-  showUserIndicators(employee: any){
-    if (this.selectedUsers.includes(employee.uuid)){
-      this.selectedUsers = this.selectedUsers.filter((user:any) => user != employee.uuid)
+  showUserIndicators(employee: any) {
+    if (this.selectedUsers.includes(employee.uuid)) {
+      this.selectedUsers = this.selectedUsers.filter((user: any) => user != employee.uuid);
+      // employee.color = null; 
     } else {
-      this.selectedUsers.push(employee.uuid)
+      this.selectedUsers.push(employee.uuid);
+      // employee.color = this.getRandomColor();
+      // this.selectedUsers[employee.uuid] = employee.color;
     }
     this.empitem = this.items?.users.filter((item: any) => {
-      return this.selectedUsers.includes(item.uuid)
-    })
+      return this.selectedUsers.includes(item.uuid);
+    });;
+  }
+
+  getRandomColor2() {
+    var length = 6;
+    var chars = '0123456789ABCDEF';
+    var hex = '#';
+    while (length--) hex += chars[(Math.random() * 16) | 0];
+    return hex;
+  }
+
+  getRandomColor() {
+    var color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
   }
 
   getInviteOrganization() {
@@ -332,11 +385,13 @@ setDepartments(department: any) {
     });
   }
 
+
   getOrganizationUsers() {
     this.userService
       .getOrganizationUsers(this.organization, this.departments)
       .subscribe((res) => {
         this.employees = res.employees;
       });
+
   }
 }

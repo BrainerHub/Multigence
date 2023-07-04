@@ -115,6 +115,7 @@ export class CorridorGraphComponent implements OnInit, OnChanges {
       options: options,
     });
   }
+ 
 
   getRandomColor2() {
     var length = 6;
