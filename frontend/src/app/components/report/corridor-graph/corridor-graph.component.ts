@@ -43,7 +43,7 @@ export class CorridorGraphComponent implements OnInit, OnChanges {
     this.DefultDept = JSON.parse(localStorage.getItem('defultDepartment') || '{}')
     if (this.selectedDept.length === 0) {
       for (let i = 0; i < this.childItems?.data?.length; i++) {
-        this.sphereList = this.childItems?.data[i].data.spheres
+        this.sphereList = this.childItems?.data[i].data.sphere_name
         const newData = {
           label: `Department_${i}`,
           data: this.childItems.data[i].data.points,

@@ -73,10 +73,10 @@ def get_corridor_source_data(company, role=None, user_id=None, department_uuid=N
         sphere_points = get_sphere_points(sphere, company, role=role, user_id=user_id, department_uuid=department_uuid)
         sphere_count = get_sphere_count(sphere, company, role=role, user_id=user_id, department_uuid=department_uuid)
         if sphere_count == 0:
-            data.append({'sphereId': sphere.uuid, 'totalPoints': 0})
+            data.append({'sphereId': sphere.uuid, 'totalPoints': 0, 'sphere_name': sphere.name})
         else:
             total_points = round(number_of_questions * sphere_points / sphere_count)
-            data.append({'sphereId': sphere.uuid, 'totalPoints': total_points})
+            data.append({'sphereId': sphere.uuid, 'totalPoints': total_points, 'sphere_name': sphere.name})
     return data
 
 
@@ -89,11 +89,13 @@ def extract_sphere_points(sphere_points_list):
 def extract_sphere_points_v2(sphere_points_list):
     spheres = []
     points = []
+    sphere_name = []
     for item in sphere_points_list:
         points.append(item['totalPoints'])
         spheres.append(item['sphereId'])
+        sphere_name.append(item['sphere_name'])
     
-    return {'spheres': spheres, 'points': points}
+    return {'spheres': spheres, 'points': points, 'sphere_name': sphere_name}
 
 # -- retrieve sphere points
 
